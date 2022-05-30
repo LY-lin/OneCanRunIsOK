@@ -1,5 +1,5 @@
 # OneCanRunIsOK
-这是一次简单的测试
+
 git使用
 
 + 初始化：git init
@@ -16,4 +16,3 @@ git使用
 + git commit -m "fix: 修复bug / feat：添加功能"
 + git push
 + git status
-+ 会长，我挂树了！
