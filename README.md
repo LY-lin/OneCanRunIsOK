@@ -17,4 +17,4 @@ git使用
 + git commit -m "fix: 修复bug / feat：添加功能"
 + git push
 + git status
-+ 但是高植林不想出刀
++ 会长，我挂树了！
