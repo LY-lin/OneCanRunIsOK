@@ -1,5 +1,5 @@
 # OneCanRunIsOK
-
+这是一次简单的测试
 git使用
 + 初始化：git init
 + 添加远程仓库：git remote add origin URL
