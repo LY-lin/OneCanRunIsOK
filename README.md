@@ -16,4 +16,4 @@ git使用
 + git commit -m "fix: 修复bug / feat：添加功能"
 + git push
 + git status
-+ 春黑刀真难打
++ 会长，我挂树了！
