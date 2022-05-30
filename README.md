@@ -1,6 +1,7 @@
 # OneCanRunIsOK
 这是一次简单的测试
 git使用
+
 + 初始化：git init
 + 添加远程仓库：git remote add origin URL
 + 切换远程仓库: git remote set-url origin URL
@@ -10,7 +11,9 @@ git使用
 + 切换分支： git checkout branch_name
 
 完整的一次简单推送
+
 + git add .
 + git commit -m "fix: 修复bug / feat：添加功能"
 + git push
 + git status
++ 春黑刀真难打
