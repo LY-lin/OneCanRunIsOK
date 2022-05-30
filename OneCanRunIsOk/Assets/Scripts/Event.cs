@@ -1,13 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+namespace OneCanRun
+{
+    public abstract class Event
+    {
+        //public abstract void fireEvent();
+        public int id;
+        public abstract void setID(int _id);
+    }
 
-public abstract class Event {
-    //public abstract void fireEvent();
-    public abstract Event(int _id);
-    int id;
-}
+    public class DefaultEvent : Event
+    {
+        public DefaultEvent(int id)
+        {
+            setID(id);
+        }
 
-public class DefaultEvent : Event{
+        public override void setID(int _id)
+        {
+            id = _id;
+        }
+    }
 
 }
