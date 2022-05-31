@@ -6,7 +6,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace OCR
+namespace OneCanRun
 {
     public class GameFlowManager : MonoBehaviour
     {
@@ -70,6 +70,8 @@ namespace OCR
                 }
             }
         }
+        void OnAllObjectivesCompleted(AllObjectivesCompletedEvent evt) => EndGame(true);
+        void OnPlayerDeath(PlayerDeathEvent evt) => EndGame(false);
 
         void EndGame(bool win)
         {
