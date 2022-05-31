@@ -44,6 +44,8 @@ namespace OneCanRun
         private void Awake()
         {
             //向事件管理器注册 AllMissonCompleted事件与PlayerDeath事件。
+            EventManager.addListener<AllObjectivesCompletedEvent>(OnAllObjectivesCompleted);
+            EventManager.addListener<PlayerDeathEvent>(OnPlayerDeath);
         }
         void Start()
         {
@@ -120,8 +122,8 @@ namespace OneCanRun
         void OnDestroy()
         {
             //从事件管理器中注销事件
-            /*EventManager.RemoveListener<AllObjectivesCompletedEvent>(OnAllObjectivesCompleted);
-            EventManager.RemoveListener<PlayerDeathEvent>(OnPlayerDeath);*/
+            EventManager.removeListener<AllObjectivesCompletedEvent>(OnAllObjectivesCompleted);
+            EventManager.removeListener<PlayerDeathEvent>(OnPlayerDeath);
         }
 
     }

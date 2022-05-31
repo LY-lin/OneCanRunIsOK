@@ -9,7 +9,7 @@ namespace OneCanRun
         private static Dictionary<Type, Action<OneCanRun.Event>> mEventMap = new Dictionary<Type, Action<OneCanRun.Event>>();
         private static Dictionary<Delegate, Action<OneCanRun.Event>> mEventLookups = new Dictionary<Delegate, Action<OneCanRun.Event>>();
 
-        public static void addListerner<T>(Action<T> evt) where T : OneCanRun.Event{
+        public static void addListener<T>(Action<T> evt) where T : OneCanRun.Event{
             if (!mEventLookups.ContainsKey(evt))
             {
 

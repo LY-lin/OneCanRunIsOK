@@ -2,7 +2,7 @@ using Unity.Scripts.Game;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Unity.Scripts.Gameplay
+namespace OneCanRun
 {   
     //Ωˆ  ”√“∆∂Ø
     //[RequireComponent(typeof(CharacterController), typeof(PlayerInputHandler), typeof(AudioSource))]
@@ -234,7 +234,7 @@ namespace Unity.Scripts.Gameplay
             // Tell the weapons manager to switch to a non-existing weapon in order to lower the weapon
             //m_WeaponsManager.SwitchToWeaponIndex(-1, true);
 
-            //EventManager.Broadcast(Events.PlayerDeathEvent);
+            EventManager.broadcast(Events.PlayerDeathEvent);
         }
 
         void GroundCheck()

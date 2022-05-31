@@ -1,7 +1,7 @@
 using Unity.Scripts.Game;
 using UnityEngine;
 
-namespace Unity.Scripts.Gameplay
+namespace OneCanRun
 {
     //暂不加载游戏流管理
     //该input输入流(如Input.GetAxisRaw(GameConstants.k_AxisNameHorizontal)类函数)与编辑器中的input设置相关 方便修改·调试
@@ -22,7 +22,7 @@ namespace Unity.Scripts.Gameplay
         [Tooltip("Used to flip the horizontal input axis")]
         public bool InvertXAxis = false;
 
-        //GameFlowManager m_GameFlowManager;
+        GameFlowManager m_GameFlowManager;
         PlayerCharacterController m_PlayerCharacterController;
         bool m_FireInputWasHeld;
 
@@ -31,7 +31,7 @@ namespace Unity.Scripts.Gameplay
             m_PlayerCharacterController = GetComponent<PlayerCharacterController>();
             DebugUtility.HandleErrorIfNullGetComponent<PlayerCharacterController, PlayerInputHandler>(
                 m_PlayerCharacterController, this, gameObject);
-            //m_GameFlowManager = FindObjectOfType<GameFlowManager>();
+            m_GameFlowManager = FindObjectOfType<GameFlowManager>();
             //DebugUtility.HandleErrorIfNullFindObject<GameFlowManager, PlayerInputHandler>(m_GameFlowManager, this);
 
             //进入第一人称 隐藏鼠标
