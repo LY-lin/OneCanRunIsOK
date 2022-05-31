@@ -17,13 +17,12 @@ namespace OneCanRun
 
         public override Event createEvent(string eventName)
         {
+            if (eventName == "DefaultEvent")
+            {
+                return new DefaultEvent();
 
+            }
             return null;
-        }
-
-        public void delete(int index)
-        {
-
         }
     }
 }
