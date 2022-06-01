@@ -104,6 +104,7 @@ namespace OneCanRun.GamePlay
         //跳跃持续输入
         public bool GetJumpInputHeld()
         {
+            Debug.Log(3331);
             if (CanProcessInput())
             {
                 return Input.GetButton(GameConstants.k_ButtonNameJump);
@@ -115,20 +116,24 @@ namespace OneCanRun.GamePlay
         //开火按下输入
         public bool GetFireInputDown()
         {
+            
             return GetFireInputHeld() && !m_FireInputWasHeld;
         }
 
         //开火弹起输入
         public bool GetFireInputReleased()
         {
+            
             return !GetFireInputHeld() && m_FireInputWasHeld;
         }
 
         //开火持续输入
         public bool GetFireInputHeld()
         {
+            
             if (CanProcessInput())
             {
+                
                 //bool isGamepad = Input.GetAxis(GameConstants.k_ButtonNameGamepadFire) != 0f;
                 //if (isGamepad)
                 //{
