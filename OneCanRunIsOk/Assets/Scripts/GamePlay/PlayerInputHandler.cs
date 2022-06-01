@@ -8,18 +8,23 @@ namespace OneCanRun.GamePlay
     public class PlayerInputHandler : MonoBehaviour
     {
         [Tooltip("Sensitivity multiplier for moving the camera around")]
+        //镜头灵敏度
         public float LookSensitivity = 1f;
 
         [Tooltip("Additional sensitivity multiplier for WebGL")]
+        //WebGL额外镜头灵敏度
         public float WebglLookSensitivityMultiplier = 0.25f;
 
         [Tooltip("Limit to consider an input when using a trigger on a controller")]
+        //输入限制
         public float TriggerAxisThreshold = 0.4f;
 
         [Tooltip("Used to flip the vertical input axis")]
+        //反转X轴
         public bool InvertYAxis = false;
 
         [Tooltip("Used to flip the horizontal input axis")]
+        //反转Y轴
         public bool InvertXAxis = false;
 
         GameFlowManager m_GameFlowManager;
@@ -39,18 +44,20 @@ namespace OneCanRun.GamePlay
             Cursor.visible = false;
         }
 
-        //在update()全调用后再调用
+        //后更新-在update()全调用后再调用
         void LateUpdate()
         {
             m_FireInputWasHeld = GetFireInputHeld();
         }
 
+        //通过鼠标是否锁定判断是否能处理输入
         public bool CanProcessInput()
         {
             //return Cursor.lockState == CursorLockMode.Locked && !m_GameFlowManager.GameIsEnding;
             return Cursor.lockState == CursorLockMode.Locked;
         }
 
+        //判断移动输入wasd
         public Vector3 GetMoveInput()
         {
             if (CanProcessInput())
@@ -69,18 +76,21 @@ namespace OneCanRun.GamePlay
             return Vector3.zero;
         }
 
+        //镜头移动-x轴
         public float GetLookInputsHorizontal()
         {
             return GetMouseLookAxis(GameConstants.k_MouseAxisNameHorizontal,
                 GameConstants.k_AxisNameJoystickLookHorizontal);
         }
 
+        //镜头输入-y轴
         public float GetLookInputsVertical()
         {
             return GetMouseLookAxis(GameConstants.k_MouseAxisNameVertical,
                 GameConstants.k_AxisNameJoystickLookVertical);
         }
 
+        //跳跃按下输入
         public bool GetJumpInputDown()
         {
             if (CanProcessInput())
@@ -91,6 +101,7 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
+        //跳跃持续输入
         public bool GetJumpInputHeld()
         {
             if (CanProcessInput())
@@ -101,16 +112,19 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
+        //开火按下输入
         public bool GetFireInputDown()
         {
             return GetFireInputHeld() && !m_FireInputWasHeld;
         }
 
+        //开火弹起输入
         public bool GetFireInputReleased()
         {
             return !GetFireInputHeld() && m_FireInputWasHeld;
         }
 
+        //开火持续输入
         public bool GetFireInputHeld()
         {
             if (CanProcessInput())
@@ -130,6 +144,7 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
+        //瞄准持续输入
         public bool GetAimInputHeld()
         {
             if (CanProcessInput())
@@ -145,6 +160,7 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
+        //冲刺持续输入
         public bool GetSprintInputHeld()
         {
             if (CanProcessInput())
@@ -155,6 +171,7 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
+        //下蹲按下输入
         public bool GetCrouchInputDown()
         {
             if (CanProcessInput())
@@ -165,6 +182,7 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
+        //下蹲弹起输入
         public bool GetCrouchInputReleased()
         {
             if (CanProcessInput())
@@ -175,6 +193,7 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
+        //重新装填按下输入
         public bool GetReloadButtonDown()
         {
             if (CanProcessInput())
@@ -185,6 +204,7 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
+        //切换武器输入-滚轴
         public int GetSwitchWeaponInput()
         {
             if (CanProcessInput())
@@ -210,6 +230,7 @@ namespace OneCanRun.GamePlay
             return 0;
         }
 
+        //切换武器输入-按键（1-9）
         public int GetSelectWeaponInput()
         {
             if (CanProcessInput())
@@ -274,7 +295,8 @@ namespace OneCanRun.GamePlay
 
 //            return 0f;
 //        }
-
+        
+        //鼠标输入-镜头输入（包括x轴 y轴）
         float GetMouseLookAxis(string mouseInputName, string stickInputName)
         {
             if (CanProcessInput())
