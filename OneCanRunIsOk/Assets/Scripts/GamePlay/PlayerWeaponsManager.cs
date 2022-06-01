@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using OneCanRun.Game;
+using OneCanRun.Game.Share;
 using UnityEngine;
 using UnityEngine.Events;
 
