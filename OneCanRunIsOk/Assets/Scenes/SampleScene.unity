@@ -164,6 +164,13 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 963194228}
     m_Modifications:
+<<<<<<< Updated upstream
+=======
+    - target: {fileID: 86379134677064681, guid: f9e7add94992d164d8e6ee9d5ab13b52, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+>>>>>>> Stashed changes
     - target: {fileID: 873802477006381954, guid: f9e7add94992d164d8e6ee9d5ab13b52, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -370,6 +377,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &200371267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 200371268}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &200371268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200371267}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 963194228}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,6 +660,12 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1286954371}
+<<<<<<< Updated upstream
+=======
+  - {fileID: 200371268}
+  - {fileID: 1589799464}
+  - {fileID: 1831810740}
+>>>>>>> Stashed changes
   m_Father: {fileID: 1882154184}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -72.195, z: 0}
@@ -737,6 +781,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 873802477006381954, guid: f9e7add94992d164d8e6ee9d5ab13b52, type: 3}
   m_PrefabInstance: {fileID: 108965666}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
+=======
+--- !u!114 &1286954372 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3236227053233889265, guid: f9e7add94992d164d8e6ee9d5ab13b52, type: 3}
+  m_PrefabInstance: {fileID: 108965666}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286954370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0cb1d2328a4d9d4d8d2e278186760aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+>>>>>>> Stashed changes
 --- !u!1 &1339365529
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,6 +957,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473854218}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1589799463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1589799464}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1589799464
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589799463}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 963194228}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1716471318
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,6 +1054,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1831810739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1831810740}
+  m_Layer: 0
+  m_Name: GameObject (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1831810740
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831810739}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 963194228}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1882154181
 GameObject:
@@ -1116,6 +1236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b81eabd817861d4990283b216486f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   StartingWeapons: []
   WeaponCamera: {fileID: 963194227}
   WeaponParentSocket: {fileID: 0}
@@ -1125,6 +1246,18 @@ MonoBehaviour:
   BobSharpness: 10
   DefaultBobAmount: 0.05
   RecoilSharpness: 50
+=======
+  StartingWeapons:
+  - {fileID: 1286954372}
+  WeaponCamera: {fileID: 963194227}
+  WeaponParentSocket: {fileID: 200371268}
+  DefaultWeaponPosition: {fileID: 1286954371}
+  DownWeaponPosition: {fileID: 1831810740}
+  BobFrequency: 0
+  BobSharpness: 10
+  DefaultBobAmount: 0.05
+  RecoilSharpness: 0
+>>>>>>> Stashed changes
   MaxRecoilDistance: 0.5
   RecoilRestitutionSharpness: 10
   DefaultFov: 60
