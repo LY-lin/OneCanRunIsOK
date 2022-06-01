@@ -85,6 +85,7 @@ namespace OneCanRun.Game
                 m_IsDead = true;
                 Debug.Log("I'm died");
                 OnDie?.Invoke();
+                Destroy(this.gameObject);
             }
         }
     }

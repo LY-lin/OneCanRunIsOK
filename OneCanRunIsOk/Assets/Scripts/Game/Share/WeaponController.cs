@@ -22,6 +22,21 @@ namespace OneCanRun.Game.Share
             GameObject tmp = new GameObject();
 
 
+<<<<<<< Updated upstream
+=======
+            float currentSpread = Mathf.Lerp(0.0f, 10, 2 / 1);
+            
+            fireRotation = Quaternion.RotateTowards(fireRotation, UnityEngine.Random.rotation, UnityEngine.Random.Range(0.0f, currentSpread));
+
+            Physics.Raycast(transform.position, fireRotation * Vector3.forward, out hit, Mathf.Infinity);
+
+            {
+                GameObject tempBullet = Instantiate(bullet, WeaponMuzzle.position, fireRotation);
+                tempBullet.GetComponent<BulletController>().hitPoint = hit.point;
+                
+                tempBullet.GetComponent<Rigidbody>().AddForce(  5f*WeaponMuzzle.forward.normalized);
+            }
+>>>>>>> Stashed changes
         }
     }
 
