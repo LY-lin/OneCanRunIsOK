@@ -563,7 +563,10 @@ namespace OneCanRun.Game.Share
                 GameObject tempBullet = Instantiate(bullet, WeaponMuzzle.position, fireRotation);
                 tempBullet.GetComponent<BulletController>().hitPoint = hit.point;
 
-                tempBullet.GetComponent<Rigidbody>().AddForce(5f * WeaponMuzzle.forward.normalized);
+                float spped = BulletController.speed;
+                Vector3 temp = spped * WeaponMuzzle.forward.normalized;
+                tempBullet.GetComponent<Rigidbody>().velocity = temp;
+
             }
         }
     }

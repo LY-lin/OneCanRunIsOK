@@ -1,4 +1,5 @@
 using UnityEngine;
+using OneCanRun.Game;
 
 namespace OneCanRun.Game
 {

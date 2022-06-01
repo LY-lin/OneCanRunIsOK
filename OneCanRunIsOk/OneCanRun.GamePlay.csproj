@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\GamePlay\PlayerCharacterController.cs" />
     <Compile Include="Assets\Scripts\GamePlay\PlayerInputHandler.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Objectives\ObjectiveReachPoint.cs" />
+    <Compile Include="Assets\Scripts\GamePlay\PlayerWeaponsManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\GamePlay\OneCanRun.GamePlay.asmdef" />

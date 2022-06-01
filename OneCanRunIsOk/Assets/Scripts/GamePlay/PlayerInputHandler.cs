@@ -1,30 +1,25 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using OneCanRun.Game;
 
 namespace OneCanRun.GamePlay
 {
-    //ÔÝ²»¼ÓÔØÓÎÏ·Á÷¹ÜÀí
-    //¸ÃinputÊäÈëÁ÷(ÈçInput.GetAxisRaw(GameConstants.k_AxisNameHorizontal)Ààº¯Êý)Óë±à¼­Æ÷ÖÐµÄinputÉèÖÃÏà¹Ø ·½±ãÐÞ¸Ä¡¤µ÷ÊÔ
+    //ï¿½Ý²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //ï¿½ï¿½inputï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½Input.GetAxisRaw(GameConstants.k_AxisNameHorizontal)ï¿½àº¯ï¿½ï¿½)ï¿½ï¿½à¼­ï¿½ï¿½ï¿½Ðµï¿½inputï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½
     public class PlayerInputHandler : MonoBehaviour
     {
         [Tooltip("Sensitivity multiplier for moving the camera around")]
-        //¾µÍ·ÁéÃô¶È
         public float LookSensitivity = 1f;
 
         [Tooltip("Additional sensitivity multiplier for WebGL")]
-        //WebGL¶îÍâ¾µÍ·ÁéÃô¶È
         public float WebglLookSensitivityMultiplier = 0.25f;
 
         [Tooltip("Limit to consider an input when using a trigger on a controller")]
-        //ÊäÈëÏÞÖÆ
         public float TriggerAxisThreshold = 0.4f;
 
         [Tooltip("Used to flip the vertical input axis")]
-        //·´×ªXÖá
         public bool InvertYAxis = false;
 
         [Tooltip("Used to flip the horizontal input axis")]
-        //·´×ªYÖá
         public bool InvertXAxis = false;
 
         GameFlowManager m_GameFlowManager;
@@ -39,35 +34,33 @@ namespace OneCanRun.GamePlay
             m_GameFlowManager = FindObjectOfType<GameFlowManager>();
             //DebugUtility.HandleErrorIfNullFindObject<GameFlowManager, PlayerInputHandler>(m_GameFlowManager, this);
 
-            //½øÈëµÚÒ»ÈË³Æ Òþ²ØÊó±ê
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Ë³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
 
-        //ºó¸üÐÂ-ÔÚupdate()È«µ÷ÓÃºóÔÙµ÷ÓÃ
+        //ï¿½ï¿½update()È«ï¿½ï¿½ï¿½Ãºï¿½ï¿½Ùµï¿½ï¿½ï¿½
         void LateUpdate()
         {
             m_FireInputWasHeld = GetFireInputHeld();
         }
 
-        //Í¨¹ýÊó±êÊÇ·ñËø¶¨ÅÐ¶ÏÊÇ·ñÄÜ´¦ÀíÊäÈë
         public bool CanProcessInput()
         {
             //return Cursor.lockState == CursorLockMode.Locked && !m_GameFlowManager.GameIsEnding;
             return Cursor.lockState == CursorLockMode.Locked;
         }
 
-        //ÅÐ¶ÏÒÆ¶¯ÊäÈëwasd
         public Vector3 GetMoveInput()
         {
             if (CanProcessInput())
             {
-                //GetAxisRaw ¸ù¾ÝinputÉèÖÃµÄkey¼ü·µ»Ø1»òÕß-1
+                //GetAxisRaw ï¿½ï¿½ï¿½ï¿½inputï¿½ï¿½ï¿½Ãµï¿½keyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½-1
                 Vector3 move = new Vector3(Input.GetAxisRaw(GameConstants.k_AxisNameHorizontal), 0f,
                     Input.GetAxisRaw(GameConstants.k_AxisNameVertical));
 
                 // constrain move input to a maximum magnitude of 1, otherwise diagonal movement might exceed the max move speed defined
-                //Ô¼Êø×î´óÖµÎª1
+                //Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÎª1
                 move = Vector3.ClampMagnitude(move, 1);
 
                 return move;
@@ -76,21 +69,18 @@ namespace OneCanRun.GamePlay
             return Vector3.zero;
         }
 
-        //¾µÍ·ÒÆ¶¯-xÖá
         public float GetLookInputsHorizontal()
         {
             return GetMouseLookAxis(GameConstants.k_MouseAxisNameHorizontal,
                 GameConstants.k_AxisNameJoystickLookHorizontal);
         }
 
-        //¾µÍ·ÊäÈë-yÖá
         public float GetLookInputsVertical()
         {
             return GetMouseLookAxis(GameConstants.k_MouseAxisNameVertical,
                 GameConstants.k_AxisNameJoystickLookVertical);
         }
 
-        //ÌøÔ¾°´ÏÂÊäÈë
         public bool GetJumpInputDown()
         {
             if (CanProcessInput())
@@ -101,7 +91,6 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
-        //ÌøÔ¾³ÖÐøÊäÈë
         public bool GetJumpInputHeld()
         {
             Debug.Log(3331);
@@ -113,27 +102,24 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
-        //¿ª»ð°´ÏÂÊäÈë
         public bool GetFireInputDown()
         {
-            
+
             return GetFireInputHeld() && !m_FireInputWasHeld;
         }
 
-        //¿ª»ðµ¯ÆðÊäÈë
         public bool GetFireInputReleased()
         {
-            
+
             return !GetFireInputHeld() && m_FireInputWasHeld;
         }
 
-        //¿ª»ð³ÖÐøÊäÈë
         public bool GetFireInputHeld()
         {
-            
+
             if (CanProcessInput())
             {
-                
+
                 //bool isGamepad = Input.GetAxis(GameConstants.k_ButtonNameGamepadFire) != 0f;
                 //if (isGamepad)
                 //{
@@ -149,7 +135,6 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
-        //Ãé×¼³ÖÐøÊäÈë
         public bool GetAimInputHeld()
         {
             if (CanProcessInput())
@@ -165,7 +150,6 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
-        //³å´Ì³ÖÐøÊäÈë
         public bool GetSprintInputHeld()
         {
             if (CanProcessInput())
@@ -176,7 +160,6 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
-        //ÏÂ¶×°´ÏÂÊäÈë
         public bool GetCrouchInputDown()
         {
             if (CanProcessInput())
@@ -187,7 +170,6 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
-        //ÏÂ¶×µ¯ÆðÊäÈë
         public bool GetCrouchInputReleased()
         {
             if (CanProcessInput())
@@ -198,7 +180,6 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
-        //ÖØÐÂ×°Ìî°´ÏÂÊäÈë
         public bool GetReloadButtonDown()
         {
             if (CanProcessInput())
@@ -209,7 +190,6 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
-        //ÇÐ»»ÎäÆ÷ÊäÈë-¹öÖá
         public int GetSwitchWeaponInput()
         {
             if (CanProcessInput())
@@ -220,7 +200,7 @@ namespace OneCanRun.GamePlay
                 //    ? GameConstants.k_ButtonNameGamepadSwitchWeapon
                 //    : GameConstants.k_ButtonNameSwitchWeapon;
 
-                string axisName= GameConstants.k_ButtonNameSwitchWeapon;
+                string axisName = GameConstants.k_ButtonNameSwitchWeapon;
 
                 if (Input.GetAxis(axisName) > 0f)
                     return -1;
@@ -235,7 +215,6 @@ namespace OneCanRun.GamePlay
             return 0;
         }
 
-        //ÇÐ»»ÎäÆ÷ÊäÈë-°´¼ü£¨1-9£©
         public int GetSelectWeaponInput()
         {
             if (CanProcessInput())
@@ -265,43 +244,42 @@ namespace OneCanRun.GamePlay
             return 0;
         }
 
-//        float GetMouseOrStickLookAxis(string mouseInputName, string stickInputName)
-//        {
-//            if (CanProcessInput())
-//            {
-//                // Check if this look input is coming from the mouse
-//                bool isGamepad = Input.GetAxis(stickInputName) != 0f;
-//                float i = isGamepad ? Input.GetAxis(stickInputName) : Input.GetAxisRaw(mouseInputName);
+        //        float GetMouseOrStickLookAxis(string mouseInputName, string stickInputName)
+        //        {
+        //            if (CanProcessInput())
+        //            {
+        //                // Check if this look input is coming from the mouse
+        //                bool isGamepad = Input.GetAxis(stickInputName) != 0f;
+        //                float i = isGamepad ? Input.GetAxis(stickInputName) : Input.GetAxisRaw(mouseInputName);
 
-//                // handle inverting vertical input
-//                if (InvertYAxis)
-//                    i *= -1f;
+        //                // handle inverting vertical input
+        //                if (InvertYAxis)
+        //                    i *= -1f;
 
-//                // apply sensitivity multiplier
-//                i *= LookSensitivity;
+        //                // apply sensitivity multiplier
+        //                i *= LookSensitivity;
 
-//                if (isGamepad)
-//                {
-//                    // since mouse input is already deltaTime-dependant, only scale input with frame time if it's coming from sticks
-//                    i *= Time.deltaTime;
-//                }
-//                else
-//                {
-//                    // reduce mouse input amount to be equivalent to stick movement
-//                    i *= 0.01f;
-//#if UNITY_WEBGL
-//                    // Mouse tends to be even more sensitive in WebGL due to mouse acceleration, so reduce it even more
-//                    i *= WebglLookSensitivityMultiplier;
-//#endif
-//                }
+        //                if (isGamepad)
+        //                {
+        //                    // since mouse input is already deltaTime-dependant, only scale input with frame time if it's coming from sticks
+        //                    i *= Time.deltaTime;
+        //                }
+        //                else
+        //                {
+        //                    // reduce mouse input amount to be equivalent to stick movement
+        //                    i *= 0.01f;
+        //#if UNITY_WEBGL
+        //                    // Mouse tends to be even more sensitive in WebGL due to mouse acceleration, so reduce it even more
+        //                    i *= WebglLookSensitivityMultiplier;
+        //#endif
+        //                }
 
-//                return i;
-//            }
+        //                return i;
+        //            }
 
-//            return 0f;
-//        }
-        
-        //Êó±êÊäÈë-¾µÍ·ÊäÈë£¨°üÀ¨xÖá yÖá£©
+        //            return 0f;
+        //        }
+
         float GetMouseLookAxis(string mouseInputName, string stickInputName)
         {
             if (CanProcessInput())
@@ -309,7 +287,7 @@ namespace OneCanRun.GamePlay
                 // Check if this look input is coming from the mouse
                 //bool isGamepad = Input.GetAxis(stickInputName) != 0f;
                 //float i = isGamepad ? Input.GetAxis(stickInputName) : Input.GetAxisRaw(mouseInputName);
-                float i = Input.GetAxisRaw(mouseInputName); 
+                float i = Input.GetAxisRaw(mouseInputName);
 
                 // handle inverting vertical input
                 if (InvertYAxis)
@@ -318,20 +296,20 @@ namespace OneCanRun.GamePlay
                 // apply sensitivity multiplier
                 i *= LookSensitivity;
 
-//                if (isGamepad)
-//                {
-//                    // since mouse input is already deltaTime-dependant, only scale input with frame time if it's coming from sticks
-//                    i *= Time.deltaTime;
-//                }
-//                else
-//                {
-//                    // reduce mouse input amount to be equivalent to stick movement
-//                    i *= 0.01f;
-//#if UNITY_WEBGL
-//                    // Mouse tends to be even more sensitive in WebGL due to mouse acceleration, so reduce it even more
-//                    i *= WebglLookSensitivityMultiplier;
-//#endif
-//                }
+                //                if (isGamepad)
+                //                {
+                //                    // since mouse input is already deltaTime-dependant, only scale input with frame time if it's coming from sticks
+                //                    i *= Time.deltaTime;
+                //                }
+                //                else
+                //                {
+                //                    // reduce mouse input amount to be equivalent to stick movement
+                //                    i *= 0.01f;
+                //#if UNITY_WEBGL
+                //                    // Mouse tends to be even more sensitive in WebGL due to mouse acceleration, so reduce it even more
+                //                    i *= WebglLookSensitivityMultiplier;
+                //#endif
+                //                }
 
                 i *= 0.01f;
 #if UNITY_WEBGL
