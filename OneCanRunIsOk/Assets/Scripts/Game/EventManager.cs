@@ -2,21 +2,21 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-namespace OneCanRun
+namespace OneCanRun.Game
 {
     public static class EventManager{
 
-        private static Dictionary<Type, Action<OneCanRun.Event>> mEventMap = new Dictionary<Type, Action<OneCanRun.Event>>();
-        private static Dictionary<Delegate, Action<OneCanRun.Event>> mEventLookups = new Dictionary<Delegate, Action<OneCanRun.Event>>();
+        private static Dictionary<Type, Action<Event>> mEventMap = new Dictionary<Type, Action<Event>>();
+        private static Dictionary<Delegate, Action<Event>> mEventLookups = new Dictionary<Delegate, Action<Event>>();
 
-        public static void addListener<T>(Action<T> evt) where T : OneCanRun.Event{
+        public static void addListener<T>(Action<T> evt) where T : Event{
             if (!mEventLookups.ContainsKey(evt))
             {
 
-                Action<OneCanRun.Event> newAction = (e) => evt((T)e);
+                Action<Event> newAction = (e) => evt((T)e);
                 mEventLookups[evt] = newAction;
 
-                if (mEventMap.TryGetValue(typeof(T), out Action<OneCanRun.Event> internalAction))
+                if (mEventMap.TryGetValue(typeof(T), out Action<Event> internalAction))
                 {
                     mEventMap[typeof(T)] = internalAction += newAction;
                 }
@@ -27,7 +27,7 @@ namespace OneCanRun
 
         }
 
-        public static void removeListener<T>(Action<T> evt) where T : OneCanRun.Event{
+        public static void removeListener<T>(Action<T> evt) where T : Event{
             if(mEventLookups.TryGetValue(evt, out var action)){
                 if(mEventMap.TryGetValue(typeof(T), out var tempAction)){
                     tempAction -= action;

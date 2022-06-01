@@ -1,7 +1,7 @@
-using Unity.Scripts.Game;
 using UnityEngine;
+using OneCanRun.Game;
 
-namespace OneCanRun
+namespace OneCanRun.GamePlay
 {
     //暂不加载游戏流管理
     //该input输入流(如Input.GetAxisRaw(GameConstants.k_AxisNameHorizontal)类函数)与编辑器中的input设置相关 方便修改·调试

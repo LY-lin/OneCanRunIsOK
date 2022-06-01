@@ -1,8 +1,8 @@
-using Unity.Scripts.Game;
 using UnityEngine;
 using UnityEngine.Events;
+using OneCanRun.Game;
 
-namespace OneCanRun
+namespace OneCanRun.GamePlay
 {   
     //Ωˆ  ”√“∆∂Ø
     //[RequireComponent(typeof(CharacterController), typeof(PlayerInputHandler), typeof(AudioSource))]

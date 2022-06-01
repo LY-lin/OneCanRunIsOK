@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Unity.Scripts.Game
+namespace OneCanRun.Game
 {
     public class ActorsManager : MonoBehaviour
     {

@@ -1,4 +1,4 @@
-namespace Unity.Scripts.Game
+namespace OneCanRun.Game
 {
     public class GameConstants
     {

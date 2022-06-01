@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace OneCanRun
+namespace OneCanRun.Game.Share
 {
     public class Objective : MonoBehaviour
     {
@@ -46,6 +46,7 @@ namespace OneCanRun
 
         public void CompleteObjective(string descriptionText, string counterText, string notificationText)
         {
+            
             IsCompleted = true;
 
             ObjectiveUpdateEvent evt = Events.ObjectiveUpdateEvent;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OneCanRun
+namespace OneCanRun.Game
 {
     //error throw
     public static class DebugUtility

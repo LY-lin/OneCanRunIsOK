@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace OneCanRun
+namespace OneCanRun.Game
 {
     public abstract class AbstractEventFactory
     {

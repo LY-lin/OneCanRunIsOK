@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using OneCanRun.Game.Share;
 using UnityEngine;
-namespace OneCanRun
+namespace OneCanRun.Game
 {
     public static class Events
     {

@@ -6,7 +6,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace OneCanRun
+namespace OneCanRun.Game
 {
     public class GameFlowManager : MonoBehaviour
     {
@@ -50,6 +50,7 @@ namespace OneCanRun
         void Start()
         {
             //游戏音量管理
+            EndGameFadeCanvasGroup.gameObject.SetActive(false);
         }
 
         void Update()
@@ -83,10 +84,11 @@ namespace OneCanRun
 
             // Remember that we need to load the appropriate end scene after a delay
             GameIsEnding = true;
+            Debug.Log("YOU Win");
             EndGameFadeCanvasGroup.gameObject.SetActive(true);
             if (win)
             {
-                m_SceneToLoad = WinSceneName;
+                //m_SceneToLoad = WinSceneName;
                 m_TimeLoadEndGameScene = Time.time + EndSceneLoadDelay + DelayBeforeFadeToBlack;
 
                 // 播放胜利音效

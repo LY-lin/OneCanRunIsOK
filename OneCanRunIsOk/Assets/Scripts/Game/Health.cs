@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace OneCanRun
+namespace OneCanRun.Game
 {
     public class Health : MonoBehaviour
     {
