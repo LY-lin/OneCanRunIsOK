@@ -68,7 +68,7 @@ namespace OneCanRun.Game
                 // See if it's time to load the end scene (after the delay)
                 if (Time.time >= m_TimeLoadEndGameScene)
                 {
-                    SceneManager.LoadScene(m_SceneToLoad);
+                    //SceneManager.LoadScene(m_SceneToLoad);
                     GameIsEnding = false;
                 }
             }
