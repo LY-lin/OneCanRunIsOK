@@ -81,6 +81,7 @@ namespace OneCanRun.Game
             if (CurrentHealth <= 0f)
             {
                 m_IsDead = true;
+                Debug.Log("I'm died");
                 OnDie?.Invoke();
             }
         }
