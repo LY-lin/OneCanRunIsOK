@@ -30,12 +30,17 @@ namespace OneCanRun.Game.Share
     // [RequireComponent(typeof(AudioSource))]  //加入声源
     public class WeaponController : MonoBehaviour
     {
+        
+
         [Header("Information")]
         [Tooltip("The name that will be displayed in the UI for this weapon")]
         public string WeaponName;   //武器名
 
         [Tooltip("The image that will be displayed in the UI for this weapon")]
         public Sprite WeaponIcon;   //武器显示在UI的小图标
+
+        [Tooltip("Bullet profebs")]
+        public GameObject bullet;
 
         [Tooltip("Default data for the crosshair")]
         public CrosshairData CrosshairDataDefault;//默认的准心数据
@@ -391,6 +396,7 @@ namespace OneCanRun.Game.Share
 
         public bool HandleShootInputs(bool inputDown, bool inputHeld, bool inputUp)
         {
+            
             m_WantsToShoot = inputDown || inputHeld;
             switch (ShootType)
             {
@@ -489,12 +495,9 @@ namespace OneCanRun.Game.Share
                 /*
                 ProjectileBase newProjectile = Instantiate(ProjectilePrefab, WeaponMuzzle.position,
                     Quaternion.LookRotation(shotDirection));
-                newProjectile.Shoot(this);*/
-
-
-                /*
-                 *  Bullet newBullet = Initiate(ShootType,  shotDirection);//给子弹传递子弹类型和射击的方向——坚
-                */
+                newProjectile.Shoot(this*/
+                
+                trigger(Quaternion.LookRotation(shotDirection));
             }
 
             // muzzle flash
@@ -544,6 +547,23 @@ namespace OneCanRun.Game.Share
                 spreadAngleRatio);
 
             return spreadWorldDirection;
+        }
+
+        private void trigger(Quaternion fireRotation)
+        {
+            //Debug.Log(111);
+            RaycastHit hit;
+
+            //float currentSpread = Mathf.Lerp(0.0f, maxSpreadAngle, accuracy / timeTillMaxSpread);
+
+            //fireRotation = Quaternion.RotateTowards(fireRotation, Random.rotation, Random.Range(0.0f, currentSpread));
+
+            Physics.Raycast(transform.position, fireRotation * Vector3.forward, out hit, Mathf.Infinity);
+
+            {
+                GameObject tempBullet = Instantiate(bullet, WeaponMuzzle.position, fireRotation);
+                tempBullet.GetComponent<BulletController>().hitPoint = hit.point;
+            }
         }
     }
 }

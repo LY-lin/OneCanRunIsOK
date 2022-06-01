@@ -93,6 +93,7 @@ namespace OneCanRun.GamePlay
 
         public bool GetJumpInputHeld()
         {
+            Debug.Log(3331);
             if (CanProcessInput())
             {
                 return Input.GetButton(GameConstants.k_ButtonNameJump);
@@ -103,18 +104,22 @@ namespace OneCanRun.GamePlay
 
         public bool GetFireInputDown()
         {
+            
             return GetFireInputHeld() && !m_FireInputWasHeld;
         }
 
         public bool GetFireInputReleased()
         {
+            
             return !GetFireInputHeld() && m_FireInputWasHeld;
         }
 
         public bool GetFireInputHeld()
         {
+            
             if (CanProcessInput())
             {
+                
                 //bool isGamepad = Input.GetAxis(GameConstants.k_ButtonNameGamepadFire) != 0f;
                 //if (isGamepad)
                 //{
