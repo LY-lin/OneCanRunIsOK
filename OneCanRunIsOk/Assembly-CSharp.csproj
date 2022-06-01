@@ -56,7 +56,8 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\UI\NewBehaviourScript.cs" />
+    <Compile Include="Assets\Scripts\Event.cs" />
+    <Compile Include="Assets\Scripts\EventFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -760,13 +761,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="OneCanRun.GamePlay.csproj">
-      <Project>{40CE134F-9912-0858-92D8-7B16B28CFF40}</Project>
-      <Name>OneCanRun.GamePlay</Name>
+    <ProjectReference Include="Scripts.GamePlay.csproj">
+      <Project>{CB774859-8B0B-EFC1-1698-A47902577400}</Project>
+      <Name>Scripts.GamePlay</Name>
     </ProjectReference>
-    <ProjectReference Include="OneCanRun.Game.csproj">
-      <Project>{31FE8E72-AA61-C945-B617-01FDE253E853}</Project>
-      <Name>OneCanRun.Game</Name>
+    <ProjectReference Include="Scripts.Game.csproj">
+      <Project>{10A3AF4A-8988-77FB-217F-BE44A5145583}</Project>
+      <Name>Scripts.Game</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -293,24 +293,4 @@ InputManager:
     type: 0
     axis: 0
     joyNum: 0
-<<<<<<< Updated upstream
   m_UsePhysicalKeys: 1
-=======
-  - serializedVersion: 3
-    m_Name: NextWeapon
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: q
-    altNegativeButton: 
-    altPositiveButton: e
-    gravity: 1000
-    dead: 0.001
-    sensitivity: 1000
-    snap: 0
-    invert: 0
-    type: 0
-    axis: 0
-    joyNum: 0
-  m_UsePhysicalKeys: 0
->>>>>>> Stashed changes
