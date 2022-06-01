@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace OneCanRun.Game.Share
+
+public class bulletController : MonoBehaviour
 {
-    public class BulletController : MonoBehaviour
+    // Start is called before the first frame update
+    void Start()
     {
+<<<<<<< Updated upstream
+        
+=======
         public Vector3 hitPoint;
         public int speed;
+
+        //²âÊÔÉËº¦Ê±µÄ¿ÕÉËº¦À´Ô´
+        public GameObject Owner { get; set; }
         // Start is called before the first frame update
         void Start()
         {
@@ -22,18 +30,29 @@ namespace OneCanRun.Game.Share
 
         void OnCollisionEnter(Collision col)
         {
-            if (col.gameObject.tag == "Enemy")
+            //if (col.gameObject.tag == "Enemy")
+            //{
+                Damageable damageable = col.collider.GetComponent<Damageable>();
+            if (damageable)
             {
-
-                Destroy(this.gameObject);
+                //ProjectileBase m_ProjectileBase = new ProjectileBase();
+                damageable.InflictDamage(10f, false, Owner);
             }
-            else
-            {
-                Destroy(this.gameObject);
-            }
+                //Destroy(this.gameObject);
+            //}
+            //else
+            //{
+            //    Destroy(this.gameObject);
+            //}
 
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
         }
+>>>>>>> Stashed changes
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }

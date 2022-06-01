@@ -46,6 +46,7 @@ namespace OneCanRun.Game.Share
                 Health.TakeDamage(totalDamage, damageSource);
             }
         }
+        
     }
 
 }
