@@ -48,7 +48,11 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
+<<<<<<< Updated upstream
   controlID: 42
+=======
+  controlID: 95
+>>>>>>> Stashed changes
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -317,22 +321,36 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
+<<<<<<< Updated upstream
     - Assets/Scripts/GamePlay/Objectives
+=======
+    - Assets/Art
+>>>>>>> Stashed changes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
+<<<<<<< Updated upstream
   - Assets/Scripts/GamePlay/Objectives
+=======
+  - Assets/Art
+>>>>>>> Stashed changes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: E:\Unity\OneCanRunIsOK\OneCanRunIsOk
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 60}
+<<<<<<< Updated upstream
     m_SelectedIDs: d0590000
     m_LastClickedID: 22992
     m_ExpandedIDs: 00000000985900009a590000ac59000000ca9a3bffffff7f
+=======
+    m_SelectedIDs: d8590000
+    m_LastClickedID: 23000
+    m_ExpandedIDs: 00000000ca590000cc590000ce59000000ca9a3bffffff7f
+>>>>>>> Stashed changes
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -360,7 +378,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< Updated upstream
     m_ExpandedIDs: 00000000985900009a590000
+=======
+    m_ExpandedIDs: 00000000ca590000cc590000ce590000
+>>>>>>> Stashed changes
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -490,7 +512,11 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
+<<<<<<< Updated upstream
       m_ExpandedIDs: 34fbffff
+=======
+      m_ExpandedIDs: 0afbffff2c5900007c590000
+>>>>>>> Stashed changes
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -772,7 +798,11 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< Updated upstream
     m_Target: {x: -2.0588236, y: -0.6628418, z: 1.8080292}
+=======
+    m_Target: {x: 387.87756, y: 133.53868, z: 120.76959}
+>>>>>>> Stashed changes
     speed: 2
     m_Value: {x: -2.0588236, y: -0.6628418, z: 1.8080292}
   m_RenderMode: 0
@@ -820,11 +850,19 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
+<<<<<<< Updated upstream
     m_Target: {x: -0.075712375, y: 0.92163336, z: -0.23024279, w: -0.30306777}
+=======
+    m_Target: {x: -0.03479815, y: -0.015892355, z: 0.00055415084, w: -0.99926966}
+>>>>>>> Stashed changes
     speed: 2
     m_Value: {x: -0.07571229, y: 0.92163235, z: -0.23024254, w: -0.30306745}
   m_Size:
+<<<<<<< Updated upstream
     m_Target: 14.167129
+=======
+    m_Target: 262.38715
+>>>>>>> Stashed changes
     speed: 2
     m_Value: 14.167129
   m_Ortho:
