@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Game\DebugUtility.cs" />
     <Compile Include="Assets\Scripts\Game\Share\Objective.cs" />
     <Compile Include="Assets\Scripts\Game\Actor.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\Damageable.cs" />
     <Compile Include="Assets\Scripts\Game\StaticEvents.cs" />
     <Compile Include="Assets\Scripts\Game\ActorsManager.cs" />
     <Compile Include="Assets\Scripts\Game\Share\WeaponController.cs" />

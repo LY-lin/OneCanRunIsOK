@@ -52,12 +52,14 @@ namespace OneCanRun.Game
             CurrentHealth -= damage;
             CurrentHealth = Mathf.Clamp(CurrentHealth, 0f, MaxHealth);
 
+            Debug.Log(CurrentHealth);
+            /*
             // call OnDamage action
             float trueDamageAmount = healthBefore - CurrentHealth;
             if (trueDamageAmount > 0f)
             {
                 OnDamaged?.Invoke(trueDamageAmount, damageSource);
-            }
+            }*/
 
             HandleDeath();
         }
