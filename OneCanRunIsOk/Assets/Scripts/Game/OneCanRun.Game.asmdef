@@ -1,6 +1,6 @@
 {
     "name": "OneCanRun.Game",
-    "rootNamespace": "",
+    "rootNamespace": "OneCanRun",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
