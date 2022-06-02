@@ -1,5 +1,5 @@
 /**
- *  ÓÎÏ·Ö÷½ø³Ì¹ÜÀíÆ÷£¬¿ØÖÆÓÎÏ·±¾ÌåµÄÉúÃüÖÜÆÚ¡£ÈçºÎ¿ªÊ¼£¬½áÊø
+ *  æ¸¸æˆä¸»è¿›ç¨‹ç®¡ç†å™¨ï¼Œæ§åˆ¶æ¸¸æˆæœ¬ä½“çš„ç”Ÿå‘½å‘¨æœŸã€‚å¦‚ä½•å¼€å§‹ï¼Œç»“æŸ
  *
  */
 
@@ -43,26 +43,26 @@ namespace OneCanRun.Game
 
         private void Awake()
         {
-            //ÏòÊÂ¼ş¹ÜÀíÆ÷×¢²á AllMissonCompletedÊÂ¼şÓëPlayerDeathÊÂ¼ş¡£
+            //å‘äº‹ä»¶ç®¡ç†å™¨æ³¨å†Œ AllMissonCompletedäº‹ä»¶ä¸PlayerDeathäº‹ä»¶ã€‚
             EventManager.addListener<AllObjectivesCompletedEvent>(OnAllObjectivesCompleted);
             EventManager.addListener<PlayerDeathEvent>(OnPlayerDeath);
         }
         void Start()
         {
-            //ÓÎÏ·ÒôÁ¿¹ÜÀí
+            //æ¸¸æˆéŸ³é‡ç®¡ç†
             EndGameFadeCanvasGroup.gameObject.SetActive(false);
         }
 
         void Update()
         {
-            //Èç¹ûÓÎÏ·½áÊø
+            //å¦‚æœæ¸¸æˆç»“æŸ
             if (GameIsEnding)
             {
-                //¼ÆËã½áÊø³¡¾°µÄ»­²¼Í¸Ã÷¶È£¬ÊµÏÖ½¥±äĞ§¹û
+                //è®¡ç®—ç»“æŸåœºæ™¯çš„ç”»å¸ƒé€æ˜åº¦ï¼Œå®ç°æ¸å˜æ•ˆæœ
                 float timeRatio = 1 - (m_TimeLoadEndGameScene - Time.time) / EndSceneLoadDelay;
                 EndGameFadeCanvasGroup.alpha = timeRatio;
 
-                //ÒôÏì¿ØÖÆÏµÍ³
+                //éŸ³å“æ§åˆ¶ç³»ç»Ÿ
                 //AudioUtility.SetMasterVolume(1 - timeRatio);
 
                 // See if it's time to load the end scene (after the delay)
@@ -91,7 +91,7 @@ namespace OneCanRun.Game
                 //m_SceneToLoad = WinSceneName;
                 m_TimeLoadEndGameScene = Time.time + EndSceneLoadDelay + DelayBeforeFadeToBlack;
 
-                // ²¥·ÅÊ¤ÀûÒôĞ§
+                // æ’­æ”¾èƒœåˆ©éŸ³æ•ˆ
                 /*
                 var audioSource = gameObject.AddComponent<AudioSource>();
                 audioSource.clip = VictorySound;
@@ -107,7 +107,7 @@ namespace OneCanRun.Game
                 //    message.GetComponent<Transform>().SetAsLastSibling();
                 //}
 
-                //¹ã²¥ÓÎÏ·»ñÊ¤ÊÂ¼ş
+                //å¹¿æ’­æ¸¸æˆè·èƒœäº‹ä»¶
                 /*
                 DisplayMessageEvent displayMessage = Events.DisplayMessageEvent;
                 displayMessage.Message = WinGameMessage;
@@ -123,11 +123,10 @@ namespace OneCanRun.Game
 
         void OnDestroy()
         {
-            //´ÓÊÂ¼ş¹ÜÀíÆ÷ÖĞ×¢ÏúÊÂ¼ş
+            //ä»äº‹ä»¶ç®¡ç†å™¨ä¸­æ³¨é”€äº‹ä»¶
             EventManager.removeListener<AllObjectivesCompletedEvent>(OnAllObjectivesCompleted);
             EventManager.removeListener<PlayerDeathEvent>(OnPlayerDeath);
         }
 
     }
 }
-

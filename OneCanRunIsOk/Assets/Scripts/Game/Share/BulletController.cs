@@ -1,18 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class bulletController : MonoBehaviour
+namespace OneCanRun.Game.Share
 {
-    // Start is called before the first frame update
-    void Start()
+    public class BulletController : MonoBehaviour
     {
-        
+        // Start is called before the first frame update
+        void Start()
+        {
+        }
+
+        public Vector3 hitPoint;
+        //[Tooltip("Speed")]
+        public static int speed = 50;
+
+        //�����˺�ʱ�Ŀ��˺���Դ
+        public GameObject Owner { get; set; }
+        // Start is called before the first frame update
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+
+        void OnCollisionEnter(Collision col)
+        {
+            //if (col.gameObject.tag == "Enemy")
+            //{
+            Damageable damageable = col.collider.GetComponent<Damageable>();
+            if (damageable)
+            {
+                //ProjectileBase m_ProjectileBase = new ProjectileBase();
+                damageable.InflictDamage(10f, false, Owner);
+            }
+            //Destroy(this.gameObject);
+            //}
+            //else
+            //{
+            //    Destroy(this.gameObject);
+            //}
+
+            //Destroy(this.gameObject);
+        }
+
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
