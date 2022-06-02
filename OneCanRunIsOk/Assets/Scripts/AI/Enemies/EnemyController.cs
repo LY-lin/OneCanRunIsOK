@@ -212,7 +212,7 @@ namespace OneCanRun.AI.Enemies
         {
             if (IsPathValid())
             {
-                Debug.Log(pathDestinationNodeIndex);
+                //Debug.Log(pathDestinationNodeIndex);
                 return PatrolPath.GetPositionOfPathNode(pathDestinationNodeIndex);
             }
             else
@@ -236,7 +236,7 @@ namespace OneCanRun.AI.Enemies
             if (IsPathValid())
             {
                 // Check if reached the path destination
-                Debug.Log((transform.position - GetDestinationOnPath()).magnitude);
+                //Debug.Log((transform.position - GetDestinationOnPath()).magnitude);
                 if ((transform.position - GetDestinationOnPath()).magnitude <= PathReachingRadius)
                 {
                     // increment path destination index
