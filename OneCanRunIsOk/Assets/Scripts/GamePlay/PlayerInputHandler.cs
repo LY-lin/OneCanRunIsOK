@@ -204,6 +204,17 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
+        //使用技能按下输入
+        public bool GetUseSkillButtonDown()
+        {
+            if (CanProcessInput())
+            {
+                return Input.GetButtonDown(GameConstants.k_ButtonUseSkill);
+            }
+
+            return false;
+        }
+
         //切换武器输入-滚轴
         public int GetSwitchWeaponInput()
         {
