@@ -262,6 +262,7 @@ namespace OneCanRun.Game.Share
 
         public void Reload()   //??????????
         {
+            Debug.Log(123);
             m_CurrentAmmo = ClipSize;
             m_CarriedPhysicalBullets = Mathf.RoundToInt(m_CurrentAmmo);
             IsReloading = false;
