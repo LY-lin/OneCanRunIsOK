@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace OneCanRun.Game.Share
 {
-
+    
     public enum WeaponShootType
     {
         Manual,
@@ -39,6 +39,9 @@ namespace OneCanRun.Game.Share
 
         [Tooltip("Default data for the crosshair")]
         public CrosshairData CrosshairDataDefault;//默认的准心数据
+
+        [Tooltip("Bullet profebs")]
+        public GameObject bullet;
 
         /*
         [Tooltip("Data for the crosshair when targeting an enemy")]
@@ -155,7 +158,7 @@ namespace OneCanRun.Game.Share
         public AudioClip ContinuousShootEndSfx;
         AudioSource m_ContinuousShootAudioSource = null;*/
         bool m_WantsToShoot = false;
-
+        
 
         //射击时的Action
         public UnityAction OnShoot;
@@ -344,7 +347,7 @@ namespace OneCanRun.Game.Share
             }
         }
 
-        void UpdateContinuousShootSound()
+       void UpdateContinuousShootSound()
         {/*
             if (UseContinuousShootSound)
             {
@@ -540,6 +543,26 @@ namespace OneCanRun.Game.Share
                 spreadAngleRatio);
 
             return spreadWorldDirection;
+        }
+        private void trigger(Quaternion fireRotation)
+        {
+            //Debug.Log(111);
+            RaycastHit hit;
+            float currentSpread = Mathf.Lerp(0.0f, 10, 2 / 1);
+
+            fireRotation = Quaternion.RotateTowards(fireRotation, UnityEngine.Random.rotation, UnityEngine.Random.Range(0.0f, currentSpread));
+
+            Physics.Raycast(transform.position, fireRotation * Vector3.forward, out hit, Mathf.Infinity);
+
+            {
+                GameObject tempBullet = Instantiate(bullet, WeaponMuzzle.position, fireRotation);
+                tempBullet.GetComponent<BulletController>().hitPoint = hit.point;
+
+                float spped = BulletController.speed;
+                Vector3 temp = spped * WeaponMuzzle.forward.normalized;
+                tempBullet.GetComponent<Rigidbody>().velocity = temp;
+
+            }
         }
     }
 }
