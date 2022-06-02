@@ -159,9 +159,15 @@ namespace OneCanRun.GamePlay
 
             if (activeWeapon != null && m_WeaponSwitchState == WeaponSwitchState.Up)
             {
+<<<<<<< Updated upstream
                 //·¢Æð»»µ¯
                 if (!activeWeapon.AutomaticReload && m_InputHandler.GetReloadButtonDown() && activeWeapon.CurrentAmmoRatio < 1.0f)
+=======
+                //å‘èµ·æ¢å¼¹
+                if (activeWeapon.HasPhysicalBullets && m_InputHandler.GetReloadButtonDown() && activeWeapon.CurrentAmmoRatio < 1.0f)
+>>>>>>> Stashed changes
                 {
+                    Debug.Log(321);
                     //IsAiming = false;
                     //activeWeapon.StartReloadAnimation();
                     activeWeapon.Reload();
