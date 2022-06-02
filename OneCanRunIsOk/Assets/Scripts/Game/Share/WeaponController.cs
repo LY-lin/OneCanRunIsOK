@@ -202,14 +202,15 @@ namespace OneCanRun.Game.Share
         void Awake()
         {
             m_CurrentAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
+            MaxAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
             //m_CarriedPhysicalBullets = HasPhysicalBullets ? ClipSize : 0;//?��????????????????????????0
             m_LastMuzzlePosition = WeaponMuzzle.position;
 
-            /* 
-             * m_ShootAudioSource = GetComponent<AudioSource>();
-             DebugUtility.HandleErrorIfNullGetComponent<AudioSource, WeaponController>(m_ShootAudioSource, this,
-                 gameObject);
-            */
+
+            m_ShootAudioSource = GetComponent<AudioSource>();
+            DebugUtility.HandleErrorIfNullGetComponent<AudioSource, WeaponController>(m_ShootAudioSource, this,
+                gameObject);
+
 
             /*
             if (UseContinuousShootSound)
