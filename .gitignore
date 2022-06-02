@@ -37,3 +37,6 @@ sysinfo.txt
 *.unitypackage
 *.log
 *.log
+OneCanRunIsOk/OneCanRun.Game.csproj
+OneCanRunIsOk/ProjectSettings/InputManager.asset
+OneCanRunIsOk/Logs/shadercompiler-UnityShaderCompiler.exe0.log
