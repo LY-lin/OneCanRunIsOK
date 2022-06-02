@@ -34,7 +34,8 @@ namespace OneCanRun.AI.Enemies
         // Start is called before the first frame update
         void Start()
         {
-            manager = GetComponent<ActorsManager>();
+            manager = FindObjectOfType<ActorsManager>();
+            DebugUtility.HandleErrorIfNullFindObject<ActorsManager, EnemyDetectionModule>(manager, this);
         }
 
         public virtual void HandleDetection(Actor self, Collider[] selfColliders)

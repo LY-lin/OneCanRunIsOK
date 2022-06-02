@@ -78,12 +78,23 @@ namespace OneCanRun.AI.Enemies
         {
             // 初始化
             enemyManager = FindObjectOfType<EnemyManager>();
+            DebugUtility.HandleErrorIfNullFindObject<EnemyManager, EnemyController>(enemyManager, this);
+
             actorsManager = FindObjectOfType<ActorsManager>();
+            DebugUtility.HandleErrorIfNullFindObject<ActorsManager, EnemyController>(actorsManager, this);
+
             gameFlowManager = FindObjectOfType<GameFlowManager>();
+            DebugUtility.HandleErrorIfNullFindObject<GameFlowManager, EnemyController>(gameFlowManager, this);
+
             health = GetComponent<Health>();
+            DebugUtility.HandleErrorIfNullGetComponent<Health, EnemyController>(health, this, gameObject);
+
             actor = GetComponent<Actor>();
+            DebugUtility.HandleErrorIfNullGetComponent<Actor, EnemyController>(actor, this, gameObject);
+
             colliders = GetComponentsInChildren<Collider>();
             NavMeshAgent = GetComponent<NavMeshAgent>();
+            DebugUtility.HandleErrorIfNullGetComponent<NavMeshAgent, EnemyController>(NavMeshAgent, this, gameObject);
 
             // 注册敌人
             enemyManager.RegisterEnemy(this);
@@ -94,6 +105,10 @@ namespace OneCanRun.AI.Enemies
 
             // 初始化检测模块
             EnemyDetectionModule[] enemyDetectionModules = GetComponentsInChildren<EnemyDetectionModule>();
+            DebugUtility.HandleErrorIfNoComponentFound<EnemyDetectionModule, EnemyController>(enemyDetectionModules.Length, this,
+                gameObject);
+            DebugUtility.HandleWarningIfDuplicateObjects<EnemyDetectionModule, EnemyController>(enemyDetectionModules.Length,
+                this, gameObject);
             EnemyDetectionModule = enemyDetectionModules[0];
             EnemyDetectionModule.onDetectedTarget += OnDetectTarget;
             EnemyDetectionModule.onLostTarget += OnLostTarget;
@@ -197,6 +212,7 @@ namespace OneCanRun.AI.Enemies
         {
             if (IsPathValid())
             {
+                Debug.Log(pathDestinationNodeIndex);
                 return PatrolPath.GetPositionOfPathNode(pathDestinationNodeIndex);
             }
             else
@@ -220,6 +236,7 @@ namespace OneCanRun.AI.Enemies
             if (IsPathValid())
             {
                 // Check if reached the path destination
+                Debug.Log((transform.position - GetDestinationOnPath()).magnitude);
                 if ((transform.position - GetDestinationOnPath()).magnitude <= PathReachingRadius)
                 {
                     // increment path destination index

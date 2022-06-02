@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace OneCanRun.AI.Enemies
 {
-    [RequireComponent(typeof(Health), typeof(Actor), typeof(EnemyController))]
+    [RequireComponent(typeof(EnemyController))]
     public class MovableEnemy : MonoBehaviour
     {
         [Tooltip("Fraction of the enemy's attack range at which it will stop moving towards target while attacking")]
@@ -38,6 +38,7 @@ namespace OneCanRun.AI.Enemies
             attckDistance = 10f;
             detectDistance = 20f;
             controller = GetComponent<EnemyController>();
+            DebugUtility.HandleErrorIfNullGetComponent<EnemyController, MovableEnemy>(controller, this, gameObject);
 
             // ³õÊ¼»¯ÎªÑ²¼ì×´Ì¬
             state = AIState.Patrol;
