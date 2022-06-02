@@ -250,8 +250,8 @@ namespace OneCanRun.GamePlay
             if (Time.time >= m_LastTimeJumped + k_JumpGroundingPreventionTime)
             {
                 // if we're grounded, collect info about the ground normal with a downward capsule cast representing our character capsule
-                //胶囊体转换
-                //如果我们着地，收集有关地面法线的信息，使用向下的胶囊投射代表我们的角色胶囊
+                //锟斤拷锟斤拷锟斤拷转锟斤拷
+                //锟斤拷锟斤拷锟斤拷锟斤拷诺兀锟斤拷占锟斤拷泄氐锟斤拷娣拷叩锟斤拷锟较拷锟绞癸拷锟斤拷锟斤拷碌慕锟斤拷锟酵讹拷锟斤拷锟斤拷锟斤拷锟角的斤拷色锟斤拷锟斤拷
                 if (Physics.CapsuleCast(GetCapsuleBottomHemisphere(), GetCapsuleTopHemisphere(m_Controller.height),
                     m_Controller.radius, Vector3.down, out RaycastHit hit, chosenGroundCheckDistance, GroundCheckLayers,
                     QueryTriggerInteraction.Ignore))

@@ -5,78 +5,78 @@ using OneCanRun.Game;
 
 namespace OneCanRun.AI.Enemies
 {
-    // µÐÈË¿ØÖÆÆ÷Àà£¬µÐÈË¶¨Òå×Ô¼ºµÄÐÐÎª²¢½«Æä¿ØÖÆÈ¨½»¸ø¿ØÖÆÆ÷
+    // ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£¬ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     [RequireComponent(typeof(Health), typeof(Actor), typeof(NavMeshAgent))]
     public class EnemyController : MonoBehaviour
     {
         [Tooltip("The distance at which the enemy considers that it has reached its current path destination point")]
         public float PathReachingRadius = 2f;
 
-        // ×îµÍ¸ß¶È£¬³¬³öËÀÍö£¬¹ÖÎïµôÂäÏûÊ§
+        // ï¿½ï¿½Í¸ß¶È£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§
         [Header("Parameters")]
         [Tooltip("The Y height at which the enemy will be automatically killed (if it falls off of the level)")]
         public float minHeight = -20f;
 
-        // ×ª¶¯ËÙ¶È£¬µÐÈË×ª¶¯ÊÓ½ÇµÄËÙ¶È/Ðý×ªËÙ¶È
+        // ×ªï¿½ï¿½ï¿½Ù¶È£ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½Ó½Çµï¿½ï¿½Ù¶ï¿½/ï¿½ï¿½×ªï¿½Ù¶ï¿½
         [Tooltip("The speed at which the enemy rotates")]
         public float OrientationSpeed = 10f;
 
-        // ËÀÍö³ÖÐøÊ±¼ä£¬¶¯»­
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½
         [Tooltip("Delay after death where the GameObject is destroyed (to allow for animation)")]
         public float DeathDuration = 0f;
 
-        // µôÂäÕ½ÀûÆ·
+        // ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½Æ·
         [Header("Loot")]
         [Tooltip("The object this enemy can drop when dying")]
         public GameObject LootPrefab;
 
-        // µôÂä¼¸ÂÊ
+        // ï¿½ï¿½ï¿½ä¼¸ï¿½ï¿½
         [Tooltip("The chance the object has to drop")]
         [Range(0, 1)]
         public float DropRate = 1f;
 
-        // ¶ÔÓ¦µÐÈËµÄËÄ¸öÊÂ¼þ£º¹¥»÷¡¢·¢ÏÖ¡¢¶ªÊ§¡¢ÊÜÉËºÍËÀÍö
+        // ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Ëµï¿½ï¿½Ä¸ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½ï¿½ï¿½ï¿½ï¿½
         public UnityAction onAttack;
         public UnityAction onDetectedTarget;
         public UnityAction onLostTarget;
         public UnityAction onDamaged;
         public UnityAction onDie;
 
-        // ×îÐÂÊÜÉËÊ±¼ä£¬ÓÃÓÚ³ðºÞ¶ªÊ§
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£¬ï¿½ï¿½ï¿½Ú³ï¿½Þ¶ï¿½Ê§
         float lastTimeDamaged = float.NegativeInfinity;
 
-        // ÒýÈëµÐÈËµÄ¼ì²âÄ£¿é
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ËµÄ¼ï¿½ï¿½Ä£ï¿½ï¿½
         public EnemyDetectionModule EnemyDetectionModule { get; private set; }
-        // ÒýÈë×Ô´øµÄAIÑ°Â·Ä£¿é
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½AIÑ°Â·Ä£ï¿½ï¿½
         public NavMeshAgent NavMeshAgent { get; private set; }
-        // ÒýÈë×Ô¶¨ÒåµÄÑ²¼ìÂ·¾¶
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Ñ²ï¿½ï¿½Â·ï¿½ï¿½
         public PatrolPath PatrolPath { get; set; }
-        // ÒýÈëµÐÈËµÄÑªÁ¿ÏµÍ³
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½Ñªï¿½ï¿½ÏµÍ³
         public Health health;
-        // ÒýÈë½ÇÉ«
+        // ï¿½ï¿½ï¿½ï¿½ï¿½É«
         public Actor actor;
-        // °ó¶¨×´Ì¬£¬ÓÃÓÚµÐÈËµÄ×´Ì¬´¦Àí
+        // ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½Ëµï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½
         public GameObject KnownDetectedTarget => EnemyDetectionModule.KnownDetectedTarget;
         public bool IsTargetInAttackRange => EnemyDetectionModule.IsTargetInAttackRange;
         public bool IsSeeingTarget => EnemyDetectionModule.IsSeeingTarget;
         public bool HadKnownTarget => EnemyDetectionModule.HadKnownTarget;
 
-        // µÐÈË¹ÜÀíÆ÷
+        // ï¿½ï¿½ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½ï¿½
         EnemyManager enemyManager;
-        // ½ÇÉ«¹ÜÀíÆ÷
+        // ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         ActorsManager actorsManager;
-        // ÓÎÏ·½ø³Ì¹ÜÀíÆ÷
+        // ï¿½ï¿½Ï·ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½
         GameFlowManager gameFlowManager;
-        // ±£´æ×Ô¼ºµÄ×é¼þ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Collider[] colliders;
-        // µ¼º½Êý¾ÝÄ£¿é
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
         NavigationModule navigationModule;
         int pathDestinationNodeIndex;
 
         // Start is called before the first frame update
         void Start()
         {
-            // ³õÊ¼»¯
+            // ï¿½ï¿½Ê¼ï¿½ï¿½
             enemyManager = FindObjectOfType<EnemyManager>();
             DebugUtility.HandleErrorIfNullFindObject<EnemyManager, EnemyController>(enemyManager, this);
 
@@ -96,14 +96,14 @@ namespace OneCanRun.AI.Enemies
             NavMeshAgent = GetComponent<NavMeshAgent>();
             DebugUtility.HandleErrorIfNullGetComponent<NavMeshAgent, EnemyController>(NavMeshAgent, this, gameObject);
 
-            // ×¢²áµÐÈË
+            // ×¢ï¿½ï¿½ï¿½ï¿½ï¿½
             enemyManager.RegisterEnemy(this);
 
-            // ¶©ÔÄÊÂ¼þ
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
             health.OnDie += OnDie;
             health.OnDamaged += OnDamaged;
 
-            // ³õÊ¼»¯¼ì²âÄ£¿é
+            // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
             EnemyDetectionModule[] enemyDetectionModules = GetComponentsInChildren<EnemyDetectionModule>();
             DebugUtility.HandleErrorIfNoComponentFound<EnemyDetectionModule, EnemyController>(enemyDetectionModules.Length, this,
                 gameObject);
@@ -130,13 +130,13 @@ namespace OneCanRun.AI.Enemies
         // Update is called once per frame
         void Update()
         {
-            // È·±£ËùÓÐµÐÈË¶¼ÔÚÒ»¶¨¸ß¶È
+            // È·ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½Ë¶ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ß¶ï¿½
             EnsureIsWithinLevelBounds();
-            // Ã¿Ö¡¶¼Òª¼ì²â
+            // Ã¿Ö¡ï¿½ï¿½Òªï¿½ï¿½ï¿½
             EnemyDetectionModule.HandleDetection(actor, colliders);
         }
 
-        // È·±£ÔÚÏÞÖÆ·¶Î§ÄÚ²¿
+        // È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Î§ï¿½Ú²ï¿½
         void EnsureIsWithinLevelBounds()
         {
             if (transform.position.y < minHeight)
@@ -146,23 +146,23 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ´¦Àí¶ªÊ§Ä¿±ê
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ê§Ä¿ï¿½ï¿½
         void OnLostTarget()
         {
-            // µ÷ÓÃ°ó¶¨µÄµÐÈË¶ªÊ§ÊÂ¼þ
+            // ï¿½ï¿½ï¿½Ã°ó¶¨µÄµï¿½ï¿½Ë¶ï¿½Ê§ï¿½Â¼ï¿½
             onLostTarget.Invoke();
         }
 
-        // ´¦Àí¼ì²âµ½Ä¿±ê
+        // ï¿½ï¿½ï¿½ï¿½ï¿½âµ½Ä¿ï¿½ï¿½
         void OnDetectTarget()
         {
             onDetectedTarget.Invoke();
         }
 
-        // ´¦ÀíÊÓ½Ç£¬×·×ÙÍæ¼Ò
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ó½Ç£ï¿½×·ï¿½ï¿½ï¿½ï¿½ï¿½
         public void OrientTowards(Vector3 lookPosition)
         {
-            // ¼ÆËãÉäÏß·½Ïò
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß·ï¿½ï¿½ï¿½
             Vector3 lookDirection = Vector3.ProjectOnPlane(lookPosition - transform.position, Vector3.up).normalized;
             {
                 Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
@@ -171,22 +171,22 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ÅÐ¶ÏÑ²¼ìÂ·¾¶ÊÇ·ñÓÐÐ§
+        // ï¿½Ð¶ï¿½Ñ²ï¿½ï¿½Â·ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ð§
         bool IsPathValid()
         {
             return true;
         }
 
-        // ÖØÖÃÂ·¾¶Ä¿µÄµØ
+        // ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½Ä¿ï¿½Äµï¿½
         public void resetPathDestination()
         {
             pathDestinationNodeIndex = 0;
         }
 
-        // ÉèÖÃÄ¿µÄµØ×î½üµÄµ¼º½Â·¾¶
+        // ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½Â·ï¿½ï¿½
         public void SetPathDestinationToClosestNode()
         {
-            // Â·¾¶ÓÐÐ§
+            // Â·ï¿½ï¿½ï¿½ï¿½Ð§
             if (IsPathValid())
             {
                 int closestPathNodeIndex = 0;
@@ -207,12 +207,12 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // »ñÈ¡Â·¾¶µÄÄ¿µÄµØ
+        // ï¿½ï¿½È¡Â·ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½Äµï¿½
         public Vector3 GetDestinationOnPath()
         {
             if (IsPathValid())
             {
-                //Debug.Log(pathDestinationNodeIndex);
+                Debug.Log(pathDestinationNodeIndex);
                 return PatrolPath.GetPositionOfPathNode(pathDestinationNodeIndex);
             }
             else
@@ -221,7 +221,7 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ÉèÖÃµ¼º½Ä¿µÄµØ
+        // ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½Ä¿ï¿½Äµï¿½
         public void SetNavDestination(Vector3 destination)
         {
             if (NavMeshAgent)
@@ -236,7 +236,7 @@ namespace OneCanRun.AI.Enemies
             if (IsPathValid())
             {
                 // Check if reached the path destination
-                //Debug.Log((transform.position - GetDestinationOnPath()).magnitude);
+                Debug.Log((transform.position - GetDestinationOnPath()).magnitude);
                 if ((transform.position - GetDestinationOnPath()).magnitude <= PathReachingRadius)
                 {
                     // increment path destination index
@@ -255,22 +255,22 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ´¦ÀíÊÜÉË
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         void OnDamaged(float damage, GameObject damageSource)
         {
-            // ÓÉÉËº¦À´Ô´£¬ÇÒÉËº¦À´Ô´²»ÊÇµÐÈË
+            // ï¿½ï¿½ï¿½Ëºï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½
             if (damageSource && !damageSource.GetComponent<EnemyController>())
             {
-                // µÐÈËÊÜÉËºóÒª¸üÐÂ¼ì²â×´Ì¬£¨ÎÞÊÓ¼ì²â·¶Î§£©
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½Òªï¿½ï¿½ï¿½Â¼ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½Ó¼ï¿½â·¶Î§ï¿½ï¿½
                 EnemyDetectionModule.OnDamaged(damageSource);
 
-                // µÐÈË×Ô¶¨ÒåÊÜÉËÊÂ¼þ
+                // ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
                 onDamaged?.Invoke();
 
-                // ¸üÐÂÊÜÉËÊ±¼ä
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
                 lastTimeDamaged = Time.time;
 
-                // ´¦ÀíÊÜÉËÒôÐ§
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§
 
             }
         }
