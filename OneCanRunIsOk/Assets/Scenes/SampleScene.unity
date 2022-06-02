@@ -181,14 +181,14 @@ MonoBehaviour:
     CrosshairColor: {r: 0, g: 0, b: 0, a: 0}
   WeaponRoot: {fileID: 29378940}
   WeaponMuzzle: {fileID: 1746902590}
-  ShootType: 0
-  DelayBetweenShots: 0.5
+  ShootType: 1
+  DelayBetweenShots: 0.1
   BulletSpreadAngle: 0
   BulletsPerShot: 1
   RecoilForce: 1
   AutomaticReload: 1
   HasPhysicalBullets: 1
-  ClipSize: 30
+  ClipSize: 300
   ShellCasing: {fileID: 0}
   EjectionPort: {fileID: 0}
   ShellCasingEjectionForce: 2

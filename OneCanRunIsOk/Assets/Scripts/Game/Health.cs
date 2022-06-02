@@ -16,7 +16,7 @@ namespace OneCanRun.Game
 
         public float CurrentHealth { get; set; }
         public bool Invincible { get; set; }
-        //ÑªÁ¿ÊÇ·ñÂú
+        
         public bool CanPickup() => CurrentHealth < MaxHealth;
 
         public float GetRatio() => CurrentHealth / MaxHealth;

@@ -5,12 +5,12 @@ using UnityEngine;
 using UnityEngine.Events;
 
 namespace OneCanRun.GamePlay
-{   //����׼
+{   //无瞄准
     [RequireComponent(typeof(PlayerInputHandler))]
     public class PlayerWeaponsManager : MonoBehaviour
     {
 
-        //����״̬ �ֳ�-����-����Ԥ��-�ֳ�Ԥ��
+        //武器状态 手持-放下-放下预备-手持预备
         public enum WeaponSwitchState
         {
             Up,
@@ -20,58 +20,58 @@ namespace OneCanRun.GamePlay
         }
 
         [Tooltip("List of weapon the player will start with")]
-        //�����б�
+        //武器列表
         public List<WeaponController> StartingWeapons = new List<WeaponController>();
 
         [Header("References")]
         [Tooltip("Secondary camera used to avoid seeing weapon go throw geometries")]
-        //������ͷ
+        //武器镜头
         public Camera WeaponCamera;
 
         [Tooltip("Parent transform where all weapon will be added in the hierarchy")]
-        //������
+        //武器包
         public Transform WeaponParentSocket;
 
         [Tooltip("Position for weapons when active but not actively aiming")]
-        //����λ��
+        //武器位置
         public Transform DefaultWeaponPosition;
 
         //[Tooltip("Position for weapons when aiming")]
         //public Transform AimingWeaponPosition;
 
         [Tooltip("Position for innactive weapons")]
-        //�ǵ�ǰ����λ��
+        //非当前武器位置
         public Transform DownWeaponPosition;
 
-        //�������¶���
+        //武器上下抖动
         [Header("Weapon Bob")]
         [Tooltip("Frequency at which the weapon will move around in the screen when the player is in movement")]
-        //���¶���Ƶ��
+        //上下抖动频率
         public float BobFrequency = 10f;
 
         [Tooltip("How fast the weapon bob is applied, the bigger value the fastest")]
-        //���¶����ٶ�
+        //上下抖动速度
         public float BobSharpness = 10f;
 
         [Tooltip("Distance the weapon bobs when not aiming")]
-        //���¶�������
+        //上下抖动距离
         public float DefaultBobAmount = 0.05f;
 
         //[Tooltip("Distance the weapon bobs when aiming")]
         //public float AimingBobAmount = 0.02f;
 
-        //��������-������
+        //武器反冲-后坐力
         [Header("Weapon Recoil")]
         [Tooltip("This will affect how fast the recoil moves the weapon, the bigger the value, the fastest")]
-        //�������ٶ�
+        //后坐力速度
         public float RecoilSharpness = 50f;
 
         [Tooltip("Maximum distance the recoil can affect the weapon")]
-        //����������
+        //后坐力距离
         public float MaxRecoilDistance = 0.5f;
 
         [Tooltip("How fast the weapon goes back to it's original position after the recoil is finished")]
-        //�������ָ��ٶ�
+        //后坐力恢复速度
         public float RecoilRestitutionSharpness = 10f;
 
         [Header("Misc")]
@@ -79,23 +79,23 @@ namespace OneCanRun.GamePlay
         //public float AimingAnimationSpeed = 10f;
 
         [Tooltip("Field of view when not aiming")]
-        //Ĭ���ӽ�
+        //默认视角
         public float DefaultFov = 60f;
 
         [Tooltip("Portion of the regular FOV to apply to the weapon camera")]
-        //�����ӽ�ϵ��
+        //武器视角系数
         public float WeaponFovMultiplier = 1f;
 
         [Tooltip("Delay before switching weapon a second time, to avoid recieving multiple inputs from mouse wheel")]
-        //�����л��ӳ�
+        //武器切换延迟
         public float WeaponSwitchDelay = 1f;
 
         [Tooltip("Layer to set FPS weapon gameObjects to")]
-        //������
+        //武器层
         public LayerMask FpsWeaponLayer;
 
         //public bool IsAiming { get; private set; }
-        //�Ƿ���׼����
+        //是否瞄准敌人
         public bool IsPointingAtEnemy { get; private set; }
         public int ActiveWeaponIndex { get; private set; }
 
@@ -103,13 +103,13 @@ namespace OneCanRun.GamePlay
         public UnityAction<WeaponController, int> OnAddedWeapon;
         public UnityAction<WeaponController, int> OnRemovedWeapon;
 
-        //������λ-����9
+        //武器槽位-上限9
         WeaponController[] m_WeaponSlots = new WeaponController[9]; // 9 available weapon slots
         PlayerInputHandler m_InputHandler;
         PlayerCharacterController m_PlayerCharacterController;
-        //����ϵ��
+        //抖动系数
         float m_WeaponBobFactor;
-        //�������꣬�仯transformʹ��
+        //各种坐标，变化transform使用
         Vector3 m_LastCharacterPosition;
         Vector3 m_WeaponMainLocalPosition;
         Vector3 m_WeaponBobLocalPosition;
@@ -121,7 +121,7 @@ namespace OneCanRun.GamePlay
 
         void Start()
         {
-            //��ǰ������ ��������Ϊ-1
+            //当前无武器 武器索引为-1
             ActiveWeaponIndex = -1;
             m_WeaponSwitchState = WeaponSwitchState.Down;
 
@@ -138,7 +138,7 @@ namespace OneCanRun.GamePlay
             OnSwitchedToWeapon += OnWeaponSwitched;
 
             // Add starting weapons
-            //�����б���ʼ��
+            //武器列表初始化
             foreach (var weapon in StartingWeapons)
             {
                 AddWeapon(weapon);
@@ -152,14 +152,14 @@ namespace OneCanRun.GamePlay
             // shoot handling
             WeaponController activeWeapon = GetActiveWeapon();
 
-            //������
+            //换弹中
             if (activeWeapon != null && activeWeapon.IsReloading)
                 return;
 
 
             if (activeWeapon != null && m_WeaponSwitchState == WeaponSwitchState.Up)
             {
-                //���𻻵�
+                //发起换弹
                 if (!activeWeapon.AutomaticReload && m_InputHandler.GetReloadButtonDown() && activeWeapon.CurrentAmmoRatio < 1.0f)
                 {
                     //IsAiming = false;
@@ -171,14 +171,14 @@ namespace OneCanRun.GamePlay
                 //IsAiming = m_InputHandler.GetAimInputHeld();
 
                 // handle shooting
-                //�ж��Ƿ��ڳ�������-���������
+                //判断是否在持续开火-计算后坐力
                 bool hasFired = activeWeapon.HandleShootInputs(
                     m_InputHandler.GetFireInputDown(),
                     m_InputHandler.GetFireInputHeld(),
                     m_InputHandler.GetFireInputReleased());
 
                 // Handle accumulating recoil
-                //���������
+                //计算后坐力
                 if (hasFired)
                 {
                     m_AccumulatedRecoil += Vector3.back * activeWeapon.RecoilForce;
@@ -192,12 +192,12 @@ namespace OneCanRun.GamePlay
             //    (activeWeapon == null || !activeWeapon.IsCharging) &&
             //    (m_WeaponSwitchState == WeaponSwitchState.Up || m_WeaponSwitchState == WeaponSwitchState.Down))
 
-            //�����л�����
+            //武器切换控制
             if ((activeWeapon == null || !activeWeapon.IsCharging) &&
                 (m_WeaponSwitchState == WeaponSwitchState.Up || m_WeaponSwitchState == WeaponSwitchState.Down))
             {
                 int switchWeaponInput = m_InputHandler.GetSwitchWeaponInput();
-                //��������
+                //滚轴输入
                 if (switchWeaponInput != 0)
                 {
                     bool switchUp = switchWeaponInput > 0;
@@ -206,7 +206,7 @@ namespace OneCanRun.GamePlay
                 else
                 {
                     switchWeaponInput = m_InputHandler.GetSelectWeaponInput();
-                    //�������� 1-9
+                    //按键输入 1-9
                     if (switchWeaponInput != 0)
                     {
                         if (GetWeaponAtSlotIndex(switchWeaponInput - 1) != null)
@@ -216,11 +216,11 @@ namespace OneCanRun.GamePlay
             }
 
             // Pointing at enemy handling
-            //�Ƿ�ָ�����
+            //是否指向敌人
             IsPointingAtEnemy = false;
             if (activeWeapon)
             {
-                //����-���߼��
+                //物理-射线检测
                 if (Physics.Raycast(WeaponCamera.transform.position, WeaponCamera.transform.forward, out RaycastHit hit,
                     1000, -1, QueryTriggerInteraction.Ignore))
                 {
@@ -234,7 +234,7 @@ namespace OneCanRun.GamePlay
 
 
         // Update various animated features in LateUpdate because it needs to override the animated arm position
-        //�����-���¶�������������������
+        //后更新-更新抖动、后坐力、武器等
         void LateUpdate()
         {
             //UpdateWeaponAiming();
@@ -243,7 +243,7 @@ namespace OneCanRun.GamePlay
             UpdateWeaponSwitching();
 
             // Set final weapon socket position based on all the combined animation influences
-            //�ı�����λ��
+            //改变武器位置
             WeaponParentSocket.localPosition =
                 m_WeaponMainLocalPosition + m_WeaponBobLocalPosition + m_WeaponRecoilLocalPosition;
         }
@@ -256,12 +256,12 @@ namespace OneCanRun.GamePlay
         }
 
         // Iterate on all weapon slots to find the next valid weapon to switch to
-        //�л�����-Ѱ������Ŀ�ʹ������������������أ�
+        //切换武器-寻找最近的可使用武器（滚轴输入相关）
         public void SwitchWeapon(bool ascendingOrder)
         {
             int newWeaponIndex = -1;
             int closestSlotDistance = m_WeaponSlots.Length;
-            //�������������һ������
+            //遍历计算最近的一把武器
             for (int i = 0; i < m_WeaponSlots.Length; i++)
             {
                 // If the weapon at this slot is valid, calculate its "distance" from the active slot index (either in ascending or descending order)
@@ -283,7 +283,7 @@ namespace OneCanRun.GamePlay
         }
 
         // Switches to the given weapon index in weapon slots if the new index is a valid weapon that is different from our current one
-        //���������±꣨�����б����飩�л�����
+        //根据武器下标（武器列表数组）切换武器
         public void SwitchToWeaponIndex(int newWeaponIndex, bool force = false)
         {
             if (force || (newWeaponIndex != ActiveWeaponIndex && newWeaponIndex >= 0))
@@ -293,7 +293,7 @@ namespace OneCanRun.GamePlay
                 m_TimeStartedWeaponSwitch = Time.time;
 
                 // Handle case of switching to a valid weapon for the first time (simply put it up without putting anything down first)
-                //���γ����� ����̧�𶯻�
+                //初次持武器 仅有抬起动画
                 if (GetActiveWeapon() == null)
                 {
                     m_WeaponMainLocalPosition = DownWeaponPosition.localPosition;
@@ -307,7 +307,7 @@ namespace OneCanRun.GamePlay
                     }
                 }
                 // otherwise, remember we are putting down our current weapon for switching to the next one
-                //���¶���
+                //放下动画
                 else
                 {
                     m_WeaponSwitchState = WeaponSwitchState.PutDownPrevious;
@@ -315,7 +315,7 @@ namespace OneCanRun.GamePlay
             }
         }
 
-        //�ж��Ƿ����е�ǰ����
+        //判断是否已有当前武器
         public WeaponController HasWeapon(WeaponController weaponPrefab)
         {
             // Checks if we already have a weapon coming from the specified prefab
@@ -356,7 +356,7 @@ namespace OneCanRun.GamePlay
         //}
 
         // Updates the weapon bob animation based on character speed
-        //�������¶�������Ҫ�Ǳ仯�������
+        //更新上下抖动，主要是变化矩阵计算
         void UpdateWeaponBob()
         {
             if (Time.deltaTime > 0f)
@@ -394,7 +394,7 @@ namespace OneCanRun.GamePlay
         }
 
         // Updates the weapon recoil animation
-        //���º�������ͬ��Ҫ�Ǳ仯�������
+        //更新后坐力，同主要是变化矩阵计算
         void UpdateWeaponRecoil()
         {
             // if the accumulated recoil is further away from the current position, make the current position move towards the recoil target
@@ -413,12 +413,12 @@ namespace OneCanRun.GamePlay
         }
 
         // Updates the animated transition of switching weapons
-        //��������
+        //更新武器
         void UpdateWeaponSwitching()
         {
             // Calculate the time ratio (0 to 1) since weapon switch was triggered
             float switchingTimeFactor = 0f;
-            //��ֹ�л�������죬�����л���ʱ������
+            //防止切换输入过快，限制切换的时间条件
             if (WeaponSwitchDelay == 0f)
             {
                 switchingTimeFactor = 1f;
@@ -434,7 +434,7 @@ namespace OneCanRun.GamePlay
                 if (m_WeaponSwitchState == WeaponSwitchState.PutDownPrevious)
                 {
                     // Deactivate old weapon
-                    //ж�¾�����������ʾ�ȣ�
+                    //卸下旧武器（不显示等）
                     WeaponController oldWeapon = GetWeaponAtSlotIndex(ActiveWeaponIndex);
                     if (oldWeapon != null)
                     {
@@ -445,7 +445,7 @@ namespace OneCanRun.GamePlay
                     switchingTimeFactor = 0f;
 
                     // Activate new weapon
-                    //����������
+                    //激活新武器
                     WeaponController newWeapon = GetWeaponAtSlotIndex(ActiveWeaponIndex);
                     if (OnSwitchedToWeapon != null)
                     {
@@ -483,7 +483,7 @@ namespace OneCanRun.GamePlay
         }
 
         // Adds a weapon to our inventory
-        //���������������������б�
+        //添加武器至管理器武器列表
         public bool AddWeapon(WeaponController weaponPrefab)
         {
             // if we already hold this weapon type (a weapon coming from the same source prefab), don't add the weapon
@@ -510,7 +510,8 @@ namespace OneCanRun.GamePlay
 
                     // Assign the first person layer to the weapon
                     int layerIndex =
-                        Mathf.RoundToInt(Mathf.Log(FpsWeaponLayer.value, 2)); // This function converts a layermask to a layer index
+                        Mathf.RoundToInt(Mathf.Log(FpsWeaponLayer.value,
+                            2)); // This function converts a layermask to a layer index
                     foreach (Transform t in weaponInstance.gameObject.GetComponentsInChildren<Transform>(true))
                     {
                         t.gameObject.layer = layerIndex;
@@ -536,7 +537,7 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
-        //�Ƴ�����
+        //移除武器
         public bool RemoveWeapon(WeaponController weaponInstance)
         {
             // Look through our slots for that weapon
@@ -587,7 +588,7 @@ namespace OneCanRun.GamePlay
 
         // Calculates the "distance" between two weapon slot indexes
         // For example: if we had 5 weapon slots, the distance between slots #2 and #4 would be 2 in ascending order, and 3 in descending order
-        //��ȡ�������б��о��룬���������
+        //获取武器在列表中距离，正序或逆序
         int GetDistanceBetweenWeaponSlots(int fromSlotIndex, int toSlotIndex, bool ascendingOrder)
         {
             int distanceBetweenSlots = 0;
@@ -609,7 +610,7 @@ namespace OneCanRun.GamePlay
             return distanceBetweenSlots;
         }
 
-        //���л���������ʾ�ǿ�����
+        //已切换武器，显示非空武器
         void OnWeaponSwitched(WeaponController newWeapon)
         {
             if (newWeapon != null)

@@ -14,7 +14,7 @@ namespace OneCanRun.Game.Share
         //[Tooltip("Speed")]
         public static int speed = 50;
 
-        //╡Бйтик╨╕й╠╣д©уик╨╕ю╢т╢
+        //О©╫О©╫О©╫О©╫О©╫к╨О©╫й╠О©╫д©О©╫О©╫к╨О©╫О©╫О©╫т╢
         public GameObject Owner { get; set; }
         // Start is called before the first frame update
 
