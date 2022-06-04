@@ -122,9 +122,6 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-<<<<<<< Updated upstream
-  m_NavMeshData: {fileID: 0}
-=======
   m_NavMeshData: {fileID: 23800000, guid: cc3dac3f2a652004ba03b9039fb8a9cc, type: 2}
 --- !u!4 &8617325 stripped
 Transform:
@@ -136,7 +133,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: decf25da566de433cb1a874aa0e6dd00, type: 3}
   m_PrefabInstance: {fileID: 1159167805}
   m_PrefabAsset: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!1 &29378940
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +145,7 @@ GameObject:
   - component: {fileID: 29378945}
   - component: {fileID: 29378944}
   - component: {fileID: 29378942}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,9 +196,9 @@ MonoBehaviour:
   BulletSpreadAngle: 0
   BulletsPerShot: 1
   RecoilForce: 1
-  AutomaticReload: 1
+  AutomaticReload: 0
   HasPhysicalBullets: 1
-  ClipSize: 30
+  ClipSize: 30000
   ShellCasing: {fileID: 0}
   EjectionPort: {fileID: 0}
   ShellCasingEjectionForce: 2
@@ -220,6 +216,7 @@ MonoBehaviour:
   ShootSfx: {fileID: 0}
   ChangeWeaponSfx: {fileID: 0}
   UseContinuousShootSound: 0
+  Owner: {fileID: 1882154181}
 --- !u!23 &29378944
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -418,9 +415,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
-<<<<<<< Updated upstream
---- !u!1 &514893738
-=======
 --- !u!4 &132053823 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: decf25da566de433cb1a874aa0e6dd00, type: 3}
@@ -752,7 +746,6 @@ PrefabInstance:
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b2dfb46096eb400e8d5de95609e53b3, type: 3}
 --- !u!1 &484278333
->>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -760,11 +753,6 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< Updated upstream
-  - component: {fileID: 514893739}
-  m_Layer: 0
-  m_Name: GameObject (1)
-=======
   - component: {fileID: 484278344}
   - component: {fileID: 484278343}
   - component: {fileID: 484278342}
@@ -778,7 +766,6 @@ GameObject:
   - component: {fileID: 484278334}
   m_Layer: 0
   m_Name: Enemy (1)
->>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -824,12 +811,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a3eba274a03e74683b6bfa3d925d13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackStopDistanceRatio: 0.037
-  detectDistance: 20
-  maxHealth: 10
-  attckDistance: 10
-  state: 0
-  controller: {fileID: 484278337}
 --- !u!114 &484278337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -842,14 +823,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d071f739c895d140933cec7d73633fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PathReachingRadius: 2
-  minHeight: -20
-  OrientationSpeed: 10
-  DeathDuration: 0
-  LootPrefab: {fileID: 0}
-  DropRate: 1
-  health: {fileID: 484278340}
-  actor: {fileID: 484278339}
 --- !u!195 &484278338
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -977,7 +950,7 @@ Transform:
   m_Children:
   - {fileID: 1730933856}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &514893738
 GameObject:
@@ -988,7 +961,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 514893739}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1003,7 +976,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 514893738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1139,7 +1112,7 @@ GameObject:
   - component: {fileID: 596130374}
   - component: {fileID: 596130376}
   - component: {fileID: 596130375}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1204,8 +1177,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 596130373}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream
-=======
 --- !u!1 &601665154 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 5fc0e3d37ec294384aaa0b18e537ff86, type: 3}
@@ -1259,12 +1230,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c23acfaa1c803d943ac8bca7b9e0fdfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemiesToAssign:
-  - {fileID: 1456041762}
-  PathNodes:
-  - {fileID: 957172618}
-  - {fileID: 385453483}
-  - {fileID: 1427589345}
 --- !u!4 &675616730
 Transform:
   m_ObjectHideFlags: 0
@@ -1281,14 +1246,13 @@ Transform:
   - {fileID: 385453483}
   - {fileID: 1427589345}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &677895691 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: decf25da566de433cb1a874aa0e6dd00, type: 3}
   m_PrefabInstance: {fileID: 538985528}
   m_PrefabAsset: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!1 &683655694
 GameObject:
   m_ObjectHideFlags: 0
@@ -1301,7 +1265,7 @@ GameObject:
   - component: {fileID: 683655698}
   - component: {fileID: 683655697}
   - component: {fileID: 683655696}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1514,12 +1478,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c23acfaa1c803d943ac8bca7b9e0fdfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemiesToAssign:
-  - {fileID: 484278337}
-  PathNodes:
-  - {fileID: 1930936479}
-  - {fileID: 1902358614}
-  - {fileID: 806969988}
 --- !u!4 &712551356
 Transform:
   m_ObjectHideFlags: 0
@@ -1536,7 +1494,7 @@ Transform:
   - {fileID: 1902358614}
   - {fileID: 806969988}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &742468359 stripped
 GameObject:
@@ -1730,8 +1688,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 773100206}
   m_CullTransparentMesh: 0
-<<<<<<< Updated upstream
-=======
 --- !u!1 &806969987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1972,7 +1928,6 @@ Transform:
   m_Father: {fileID: 675616730}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> Stashed changes
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,7 +1939,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -2059,8 +2014,6 @@ Transform:
   m_Father: {fileID: 1882154184}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -72.195, z: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!1 &964063399
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,10 +2058,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d5d233d5fe16144aa10b6c5b9d2d51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DetectionSourcePoint: {fileID: 1456041764}
-  DetectionRange: 20
-  AttackRange: 10
-  KnownTargetTimeout: 4
 --- !u!1001 &1008628411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2227,7 +2176,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c49e12debb73554780638b4c35f023d, type: 3}
->>>>>>> Stashed changes
 --- !u!1 &1122497729
 GameObject:
   m_ObjectHideFlags: 0
@@ -2237,7 +2185,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1122497730}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DefaultWeaponPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2252,7 +2200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122497729}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.264, y: -0.347, z: 0.465}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2453,7 +2401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1207791866}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CrossHair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2650,8 +2598,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!1001 &1354907450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2837,7 +2783,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fc0e3d37ec294384aaa0b18e537ff86, type: 3}
->>>>>>> Stashed changes
 --- !u!1 &1443482271
 GameObject:
   m_ObjectHideFlags: 0
@@ -2946,14 +2891,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1443482271}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: 0.001400058, z: -0, w: 0.99999905}
   m_LocalPosition: {x: -12.45, y: 1.4960003, z: -2.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0.16, z: 0}
 --- !u!114 &1443482277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2982,8 +2927,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 100
   CriticalHealthRatio: 0.3
-<<<<<<< Updated upstream
-=======
 --- !u!1 &1456041761
 GameObject:
   m_ObjectHideFlags: 0
@@ -3021,14 +2964,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d071f739c895d140933cec7d73633fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PathReachingRadius: 2
-  minHeight: -20
-  OrientationSpeed: 10
-  DeathDuration: 0
-  LootPrefab: {fileID: 0}
-  DropRate: 1
-  health: {fileID: 1456041765}
-  actor: {fileID: 1456041763}
 --- !u!114 &1456041763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3057,7 +2992,7 @@ Transform:
   m_Children:
   - {fileID: 964063400}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1456041765
 MonoBehaviour:
@@ -3085,12 +3020,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a3eba274a03e74683b6bfa3d925d13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackStopDistanceRatio: 0.037
-  detectDistance: 20
-  maxHealth: 10
-  attckDistance: 10
-  state: 0
-  controller: {fileID: 1456041762}
 --- !u!195 &1456041767
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3190,7 +3119,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamageMultiplier: 1
   SensibilityToSelfdamage: 0.5
->>>>>>> Stashed changes
 --- !u!1 &1473854218
 GameObject:
   m_ObjectHideFlags: 0
@@ -3416,8 +3344,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2147054328}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3465,10 +3392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d5d233d5fe16144aa10b6c5b9d2d51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DetectionSourcePoint: {fileID: 484278344}
-  DetectionRange: 20
-  AttackRange: 10
-  KnownTargetTimeout: 4
 --- !u!1 &1746902589
 GameObject:
   m_ObjectHideFlags: 0
@@ -3478,11 +3401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1746902590}
-<<<<<<< Updated upstream
-  m_Layer: 0
-=======
-  m_Layer: 6
->>>>>>> Stashed changes
+  m_Layer: 7
   m_Name: GunMuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3490,8 +3409,6 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1746902590
-<<<<<<< Updated upstream
-=======
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3499,7 +3416,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1746902589}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.43, y: 0.17, z: 0.539}
   m_LocalScale: {x: 3.8967402, y: 9.964576, z: 1.1862118}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3708,7 +3625,6 @@ PrefabInstance:
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fc0e3d37ec294384aaa0b18e537ff86, type: 3}
 --- !u!4 &1853865009 stripped
->>>>>>> Stashed changes
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: eaf3edd0ef88ac84c970b62f673ed6b0, type: 3}
   m_PrefabInstance: {fileID: 2003150937}
@@ -3727,8 +3643,9 @@ GameObject:
   - component: {fileID: 1882154186}
   - component: {fileID: 1882154190}
   - component: {fileID: 1882154189}
-  - component: {fileID: 1882154191}
-  m_Layer: 0
+  - component: {fileID: 1882154192}
+  - component: {fileID: 1882154193}
+  m_Layer: 7
   m_Name: Player1
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -3851,38 +3768,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Affiliation: 0
   AimPoint: {fileID: 1882154184}
---- !u!114 &1882154191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1882154181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1daed552bc3540b4f8284cb28da1e188, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StartingWeapons:
-  - {fileID: 29378942}
-  WeaponCamera: {fileID: 963194227}
-  WeaponParentSocket: {fileID: 29378941}
-  DefaultWeaponPosition: {fileID: 1122497730}
-  DownWeaponPosition: {fileID: 514893739}
-  BobFrequency: 10
-  BobSharpness: 10
-  DefaultBobAmount: 0.05
-  RecoilSharpness: 50
-  MaxRecoilDistance: 0.5
-  RecoilRestitutionSharpness: 10
-  DefaultFov: 60
-  WeaponFovMultiplier: 1
-  WeaponSwitchDelay: 1
-  FpsWeaponLayer:
-    serializedVersion: 2
-    m_Bits: 64
-<<<<<<< Updated upstream
-=======
 --- !u!82 &1882154192
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3979,7 +3864,36 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
->>>>>>> Stashed changes
+--- !u!114 &1882154193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882154181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1daed552bc3540b4f8284cb28da1e188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingWeapons:
+  - {fileID: 29378942}
+  WeaponCamera: {fileID: 963194227}
+  WeaponParentSocket: {fileID: 29378941}
+  DefaultWeaponPosition: {fileID: 29378941}
+  DownWeaponPosition: {fileID: 29378941}
+  BobFrequency: 10
+  BobSharpness: 10
+  DefaultBobAmount: 0.05
+  RecoilSharpness: 50
+  MaxRecoilDistance: 0.5
+  RecoilRestitutionSharpness: 10
+  DefaultFov: 60
+  WeaponFovMultiplier: 1
+  WeaponSwitchDelay: 1
+  FpsWeaponLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1892287352
 GameObject:
   m_ObjectHideFlags: 0
@@ -3992,6 +3906,7 @@ GameObject:
   - component: {fileID: 1892287353}
   - component: {fileID: 1892287356}
   - component: {fileID: 1892287355}
+  - component: {fileID: 1892287357}
   m_Layer: 0
   m_Name: GameManeger
   m_TagString: Untagged
@@ -4025,7 +3940,7 @@ Transform:
   m_Children:
   - {fileID: 128756718}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1892287355
 MonoBehaviour:
@@ -4058,8 +3973,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c26e4bf97b23f94e83942af42c0efb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-=======
 --- !u!114 &1892287357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4139,7 +4052,6 @@ Transform:
   m_Father: {fileID: 712551356}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> Stashed changes
 --- !u!1 &1977313801 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 5fc0e3d37ec294384aaa0b18e537ff86, type: 3}
@@ -4343,6 +4255,6 @@ Transform:
   - {fileID: 132053823}
   - {fileID: 1515218974}
   - {fileID: 1210154691}
-  m_Father: {fileID: 1716471321}
-  m_RootOrder: -1
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

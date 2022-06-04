@@ -3,7 +3,17 @@ guid: d0cb1d2328a4d9d4d8d2e278186760aa
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - WeaponIcon: {instanceID: 0}
+  - bullet: {fileID: 1254343392523665438, guid: 28ca67a84a75e9642a8da4bee674efbc, type: 3}
+  - WeaponRoot: {instanceID: 0}
+  - WeaponMuzzle: {instanceID: 0}
+  - ShellCasing: {instanceID: 0}
+  - EjectionPort: {instanceID: 0}
+  - WeaponAnimator: {instanceID: 0}
+  - MuzzleFlashPrefab: {instanceID: 0}
+  - ShootSfx: {instanceID: 0}
+  - ChangeWeaponSfx: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
