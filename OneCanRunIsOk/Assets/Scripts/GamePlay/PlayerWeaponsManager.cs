@@ -1,16 +1,16 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using OneCanRun.Game;
 using OneCanRun.Game.Share;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace OneCanRun.GamePlay
-{   //ÎŞÃé×¼
+{   //æ— ç„å‡†
     [RequireComponent(typeof(PlayerInputHandler))]
     public class PlayerWeaponsManager : MonoBehaviour
     {
 
-        //ÎäÆ÷×´Ì¬ ÊÖ³Ö-·ÅÏÂ-·ÅÏÂÔ¤±¸-ÊÖ³ÖÔ¤±¸
+        //æ­¦å™¨çŠ¶æ€ æ‰‹æŒ-æ”¾ä¸‹-æ”¾ä¸‹é¢„å¤‡-æ‰‹æŒé¢„å¤‡
         public enum WeaponSwitchState
         {
             Up,
@@ -20,58 +20,58 @@ namespace OneCanRun.GamePlay
         }
 
         [Tooltip("List of weapon the player will start with")]
-        //ÎäÆ÷ÁĞ±í
+        //æ­¦å™¨åˆ—è¡¨
         public List<WeaponController> StartingWeapons = new List<WeaponController>();
 
         [Header("References")]
         [Tooltip("Secondary camera used to avoid seeing weapon go throw geometries")]
-        //ÎäÆ÷¾µÍ·
+        //æ­¦å™¨é•œå¤´
         public Camera WeaponCamera;
 
         [Tooltip("Parent transform where all weapon will be added in the hierarchy")]
-        //ÎäÆ÷°ü
+        //æ­¦å™¨åŒ…
         public Transform WeaponParentSocket;
 
         [Tooltip("Position for weapons when active but not actively aiming")]
-        //ÎäÆ÷Î»ÖÃ
+        //æ­¦å™¨ä½ç½®
         public Transform DefaultWeaponPosition;
 
         //[Tooltip("Position for weapons when aiming")]
         //public Transform AimingWeaponPosition;
 
         [Tooltip("Position for innactive weapons")]
-        //·Çµ±Ç°ÎäÆ÷Î»ÖÃ
+        //éå½“å‰æ­¦å™¨ä½ç½®
         public Transform DownWeaponPosition;
 
-        //ÎäÆ÷ÉÏÏÂ¶¶¶¯
+        //æ­¦å™¨ä¸Šä¸‹æŠ–åŠ¨
         [Header("Weapon Bob")]
         [Tooltip("Frequency at which the weapon will move around in the screen when the player is in movement")]
-        //ÉÏÏÂ¶¶¶¯ÆµÂÊ
+        //ä¸Šä¸‹æŠ–åŠ¨é¢‘ç‡
         public float BobFrequency = 10f;
 
         [Tooltip("How fast the weapon bob is applied, the bigger value the fastest")]
-        //ÉÏÏÂ¶¶¶¯ËÙ¶È
+        //ä¸Šä¸‹æŠ–åŠ¨é€Ÿåº¦
         public float BobSharpness = 10f;
 
         [Tooltip("Distance the weapon bobs when not aiming")]
-        //ÉÏÏÂ¶¶¶¯¾àÀë
+        //ä¸Šä¸‹æŠ–åŠ¨è·ç¦»
         public float DefaultBobAmount = 0.05f;
 
         //[Tooltip("Distance the weapon bobs when aiming")]
         //public float AimingBobAmount = 0.02f;
 
-        //ÎäÆ÷·´³å-ºó×øÁ¦
+        //æ­¦å™¨åå†²-åååŠ›
         [Header("Weapon Recoil")]
         [Tooltip("This will affect how fast the recoil moves the weapon, the bigger the value, the fastest")]
-        //ºó×øÁ¦ËÙ¶È
+        //åååŠ›é€Ÿåº¦
         public float RecoilSharpness = 50f;
 
         [Tooltip("Maximum distance the recoil can affect the weapon")]
-        //ºó×øÁ¦¾àÀë
+        //åååŠ›è·ç¦»
         public float MaxRecoilDistance = 0.5f;
 
         [Tooltip("How fast the weapon goes back to it's original position after the recoil is finished")]
-        //ºó×øÁ¦»Ö¸´ËÙ¶È
+        //åååŠ›æ¢å¤é€Ÿåº¦
         public float RecoilRestitutionSharpness = 10f;
 
         [Header("Misc")]
@@ -79,23 +79,23 @@ namespace OneCanRun.GamePlay
         //public float AimingAnimationSpeed = 10f;
 
         [Tooltip("Field of view when not aiming")]
-        //Ä¬ÈÏÊÓ½Ç
+        //é»˜è®¤è§†è§’
         public float DefaultFov = 60f;
 
         [Tooltip("Portion of the regular FOV to apply to the weapon camera")]
-        //ÎäÆ÷ÊÓ½ÇÏµÊı
+        //æ­¦å™¨è§†è§’ç³»æ•°
         public float WeaponFovMultiplier = 1f;
 
         [Tooltip("Delay before switching weapon a second time, to avoid recieving multiple inputs from mouse wheel")]
-        //ÎäÆ÷ÇĞ»»ÑÓ³Ù
+        //æ­¦å™¨åˆ‡æ¢å»¶è¿Ÿ
         public float WeaponSwitchDelay = 1f;
 
         [Tooltip("Layer to set FPS weapon gameObjects to")]
-        //ÎäÆ÷²ã
+        //æ­¦å™¨å±‚
         public LayerMask FpsWeaponLayer;
 
         //public bool IsAiming { get; private set; }
-        //ÊÇ·ñÃé×¼µĞÈË
+        //æ˜¯å¦ç„å‡†æ•Œäºº
         public bool IsPointingAtEnemy { get; private set; }
         public int ActiveWeaponIndex { get; private set; }
 
@@ -103,13 +103,13 @@ namespace OneCanRun.GamePlay
         public UnityAction<WeaponController, int> OnAddedWeapon;
         public UnityAction<WeaponController, int> OnRemovedWeapon;
 
-        //ÎäÆ÷²ÛÎ»-ÉÏÏŞ9
+        //æ­¦å™¨æ§½ä½-ä¸Šé™9
         WeaponController[] m_WeaponSlots = new WeaponController[9]; // 9 available weapon slots
         PlayerInputHandler m_InputHandler;
         PlayerCharacterController m_PlayerCharacterController;
-        //¶¶¶¯ÏµÊı
+        //æŠ–åŠ¨ç³»æ•°
         float m_WeaponBobFactor;
-        //¸÷ÖÖ×ø±ê£¬±ä»¯transformÊ¹ÓÃ
+        //å„ç§åæ ‡ï¼Œå˜åŒ–transformä½¿ç”¨
         Vector3 m_LastCharacterPosition;
         Vector3 m_WeaponMainLocalPosition;
         Vector3 m_WeaponBobLocalPosition;
@@ -121,7 +121,7 @@ namespace OneCanRun.GamePlay
 
         void Start()
         {
-            //µ±Ç°ÎŞÎäÆ÷ ÎäÆ÷Ë÷ÒıÎª-1
+            //å½“å‰æ— æ­¦å™¨ æ­¦å™¨ç´¢å¼•ä¸º-1
             ActiveWeaponIndex = -1;
             m_WeaponSwitchState = WeaponSwitchState.Down;
 
@@ -138,7 +138,7 @@ namespace OneCanRun.GamePlay
             OnSwitchedToWeapon += OnWeaponSwitched;
 
             // Add starting weapons
-            //ÎäÆ÷ÁĞ±í³õÊ¼»¯
+            //æ­¦å™¨åˆ—è¡¨åˆå§‹åŒ–
             foreach (var weapon in StartingWeapons)
             {
                 AddWeapon(weapon);
@@ -152,26 +152,16 @@ namespace OneCanRun.GamePlay
             // shoot handling
             WeaponController activeWeapon = GetActiveWeapon();
 
-            //»»µ¯ÖĞ
+            //æ¢å¼¹ä¸­
             if (activeWeapon != null && activeWeapon.IsReloading)
                 return;
 
 
             if (activeWeapon != null && m_WeaponSwitchState == WeaponSwitchState.Up)
             {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-                //·¢Æğ»»µ¯
-                if (!activeWeapon.AutomaticReload && m_InputHandler.GetReloadButtonDown() && activeWeapon.CurrentAmmoRatio < 1.0f)
-=======
-=======
-
->>>>>>> Stashed changes
-                //å‘èµ·æ¢å¼¹
-                
                 if (activeWeapon.HasPhysicalBullets && m_InputHandler.GetReloadButtonDown() && activeWeapon.CurrentAmmoRatio < 1.0f)
                 {
-                    Debug.Log(activeWeapon.CurrentAmmoRatio);
+                    Debug.Log(321);
                     //IsAiming = false;
                     //activeWeapon.StartReloadAnimation();
                     activeWeapon.Reload();
@@ -181,14 +171,14 @@ namespace OneCanRun.GamePlay
                 //IsAiming = m_InputHandler.GetAimInputHeld();
 
                 // handle shooting
-                //ÅĞ¶ÏÊÇ·ñÔÚ³ÖĞø¿ª»ğ-¼ÆËãºó×øÁ¦
+                //åˆ¤æ–­æ˜¯å¦åœ¨æŒç»­å¼€ç«-è®¡ç®—åååŠ›
                 bool hasFired = activeWeapon.HandleShootInputs(
                     m_InputHandler.GetFireInputDown(),
                     m_InputHandler.GetFireInputHeld(),
                     m_InputHandler.GetFireInputReleased());
 
                 // Handle accumulating recoil
-                //¼ÆËãºó×øÁ¦
+                //è®¡ç®—åååŠ›
                 if (hasFired)
                 {
                     m_AccumulatedRecoil += Vector3.back * activeWeapon.RecoilForce;
@@ -202,12 +192,12 @@ namespace OneCanRun.GamePlay
             //    (activeWeapon == null || !activeWeapon.IsCharging) &&
             //    (m_WeaponSwitchState == WeaponSwitchState.Up || m_WeaponSwitchState == WeaponSwitchState.Down))
 
-            //ÎäÆ÷ÇĞ»»¿ØÖÆ
+            //æ­¦å™¨åˆ‡æ¢æ§åˆ¶
             if ((activeWeapon == null || !activeWeapon.IsCharging) &&
                 (m_WeaponSwitchState == WeaponSwitchState.Up || m_WeaponSwitchState == WeaponSwitchState.Down))
             {
                 int switchWeaponInput = m_InputHandler.GetSwitchWeaponInput();
-                //¹öÖáÊäÈë
+                //æ»šè½´è¾“å…¥
                 if (switchWeaponInput != 0)
                 {
                     bool switchUp = switchWeaponInput > 0;
@@ -216,7 +206,7 @@ namespace OneCanRun.GamePlay
                 else
                 {
                     switchWeaponInput = m_InputHandler.GetSelectWeaponInput();
-                    //°´¼üÊäÈë 1-9
+                    //æŒ‰é”®è¾“å…¥ 1-9
                     if (switchWeaponInput != 0)
                     {
                         if (GetWeaponAtSlotIndex(switchWeaponInput - 1) != null)
@@ -226,11 +216,11 @@ namespace OneCanRun.GamePlay
             }
 
             // Pointing at enemy handling
-            //ÊÇ·ñÖ¸ÏòµĞÈË
+            //æ˜¯å¦æŒ‡å‘æ•Œäºº
             IsPointingAtEnemy = false;
             if (activeWeapon)
             {
-                //ÎïÀí-ÉäÏß¼ì²â
+                //ç‰©ç†-å°„çº¿æ£€æµ‹
                 if (Physics.Raycast(WeaponCamera.transform.position, WeaponCamera.transform.forward, out RaycastHit hit,
                     1000, -1, QueryTriggerInteraction.Ignore))
                 {
@@ -244,7 +234,7 @@ namespace OneCanRun.GamePlay
 
 
         // Update various animated features in LateUpdate because it needs to override the animated arm position
-        //ºó¸üĞÂ-¸üĞÂ¶¶¶¯¡¢ºó×øÁ¦¡¢ÎäÆ÷µÈ
+        //åæ›´æ–°-æ›´æ–°æŠ–åŠ¨ã€åååŠ›ã€æ­¦å™¨ç­‰
         void LateUpdate()
         {
             //UpdateWeaponAiming();
@@ -253,7 +243,7 @@ namespace OneCanRun.GamePlay
             UpdateWeaponSwitching();
 
             // Set final weapon socket position based on all the combined animation influences
-            //¸Ä±äÎäÆ÷Î»ÖÃ
+            //æ”¹å˜æ­¦å™¨ä½ç½®
             WeaponParentSocket.localPosition =
                 m_WeaponMainLocalPosition + m_WeaponBobLocalPosition + m_WeaponRecoilLocalPosition;
         }
@@ -266,12 +256,12 @@ namespace OneCanRun.GamePlay
         }
 
         // Iterate on all weapon slots to find the next valid weapon to switch to
-        //ÇĞ»»ÎäÆ÷-Ñ°ÕÒ×î½üµÄ¿ÉÊ¹ÓÃÎäÆ÷£¨¹öÖáÊäÈëÏà¹Ø£©
+        //åˆ‡æ¢æ­¦å™¨-å¯»æ‰¾æœ€è¿‘çš„å¯ä½¿ç”¨æ­¦å™¨ï¼ˆæ»šè½´è¾“å…¥ç›¸å…³ï¼‰
         public void SwitchWeapon(bool ascendingOrder)
         {
             int newWeaponIndex = -1;
             int closestSlotDistance = m_WeaponSlots.Length;
-            //±éÀú¼ÆËã×î½üµÄÒ»°ÑÎäÆ÷
+            //éå†è®¡ç®—æœ€è¿‘çš„ä¸€æŠŠæ­¦å™¨
             for (int i = 0; i < m_WeaponSlots.Length; i++)
             {
                 // If the weapon at this slot is valid, calculate its "distance" from the active slot index (either in ascending or descending order)
@@ -293,7 +283,7 @@ namespace OneCanRun.GamePlay
         }
 
         // Switches to the given weapon index in weapon slots if the new index is a valid weapon that is different from our current one
-        //¸ù¾İÎäÆ÷ÏÂ±ê£¨ÎäÆ÷ÁĞ±íÊı×é£©ÇĞ»»ÎäÆ÷
+        //æ ¹æ®æ­¦å™¨ä¸‹æ ‡ï¼ˆæ­¦å™¨åˆ—è¡¨æ•°ç»„ï¼‰åˆ‡æ¢æ­¦å™¨
         public void SwitchToWeaponIndex(int newWeaponIndex, bool force = false)
         {
             if (force || (newWeaponIndex != ActiveWeaponIndex && newWeaponIndex >= 0))
@@ -303,7 +293,7 @@ namespace OneCanRun.GamePlay
                 m_TimeStartedWeaponSwitch = Time.time;
 
                 // Handle case of switching to a valid weapon for the first time (simply put it up without putting anything down first)
-                //³õ´Î³ÖÎäÆ÷ ½öÓĞÌ§Æğ¶¯»­
+                //åˆæ¬¡æŒæ­¦å™¨ ä»…æœ‰æŠ¬èµ·åŠ¨ç”»
                 if (GetActiveWeapon() == null)
                 {
                     m_WeaponMainLocalPosition = DownWeaponPosition.localPosition;
@@ -317,7 +307,7 @@ namespace OneCanRun.GamePlay
                     }
                 }
                 // otherwise, remember we are putting down our current weapon for switching to the next one
-                //·ÅÏÂ¶¯»­
+                //æ”¾ä¸‹åŠ¨ç”»
                 else
                 {
                     m_WeaponSwitchState = WeaponSwitchState.PutDownPrevious;
@@ -325,7 +315,7 @@ namespace OneCanRun.GamePlay
             }
         }
 
-        //ÅĞ¶ÏÊÇ·ñÒÑÓĞµ±Ç°ÎäÆ÷
+        //åˆ¤æ–­æ˜¯å¦å·²æœ‰å½“å‰æ­¦å™¨
         public WeaponController HasWeapon(WeaponController weaponPrefab)
         {
             // Checks if we already have a weapon coming from the specified prefab
@@ -366,7 +356,7 @@ namespace OneCanRun.GamePlay
         //}
 
         // Updates the weapon bob animation based on character speed
-        //¸üĞÂÉÏÏÂ¶¶¶¯£¬Ö÷ÒªÊÇ±ä»¯¾ØÕó¼ÆËã
+        //æ›´æ–°ä¸Šä¸‹æŠ–åŠ¨ï¼Œä¸»è¦æ˜¯å˜åŒ–çŸ©é˜µè®¡ç®—
         void UpdateWeaponBob()
         {
             if (Time.deltaTime > 0f)
@@ -404,7 +394,7 @@ namespace OneCanRun.GamePlay
         }
 
         // Updates the weapon recoil animation
-        //¸üĞÂºó×øÁ¦£¬Í¬Ö÷ÒªÊÇ±ä»¯¾ØÕó¼ÆËã
+        //æ›´æ–°åååŠ›ï¼ŒåŒä¸»è¦æ˜¯å˜åŒ–çŸ©é˜µè®¡ç®—
         void UpdateWeaponRecoil()
         {
             // if the accumulated recoil is further away from the current position, make the current position move towards the recoil target
@@ -423,12 +413,12 @@ namespace OneCanRun.GamePlay
         }
 
         // Updates the animated transition of switching weapons
-        //¸üĞÂÎäÆ÷
+        //æ›´æ–°æ­¦å™¨
         void UpdateWeaponSwitching()
         {
             // Calculate the time ratio (0 to 1) since weapon switch was triggered
             float switchingTimeFactor = 0f;
-            //·ÀÖ¹ÇĞ»»ÊäÈë¹ı¿ì£¬ÏŞÖÆÇĞ»»µÄÊ±¼äÌõ¼ş
+            //é˜²æ­¢åˆ‡æ¢è¾“å…¥è¿‡å¿«ï¼Œé™åˆ¶åˆ‡æ¢çš„æ—¶é—´æ¡ä»¶
             if (WeaponSwitchDelay == 0f)
             {
                 switchingTimeFactor = 1f;
@@ -444,7 +434,7 @@ namespace OneCanRun.GamePlay
                 if (m_WeaponSwitchState == WeaponSwitchState.PutDownPrevious)
                 {
                     // Deactivate old weapon
-                    //Ğ¶ÏÂ¾ÉÎäÆ÷£¨²»ÏÔÊ¾µÈ£©
+                    //å¸ä¸‹æ—§æ­¦å™¨ï¼ˆä¸æ˜¾ç¤ºç­‰ï¼‰
                     WeaponController oldWeapon = GetWeaponAtSlotIndex(ActiveWeaponIndex);
                     if (oldWeapon != null)
                     {
@@ -455,7 +445,7 @@ namespace OneCanRun.GamePlay
                     switchingTimeFactor = 0f;
 
                     // Activate new weapon
-                    //¼¤»îĞÂÎäÆ÷
+                    //æ¿€æ´»æ–°æ­¦å™¨
                     WeaponController newWeapon = GetWeaponAtSlotIndex(ActiveWeaponIndex);
                     if (OnSwitchedToWeapon != null)
                     {
@@ -493,7 +483,7 @@ namespace OneCanRun.GamePlay
         }
 
         // Adds a weapon to our inventory
-        //Ìí¼ÓÎäÆ÷ÖÁ¹ÜÀíÆ÷ÎäÆ÷ÁĞ±í
+        //æ·»åŠ æ­¦å™¨è‡³ç®¡ç†å™¨æ­¦å™¨åˆ—è¡¨
         public bool AddWeapon(WeaponController weaponPrefab)
         {
             // if we already hold this weapon type (a weapon coming from the same source prefab), don't add the weapon
@@ -547,7 +537,7 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
-        //ÒÆ³ıÎäÆ÷
+        //ç§»é™¤æ­¦å™¨
         public bool RemoveWeapon(WeaponController weaponInstance)
         {
             // Look through our slots for that weapon
@@ -598,7 +588,7 @@ namespace OneCanRun.GamePlay
 
         // Calculates the "distance" between two weapon slot indexes
         // For example: if we had 5 weapon slots, the distance between slots #2 and #4 would be 2 in ascending order, and 3 in descending order
-        //»ñÈ¡ÎäÆ÷ÔÚÁĞ±íÖĞ¾àÀë£¬ÕıĞò»òÄæĞò
+        //è·å–æ­¦å™¨åœ¨åˆ—è¡¨ä¸­è·ç¦»ï¼Œæ­£åºæˆ–é€†åº
         int GetDistanceBetweenWeaponSlots(int fromSlotIndex, int toSlotIndex, bool ascendingOrder)
         {
             int distanceBetweenSlots = 0;
@@ -620,7 +610,7 @@ namespace OneCanRun.GamePlay
             return distanceBetweenSlots;
         }
 
-        //ÒÑÇĞ»»ÎäÆ÷£¬ÏÔÊ¾·Ç¿ÕÎäÆ÷
+        //å·²åˆ‡æ¢æ­¦å™¨ï¼Œæ˜¾ç¤ºéç©ºæ­¦å™¨
         void OnWeaponSwitched(WeaponController newWeapon)
         {
             if (newWeapon != null)

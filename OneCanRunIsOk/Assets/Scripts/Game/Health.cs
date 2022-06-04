@@ -16,7 +16,7 @@ namespace OneCanRun.Game
 
         public float CurrentHealth { get; set; }
         public bool Invincible { get; set; }
-        //ÑªÁ¿ÊÇ·ñÂú
+        
         public bool CanPickup() => CurrentHealth < MaxHealth;
 
         public float GetRatio() => CurrentHealth / MaxHealth;
@@ -52,12 +52,14 @@ namespace OneCanRun.Game
             CurrentHealth -= damage;
             CurrentHealth = Mathf.Clamp(CurrentHealth, 0f, MaxHealth);
 
+            Debug.Log(CurrentHealth);
+            /*
             // call OnDamage action
             float trueDamageAmount = healthBefore - CurrentHealth;
             if (trueDamageAmount > 0f)
             {
                 OnDamaged?.Invoke(trueDamageAmount, damageSource);
-            }
+            }*/
 
             HandleDeath();
         }
@@ -81,7 +83,9 @@ namespace OneCanRun.Game
             if (CurrentHealth <= 0f)
             {
                 m_IsDead = true;
+                Debug.Log("I'm died");
                 OnDie?.Invoke();
+                Destroy(this.gameObject);
             }
         }
     }

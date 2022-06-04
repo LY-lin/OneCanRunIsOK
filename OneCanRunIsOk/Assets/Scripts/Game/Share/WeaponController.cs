@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace OneCanRun.Game.Share
 {
-    
+
     public enum WeaponShootType
     {
         Manual,
@@ -15,7 +15,7 @@ namespace OneCanRun.Game.Share
     }
 
     [System.Serializable]
-    public struct CrosshairData //准心的信息
+    public struct CrosshairData //???????
     {
         [Tooltip("The image that will be used for this weapon's crosshair")]
         public Sprite CrosshairSprite;
@@ -27,35 +27,35 @@ namespace OneCanRun.Game.Share
         public Color CrosshairColor;
     }
 
-    // [RequireComponent(typeof(AudioSource))]  //加入声源
+    // [RequireComponent(typeof(AudioSource))]  //???????
     public class WeaponController : MonoBehaviour
     {
-        
+
 
         [Header("Information")]
         [Tooltip("The name that will be displayed in the UI for this weapon")]
-        public string WeaponName;   //武器名
+        public string WeaponName;   //??????
 
         [Tooltip("The image that will be displayed in the UI for this weapon")]
-        public Sprite WeaponIcon;   //武器显示在UI的小图标
+        public Sprite WeaponIcon;   //?????????UI??锟斤拷???
 
         [Tooltip("Bullet profebs")]
         public GameObject bullet;
 
         [Tooltip("Default data for the crosshair")]
-        public CrosshairData CrosshairDataDefault;//默认的准心数据
+        public CrosshairData CrosshairDataDefault;//???????????
 
         /*
         [Tooltip("Data for the crosshair when targeting an enemy")]
-        public CrosshairData CrosshairDataTargetInSight;//瞄准时的准信数据
+        public CrosshairData CrosshairDataTargetInSight;//?????????????
         */
 
         [Header("Internal References")]
         [Tooltip("The root object for the weapon, this is what will be deactivated when the weapon isn't active")]
-        public GameObject WeaponRoot;   //武器使用的模型
+        public GameObject WeaponRoot;   //???????????
 
         [Tooltip("Tip of the weapon, where the projectiles are shot")]
-        public Transform WeaponMuzzle;  //武器发射弹丸的地方
+        public Transform WeaponMuzzle;  //?????????????
 
         [Header("Shoot Parameters")]
         [Tooltip("The type of weapon wil affect how it shoots")]
@@ -63,130 +63,130 @@ namespace OneCanRun.Game.Share
 
         /*
         [Tooltip("The projectile prefab")] 
-        public ProjectileBase ProjectilePrefab;//子弹的预制件*/
+        public ProjectileBase ProjectilePrefab;//?????????*/
 
         [Tooltip("Minimum duration between two shots")]
-        public float DelayBetweenShots = 0.5f;  //两次射击之间的最短间隔
+        public float DelayBetweenShots = 0.5f;  //????????????????
 
         [Tooltip("Angle for the cone in which the bullets will be shot randomly (0 means no spread at all)")]
-        public float BulletSpreadAngle = 0f;    //“子弹随机射击的圆锥体角度, 扩散(0表示完全没有扩散)
+        public float BulletSpreadAngle = 0f;    //???????????????????, ???(0????????????)
 
         [Tooltip("Amount of bullets per shot")]
-        public int BulletsPerShot = 1;  //每次射击的子弹数
+        public int BulletsPerShot = 1;  //?????????????
 
         [Tooltip("Force that will push back the weapon after each shot")]
         [Range(0f, 2f)]
-        public float RecoilForce = 1;//后坐力
+        public float RecoilForce = 1;//??????
 
         /* [Tooltip("Ratio of the default FOV that this weapon applies while aiming")]
          [Range(0f, 1f)]
-         public float AimZoomRatio = 1f; //瞄准时候的FOV比例
+         public float AimZoomRatio = 1f; //???????FOV????
 
          [Tooltip("Translation to apply to weapon arm when aiming with this weapon")]
          public Vector3 AimOffset;*/
-        //当用这种武器瞄准时，平移过来适用于武器臂
+        //????????????????????????????????????
 
-        [Header("GunAmmo Parameters")]//枪支武器
-        [Tooltip("Should the player manually reload")]//玩家手动装弹
-        public bool AutomaticReload = true;//默认自动换弹
+        [Header("GunAmmo Parameters")]//??????
+        [Tooltip("Should the player manually reload")]//?????????
+        public bool AutomaticReload = true;//??????????
 
         [Tooltip("Has physical clip on the weapon and ammo shells are ejected when firing")]
-        public bool HasPhysicalBullets = false;//武器上有物理弹夹吗?发射时弹壳会弹出吗
+        public bool HasPhysicalBullets = false;//?????????????????????????????????
 
 
         [Tooltip("Number of bullets in a clip")]
-        public int ClipSize = 30;//单个弹匣的子弹数量
+        public int ClipSize = 30;//????????????????
 
         [Tooltip("Bullet Shell Casing")]
-        public GameObject ShellCasing;//枪管物件
+        public GameObject ShellCasing;//??????
 
         [Tooltip("Weapon Ejection Port for physical ammo")]
-        public Transform EjectionPort;//武器弹射端口用于物理弹药
+        public Transform EjectionPort;//?????????????????????
 
         [Tooltip("Force applied on the shell")]
         [Range(0.0f, 5.0f)] public float ShellCasingEjectionForce = 2.0f;
-        //施加在壳上的力
+        //???????????
 
         [Tooltip("Maximum number of shell that can be spawned before reuse")]
-        [Range(1, 30)] public int ShellPoolSize = 1;//在装弹之前可以生成的最大shell数
+        [Range(1, 30)] public int ShellPoolSize = 1;//???????????????????shell??
 
         [Tooltip("Amount of ammo reloaded per second")]
-        public float AmmoReloadRate = 1f;//每秒装弹的数量
+        public float AmmoReloadRate = 1f;//????????????
 
         [Tooltip("Delay after the last shot before starting to reload")]
-        public float AmmoReloadDelay = 2f;//在最后一枪后延迟开始装填
+        public float AmmoReloadDelay = 2f;//?????????????????
 
         [Tooltip("Maximum amount of ammo in the gun")]
-        public int MaxAmmo = 8;//枪中最大的子弹数量（最大备弹）
+        public int MaxAmmo = 8;//???????????????????????
 
 
-        //充能类武器参数
+        //??????????????
         [Header("Charging parameters (charging weapons only)")]
         [Tooltip("Trigger a shot when maximum charge is reached")]
-        public bool AutomaticReleaseOnCharged;//是否达到最大充能时触发一次射击
+        public bool AutomaticReleaseOnCharged;//?????????????????????
 
         [Tooltip("Duration to reach maximum charge")]
-        public float MaxChargeDuration = 2f;//到达最大充能时的耐久
+        public float MaxChargeDuration = 2f;//????????????????
 
         [Tooltip("Initial ammo used when starting to charge")]
-        public float AmmoUsedOnStartCharge = 1f;//启动武器时使用的子弹量
+        public float AmmoUsedOnStartCharge = 1f;//??????????????????
 
         [Tooltip("Additional ammo used when charge reaches its maximum")]
-        public float AmmoUsageRateWhileCharging = 1f;//到达最大充能使用的子弹
+        public float AmmoUsageRateWhileCharging = 1f;//?????????????????
 
 
 
         [Header("Audio & Visual")]
         [Tooltip("Optional weapon animator for OnShoot animations")]
-        public Animator WeaponAnimator;//武器动画
+        public Animator WeaponAnimator;//????????
 
         [Tooltip("Prefab of the muzzle flash")]
-        public GameObject MuzzleFlashPrefab;//预制的枪口闪光，枪口的焰火
+        public GameObject MuzzleFlashPrefab;//??????????????????
 
         [Tooltip("Unparent the muzzle flash instance on spawn")]
-        public bool UnparentMuzzleFlash;//是否在子弹出去时去掉炮口闪光实例
+        public bool UnparentMuzzleFlash;//?????????????????????????
 
         [Tooltip("sound played when shooting")]
-        public AudioClip ShootSfx;//射击时的音频片段
+        public AudioClip ShootSfx;//????????????
 
         [Tooltip("Sound played when changing to this weapon")]
-        public AudioClip ChangeWeaponSfx;//充能武器时的音频片段
+        public AudioClip ChangeWeaponSfx;//?????????????????
 
         [Tooltip("Continuous Shooting Sound")]
-        public bool UseContinuousShootSound = false;//是否时许产生持续的音效
+        public bool UseContinuousShootSound = false;//??????????????????锟斤拷
 
-        /*  //持续音频的设计
+        /*  //????????????
         public AudioClip ContinuousShootStartSfx;
         public AudioClip ContinuousShootLoopSfx;
         public AudioClip ContinuousShootEndSfx;
         AudioSource m_ContinuousShootAudioSource = null;*/
         bool m_WantsToShoot = false;
-        
 
-        //射击时的Action
+
+        //??????Action
         public UnityAction OnShoot;
         public event Action OnShootProcessed;
 
-        int m_CarriedPhysicalBullets;//携带的物理子弹量
-        float m_CurrentAmmo;    //现在的弹药
-        float m_LastTimeShot = Mathf.NegativeInfinity;  //上次射击的实现 = 负无穷大
-        public float LastChargeTriggerTimestamp { get; private set; }   //上次触发充能的时间戳
-        Vector3 m_LastMuzzlePosition;   //上次枪口的位置
+        int m_CarriedPhysicalBullets;//锟斤拷?????????????
+        float m_CurrentAmmo;    //???????
+        float m_LastTimeShot = Mathf.NegativeInfinity;  //??????????? = ???????
+        public float LastChargeTriggerTimestamp { get; private set; }   //??锟斤拷????????????
+        Vector3 m_LastMuzzlePosition;   //???????锟斤拷??
         // Update is called once per frame
 
-        public GameObject Owner { get; set; }           //拥有者
-        public GameObject SourcePrefab { get; set; }    //源预制件  
-        public bool IsCharging { get; private set; }    //是否在充能（充能武器）
-        public float CurrentAmmoRatio { get; private set; } //现在弹药的比例
-        public bool IsWeaponActive { get; private set; }    //武器是否可动
-        public bool IsCooling { get; private set; }         //是否在冷却中
-        public float CurrentCharge { get; private set; }    //？
-        public Vector3 MuzzleWorldVelocity { get; private set; }    //枪口在时世界中的速率
+        public GameObject Owner { get; set; }           //?????
+        public GameObject SourcePrefab { get; set; }    //?????  
+        public bool IsCharging { get; private set; }    //???????????????????
+        public float CurrentAmmoRatio { get; private set; } //???????????
+        public bool IsWeaponActive { get; private set; }    //?????????
+        public bool IsCooling { get; private set; }         //??????????
+        public float CurrentCharge { get; private set; }    //??
+        public Vector3 MuzzleWorldVelocity { get; private set; }    //???????????锟斤拷?????
 
         public float GetAmmoNeededToShoot() =>
             (ShootType != WeaponShootType.Charge ?
             1f : Mathf.Max(1f, AmmoUsedOnStartCharge)) /
-            (MaxAmmo * BulletsPerShot);//获得单次射击需要的子弹数
+            (MaxAmmo * BulletsPerShot);//???????????????????
 
         public int GetCarriedPhysicalBullets() => m_CarriedPhysicalBullets;
         public int GetCurrentAmmo() => Mathf.FloorToInt(m_CurrentAmmo);
@@ -197,24 +197,20 @@ namespace OneCanRun.Game.Share
 
         const string k_AnimAttackParameter = "Attack";
 
-        private Queue<Rigidbody> m_PhysicalAmmoPool;//枪的子弹池
+        private Queue<Rigidbody> m_PhysicalAmmoPool;//????????
 
         void Awake()
         {
             m_CurrentAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
-<<<<<<< Updated upstream
-            //m_CarriedPhysicalBullets = HasPhysicalBullets ? ClipSize : 0;//有弹匣时单个弹匣的子弹数，否则为0
-=======
             MaxAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
             //m_CarriedPhysicalBullets = HasPhysicalBullets ? ClipSize : 0;//?锟斤拷????????????????????????0
->>>>>>> Stashed changes
             m_LastMuzzlePosition = WeaponMuzzle.position;
 
-            /* 
-             * m_ShootAudioSource = GetComponent<AudioSource>();
-             DebugUtility.HandleErrorIfNullGetComponent<AudioSource, WeaponController>(m_ShootAudioSource, this,
-                 gameObject);
-            */
+
+            m_ShootAudioSource = GetComponent<AudioSource>();
+            DebugUtility.HandleErrorIfNullGetComponent<AudioSource, WeaponController>(m_ShootAudioSource, this,
+                gameObject);
+
 
             /*
             if (UseContinuousShootSound)
@@ -228,23 +224,23 @@ namespace OneCanRun.Game.Share
             }*/
 
             /*
-            if (HasPhysicalBullets)//如果有物理子弹
+            if (HasPhysicalBullets)//????????????
             {
-                m_PhysicalAmmoPool = new Queue<Rigidbody>(ShellPoolSize);//创建子弹池
+                m_PhysicalAmmoPool = new Queue<Rigidbody>(ShellPoolSize);//?????????
 
                 for (int i = 0; i < ShellPoolSize; i++)
                 {
                     GameObject shell = Instantiate(ShellCasing, transform);
-                    shell.SetActive(false);//默认禁用子弹
+                    shell.SetActive(false);//?????????
                     m_PhysicalAmmoPool.Enqueue(shell.GetComponent<Rigidbody>());
                 }
             }*/
         }
 
-        //PickUp中需要删除
+        //PickUp????????
         //public void AddCarriablePhysicalBullets(int count) => m_CarriedPhysicalBullets = Mathf.Max(m_CarriedPhysicalBullets + count, MaxAmmo);
 
-        void ShootShell()//物理枪射击
+        void ShootShell()//????????
         {
             /*
             Rigidbody nextShell = m_PhysicalAmmoPool.Dequeue();
@@ -265,7 +261,7 @@ namespace OneCanRun.Game.Share
         //void PlaySFX(AudioClip sfx) => AudioUtility.CreateSFX(sfx, transform.position, AudioUtility.AudioGroups.WeaponShoot, 0.0f);
 
 
-        public void Reload()   //物理子弹装弹
+        public void Reload()   //??????????
         {
             Debug.Log(123);
             m_CurrentAmmo = ClipSize;
@@ -273,7 +269,7 @@ namespace OneCanRun.Game.Share
             IsReloading = false;
         }
 
-        public void StartReloadAnimation()  //装弹动画
+        public void StartReloadAnimation()  //???????
         {
             /*
                 GetComponent<Animator>().SetTrigger("Reload");
@@ -359,7 +355,7 @@ namespace OneCanRun.Game.Share
             }
         }
 
-       void UpdateContinuousShootSound()
+        void UpdateContinuousShootSound()
         {/*
             if (UseContinuousShootSound)
             {
@@ -402,7 +398,7 @@ namespace OneCanRun.Game.Share
 
         public bool HandleShootInputs(bool inputDown, bool inputHeld, bool inputUp)
         {
-            
+
             m_WantsToShoot = inputDown || inputHeld;
             switch (ShootType)
             {
@@ -502,14 +498,14 @@ namespace OneCanRun.Game.Share
                 ProjectileBase newProjectile = Instantiate(ProjectilePrefab, WeaponMuzzle.position,
                     Quaternion.LookRotation(shotDirection));
                 newProjectile.Shoot(this*/
-                
+
                 trigger(Quaternion.LookRotation(shotDirection));
             }
 
             // muzzle flash
             if (MuzzleFlashPrefab != null)
             {
-                //烟火特效的产生
+                //?????锟斤拷?????
                 GameObject muzzleFlashInstance = Instantiate(MuzzleFlashPrefab, WeaponMuzzle.position,
                     WeaponMuzzle.rotation, WeaponMuzzle.transform);
                 // Unparent the muzzleFlashInstance
@@ -559,16 +555,20 @@ namespace OneCanRun.Game.Share
         {
             //Debug.Log(111);
             RaycastHit hit;
+            float currentSpread = Mathf.Lerp(0.0f, 10, 2 / 1);
 
-            //float currentSpread = Mathf.Lerp(0.0f, maxSpreadAngle, accuracy / timeTillMaxSpread);
-
-            //fireRotation = Quaternion.RotateTowards(fireRotation, Random.rotation, Random.Range(0.0f, currentSpread));
+            fireRotation = Quaternion.RotateTowards(fireRotation, UnityEngine.Random.rotation, UnityEngine.Random.Range(0.0f, currentSpread));
 
             Physics.Raycast(transform.position, fireRotation * Vector3.forward, out hit, Mathf.Infinity);
 
             {
                 GameObject tempBullet = Instantiate(bullet, WeaponMuzzle.position, fireRotation);
                 tempBullet.GetComponent<BulletController>().hitPoint = hit.point;
+
+                float spped = BulletController.speed;
+                Vector3 temp = spped * WeaponMuzzle.forward.normalized;
+                tempBullet.GetComponent<Rigidbody>().velocity = temp;
+
             }
         }
     }

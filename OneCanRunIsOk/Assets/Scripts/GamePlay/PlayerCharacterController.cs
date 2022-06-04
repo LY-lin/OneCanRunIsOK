@@ -4,17 +4,16 @@ using OneCanRun.Game;
 
 namespace OneCanRun.GamePlay
 {   
-    //½öÊÊÓÃÒÆ¶¯
-    //[RequireComponent(typeof(CharacterController), typeof(PlayerInputHandler), typeof(AudioSource))]
-    [RequireComponent(typeof(CharacterController), typeof(PlayerInputHandler))]
+    [RequireComponent(typeof(CharacterController), typeof(PlayerInputHandler), typeof(AudioSource))]
+    //[RequireComponent(typeof(CharacterController), typeof(PlayerInputHandler))]
     public class PlayerCharacterController : MonoBehaviour
     {
         [Header("References")]
         [Tooltip("Reference to the main camera used for the player")]
         public Camera PlayerCamera;
 
-        //[Tooltip("Audio source for footsteps, jump, etc...")]
-        //public AudioSource AudioSource;
+        [Tooltip("Audio source for footsteps, jump, etc...")]
+        public AudioSource AudioSource;
 
         [Header("General")]
         [Tooltip("Force applied downward when in the air")]
@@ -75,21 +74,21 @@ namespace OneCanRun.GamePlay
         [Tooltip("Speed of crouching transitions")]
         public float CrouchingSharpness = 10f;
 
-        //[Header("Audio")]
-        //[Tooltip("Amount of footstep sounds played when moving one meter")]
-        //public float FootstepSfxFrequency = 1f;
+        [Header("Audio")]
+        [Tooltip("Amount of footstep sounds played when moving one meter")]
+        public float FootstepSfxFrequency = 1f;
 
-        //[Tooltip("Amount of footstep sounds played when moving one meter while sprinting")]
-        //public float FootstepSfxFrequencyWhileSprinting = 1f;
+        [Tooltip("Amount of footstep sounds played when moving one meter while sprinting")]
+        public float FootstepSfxFrequencyWhileSprinting = 1f;
 
-        //[Tooltip("Sound played for footsteps")]
-        //public AudioClip FootstepSfx;
+        [Tooltip("Sound played for footsteps")]
+        public AudioClip FootstepSfx;
 
-        //[Tooltip("Sound played when jumping")] public AudioClip JumpSfx;
-        //[Tooltip("Sound played when landing")] public AudioClip LandSfx;
+        [Tooltip("Sound played when jumping")] public AudioClip JumpSfx;
+        [Tooltip("Sound played when landing")] public AudioClip LandSfx;
 
-        //[Tooltip("Sound played when taking damage froma fall")]
-        //public AudioClip FallDamageSfx;
+        [Tooltip("Sound played when taking damage froma fall")]
+        public AudioClip FallDamageSfx;
 
         [Header("Fall Damage")]
         [Tooltip("Whether the player will recieve damage when hitting the ground at high speed")]
@@ -206,13 +205,13 @@ namespace OneCanRun.GamePlay
                     float dmgFromFall = Mathf.Lerp(FallDamageAtMinSpeed, FallDamageAtMaxSpeed, fallSpeedRatio);
                     m_Health.TakeDamage(dmgFromFall, null);
 
-                    //// fall damage SFX
-                    //AudioSource.PlayOneShot(FallDamageSfx);
+                    // fall damage SFX
+                    AudioSource.PlayOneShot(FallDamageSfx);
                 }
                 else
                 {
-                    //// land SFX
-                    //AudioSource.PlayOneShot(LandSfx);
+                    // land SFX
+                    AudioSource.PlayOneShot(LandSfx);
                 }
             }
 
@@ -251,8 +250,8 @@ namespace OneCanRun.GamePlay
             if (Time.time >= m_LastTimeJumped + k_JumpGroundingPreventionTime)
             {
                 // if we're grounded, collect info about the ground normal with a downward capsule cast representing our character capsule
-                //½ºÄÒÌå×ª»»
-                //Èç¹ûÎÒÃÇ×ÅµØ£¬ÊÕ¼¯ÓÐ¹ØµØÃæ·¨ÏßµÄÐÅÏ¢£¬Ê¹ÓÃÏòÏÂµÄ½ºÄÒÍ¶Éä´ú±íÎÒÃÇµÄ½ÇÉ«½ºÄÒ
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÅµØ£ï¿½ï¿½Õ¼ï¿½ï¿½Ð¹Øµï¿½ï¿½æ·¨ï¿½ßµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ÂµÄ½ï¿½ï¿½ï¿½Í¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÇµÄ½ï¿½É«ï¿½ï¿½ï¿½ï¿½
                 if (Physics.CapsuleCast(GetCapsuleBottomHemisphere(), GetCapsuleTopHemisphere(m_Controller.height),
                     m_Controller.radius, Vector3.down, out RaycastHit hit, chosenGroundCheckDistance, GroundCheckLayers,
                     QueryTriggerInteraction.Ignore))
@@ -352,17 +351,17 @@ namespace OneCanRun.GamePlay
                         }
                     }
 
-                    // footsteps sound
-                    //float chosenFootstepSfxFrequency =
-                    //    (isSprinting ? FootstepSfxFrequencyWhileSprinting : FootstepSfxFrequency);
-                    //if (m_FootstepDistanceCounter >= 1f / chosenFootstepSfxFrequency)
-                    //{
-                    //    m_FootstepDistanceCounter = 0f;
-                    //    AudioSource.PlayOneShot(FootstepSfx);
-                    //}
+                    //footsteps sound
+                    float chosenFootstepSfxFrequency =
+                        (isSprinting ? FootstepSfxFrequencyWhileSprinting : FootstepSfxFrequency);
+                    if (m_FootstepDistanceCounter >= 1f / chosenFootstepSfxFrequency)
+                    {
+                        m_FootstepDistanceCounter = 0f;
+                        AudioSource.PlayOneShot(FootstepSfx);
+                    }
 
-                    //// keep track of distance traveled for footsteps sound
-                    //m_FootstepDistanceCounter += CharacterVelocity.magnitude * Time.deltaTime;
+                    // keep track of distance traveled for footsteps sound
+                    m_FootstepDistanceCounter += CharacterVelocity.magnitude * Time.deltaTime;
                 }
                 // handle air movement
                 else
