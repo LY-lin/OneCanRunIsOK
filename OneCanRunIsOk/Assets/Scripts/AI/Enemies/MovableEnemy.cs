@@ -93,7 +93,7 @@ namespace OneCanRun.AI.Enemies
                 case AIState.Follow:
                     controller.SetNavDestination(controller.KnownDetectedTarget.transform.position);
                     controller.OrientTowards(controller.KnownDetectedTarget.transform.position);
-                    // controller.OrientWeaponsTowards(controller.KnownDetectedTarget.transform.position);
+                    controller.OrientWeaponsTowards(controller.KnownDetectedTarget.transform.position);
                     break;
                 case AIState.Attack:
                     if (Vector3.Distance(controller.KnownDetectedTarget.transform.position,
@@ -108,7 +108,7 @@ namespace OneCanRun.AI.Enemies
                     }
 
                     controller.OrientTowards(controller.KnownDetectedTarget.transform.position);
-                    // controller.TryAtack(controller.KnownDetectedTarget.transform.position);
+                    controller.TryAttack(controller.KnownDetectedTarget.transform.position);
                     break;
             }
         }
