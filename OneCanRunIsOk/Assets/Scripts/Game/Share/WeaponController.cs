@@ -36,6 +36,7 @@ namespace OneCanRun.Game.Share
         [Tooltip("The name that will be displayed in the UI for this weapon")]
         public string WeaponName;   //武器名
 
+
         [Tooltip("The image that will be displayed in the UI for this weapon")]
         public Sprite WeaponIcon;   //武器显示在UI的小图标
 
@@ -499,7 +500,7 @@ namespace OneCanRun.Game.Share
                     Quaternion.LookRotation(shotDirection));
                 newProjectile.Shoot(this*/
 
-                trigger(Quaternion.LookRotation(shotDirection));
+                trigger(Quaternion.LookRotation(shotDirection),shotDirection);
             }
 
             // muzzle flash
@@ -551,7 +552,7 @@ namespace OneCanRun.Game.Share
             return spreadWorldDirection;
         }
 
-        private void trigger(Quaternion fireRotation)
+        private void trigger(Quaternion fireRotation, Vector3 shotDirection)
         {
             //Debug.Log(111);
             RaycastHit hit;
@@ -563,11 +564,18 @@ namespace OneCanRun.Game.Share
 
             {
                 GameObject tempBullet = Instantiate(bullet, WeaponMuzzle.position, fireRotation);
+                
                 tempBullet.GetComponent<BulletController>().hitPoint = hit.point;
+                tempBullet.transform.position = WeaponMuzzle.position;
+                tempBullet.transform.forward = shotDirection;
+                tempBullet.GetComponent<BulletController>().Shoot(this);
+                tempBullet.GetComponent<BulletController>().OnShoot?.Invoke();
 
-                float spped = BulletController.speed;
-                Vector3 temp = spped * WeaponMuzzle.forward.normalized;
-                tempBullet.GetComponent<Rigidbody>().velocity = temp;
+                Debug.Log("shoot bullet at " + tempBullet.transform.position.ToString("f6"));
+                
+                //float speed = BulletController.speed;
+                //Vector3 temp = speed * WeaponMuzzle.forward.normalized;
+                //tempBullet.GetComponent<Rigidbody>().velocity = temp;
 
             }
         }
