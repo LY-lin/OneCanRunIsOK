@@ -397,7 +397,6 @@ namespace OneCanRun.Game.Share
 
         public bool HandleShootInputs(bool inputDown, bool inputHeld, bool inputUp)
         {
-
             m_WantsToShoot = inputDown || inputHeld;
             switch (ShootType)
             {
@@ -412,6 +411,7 @@ namespace OneCanRun.Game.Share
                 case WeaponShootType.Automatic:
                     if (inputHeld)
                     {
+                        
                         return TryShoot();
                     }
 
@@ -438,6 +438,7 @@ namespace OneCanRun.Game.Share
 
         bool TryShoot()
         {
+            
             if (m_CurrentAmmo >= 1f
                 && m_LastTimeShot + DelayBetweenShots < Time.time)
             {

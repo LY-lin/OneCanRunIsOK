@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
 using OneCanRun.Game;
+using OneCanRun.Game.Share;
 
 namespace OneCanRun.AI.Enemies
 {
@@ -35,7 +36,16 @@ namespace OneCanRun.AI.Enemies
         [Range(0, 1)]
         public float DropRate = 1f;
 
-        // 对应敌人的四个事件：攻击、发现、丢失、受伤和死亡
+        // ���������������Ƿ�����л�����
+        [Header("Weapons Parameters")]
+        [Tooltip("Allow weapon swapping for this enemy")]
+        public bool SwapToNextWeapon = false;
+
+        // ���֮�����ȴʱ��
+        [Tooltip("Time delay between a weapon swap and the next attack")]
+        public float DelayAfterWeaponSwap = 0f;
+
+        // ��Ӧ���˵��ĸ��¼������������֡���ʧ�����˺�����
         public UnityAction onAttack;
         public UnityAction onDetectedTarget;
         public UnityAction onLostTarget;
@@ -71,7 +81,16 @@ namespace OneCanRun.AI.Enemies
         Collider[] colliders;
         // 导航数据模块
         NavigationModule navigationModule;
+        // ��¼��ǰѲ��ĵ�����
         int pathDestinationNodeIndex;
+        // ��¼���һ�����ʱ��
+        float lastTimeWeaponSwapped = Mathf.NegativeInfinity;
+        // ��ǰ��������������Ǵ��ڶ������
+        int currentWeaponIndex;
+        // һ��������Ӧһ������������
+        WeaponController currentWeapon;
+        // ��ȡ�����������а󶨵�����
+        WeaponController[] weapons;
 
         // Start is called before the first frame update
         void Start()
@@ -99,7 +118,12 @@ namespace OneCanRun.AI.Enemies
             // 注册敌人
             enemyManager.RegisterEnemy(this);
 
-            // 订阅事件
+            // ��ʼ������
+            FindAndInitializeAllWeapons();
+            currentWeapon = GetCurrentWeapon();
+            currentWeapon.ShowWeapon(true);
+
+            // �����¼�
             health.OnDie += OnDie;
             health.OnDamaged += OnDamaged;
 
@@ -164,6 +188,7 @@ namespace OneCanRun.AI.Enemies
         {
             // 计算射线方向
             Vector3 lookDirection = Vector3.ProjectOnPlane(lookPosition - transform.position, Vector3.up).normalized;
+            if(lookDirection.sqrMagnitude != 0f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
                 transform.rotation =
@@ -174,7 +199,7 @@ namespace OneCanRun.AI.Enemies
         // 判断巡检路径是否有效
         bool IsPathValid()
         {
-            return true;
+            return PatrolPath && PatrolPath.PathNodes.Count > 0;
         }
 
         // 重置路径目的地
@@ -212,7 +237,6 @@ namespace OneCanRun.AI.Enemies
         {
             if (IsPathValid())
             {
-                //Debug.Log(pathDestinationNodeIndex);
                 return PatrolPath.GetPositionOfPathNode(pathDestinationNodeIndex);
             }
             else
@@ -236,7 +260,6 @@ namespace OneCanRun.AI.Enemies
             if (IsPathValid())
             {
                 // Check if reached the path destination
-                //Debug.Log((transform.position - GetDestinationOnPath()).magnitude);
                 if ((transform.position - GetDestinationOnPath()).magnitude <= PathReachingRadius)
                 {
                     // increment path destination index
@@ -255,7 +278,88 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // 处理受伤
+        // Ѱ�Ҳ���ʼ����������
+        void FindAndInitializeAllWeapons()
+        {
+            if (weapons == null)
+            {
+                weapons = GetComponentsInChildren<WeaponController>();
+                DebugUtility.HandleErrorIfNoComponentFound<WeaponController, EnemyController>(weapons.Length, this, gameObject);
+
+                // ��ʼ������������ӵ����
+                foreach (WeaponController weapon in weapons)
+                {
+                    weapon.Owner = gameObject;
+                }
+            }
+        }
+
+        // ��ȡ��ǰ����
+        public WeaponController GetCurrentWeapon()
+        {
+            FindAndInitializeAllWeapons();
+            if (currentWeapon == null)
+            {
+                SetCurrentWeapon(0);
+            }
+            DebugUtility.HandleErrorIfNullGetComponent<WeaponController, EnemyController>(currentWeapon, this, gameObject);
+            return currentWeapon;
+        }
+
+        // ���õ�ǰ����
+        public void SetCurrentWeapon(int index)
+        {
+            currentWeaponIndex = index;
+            currentWeapon = weapons[currentWeaponIndex];
+            lastTimeWeaponSwapped = SwapToNextWeapon ? Time.time : Mathf.NegativeInfinity;
+        }
+
+        // ���Թ���
+        public bool TryAttack(Vector3 enemyPosition)
+        {
+            // ��Ϸδ������Ҫ��������
+            if (gameFlowManager.GameIsEnding)
+            {
+                return false;
+            }
+
+            // ���ˣ����������������߼���������
+            OrientWeaponsTowards(enemyPosition);
+
+            if (lastTimeWeaponSwapped + DelayAfterWeaponSwap >= Time.time)
+            {
+                return false;
+            }
+
+            // ���
+            bool didFire = GetCurrentWeapon().HandleShootInputs(false, true, false);
+
+            if (didFire && onAttack != null)
+            {
+                onAttack.Invoke();
+
+                if (SwapToNextWeapon && weapons.Length > 1)
+                {
+                    int nextWeaponIndex = (currentWeaponIndex + 1) % weapons.Length;
+                    SetCurrentWeapon(nextWeaponIndex);
+                }
+            }
+
+            return didFire;
+        }
+
+        // ������������
+        public void OrientWeaponsTowards(Vector3 lookPostion)
+        {
+            // �������������ĳ��򣬲�����
+            foreach (WeaponController weapon in weapons)
+            {
+                Vector3 weaponForward = (lookPostion - weapon.WeaponRoot.transform.position).normalized;
+                weapon.transform.forward = weaponForward;
+            }
+        }
+
+        // ��������
         void OnDamaged(float damage, GameObject damageSource)
         {
             // 由伤害来源，且伤害来源不是敌人
@@ -279,12 +383,6 @@ namespace OneCanRun.AI.Enemies
         {
             // tells the game flow manager to handle the enemy destuction
             enemyManager.UnregisterEnemy(this);
-
-            // loot an object
-            if (TryDropItem())
-            {
-                Instantiate(LootPrefab, transform.position, Quaternion.identity);
-            }
 
             // this will call the OnDestroy function
             Destroy(gameObject, DeathDuration);

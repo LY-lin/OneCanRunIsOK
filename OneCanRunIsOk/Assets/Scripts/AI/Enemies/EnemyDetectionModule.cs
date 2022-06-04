@@ -40,13 +40,19 @@ namespace OneCanRun.AI.Enemies
 
         public virtual void HandleDetection(Actor self, Collider[] selfColliders)
         {
+            // ���������ʧ
+            if (KnownDetectedTarget && !IsSeeingTarget && (Time.time - TimeLastSeenTarget) > KnownTargetTimeout)
+            {
+                KnownDetectedTarget = null;
+            }
+
             float sqrDetectRange = DetectionRange * DetectionRange;
             IsSeeingTarget = false;
             float minDistance = Mathf.Infinity;
             // 遍历场景中所有角色
             foreach (Actor actor in manager.Actors)
             {
-                // 属于不同阵营
+                // ���ڲ�ͬ��Ӫ
                 if (actor.Affiliation != self.Affiliation)
                 {
                     float sqrDistance = (actor.transform.position - DetectionSourcePoint.position).sqrMagnitude;
@@ -107,6 +113,8 @@ namespace OneCanRun.AI.Enemies
             {
                 OnLostTarget();
             }
+
+            HadKnownTarget = KnownDetectedTarget != null;
         }
 
         // 丢失目标事件
