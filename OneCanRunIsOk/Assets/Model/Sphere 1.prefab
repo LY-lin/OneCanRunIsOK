@@ -127,10 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ae5458550331549a718b4876bea4a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoint: {x: 0, y: 0, z: 0}
   Radius: 0.01
-  Root: {fileID: 0}
-  Tip: {fileID: 0}
   MaxLifeTime: 5
   ImpactVfx: {fileID: 0}
   ImpactVfxLifetime: 5
@@ -139,7 +136,7 @@ MonoBehaviour:
   HittableLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  Speed: 20
+  Speed: 100
   GravityDownAcceleration: 0
   TrajectoryCorrectionDistance: -1
   InheritWeaponVelocity: 0
