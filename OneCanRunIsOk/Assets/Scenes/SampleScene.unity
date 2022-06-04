@@ -180,22 +180,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 29378940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0cb1d2328a4d9d4d8d2e278186760aa, type: 3}
+  m_Script: {fileID: 11500000, guid: b6a552d5b5b943243964dce88b4fd9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponName: 
   WeaponIcon: {fileID: 0}
   bullet: {fileID: 1254343392523665438, guid: 28ca67a84a75e9642a8da4bee674efbc, type: 3}
-  CrosshairDataDefault: {CrosshairSprite: {fileID: 21300000, guid: aaf0e60b1921a2c4a86b8685fff52036, type: 3}, CrosshairSize: 0, CrosshairColor:
-      r: 0
-      g: 0
-      b: 0
-      a: 0
-}
+  CrosshairDataDefault:
+    CrosshairSprite: {fileID: 0}
+    CrosshairSize: 0
+    CrosshairColor: {r: 0, g: 0, b: 0, a: 0}
   WeaponRoot: {fileID: 29378940}
   WeaponMuzzle: {fileID: 1746902590}
-  ShootType: 1
-  DelayBetweenShots: 0.1
+  ShootType: 0
+  DelayBetweenShots: 0.5
   BulletSpreadAngle: 0
   BulletsPerShot: 1
   RecoilForce: 1
@@ -219,22 +217,6 @@ MonoBehaviour:
   ShootSfx: {fileID: 8300000, guid: be87267ec54c5264daffd2ffeb91d6a7, type: 3}
   ChangeWeaponSfx: {fileID: 0}
   UseContinuousShootSound: 0
-  m_WantsToShoot: 0
-  m_CarriedPhysicalBullets: 0
-  m_CurrentAmmo: 0
-  m_LastTimeShot: -Infinity
-  <LastChargeTriggerTimestamp>k__BackingField: 0
-  m_LastMuzzlePosition: {x: 0, y: 0, z: 0}
-  <Owner>k__BackingField: {fileID: 0}
-  <SourcePrefab>k__BackingField: {fileID: 0}
-  <IsCharging>k__BackingField: 0
-  <CurrentAmmoRatio>k__BackingField: 0
-  <IsWeaponActive>k__BackingField: 0
-  <IsCooling>k__BackingField: 0
-  <CurrentCharge>k__BackingField: 0
-  <MuzzleWorldVelocity>k__BackingField: {x: 0, y: 0, z: 0}
-  m_ShootAudioSource: {fileID: 0}
-  <IsReloading>k__BackingField: 0
 --- !u!23 &29378944
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -552,7 +534,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: decf25da566de433cb1a874aa0e6dd00, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.3842297
+      value: 4.85
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: decf25da566de433cb1a874aa0e6dd00, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3808,6 +3790,7 @@ GameObject:
   - component: {fileID: 1882154189}
   - component: {fileID: 1882154191}
   - component: {fileID: 1882154192}
+  - component: {fileID: 1882154193}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -4064,6 +4047,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1882154193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882154181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da7a12211e19e14387015f5421488d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentSkill: {fileID: 1915371431}
 --- !u!1 &1892287352
 GameObject:
   m_ObjectHideFlags: 0
@@ -4200,6 +4196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1915371430}
+  - component: {fileID: 1915371431}
   m_Layer: 0
   m_Name: Skill-CastTest
   m_TagString: Untagged
@@ -4222,6 +4219,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1915371431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915371429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af01779345aa664c85a6bc91204c961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkillName: 
+  SkillDescription: 
+  SkillIcon: {fileID: 0}
+  m_SkillType: 0
+  CoolingTime: 10
+  Projectile: {fileID: 0}
+  CastMuzzle: {fileID: 0}
 --- !u!1 &1930936478
 GameObject:
   m_ObjectHideFlags: 0
