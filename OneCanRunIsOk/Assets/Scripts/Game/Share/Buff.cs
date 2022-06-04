@@ -6,16 +6,11 @@ namespace OneCanRun
 {
     public class Buff : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        public enum BufferType
         {
-        
+            Actor,
+            Weapon,
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        public int existTime;
     }
 }
