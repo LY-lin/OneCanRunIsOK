@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 29378945}
   - component: {fileID: 29378944}
   - component: {fileID: 29378942}
+  - component: {fileID: 29378946}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -185,10 +186,12 @@ MonoBehaviour:
   WeaponName: 
   WeaponIcon: {fileID: 0}
   bullet: {fileID: 1254343392523665438, guid: 28ca67a84a75e9642a8da4bee674efbc, type: 3}
-  CrosshairDataDefault:
-    CrosshairSprite: {fileID: 21300000, guid: aaf0e60b1921a2c4a86b8685fff52036, type: 3}
-    CrosshairSize: 0
-    CrosshairColor: {r: 0, g: 0, b: 0, a: 0}
+  CrosshairDataDefault: {CrosshairSprite: {fileID: 21300000, guid: aaf0e60b1921a2c4a86b8685fff52036, type: 3}, CrosshairSize: 0, CrosshairColor:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
+}
   WeaponRoot: {fileID: 29378940}
   WeaponMuzzle: {fileID: 1746902590}
   ShootType: 1
@@ -213,9 +216,25 @@ MonoBehaviour:
   WeaponAnimator: {fileID: 0}
   MuzzleFlashPrefab: {fileID: 0}
   UnparentMuzzleFlash: 0
-  ShootSfx: {fileID: 0}
+  ShootSfx: {fileID: 8300000, guid: be87267ec54c5264daffd2ffeb91d6a7, type: 3}
   ChangeWeaponSfx: {fileID: 0}
   UseContinuousShootSound: 0
+  m_WantsToShoot: 0
+  m_CarriedPhysicalBullets: 0
+  m_CurrentAmmo: 0
+  m_LastTimeShot: -Infinity
+  <LastChargeTriggerTimestamp>k__BackingField: 0
+  m_LastMuzzlePosition: {x: 0, y: 0, z: 0}
+  <Owner>k__BackingField: {fileID: 0}
+  <SourcePrefab>k__BackingField: {fileID: 0}
+  <IsCharging>k__BackingField: 0
+  <CurrentAmmoRatio>k__BackingField: 0
+  <IsWeaponActive>k__BackingField: 0
+  <IsCooling>k__BackingField: 0
+  <CurrentCharge>k__BackingField: 0
+  <MuzzleWorldVelocity>k__BackingField: {x: 0, y: 0, z: 0}
+  m_ShootAudioSource: {fileID: 0}
+  <IsReloading>k__BackingField: 0
 --- !u!23 &29378944
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -266,6 +285,102 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29378940}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!82 &29378946
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29378940}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &83576587
 GameObject:
   m_ObjectHideFlags: 0
@@ -3729,7 +3844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCamera: {fileID: 963194227}
-  AudioSource: {fileID: 0}
+  AudioSource: {fileID: 1882154192}
   GravityDownForce: 20
   GroundCheckLayers:
     serializedVersion: 2
@@ -3749,12 +3864,12 @@ MonoBehaviour:
   CapsuleHeightStanding: 1.8
   CapsuleHeightCrouching: 0.9
   CrouchingSharpness: 10
-  FootstepSfxFrequency: 1
-  FootstepSfxFrequencyWhileSprinting: 1
-  FootstepSfx: {fileID: 0}
-  JumpSfx: {fileID: 0}
-  LandSfx: {fileID: 0}
-  FallDamageSfx: {fileID: 0}
+  FootstepSfxFrequency: 0.25
+  FootstepSfxFrequencyWhileSprinting: 0.25
+  FootstepSfx: {fileID: 8300000, guid: f404f8d3c2a4b4f48989fb1120e78fb8, type: 3}
+  JumpSfx: {fileID: 8300000, guid: 13b59a14d34add64d84a623867546ff1, type: 3}
+  LandSfx: {fileID: 8300000, guid: d0f1afed8fa916244af6ca73579ded67, type: 3}
+  FallDamageSfx: {fileID: 8300000, guid: ef980d09b569380459e609fe90ef1db2, type: 3}
   RecievesFallDamage: 0
   MinSpeedForFallDamage: 10
   MaxSpeedForFallDamage: 30
@@ -3852,7 +3967,7 @@ MonoBehaviour:
   WeaponSwitchDelay: 1
   FpsWeaponLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!82 &1882154192
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4076,6 +4191,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: decf25da566de433cb1a874aa0e6dd00, type: 3}
   m_PrefabInstance: {fileID: 166915192}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1915371429
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1915371430}
+  m_Layer: 0
+  m_Name: Skill-CastTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1915371430
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915371429}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1930936478
 GameObject:
   m_ObjectHideFlags: 0
