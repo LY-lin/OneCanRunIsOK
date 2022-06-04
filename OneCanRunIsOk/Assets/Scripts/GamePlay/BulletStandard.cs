@@ -282,7 +282,7 @@ namespace OneCanRun.GamePlay
 
         void OnDestroy()
         {
-            int a = 0;
+            //int a = 0;
         }
     }
 }
