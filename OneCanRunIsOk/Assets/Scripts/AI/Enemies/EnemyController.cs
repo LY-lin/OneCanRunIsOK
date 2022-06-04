@@ -5,78 +5,78 @@ using OneCanRun.Game;
 
 namespace OneCanRun.AI.Enemies
 {
-    // ���˿������࣬���˶����Լ�����Ϊ���������Ȩ����������
+    // 敌人控制器类，敌人定义自己的行为并将其控制权交给控制器
     [RequireComponent(typeof(Health), typeof(Actor), typeof(NavMeshAgent))]
     public class EnemyController : MonoBehaviour
     {
         [Tooltip("The distance at which the enemy considers that it has reached its current path destination point")]
         public float PathReachingRadius = 2f;
 
-        // ��͸߶ȣ��������������������ʧ
+        // 最低高度，超出死亡，怪物掉落消失
         [Header("Parameters")]
         [Tooltip("The Y height at which the enemy will be automatically killed (if it falls off of the level)")]
         public float minHeight = -20f;
 
-        // ת���ٶȣ�����ת���ӽǵ��ٶ�/��ת�ٶ�
+        // 转动速度，敌人转动视角的速度/旋转速度
         [Tooltip("The speed at which the enemy rotates")]
         public float OrientationSpeed = 10f;
 
-        // ��������ʱ�䣬����
+        // 死亡持续时间，动画
         [Tooltip("Delay after death where the GameObject is destroyed (to allow for animation)")]
         public float DeathDuration = 0f;
 
-        // ����ս��Ʒ
+        // 掉落战利品
         [Header("Loot")]
         [Tooltip("The object this enemy can drop when dying")]
         public GameObject LootPrefab;
 
-        // ���伸��
+        // 掉落几率
         [Tooltip("The chance the object has to drop")]
         [Range(0, 1)]
         public float DropRate = 1f;
 
-        // ��Ӧ���˵��ĸ��¼������������֡���ʧ�����˺�����
+        // 对应敌人的四个事件：攻击、发现、丢失、受伤和死亡
         public UnityAction onAttack;
         public UnityAction onDetectedTarget;
         public UnityAction onLostTarget;
         public UnityAction onDamaged;
         public UnityAction onDie;
 
-        // ��������ʱ�䣬���ڳ�޶�ʧ
+        // 最新受伤时间，用于仇恨丢失
         float lastTimeDamaged = float.NegativeInfinity;
 
-        // ������˵ļ��ģ��
+        // 引入敌人的检测模块
         public EnemyDetectionModule EnemyDetectionModule { get; private set; }
-        // �����Դ���AIѰ·ģ��
+        // 引入自带的AI寻路模块
         public NavMeshAgent NavMeshAgent { get; private set; }
-        // �����Զ����Ѳ��·��
+        // 引入自定义的巡检路径
         public PatrolPath PatrolPath { get; set; }
-        // ������˵�Ѫ��ϵͳ
+        // 引入敌人的血量系统
         public Health health;
-        // �����ɫ
+        // 引入角色
         public Actor actor;
-        // ��״̬�����ڵ��˵�״̬����
+        // 绑定状态，用于敌人的状态处理
         public GameObject KnownDetectedTarget => EnemyDetectionModule.KnownDetectedTarget;
         public bool IsTargetInAttackRange => EnemyDetectionModule.IsTargetInAttackRange;
         public bool IsSeeingTarget => EnemyDetectionModule.IsSeeingTarget;
         public bool HadKnownTarget => EnemyDetectionModule.HadKnownTarget;
 
-        // ���˹�����
+        // 敌人管理器
         EnemyManager enemyManager;
-        // ��ɫ������
+        // 角色管理器
         ActorsManager actorsManager;
-        // ��Ϸ���̹�����
+        // 游戏进程管理器
         GameFlowManager gameFlowManager;
-        // �����Լ������
+        // 保存自己的组件
         Collider[] colliders;
-        // ��������ģ��
+        // 导航数据模块
         NavigationModule navigationModule;
         int pathDestinationNodeIndex;
 
         // Start is called before the first frame update
         void Start()
         {
-            // ��ʼ��
+            // 初始化
             enemyManager = FindObjectOfType<EnemyManager>();
             DebugUtility.HandleErrorIfNullFindObject<EnemyManager, EnemyController>(enemyManager, this);
 
@@ -96,14 +96,14 @@ namespace OneCanRun.AI.Enemies
             NavMeshAgent = GetComponent<NavMeshAgent>();
             DebugUtility.HandleErrorIfNullGetComponent<NavMeshAgent, EnemyController>(NavMeshAgent, this, gameObject);
 
-            // ע�����
+            // 注册敌人
             enemyManager.RegisterEnemy(this);
 
-            // �����¼�
+            // 订阅事件
             health.OnDie += OnDie;
             health.OnDamaged += OnDamaged;
 
-            // ��ʼ�����ģ��
+            // 初始化检测模块
             EnemyDetectionModule[] enemyDetectionModules = GetComponentsInChildren<EnemyDetectionModule>();
             DebugUtility.HandleErrorIfNoComponentFound<EnemyDetectionModule, EnemyController>(enemyDetectionModules.Length, this,
                 gameObject);
@@ -130,13 +130,13 @@ namespace OneCanRun.AI.Enemies
         // Update is called once per frame
         void Update()
         {
-            // ȷ�����е��˶���һ���߶�
+            // 确保所有敌人都在一定高度
             EnsureIsWithinLevelBounds();
-            // ÿ֡��Ҫ���
+            // 每帧都要检测
             EnemyDetectionModule.HandleDetection(actor, colliders);
         }
 
-        // ȷ�������Ʒ�Χ�ڲ�
+        // 确保在限制范围内部
         void EnsureIsWithinLevelBounds()
         {
             if (transform.position.y < minHeight)
@@ -146,23 +146,23 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // �����ʧĿ��
+        // 处理丢失目标
         void OnLostTarget()
         {
-            // ���ð󶨵ĵ��˶�ʧ�¼�
+            // 调用绑定的敌人丢失事件
             onLostTarget.Invoke();
         }
 
-        // �����⵽Ŀ��
+        // 处理检测到目标
         void OnDetectTarget()
         {
             onDetectedTarget.Invoke();
         }
 
-        // �����ӽǣ�׷�����
+        // 处理视角，追踪玩家
         public void OrientTowards(Vector3 lookPosition)
         {
-            // �������߷���
+            // 计算射线方向
             Vector3 lookDirection = Vector3.ProjectOnPlane(lookPosition - transform.position, Vector3.up).normalized;
             {
                 Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
@@ -171,22 +171,22 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // �ж�Ѳ��·���Ƿ���Ч
+        // 判断巡检路径是否有效
         bool IsPathValid()
         {
             return true;
         }
 
-        // ����·��Ŀ�ĵ�
+        // 重置路径目的地
         public void resetPathDestination()
         {
             pathDestinationNodeIndex = 0;
         }
 
-        // ����Ŀ�ĵ�����ĵ���·��
+        // 设置目的地最近的导航路径
         public void SetPathDestinationToClosestNode()
         {
-            // ·����Ч
+            // 路径有效
             if (IsPathValid())
             {
                 int closestPathNodeIndex = 0;
@@ -207,7 +207,7 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ��ȡ·����Ŀ�ĵ�
+        // 获取路径的目的地
         public Vector3 GetDestinationOnPath()
         {
             if (IsPathValid())
@@ -221,7 +221,7 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ���õ���Ŀ�ĵ�
+        // 设置导航目的地
         public void SetNavDestination(Vector3 destination)
         {
             if (NavMeshAgent)
@@ -255,22 +255,22 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ��������
+        // 处理受伤
         void OnDamaged(float damage, GameObject damageSource)
         {
-            // ���˺���Դ�����˺���Դ���ǵ���
+            // 由伤害来源，且伤害来源不是敌人
             if (damageSource && !damageSource.GetComponent<EnemyController>())
             {
-                // �������˺�Ҫ���¼��״̬�����Ӽ�ⷶΧ��
+                // 敌人受伤后要更新检测状态（无视检测范围）
                 EnemyDetectionModule.OnDamaged(damageSource);
 
-                // �����Զ��������¼�
+                // 敌人自定义受伤事件
                 onDamaged?.Invoke();
 
-                // ��������ʱ��
+                // 更新受伤时间
                 lastTimeDamaged = Time.time;
 
-                // ����������Ч
+                // 处理受伤音效
 
             }
         }

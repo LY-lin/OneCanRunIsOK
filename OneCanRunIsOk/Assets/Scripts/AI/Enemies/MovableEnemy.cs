@@ -33,17 +33,17 @@ namespace OneCanRun.AI.Enemies
         // Start is called before the first frame update
         void Start()
         {
-            // ³õÊ¼»ù±¾ÊôĞÔ
+            // åˆå§‹åŸºæœ¬å±æ€§
             maxHealth = 10f;
             attckDistance = 10f;
             detectDistance = 20f;
             controller = GetComponent<EnemyController>();
             DebugUtility.HandleErrorIfNullGetComponent<EnemyController, MovableEnemy>(controller, this, gameObject);
 
-            // ³õÊ¼»¯ÎªÑ²¼ì×´Ì¬
+            // åˆå§‹åŒ–ä¸ºå·¡æ£€çŠ¶æ€
             state = AIState.Patrol;
 
-            //¶©ÔÄÊÂ¼ş
+            //è®¢é˜…äº‹ä»¶
             controller.onAttack += OnAttack;
             controller.onDamaged += OnDamaged;
             controller.onDetectedTarget += OnDetectedTarget;
@@ -53,10 +53,10 @@ namespace OneCanRun.AI.Enemies
         // Update is called once per frame
         void Update()
         {
-            // ÏÈ¸üĞÂµ±Ç°µÄ×´Ì¬±ä¸ü£¬µÃµ½×îĞÂ×´Ì¬
+            // å…ˆæ›´æ–°å½“å‰çš„çŠ¶æ€å˜æ›´ï¼Œå¾—åˆ°æœ€æ–°çŠ¶æ€
             UpdateAiStateTransitions();
 
-            // ¸ù¾İ×´Ì¬Ö´ĞĞÏàÓ¦µÄ¶¯×÷
+            // æ ¹æ®çŠ¶æ€æ‰§è¡Œç›¸åº”çš„åŠ¨ä½œ
             UpdateCurrentAIState();
         }
 
@@ -65,7 +65,7 @@ namespace OneCanRun.AI.Enemies
             switch (state)
             {
                 case AIState.Follow:
-                    // ¿´µ½Ä¿±êÇÒÄ¿±êÔÚ¹¥»÷·¶Î§ÄÚ²¿
+                    // çœ‹åˆ°ç›®æ ‡ä¸”ç›®æ ‡åœ¨æ”»å‡»èŒƒå›´å†…éƒ¨
                     if (controller.IsSeeingTarget && controller.IsTargetInAttackRange)
                     {
                         state = AIState.Attack;
@@ -73,7 +73,7 @@ namespace OneCanRun.AI.Enemies
                     }
                     break;
                 case AIState.Attack:
-                    // ²»ÔÚ¹¥»÷·¶Î§ÄÚ²¿
+                    // ä¸åœ¨æ”»å‡»èŒƒå›´å†…éƒ¨
                     if (!controller.IsTargetInAttackRange)
                     {
                         state = AIState.Follow;
@@ -115,7 +115,7 @@ namespace OneCanRun.AI.Enemies
 
         void OnAttack()
         {
-            // ¹¥»÷ÌØĞ§
+            // æ”»å‡»ç‰¹æ•ˆ
         }
 
         void OnDetectedTarget()
@@ -136,7 +136,7 @@ namespace OneCanRun.AI.Enemies
 
         void OnDamaged()
         {
-            // ÊÜÉËÌØĞ§
+            // å—ä¼¤ç‰¹æ•ˆ
         }
     }
 }
