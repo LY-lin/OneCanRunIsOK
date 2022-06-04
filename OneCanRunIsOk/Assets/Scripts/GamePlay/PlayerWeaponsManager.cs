@@ -160,14 +160,18 @@ namespace OneCanRun.GamePlay
             if (activeWeapon != null && m_WeaponSwitchState == WeaponSwitchState.Up)
             {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 //���𻻵�
                 if (!activeWeapon.AutomaticReload && m_InputHandler.GetReloadButtonDown() && activeWeapon.CurrentAmmoRatio < 1.0f)
 =======
-                //发起换弹
-                if (activeWeapon.HasPhysicalBullets && m_InputHandler.GetReloadButtonDown() && activeWeapon.CurrentAmmoRatio < 1.0f)
+=======
+
 >>>>>>> Stashed changes
+                //发起换弹
+                
+                if (activeWeapon.HasPhysicalBullets && m_InputHandler.GetReloadButtonDown() && activeWeapon.CurrentAmmoRatio < 1.0f)
                 {
-                    Debug.Log(321);
+                    Debug.Log(activeWeapon.CurrentAmmoRatio);
                     //IsAiming = false;
                     //activeWeapon.StartReloadAnimation();
                     activeWeapon.Reload();

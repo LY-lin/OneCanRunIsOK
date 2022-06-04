@@ -202,7 +202,12 @@ namespace OneCanRun.Game.Share
         void Awake()
         {
             m_CurrentAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
+<<<<<<< Updated upstream
             //m_CarriedPhysicalBullets = HasPhysicalBullets ? ClipSize : 0;//有弹匣时单个弹匣的子弹数，否则为0
+=======
+            MaxAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
+            //m_CarriedPhysicalBullets = HasPhysicalBullets ? ClipSize : 0;//?锟斤拷????????????????????????0
+>>>>>>> Stashed changes
             m_LastMuzzlePosition = WeaponMuzzle.position;
 
             /* 

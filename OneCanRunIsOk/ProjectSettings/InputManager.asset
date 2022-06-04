@@ -135,6 +135,7 @@ InputManager:
     joyNum: 0
   - serializedVersion: 3
     m_Name: Mouse ScrollWheel
+<<<<<<< Updated upstream
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -171,22 +172,36 @@ InputManager:
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: r
+=======
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 
+>>>>>>> Stashed changes
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 1000
-    dead: 0.001
-    sensitivity: 1000
+    gravity: 0
+    dead: 0
+    sensitivity: 0.1
     snap: 0
     invert: 0
-    type: 0
-    axis: 0
+    type: 1
+    axis: 2
     joyNum: 0
   - serializedVersion: 3
+<<<<<<< Updated upstream
     m_Name: Crouch
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
     positiveButton: c
+=======
+    m_Name: Cancel
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: escape
+>>>>>>> Stashed changes
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -214,11 +229,19 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
+<<<<<<< Updated upstream
     m_Name: NextWeapon
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: q
     positiveButton: e
+=======
+    m_Name: Crouch
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: c
+>>>>>>> Stashed changes
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
