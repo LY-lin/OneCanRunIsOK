@@ -8,6 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< Updated upstream
   - component: {fileID: 5059589331096167523}
   - component: {fileID: 7751666428296198252}
   - component: {fileID: 2273397953136828426}
@@ -15,6 +16,15 @@ GameObject:
   - component: {fileID: -2213892597631661813}
   - component: {fileID: -6586326930743980255}
   m_Layer: 0
+=======
+  - component: {fileID: 8719887438048843493}
+  - component: {fileID: 1829648980098953359}
+  - component: {fileID: 5876948537919280292}
+  - component: {fileID: -8588262988214867038}
+  - component: {fileID: 416695074524105711}
+  - component: {fileID: 7308651031931538485}
+  m_Layer: 7
+>>>>>>> Stashed changes
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +109,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!54 &-2213892597631661813
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -116,6 +127,9 @@ Rigidbody:
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &-6586326930743980255
+=======
+--- !u!114 &416695074524105711
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,7 +138,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 8070968941239793650}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: 7a0b376c4a504f245ab8d19171ceb590, type: 3}
+=======
+  m_Script: {fileID: 11500000, guid: 10ae5458550331549a718b4876bea4a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Radius: 0.01
+  MaxLifeTime: 5
+  ImpactVfx: {fileID: 0}
+  ImpactVfxLifetime: 5
+  ImpactVfxSpawnOffset: 0.1
+  ImpactSfxClip: {fileID: 0}
+  HittableLayers:
+    serializedVersion: 2
+    m_Bits: 119
+  Speed: 1
+  GravityDownAcceleration: 0
+  TrajectoryCorrectionDistance: 1
+  InheritWeaponVelocity: 0
+  Damage: 40
+  RadiusColor: {r: 0, g: 0.2, b: 0.2, a: 0.2}
+--- !u!114 &7308651031931538485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254343392523665438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ff77c5060a8b146a894ed38e058e24, type: 3}
+>>>>>>> Stashed changes
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoint: {x: 0, y: 0, z: 0}
