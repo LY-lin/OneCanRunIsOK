@@ -44,6 +44,8 @@ namespace OneCanRun.Game.Share
         float m_LastTimeUse = Mathf.NegativeInfinity;
         //适配成技能的武器控制器
         WeaponController m_SkillWeapon;
+        //源预制件
+        public GameObject SourcePrefab { get; set; }
 
         void Awake()
         {
