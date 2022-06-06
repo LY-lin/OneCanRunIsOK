@@ -111,5 +111,6 @@ namespace OneCanRun.Game.Share
         {
             Debug.Log("Summon!");
         }
+
     }
 }

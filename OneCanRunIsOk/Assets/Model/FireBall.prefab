@@ -128,21 +128,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ae5458550331549a718b4876bea4a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 0.01
-  MaxLifeTime: 5
-  ImpactVfx: {fileID: 0}
-  ImpactVfxLifetime: 5
-  ImpactVfxSpawnOffset: 0.1
-  ImpactSfxClip: {fileID: 0}
-  HittableLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  Speed: 0.1
+  MaxLifeTime: 10
   GravityDownAcceleration: 0
   TrajectoryCorrectionDistance: -1
   InheritWeaponVelocity: 0
   Damage: 40
-  RadiusColor: {r: 0, g: 0.2, b: 0.2, a: 0.2}
 --- !u!114 &8248046657347549582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,5 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66ff77c5060a8b146a894ed38e058e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoint: {x: 0, y: 0, z: 0}
+  speed: 1
   WeaponController: {fileID: 0}
+  restart: 0
+  m_ShootTime: 0
