@@ -1,0 +1,62 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+namespace OneCanRun.Game.Share
+{
+    public class BulletPoolManager {
+        const int cacheSize = 256;
+        private GameObject bullet;
+        private GameObject[] dataStream = new GameObject[cacheSize];
+        private bool[] used = new bool[cacheSize];
+        
+        public BulletPoolManager(GameObject _bullet){
+            bullet = _bullet;
+            for(int i = 0;i < cacheSize; i++){
+                GameObject temp = UnityEngine.Object.Instantiate(bullet);
+                temp.GetComponent<BulletController>().restart = false;
+                temp.SetActive(false);
+                dataStream[i] = temp;
+                used[i] = false;
+            }
+
+        }
+
+        public GameObject getObject(Vector3 position, Quaternion rotation){
+            GameObject ret = null;
+            int index = -1;
+            for(int i = 0;i < cacheSize; i++){
+                if (!used[i]){
+                    used[i] = true;
+                    index = i;
+                    break;
+                }
+            }
+
+            if (index != -1){
+                ret = dataStream[index];
+                ret.transform.position = position;
+                ret.transform.rotation = rotation;
+                //ret.transform.rotation = targetTransform.transform.rotation;
+                //ret.transform.forward = targetTransform.transform.forward;
+                ret.GetComponent<BulletController>().m_ShootTime = Time.time;
+                
+                ret.SetActive(true);
+                
+            }
+
+            return ret;
+        }
+
+        public void release(GameObject objcect){
+            objcect.GetComponent<BulletController>().restart = true;
+            objcect.SetActive(false);
+            for(int i = 0;i < cacheSize; i++){
+                if(dataStream[i] == objcect){
+                    used[i] = false;
+                    break;
+                }
+            }
+
+        }
+    }
+}
