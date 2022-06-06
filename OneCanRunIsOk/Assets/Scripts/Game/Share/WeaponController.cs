@@ -172,6 +172,7 @@ namespace OneCanRun.Game.Share
         float m_LastTimeShot = Mathf.NegativeInfinity;  //上次射击的实现 = 负无穷大
         public float LastChargeTriggerTimestamp { get; private set; }   //上次触发充能的时间戳
         Vector3 m_LastMuzzlePosition;   //上次枪口的位置
+        public BulletPoolManager bulletPoolManager;
         // Update is called once per frame
 
         public GameObject Owner { get; set; }           //拥有者
@@ -201,6 +202,7 @@ namespace OneCanRun.Game.Share
 
         void Awake()
         {
+            this.bulletPoolManager = new BulletPoolManager(this.bullet);
             m_CurrentAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
             MaxAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
             //m_CarriedPhysicalBullets = HasPhysicalBullets ? ClipSize : 0;//?��????????????????????????0
@@ -563,7 +565,7 @@ namespace OneCanRun.Game.Share
             Physics.Raycast(transform.position, fireRotation * Vector3.forward, out hit, Mathf.Infinity);
 
             {
-                GameObject tempBullet = Instantiate(bullet, WeaponMuzzle.position, fireRotation);
+                GameObject tempBullet = bulletPoolManager.getObject(WeaponMuzzle.position, fireRotation);
                 
                 tempBullet.GetComponent<BulletController>().hitPoint = hit.point;
                 tempBullet.transform.position = WeaponMuzzle.position;
@@ -571,7 +573,7 @@ namespace OneCanRun.Game.Share
                 tempBullet.GetComponent<BulletController>().Shoot(this);
                 tempBullet.GetComponent<BulletController>().OnShoot?.Invoke();
 
-                Debug.Log("shoot bullet at " + tempBullet.transform.position.ToString("f6"));
+                //Debug.Log("shoot bullet at " + tempBullet.transform.position.ToString("f6"));
                 
                 //float speed = BulletController.speed;
                 //Vector3 temp = speed * WeaponMuzzle.forward.normalized;

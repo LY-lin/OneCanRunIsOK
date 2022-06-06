@@ -45,7 +45,7 @@ namespace OneCanRun.GamePlay
 
         [Tooltip(
             "Distance over which the projectile will correct its course to fit the intended trajectory (used to drift projectiles towards center of screen in First Person view). At values under 0, there is no correction")]
-        public float TrajectoryCorrectionDistance = -1;
+        public float TrajectoryCorrectionDistance = 5;
 
         [Tooltip("Determines if the projectile inherits the velocity that the weapon's muzzle had when firing")]
         public bool InheritWeaponVelocity = false;
@@ -111,36 +111,27 @@ namespace OneCanRun.GamePlay
 
                 m_TrajectoryCorrectionVector = Vector3.ProjectOnPlane(-cameraToMuzzle,
                     playerWeaponsManager.WeaponCamera.transform.forward);
-                
-                
-                transform.position += m_TrajectoryCorrectionVector;
-                m_ConsumedTrajectoryCorrectionVector = m_TrajectoryCorrectionVector;
-
-                //m_HasTrajectoryOverride = false;
-                
-
-                if (Physics.Raycast(playerWeaponsManager.WeaponCamera.transform.position, cameraToMuzzle.normalized,
-                    out RaycastHit hit, cameraToMuzzle.magnitude, HittableLayers, k_TriggerInteraction))
-                {
-                    if (IsHitValid(hit))
-                    {
-                        OnHit(hit.point, hit.normal, hit.collider);
-                    }
-                }
+                m_ConsumedTrajectoryCorrectionVector = new Vector3(0,0,0);
             }
         }
 
         void Update()
         {
+
+            if (m_ProjectileBase.restart){
+                this.Start();
+                m_ProjectileBase.restart = false;
+
+            }
+            if(Time.time - m_ProjectileBase.m_ShootTime >= MaxLifeTime){
+                m_ProjectileBase.WeaponController.bulletPoolManager.release(this.gameObject);
+            }
             // Move
             m_LastRootPosition = transform.position;
             transform.position += m_Velocity * Time.deltaTime;
             //Debug.Log(transform.position);
             //Debug.DrawLine(m_LastRootPosition, transform.position, new Color(255,0,0), 10f);
-            if (InheritWeaponVelocity)
-            {
-                transform.position += m_ProjectileBase.InheritedMuzzleVelocity * Time.deltaTime;
-            }
+            
 
             // Drift towards trajectory override (this is so that projectiles can be centered 
             // with the camera center even though the actual weapon is offset)
@@ -166,123 +157,11 @@ namespace OneCanRun.GamePlay
             // Orient towards velocity
             transform.forward = m_Velocity.normalized;
 
-            // Gravity
-            if (GravityDownAcceleration > 0)
-            {
-                // add gravity to the projectile velocity for ballistic effect
-                m_Velocity += Vector3.down * GravityDownAcceleration * Time.deltaTime;
-            }
-            /*
-            // Hit detection
-            {
-                RaycastHit closestHit = new RaycastHit();
-                closestHit.distance = Mathf.Infinity;
-                bool foundHit = false;
-
-                
-                // Sphere cast
-                Vector3 displacementSinceLastFrame = Tip.position - m_LastRootPosition;
-                RaycastHit[] hits = Physics.SphereCastAll(m_LastRootPosition, Radius,
-                    displacementSinceLastFrame.normalized, displacementSinceLastFrame.magnitude, HittableLayers,
-                    k_TriggerInteraction);
-                foreach (var hit in hits)
-                {
-                    if (IsHitValid(hit) && hit.distance < closestHit.distance)
-                    {
-                        foundHit = true;
-                        closestHit = hit;
-                    }
-                }
-
-                if (foundHit)
-                {
-                    // Handle case of casting while already inside a collider
-                    if (closestHit.distance <= 0f)
-                    {
-                        closestHit.point = Root.position;
-                        closestHit.normal = -transform.forward;
-                    }
-
-                    OnHit(closestHit.point, closestHit.normal, closestHit.collider);
-                }
-            }
-            */
-
-            //m_LastRootPosition = Root.position;
+            
         }
 
-        bool IsHitValid(RaycastHit hit)
-        {
-            // ignore hits with an ignore component
-            /*if (hit.collider.GetComponent<IgnoreHitDetection>())
-            {
-                return false;
-            }*/
+      
 
-            // ignore hits with triggers that don't have a Damageable component
-            if (hit.collider.isTrigger && hit.collider.GetComponent<Damageable>() == null)
-            {
-                return false;
-            }
-
-            // ignore hits with specific ignored colliders (self colliders, by default)
-            if (m_IgnoredColliders != null && m_IgnoredColliders.Contains(hit.collider))
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        void OnHit(Vector3 point, Vector3 normal, Collider collider)
-        {
-            // damage
-            /*if (AreaOfDamage)
-            {
-                // area damage
-                AreaOfDamage.InflictDamageInArea(Damage, point, HittableLayers, k_TriggerInteraction,
-                    m_ProjectileBase.Owner);
-            }*/
-            //else
-            //{
-                // point damage
-                Damageable damageable = collider.GetComponent<Damageable>();
-                if (damageable)
-                {
-                    damageable.InflictDamage(Damage, false, m_ProjectileBase.Owner);
-                }
-            //}
-
-            // impact vfx
-            if (ImpactVfx)
-            {
-                GameObject impactVfxInstance = Instantiate(ImpactVfx, point + (normal * ImpactVfxSpawnOffset),
-                    Quaternion.LookRotation(normal));
-                if (ImpactVfxLifetime > 0)
-                {
-                    Destroy(impactVfxInstance.gameObject, ImpactVfxLifetime);
-                }
-            }
-            /*
-            // impact sfx
-            if (ImpactSfxClip)
-            {
-                AudioUtility.CreateSFX(ImpactSfxClip, point, AudioUtility.AudioGroups.Impact, 1f, 3f);
-            }*/
-
-            // Self Destruct
-            Destroy(this.gameObject);
-        }
-
-        void OnDrawGizmosSelected()
-        {
-            Gizmos.color = RadiusColor;
-            Gizmos.DrawSphere(transform.position, Radius);
-        }
-
-        void OnDestroy()
-        {
-            //int a = 0;
-        }
+       
     }
 }

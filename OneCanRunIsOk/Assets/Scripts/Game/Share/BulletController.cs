@@ -16,7 +16,8 @@ namespace OneCanRun.Game.Share
         public WeaponController WeaponController;
         // Start is called before the first frame update
 
-        
+        public bool restart = false;
+        public float m_ShootTime;
         public Vector3 InitialPosition { get; private set; }
         public Vector3 InitialDirection { get; private set; }
         public Vector3 InheritedMuzzleVelocity { get; private set; }
@@ -50,7 +51,7 @@ namespace OneCanRun.Game.Share
             {
                 //ProjectileBase m_ProjectileBase = new ProjectileBase();
                 damageable.InflictDamage(10f, false, Owner);
-                Destroy(this.gameObject);
+                this.WeaponController.bulletPoolManager.release(this.gameObject);
             }
             //Destroy(this.gameObject);
             //}
