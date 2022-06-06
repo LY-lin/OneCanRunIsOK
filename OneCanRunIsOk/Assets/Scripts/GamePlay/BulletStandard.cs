@@ -41,7 +41,7 @@ namespace OneCanRun.GamePlay
 
         private void Start()
         {
-            m_ProjectileBase = this.gameObject.GetComponent<BulletController>();
+            
             init();
         }
         void OnEnable()
@@ -51,6 +51,7 @@ namespace OneCanRun.GamePlay
 
         public void init()
         {
+            m_ProjectileBase = this.gameObject.GetComponent<BulletController>();
             m_LastRootPosition = m_ProjectileBase.transform.position;
             m_Velocity = transform.forward * m_ProjectileBase.speed;
             transform.position += m_ProjectileBase.InheritedMuzzleVelocity * Time.deltaTime;

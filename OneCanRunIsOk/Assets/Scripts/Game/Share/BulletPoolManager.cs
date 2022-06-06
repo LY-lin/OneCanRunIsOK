@@ -23,7 +23,7 @@ namespace OneCanRun.Game.Share
         }
 
         // get a free object, if there is not a free one, a null will turn up.
-        // you have to consider the rate in case there is not more free object
+        // you have to consider the rate in case there is not free object to get
         public GameObject getObject(Vector3 position, Quaternion rotation){
             GameObject ret = null;
             int index = -1;
@@ -39,8 +39,6 @@ namespace OneCanRun.Game.Share
                 ret = dataStream[index];
                 ret.transform.position = position;
                 ret.transform.rotation = rotation;
-                //ret.transform.rotation = targetTransform.transform.rotation;
-                //ret.transform.forward = targetTransform.transform.forward;
                 ret.GetComponent<BulletController>().m_ShootTime = Time.time;
                 
                 ret.SetActive(true);
