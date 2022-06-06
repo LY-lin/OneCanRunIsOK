@@ -7,24 +7,30 @@ namespace OneCanRun.Game.Share
     public class BulletController : MonoBehaviour
     {
 
-        public Vector3 hitPoint;
         //[Tooltip("Speed")]
-        public static int speed = 50;
+        public int speed = 50;
 
-        //�����˺�ʱ�Ŀ��˺���Դ
+        //weapon Controller
         public GameObject Owner { get; private set; }
         public WeaponController WeaponController;
         // Start is called before the first frame update
 
+
+        // for reuse
         public bool restart = false;
+
+        // for shoot and auto destory
         public float m_ShootTime;
         public Vector3 InitialPosition { get; private set; }
         public Vector3 InitialDirection { get; private set; }
         public Vector3 InheritedMuzzleVelocity { get; private set; }
+
+
         public float InitialCharge { get; private set; }
 
         public UnityAction OnShoot;
 
+        // weapon should provide the speed, but...not implement
         public void Shoot(WeaponController controller)
         {
 
@@ -37,30 +43,21 @@ namespace OneCanRun.Game.Share
             OnShoot?.Invoke();
         }
 
+        // if collision happens, it will be called
         void OnCollisionEnter(Collision col)
         {
             if (col.gameObject.layer == LayerMask.NameToLayer("weapon"))
             {
                 return;
             }
-            //if (col.gameObject.tag == "Enemy")
-            //{
-            Debug.Log("boom!");
+
             Damageable damageable = col.collider.GetComponent<Damageable>();
             if (damageable)
             {
-                //ProjectileBase m_ProjectileBase = new ProjectileBase();
                 damageable.InflictDamage(10f, false, Owner);
                 this.WeaponController.bulletPoolManager.release(this.gameObject);
             }
-            //Destroy(this.gameObject);
-            //}
-            //else
-            //{
-            //    Destroy(this.gameObject);
-            //}
-
-            //
+            this.WeaponController.bulletPoolManager.release(this.gameObject);
         }
 
 
