@@ -35,23 +35,24 @@ namespace OneCanRun.Game.Share
         public float CoolingTime = 10f;
 
         [Header("投射类型设置")]
-        [Tooltip("投射物模型")]
-        public GameObject Projectile;
-
-        [Tooltip("投射点")]
-        public Transform CastMuzzle;
-
+        
         [Header("增益类型设置")]
 
         [Header("召唤类型设置")]
 
         //上次使用技能时间
         float m_LastTimeUse = Mathf.NegativeInfinity;
+        //适配成技能的武器控制器
+        WeaponController m_SkillWeapon;
+        //源预制件
+        public GameObject SourcePrefab { get; set; }
 
-        //void Awake()
-        //{
-
-        //}
+        void Awake()
+        {
+            m_SkillWeapon = GetComponent<WeaponController>();
+            DebugUtility.HandleErrorIfNullGetComponent<WeaponController, SkillController>(m_SkillWeapon,
+                this, gameObject);
+        }
 
         //void Update()
         //{
@@ -74,15 +75,15 @@ namespace OneCanRun.Game.Share
             switch (m_SkillType)
             {
                 case SkillType.Cast:
-                    doCastSkill();
+                    UseCastSkill();
                     break;
 
                 case SkillType.Buff:
-                    doBuffSkill();
+                    UseBuffSkill();
                     break;
 
                 case SkillType.Summon:
-                    doSummonSkill();
+                    UseSummonSkill();
                     break;
 
                 default:
@@ -93,21 +94,23 @@ namespace OneCanRun.Game.Share
         }
         
         //投射技能实现
-        void doCastSkill()
+        void UseCastSkill()
         {
+            m_SkillWeapon.HandleShootInputs(true, false, false);
             Debug.Log("Cast!");
         }
 
         //增益技能实现
-        void doBuffSkill()
+        void UseBuffSkill()
         {
             Debug.Log("Buff!");
         }
 
         //召唤技能实现
-        void doSummonSkill()
+        void UseSummonSkill()
         {
             Debug.Log("Summon!");
         }
+
     }
 }

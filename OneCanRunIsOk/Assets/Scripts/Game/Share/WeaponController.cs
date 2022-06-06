@@ -502,7 +502,7 @@ namespace OneCanRun.Game.Share
                     Quaternion.LookRotation(shotDirection));
                 newProjectile.Shoot(this*/
 
-                trigger(Quaternion.LookRotation(shotDirection),shotDirection);
+                trigger(shotDirection);
             }
 
             // muzzle flash
@@ -554,32 +554,20 @@ namespace OneCanRun.Game.Share
             return spreadWorldDirection;
         }
 
-        private void trigger(Quaternion fireRotation, Vector3 shotDirection)
+
+
+        private void trigger(Vector3 shootDirection)
         {
-            //Debug.Log(111);
-            RaycastHit hit;
-            float currentSpread = Mathf.Lerp(0.0f, 10, 2 / 1);
 
-            fireRotation = Quaternion.RotateTowards(fireRotation, UnityEngine.Random.rotation, UnityEngine.Random.Range(0.0f, currentSpread));
+            // initialization
+            GameObject tempBullet = bulletPoolManager.getObject(WeaponMuzzle.position, Quaternion.LookRotation(shootDirection));
+            tempBullet.transform.position = WeaponMuzzle.position;
+            tempBullet.transform.forward = shootDirection;
+            tempBullet.GetComponent<BulletController>().Shoot(this);
+            tempBullet.GetComponent<BulletController>().OnShoot?.Invoke();
 
-            Physics.Raycast(transform.position, fireRotation * Vector3.forward, out hit, Mathf.Infinity);
 
-            {
-                GameObject tempBullet = bulletPoolManager.getObject(WeaponMuzzle.position, fireRotation);
-                
-                tempBullet.GetComponent<BulletController>().hitPoint = hit.point;
-                tempBullet.transform.position = WeaponMuzzle.position;
-                tempBullet.transform.forward = shotDirection;
-                tempBullet.GetComponent<BulletController>().Shoot(this);
-                tempBullet.GetComponent<BulletController>().OnShoot?.Invoke();
 
-                //Debug.Log("shoot bullet at " + tempBullet.transform.position.ToString("f6"));
-                
-                //float speed = BulletController.speed;
-                //Vector3 temp = speed * WeaponMuzzle.forward.normalized;
-                //tempBullet.GetComponent<Rigidbody>().velocity = temp;
-
-            }
         }
     }
 }

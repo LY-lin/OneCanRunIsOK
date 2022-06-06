@@ -9,6 +9,7 @@ namespace OneCanRun.Game.Share
         private GameObject[] dataStream = new GameObject[cacheSize];
         private bool[] used = new bool[cacheSize];
         
+        // initialization
         public BulletPoolManager(GameObject _bullet){
             bullet = _bullet;
             for(int i = 0;i < cacheSize; i++){
@@ -21,6 +22,8 @@ namespace OneCanRun.Game.Share
 
         }
 
+        // get a free object, if there is not a free one, a null will turn up.
+        // you have to consider the rate in case there is not free object to get
         public GameObject getObject(Vector3 position, Quaternion rotation){
             GameObject ret = null;
             int index = -1;
@@ -36,8 +39,6 @@ namespace OneCanRun.Game.Share
                 ret = dataStream[index];
                 ret.transform.position = position;
                 ret.transform.rotation = rotation;
-                //ret.transform.rotation = targetTransform.transform.rotation;
-                //ret.transform.forward = targetTransform.transform.forward;
                 ret.GetComponent<BulletController>().m_ShootTime = Time.time;
                 
                 ret.SetActive(true);
@@ -47,6 +48,7 @@ namespace OneCanRun.Game.Share
             return ret;
         }
 
+        // remove the object from scene 
         public void release(GameObject objcect){
             objcect.GetComponent<BulletController>().restart = true;
             objcect.SetActive(false);

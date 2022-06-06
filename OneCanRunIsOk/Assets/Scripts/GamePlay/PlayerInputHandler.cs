@@ -37,7 +37,7 @@ namespace OneCanRun.GamePlay
             DebugUtility.HandleErrorIfNullGetComponent<PlayerCharacterController, PlayerInputHandler>(
                 m_PlayerCharacterController, this, gameObject);
             m_GameFlowManager = FindObjectOfType<GameFlowManager>();
-            //DebugUtility.HandleErrorIfNullFindObject<GameFlowManager, PlayerInputHandler>(m_GameFlowManager, this);
+            DebugUtility.HandleErrorIfNullFindObject<GameFlowManager, PlayerInputHandler>(m_GameFlowManager, this);
 
             //进入第一人称 隐藏鼠标
             Cursor.lockState = CursorLockMode.Locked;
