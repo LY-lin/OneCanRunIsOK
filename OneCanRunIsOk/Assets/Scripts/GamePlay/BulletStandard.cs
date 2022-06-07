@@ -114,7 +114,7 @@ namespace OneCanRun.GamePlay
             }
 
             // Orient towards velocity
-            transform.forward = m_Velocity.normalized;
+            //transform.forward = m_Velocity.normalized;
 
             
         }

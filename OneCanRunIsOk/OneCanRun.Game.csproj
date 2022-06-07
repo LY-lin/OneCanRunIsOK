@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Game\Event.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\ActorProperties.cs" />
     <Compile Include="Assets\Scripts\Game\Health.cs" />
     <Compile Include="Assets\Scripts\Game\GameFlowManager.cs" />
     <Compile Include="Assets\Scripts\Game\GameConstants.cs" />
