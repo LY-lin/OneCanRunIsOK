@@ -579,7 +579,7 @@ MonoBehaviour:
   WeaponRoot: {fileID: 21426827}
   WeaponMuzzle: {fileID: 371022201}
   ShootType: 1
-  DelayBetweenShots: 0.5
+  DelayBetweenShots: 0.2
   BulletSpreadAngle: 0
   BulletsPerShot: 1
   RecoilForce: 1
@@ -591,8 +591,8 @@ MonoBehaviour:
   ShellCasingEjectionForce: 2
   ShellPoolSize: 1
   AmmoReloadRate: 1
-  AmmoReloadDelay: 2
-  MaxAmmo: 8
+  AmmoReloadDelay: 1
+  MaxAmmo: 20
   AutomaticReleaseOnCharged: 0
   MaxChargeDuration: 2
   AmmoUsedOnStartCharge: 1
@@ -977,7 +977,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 371022200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.248}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3130,6 +3130,8 @@ MonoBehaviour:
   DeathDuration: 0
   LootPrefab: {fileID: 0}
   DropRate: 1
+  SwapToNextWeapon: 0
+  DelayAfterWeaponSwap: 0
   health: {fileID: 1456041765}
   actor: {fileID: 1456041763}
 --- !u!114 &1456041763

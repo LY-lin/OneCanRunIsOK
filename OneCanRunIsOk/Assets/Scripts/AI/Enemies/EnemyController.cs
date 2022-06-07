@@ -333,6 +333,7 @@ namespace OneCanRun.AI.Enemies
 
             // ���
             bool didFire = GetCurrentWeapon().HandleShootInputs(false, true, false);
+            Debug.Log(GetCurrentWeapon().GetMyCurrentAmmo());
 
             if (didFire && onAttack != null)
             {

@@ -542,7 +542,10 @@ namespace OneCanRun.Game.Share
             OnShoot?.Invoke();
             OnShootProcessed?.Invoke();
         }
-
+        public float GetMyCurrentAmmo()
+        {
+            return m_CurrentAmmo;
+        }
         public Vector3 GetShotDirectionWithinSpread(Transform shootTransform)
         {
             float spreadAngleRatio = BulletSpreadAngle / 180f;
