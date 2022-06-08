@@ -7,6 +7,18 @@ namespace OneCanRun.Game.Share
     //本类定义了一个角色的所有基础数值，This class defines all the base values for a role
     public class ActorProperties
     {
+
+        // experience
+        private ulong EXP;
+
+        public ulong getEXP(){
+            return EXP;
+        }
+
+        public void setEXP(ulong exp){
+            EXP = exp;
+        }
+
         //最大生命值
         private float maxHealth;
         public float getMaxHealth()
@@ -93,11 +105,11 @@ namespace OneCanRun.Game.Share
 
         //跳跃力
         private float maxJump;
-        public float getMaxJump()
+        public float getJump()
         {
             return maxJump;
         }
-        public bool setMaxJump(float newJump)
+        public bool setJump(float newJump)
         {
             maxJump = newJump;
             return true;
