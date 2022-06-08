@@ -14,6 +14,29 @@ namespace OneCanRun.Game
 
         ActorsManager m_ActorsManager;
 
+        ActorProperties m_BaseProperties;
+
+        ActorProperties m_PresentProperties;
+
+        ActorBuffManager m_buffs;
+        
+        private void Awake()
+        {
+            m_buffs = GetComponent<ActorBuffManager>();
+            m_buffs.buffChanged += buffsAct;
+        }
+
+        public ActorProperties getBaseProperties()
+        {
+            return m_BaseProperties;
+        }
+
+        public bool setPresentProperties(ActorProperties newActorProperties)
+        {
+            m_PresentProperties = newActorProperties;
+            return true;
+        }
+
         void Start()
         {
             m_ActorsManager = GameObject.FindObjectOfType<ActorsManager>();

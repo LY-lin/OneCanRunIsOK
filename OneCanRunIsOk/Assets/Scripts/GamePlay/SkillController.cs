@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using OneCanRun.Game;
+using OneCanRun.Game.Share;
 using UnityEngine.Events;
 
-namespace OneCanRun.Game.Share
+namespace OneCanRun.GamePlay
 {
     //技能类型
     public enum SkillType
@@ -101,6 +103,10 @@ namespace OneCanRun.Game.Share
         //增益技能实现
         void doBuffSkill()
         {
+            SkillBuffGiver m_SkillBuffGiver = GetComponent<SkillBuffGiver>();
+            DebugUtility.HandleErrorIfNullGetComponent<SkillBuffGiver, SkillController>(m_SkillBuffGiver,
+                this, gameObject);
+            m_SkillBuffGiver.buffGive();
             Debug.Log("Buff!");
         }
 
