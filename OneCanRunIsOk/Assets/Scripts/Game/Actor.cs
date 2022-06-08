@@ -80,7 +80,7 @@ namespace OneCanRun.Game
                 }else if (child.GetAttribute("maxSpeed") == ""){
                     baseProperty.setMaxSpeed(float.Parse(child.InnerText));
                 }else if (child.GetAttribute("maxJump") == ""){
-                    baseProperty.setJump(float.Parse(child.InnerText));
+                    baseProperty.setMaxJump(float.Parse(child.InnerText));
                 }else {
                     throw new System.Exception();
                 

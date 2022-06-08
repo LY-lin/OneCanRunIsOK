@@ -5,15 +5,19 @@ namespace OneCanRun.Game.Share
 {
     public class BulletPoolManager {
         const int cacheSize = 256;
+        private static int counter = 1;
         private GameObject bullet;
+        private GameObject collector;
         private GameObject[] dataStream = new GameObject[cacheSize];
         private bool[] used = new bool[cacheSize];
         
         // initialization
         public BulletPoolManager(GameObject _bullet){
+            collector = new GameObject("BulletCollector" + counter);
+            counter++;
             bullet = _bullet;
             for(int i = 0;i < cacheSize; i++){
-                GameObject temp = UnityEngine.Object.Instantiate(bullet);
+                GameObject temp = UnityEngine.Object.Instantiate(bullet, collector.transform);
                 temp.GetComponent<BulletController>().restart = false;
                 temp.SetActive(false);
                 dataStream[i] = temp;
