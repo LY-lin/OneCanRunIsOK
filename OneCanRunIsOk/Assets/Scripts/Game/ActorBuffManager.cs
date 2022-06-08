@@ -16,11 +16,11 @@ namespace OneCanRun.Game
 
         public UnityAction buffChanged;
 
-        private void Update()
+        void Update()
         {
             timeSpend += Time.deltaTime;
-            if (timeSpend % 4 == 0)
-                buffLose();
+            /*if (timeSpend % 4 <= 0.5)
+                buffLose();*/
         }
 
         public void buffGain(BuffController newBuff)

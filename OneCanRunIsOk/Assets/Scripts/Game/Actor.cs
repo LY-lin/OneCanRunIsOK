@@ -22,20 +22,18 @@ namespace OneCanRun.Game
 
         ActorBuffManager m_buffs;
         
-        private void Awake()
-        {
-            m_buffs = GetComponent<ActorBuffManager>();
-            m_buffs.buffChanged += buffsAct;
-        }
 
         public ActorProperties getBaseProperties()
         {
+            
             return m_BaseProperties;
         }
 
         public bool setPresentProperties(ActorProperties newActorProperties)
         {
+            Debug.Log(m_PresentProperties.getMagicAttack());
             m_PresentProperties = newActorProperties;
+            Debug.Log(m_PresentProperties.getMagicAttack());
             return true;
         }
 
@@ -43,6 +41,11 @@ namespace OneCanRun.Game
         {
             m_ActorsManager = GameObject.FindObjectOfType<ActorsManager>();
             DebugUtility.HandleErrorIfNullFindObject<ActorsManager, Actor>(m_ActorsManager, this);
+
+            m_BaseProperties = new ActorProperties();
+            m_PresentProperties = new ActorProperties();
+            m_buffs = GetComponent<ActorBuffManager>();
+            m_buffs.buffChanged += buffsAct;
 
             // Register as an actor
             if (!m_ActorsManager.Actors.Contains(this))

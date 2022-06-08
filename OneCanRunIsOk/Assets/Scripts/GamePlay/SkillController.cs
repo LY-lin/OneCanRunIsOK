@@ -112,7 +112,13 @@ namespace OneCanRun.GamePlay
         //增益技能实现
         void UseBuffSkill()
         {
-            Debug.Log("Buff!");
+            SkillBuffGiver m_SkillBuffGiver = GetComponent<SkillBuffGiver>();
+            DebugUtility.HandleErrorIfNullGetComponent<SkillBuffGiver, SkillController>(m_SkillBuffGiver,
+                this, gameObject);
+            m_SkillBuffGiver.buffGive();
+        
+        Debug.Log("Buff!");
+
         }
 
         //召唤技能实现

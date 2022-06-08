@@ -7,6 +7,20 @@ namespace OneCanRun.Game.Share
     //本类定义了一个角色的所有基础数值，This class defines all the base values for a role
     public class ActorProperties
     {
+        //仅为测试Buff
+        public ActorProperties()
+        {
+            maxHealth = 0;
+            maxJump = 0;
+            maxSpeed = 0;
+            physicalAttack = 0;
+            physicalDefence = 0;
+            magicAttack = 0;
+            magicDefence = 0;
+            healRate = 0;
+        }
+
+
         //最大生命值
         private float maxHealth;
         public float getMaxHealth()
