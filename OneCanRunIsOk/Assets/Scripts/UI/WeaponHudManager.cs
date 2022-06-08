@@ -20,7 +20,7 @@ namespace OneCanRun.UI
 
         void Start()
         {
-            Debug.Log(321);
+            
             m_PlayerWeaponsManager = FindObjectOfType<PlayerWeaponsManager>();
             DebugUtility.HandleErrorIfNullFindObject<PlayerWeaponsManager, WeaponHUDManager>(m_PlayerWeaponsManager,
                 this);

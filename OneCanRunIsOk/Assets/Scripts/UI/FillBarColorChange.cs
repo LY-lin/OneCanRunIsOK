@@ -49,6 +49,7 @@ namespace OneCanRun.UI
 
         public void UpdateVisual(float currentRatio)
         {
+            //Debug.Log(currentRatio);
             if (currentRatio == FullValue && currentRatio != m_PreviousValue)
             {
                 ForegroundImage.color = FlashForegroundColorFull;
@@ -61,6 +62,7 @@ namespace OneCanRun.UI
             {
                 ForegroundImage.color = Color.Lerp(ForegroundImage.color, DefaultForegroundColor,
                     Time.deltaTime * ColorChangeSharpness);
+                
                 BackgroundImage.color = Color.Lerp(BackgroundImage.color, DefaultBackgroundColor,
                     Time.deltaTime * ColorChangeSharpness);
             }

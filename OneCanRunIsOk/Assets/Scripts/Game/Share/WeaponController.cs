@@ -1,5 +1,6 @@
 using System;
-using System.Collections;
+
+using System.Threading;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -175,6 +176,9 @@ namespace OneCanRun.Game.Share
         public BulletPoolManager bulletPoolManager;
         // Update is called once per frame
 
+
+        
+
         public GameObject Owner { get; set; }           //拥有者
         public GameObject SourcePrefab { get; set; }    //源预制件  
         public bool IsCharging { get; private set; }    //是否在充能（充能武器）
@@ -205,6 +209,7 @@ namespace OneCanRun.Game.Share
             this.bulletPoolManager = new BulletPoolManager(this.bullet);
             m_CurrentAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
             MaxAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
+            m_CarriedPhysicalBullets = Mathf.RoundToInt(m_CurrentAmmo);
             //m_CarriedPhysicalBullets = HasPhysicalBullets ? ClipSize : 0;//?��????????????????????????0
             m_LastMuzzlePosition = WeaponMuzzle.position;
 
@@ -225,18 +230,7 @@ namespace OneCanRun.Game.Share
                 m_ContinuousShootAudioSource.loop = true;
             }*/
 
-            /*
-            if (HasPhysicalBullets)//????????????
-            {
-                m_PhysicalAmmoPool = new Queue<Rigidbody>(ShellPoolSize);//?????????
-
-                for (int i = 0; i < ShellPoolSize; i++)
-                {
-                    GameObject shell = Instantiate(ShellCasing, transform);
-                    shell.SetActive(false);//?????????
-                    m_PhysicalAmmoPool.Enqueue(shell.GetComponent<Rigidbody>());
-                }
-            }*/
+            
         }
 
         //PickUp????????
@@ -265,18 +259,22 @@ namespace OneCanRun.Game.Share
 
         public void Reload()   //??????????
         {
-            Debug.Log(123);
-            m_CurrentAmmo = ClipSize;
-            m_CarriedPhysicalBullets = Mathf.RoundToInt(m_CurrentAmmo);
-            IsReloading = false;
+            
+                m_CurrentAmmo = ClipSize;
+                m_CarriedPhysicalBullets = Mathf.RoundToInt(m_CurrentAmmo);
+
+                IsReloading = false;
+               
         }
 
         public void StartReloadAnimation()  //???????
         {
-            /*
-                GetComponent<Animator>().SetTrigger("Reload");
-                IsReloading = true;
-            */
+            
+               // GetComponent<Animator>().SetTrigger("Reload");
+            IsReloading = true;
+            Reload();
+            
+            
         }
 
         void Update()
