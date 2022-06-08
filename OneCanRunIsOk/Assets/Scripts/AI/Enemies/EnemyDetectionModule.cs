@@ -19,6 +19,9 @@ namespace OneCanRun.AI.Enemies
         [Tooltip("Time before an enemy abandons a known target that it can't see anymore")]
         public float KnownTargetTimeout = 4f;
 
+        [Tooltip("The max angle at which the enemy can see its target in its horizon")]
+        public float DetectionAngle = 60f;
+
         public UnityAction onDetectedTarget;
         public UnityAction onLostTarget;
 
@@ -55,8 +58,13 @@ namespace OneCanRun.AI.Enemies
                 // 属于不同阵营
                 if (actor.Affiliation != self.Affiliation)
                 {
+                    // 计算敌人与玩家之间的距离
                     float sqrDistance = (actor.transform.position - DetectionSourcePoint.position).sqrMagnitude;
-                    if (sqrDistance < sqrDetectRange && sqrDistance < minDistance)
+                    // 计算玩家相对与敌人视野中线的角度
+                    Vector3 midline = -DetectionSourcePoint.forward;
+                    Vector3 direction = actor.AimPoint.position - DetectionSourcePoint.position;
+                    float angle = Vector3.Angle(midline, direction);
+                    if (sqrDistance < sqrDetectRange && sqrDistance < minDistance && angle <= DetectionAngle)
                     {
                         // 获取视线上一定距离的所有对象
                         RaycastHit[] hits = Physics.RaycastAll(DetectionSourcePoint.position,
@@ -128,12 +136,6 @@ namespace OneCanRun.AI.Enemies
         {
             TimeLastSeenTarget = Time.time;
             KnownDetectedTarget = damageSource;
-
-        }
-
-        // 攻击事件
-        public virtual void OnAttack()
-        {
 
         }
     }
