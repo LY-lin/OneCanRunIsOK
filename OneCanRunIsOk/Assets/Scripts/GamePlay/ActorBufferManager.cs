@@ -77,10 +77,10 @@ namespace OneCanRun.GamePlay
 
         public void buffsAct()
         {
-            ActorProperties Properties = GetComponentInParent<ActorProperties>();
+            Actor actor = GetComponentInParent<Actor>();
             foreach (BuffController m in NumBuffList)
             {
-                m.ActorbuffAct(ref Properties);
+                m.ActorbuffAct(ref actor.getProperties());
             }
             foreach (BuffController m in PercentBuffList)
             {
