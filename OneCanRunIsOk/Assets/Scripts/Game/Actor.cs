@@ -27,6 +27,7 @@ namespace OneCanRun.Game
         private List<OneCanRun.Game.Share.Modifier> mModifier;
         // init it as true as to calculate exposedProperty
         private bool dirty = true;
+<<<<<<< HEAD
 
         // we should consider the IPC in case two calculate function in run time
         private void calculate()
@@ -46,12 +47,53 @@ namespace OneCanRun.Game
 
         private ulong getNextLevelCount()
         {
+=======
+        private bool calculating = false; // for ipc semaphore
+
+        private void tryCalculate(){
+            if (calculating){
+                while (calculating) ;
+                return;
+            }
+
+            calculate();
+
+        }
+
+        // we should consider the IPC in case two calculate function in run time
+        private void calculate(){
+            calculating = true;
+            if(this.mModifier[0].baseValue >= getNextLevelCount()){
+                levelUpdate();
+            }
+            // core function 
+             
+            // left blank
+            // @ to do
+
+            // core function 
+
+            calculating = false;
+
+        }
+
+        private void levelUpdate(){
+
+            //@ to do
+        }
+
+        private ulong getNextLevelCount(){
+>>>>>>> 226bc9b81dea8e27f3baa870fa4348d17f5a9a83
             // it should be dynamic but for test
             return 500;
         }
 
+<<<<<<< HEAD
         private void OnEnable()
         {
+=======
+        private void OnEnable(){
+>>>>>>> 226bc9b81dea8e27f3baa870fa4348d17f5a9a83
 
             string fileName = "defaultProperties";
             string configDirectory = System.IO.Directory.GetCurrentDirectory();
@@ -72,6 +114,7 @@ namespace OneCanRun.Game
             }
 
             //initialize property
+<<<<<<< HEAD
             //OneCanRun.Game.Share.Modifier modifier = new Share.Modifier(0, Share.Modifier.ModifierType.experience, this);
             baseProperty = new OneCanRun.Game.Share.ActorProperties();
             exposedProperty = new OneCanRun.Game.Share.ActorProperties();
@@ -126,13 +169,59 @@ namespace OneCanRun.Game
 
                 }
             }
+=======
+
+            // initailize EXP modifier
+            OneCanRun.Game.Share.Modifier modifier = new Share.Modifier(0, Share.Modifier.ModifierType.experience, this);
+            this.mModifier = new List<Share.Modifier>();
+            this.mModifier.Add(modifier);
+
+            baseProperty = new OneCanRun.Game.Share.ActorProperties();
+            exposedProperty = new OneCanRun.Game.Share.ActorProperties();
+
+            // default property from file 
+            XmlDocument xml = new XmlDocument();
+                xml.Load(configDirectory + fileName);
+
+            XmlNodeList xmlNodeList = xml.SelectSingleNode("PropertyConfig").ChildNodes;
+
+            foreach(XmlElement child in xmlNodeList){
+                if (child.GetAttribute("exp") == "") {
+                    baseProperty.setEXP(ulong.Parse(child.InnerText));
+                }else if (child.GetAttribute("maxHealth") == "") {
+                    baseProperty.setMaxHealth(float.Parse(child.InnerText));
+                }else if (child.GetAttribute("healRate") == ""){
+                    baseProperty.setHealRate(float.Parse(child.InnerText));
+                }else if (child.GetAttribute("physicalAttack") == ""){
+                    baseProperty.setPhysicalAttack(float.Parse(child.InnerText));
+                }else if (child.GetAttribute("magicAttack") == ""){
+                    baseProperty.setMagicAttack(float.Parse(child.InnerText));
+                }else if (child.GetAttribute("physicalDefence") == ""){
+                    baseProperty.setPhysicalDefence(float.Parse(child.InnerText));
+                }else if (child.GetAttribute("magicDefence") == ""){
+                    baseProperty.setMagicDefence(float.Parse(child.InnerText));
+                }else if (child.GetAttribute("maxSpeed") == ""){
+                    baseProperty.setMaxSpeed(float.Parse(child.InnerText));
+                }else if (child.GetAttribute("maxJump") == ""){
+                    baseProperty.setMaxJump(float.Parse(child.InnerText));
+                }else {
+                    throw new System.Exception();
+                
+                }
+
+
+
+            }
+            
+            
+
+>>>>>>> 226bc9b81dea8e27f3baa870fa4348d17f5a9a83
         }
 
         void Start()
         {
             m_ActorsManager = GameObject.FindObjectOfType<ActorsManager>();
             DebugUtility.HandleErrorIfNullFindObject<ActorsManager, Actor>(m_ActorsManager, this);
-
             // Register as an actor
             if (!m_ActorsManager.Actors.Contains(this))
             {
@@ -152,16 +241,63 @@ namespace OneCanRun.Game
 
         // public interface are as follows
 
+<<<<<<< HEAD
         public OneCanRun.Game.Share.ActorProperties GetActorProperties()
         {
+=======
+        public OneCanRun.Game.Share.ActorProperties GetActorProperties(){
+>>>>>>> 226bc9b81dea8e27f3baa870fa4348d17f5a9a83
             if (!dirty)
                 return this.exposedProperty;
 
             // we should only allow the function in single instance only to be excuted once at the same time 
+<<<<<<< HEAD
             calculate();
 
             return exposedProperty;
 
+=======
+            tryCalculate();
+
+            return exposedProperty;
+
+        }
+
+        public void addModifier(OneCanRun.Game.Share.Modifier mod){
+
+            // experience just linear overwrite
+            if(mod.type == Share.Modifier.ModifierType.experience){
+                this.mModifier[0].baseValue += mod.baseValue;
+                if (this.mModifier[0].baseValue >= getNextLevelCount())
+                    dirty = true;
+                return;
+            }
+
+
+            this.mModifier.Add(mod);
+        }
+
+        public bool removeModifier(OneCanRun.Game.Share.Modifier mod){
+
+            return this.mModifier.Remove(mod);
+
+        }
+
+        
+        public bool removeModifierFromSource(Object obj){
+            bool deleted = false;
+            for(int i = mModifier.Count - 1;i >= 0; i--){
+
+                if(mModifier[i].source == obj){
+                    dirty = true;
+                    deleted = true;
+                    mModifier.RemoveAt(i);
+                }
+
+            }
+
+            return deleted;
+>>>>>>> 226bc9b81dea8e27f3baa870fa4348d17f5a9a83
         }
 
         public bool removeModifier(OneCanRun.Game.Share.Modifier mod)
