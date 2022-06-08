@@ -87,7 +87,7 @@ namespace OneCanRun.UI
             }
 
             Reload.gameObject.SetActive(false);
-            Reloading.gameObject.SetActive(true);
+            //Reloading.gameObject.SetActive(true);
             m_PlayerWeaponsManager = FindObjectOfType<PlayerWeaponsManager>();
             DebugUtility.HandleErrorIfNullFindObject<PlayerWeaponsManager, AmmoCounter>(m_PlayerWeaponsManager, this);
 

@@ -202,7 +202,7 @@ namespace OneCanRun.Game.Share
 
         const string k_AnimAttackParameter = "Attack";
 
-        private Queue<Rigidbody> m_PhysicalAmmoPool;//????????
+   
 
         void Awake()
         {
@@ -495,10 +495,6 @@ namespace OneCanRun.Game.Share
             for (int i = 0; i < bulletsPerShotFinal; i++)
             {
                 Vector3 shotDirection = GetShotDirectionWithinSpread(WeaponMuzzle);
-                /*
-                ProjectileBase newProjectile = Instantiate(ProjectilePrefab, WeaponMuzzle.position,
-                    Quaternion.LookRotation(shotDirection));
-                newProjectile.Shoot(this*/
 
                 trigger(shotDirection);
             }

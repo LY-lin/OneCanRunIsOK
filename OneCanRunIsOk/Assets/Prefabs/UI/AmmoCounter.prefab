@@ -434,9 +434,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ForegroundImage: {fileID: 645032500597732956}
   DefaultForegroundColor: {r: 1, g: 1, b: 1, a: 1}
-  FlashForegroundColorFull: {r: 0, g: 0, b: 0, a: 0}
+  FlashForegroundColorFull: {r: 0, g: 0.79230356, b: 1, a: 0.5176471}
   BackgroundImage: {fileID: 645032499974091307}
-  DefaultBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  DefaultBackgroundColor: {r: 1, g: 0, b: 0, a: 1}
   FlashBackgroundColorEmpty: {r: 1, g: 0, b: 0, a: 1}
   FullValue: 1
   EmptyValue: 0
