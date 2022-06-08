@@ -51,6 +51,8 @@ namespace OneCanRun.GamePlay
             CurrentSkillInstance.transform.localRotation = Quaternion.identity;
 
             CurrentSkillInstance.SourcePrefab = skillPrefab.gameObject;
+            CurrentSkillInstance.Owner = gameObject;
+            CurrentSkillInstance.UpdateOwner();
 
             //»ÙŒ™Cast¿‡–Õ
             if(CurrentSkillInstance.m_SkillType== SkillType.Cast)
