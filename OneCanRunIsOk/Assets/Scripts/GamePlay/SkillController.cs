@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using OneCanRun.Game;
+using OneCanRun.Game.Share;
 
-namespace OneCanRun.Game.Share
+namespace OneCanRun.GamePlay
 {
     //技能类型
     public enum SkillType
@@ -44,14 +46,21 @@ namespace OneCanRun.Game.Share
         float m_LastTimeUse = Mathf.NegativeInfinity;
         //适配成技能的武器控制器
         WeaponController m_SkillWeapon;
+        //持有者的Actor，存放角色基础数值
+        Actor m_Actor;
         //源预制件
         public GameObject SourcePrefab { get; set; }
+        //持有者
+        public GameObject Owner { get; set; }
 
         void Awake()
         {
-            m_SkillWeapon = GetComponent<WeaponController>();
-            DebugUtility.HandleErrorIfNullGetComponent<WeaponController, SkillController>(m_SkillWeapon,
-                this, gameObject);
+            if (m_SkillType == SkillType.Cast)
+            {
+                m_SkillWeapon = GetComponent<WeaponController>();
+                DebugUtility.HandleErrorIfNullGetComponent<WeaponController, SkillController>(m_SkillWeapon,
+                    this, gameObject);
+            }
         }
 
         //void Update()
@@ -110,6 +119,14 @@ namespace OneCanRun.Game.Share
         void UseSummonSkill()
         {
             Debug.Log("Summon!");
+        }
+        
+        //更新该技能的持有者
+        public void UpdateOwner()
+        {
+            m_Actor = Owner.GetComponent<Actor>();
+            //DebugUtility.HandleErrorIfNullGetComponent<Actor, PlayerSkillsManager>(m_Actor,
+            //    Owner, Owner);
         }
 
     }
