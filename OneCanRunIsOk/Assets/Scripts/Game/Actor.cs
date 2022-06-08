@@ -28,34 +28,31 @@ namespace OneCanRun.Game
         // init it as true as to calculate exposedProperty
         private bool dirty = true;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        ActorProperties m_PresentProperties;
-
-        ActorBuffManager m_buffs;
-        
-=======
         // we should consider the IPC in case two calculate function in run time
         private void calculate()
         {
 
+
+
+
+
         }
->>>>>>> a5118a3bd9fb77311ac0ae8aa284180ce3985e6e
+
+        private void levelUpdate()
+        {
+
+
+        }
+
+        private ulong getNextLevelCount()
+        {
+            // it should be dynamic but for test
+            return 500;
+        }
 
         private void OnEnable()
         {
-<<<<<<< HEAD
-            
-            return m_BaseProperties;
-        }
 
-        public bool setPresentProperties(ActorProperties newActorProperties)
-        {
-            Debug.Log(m_PresentProperties.getMagicAttack());
-            m_PresentProperties = newActorProperties;
-            Debug.Log(m_PresentProperties.getMagicAttack());
-            return true;
-=======
             string fileName = "defaultProperties";
             string configDirectory = System.IO.Directory.GetCurrentDirectory();
             configDirectory += "\\Config\\";
@@ -73,123 +70,68 @@ namespace OneCanRun.Game
                 default:
                     break;
             }
+
+            //initialize property
+            //OneCanRun.Game.Share.Modifier modifier = new Share.Modifier(0, Share.Modifier.ModifierType.experience, this);
             baseProperty = new OneCanRun.Game.Share.ActorProperties();
             exposedProperty = new OneCanRun.Game.Share.ActorProperties();
 
             // property from file 
             XmlDocument xml = new XmlDocument();
-                xml.Load(configDirectory + fileName);
+            xml.Load(configDirectory + fileName);
 
             XmlNodeList xmlNodeList = xml.SelectSingleNode("PropertyConfig").ChildNodes;
 
-            foreach(XmlElement child in xmlNodeList){
-                if (child.GetAttribute("exp") == "") {
-                    baseProperty.setEXP(ulong.Parse(child.InnerText));
-                }else if (child.GetAttribute("maxHealth") == "") {
-                    baseProperty.setMaxHealth(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("healRate") == ""){
-                    baseProperty.setHealRate(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("physicalAttack") == ""){
-                    baseProperty.setPhysicalAttack(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("magicAttack") == ""){
-                    baseProperty.setMagicAttack(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("physicalDefence") == ""){
-                    baseProperty.setPhysicalDefence(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("magicDefence") == ""){
-                    baseProperty.setMagicDefence(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("maxSpeed") == ""){
-                    baseProperty.setMaxSpeed(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("maxJump") == ""){
-                    baseProperty.setMaxJump(float.Parse(child.InnerText));
-                }else {
-                    throw new System.Exception();
-                
-                }
-
-
-
-            }
-            
-            
-
->>>>>>> a5118a3bd9fb77311ac0ae8aa284180ce3985e6e
-=======
-        // we should consider the IPC in case two calculate function in run time
-        private void calculate()
-        {
-
-        }
-
-        private void OnEnable()
-        {
-            string fileName = "defaultProperties";
-            string configDirectory = System.IO.Directory.GetCurrentDirectory();
-            configDirectory += "\\Config\\";
-            switch (Affiliation)
+            foreach (XmlElement child in xmlNodeList)
             {
-                case affiliationType.allies:
-                    fileName += ".allies.xml";
-                    break;
-                case affiliationType.enemy:
-                    fileName += ".enemy.xml";
-                    break;
-                case affiliationType.neutral:
-                    fileName += ".neutral.xml";
-                    break;
-                default:
-                    break;
-            }
-            baseProperty = new OneCanRun.Game.Share.ActorProperties();
-            exposedProperty = new OneCanRun.Game.Share.ActorProperties();
-
-            // property from file 
-            XmlDocument xml = new XmlDocument();
-                xml.Load(configDirectory + fileName);
-
-            XmlNodeList xmlNodeList = xml.SelectSingleNode("PropertyConfig").ChildNodes;
-
-            foreach(XmlElement child in xmlNodeList){
-                if (child.GetAttribute("exp") == "") {
+                if (child.GetAttribute("exp") == "")
+                {
                     baseProperty.setEXP(ulong.Parse(child.InnerText));
-                }else if (child.GetAttribute("maxHealth") == "") {
-                    baseProperty.setMaxHealth(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("healRate") == ""){
-                    baseProperty.setHealRate(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("physicalAttack") == ""){
-                    baseProperty.setPhysicalAttack(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("magicAttack") == ""){
-                    baseProperty.setMagicAttack(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("physicalDefence") == ""){
-                    baseProperty.setPhysicalDefence(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("magicDefence") == ""){
-                    baseProperty.setMagicDefence(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("maxSpeed") == ""){
-                    baseProperty.setMaxSpeed(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("maxJump") == ""){
-                    baseProperty.setMaxJump(float.Parse(child.InnerText));
-                }else {
-                    throw new System.Exception();
-                
                 }
+                else if (child.GetAttribute("maxHealth") == "")
+                {
+                    baseProperty.setMaxHealth(float.Parse(child.InnerText));
+                }
+                else if (child.GetAttribute("healRate") == "")
+                {
+                    baseProperty.setHealRate(float.Parse(child.InnerText));
+                }
+                else if (child.GetAttribute("physicalAttack") == "")
+                {
+                    baseProperty.setPhysicalAttack(float.Parse(child.InnerText));
+                }
+                else if (child.GetAttribute("magicAttack") == "")
+                {
+                    baseProperty.setMagicAttack(float.Parse(child.InnerText));
+                }
+                else if (child.GetAttribute("physicalDefence") == "")
+                {
+                    baseProperty.setPhysicalDefence(float.Parse(child.InnerText));
+                }
+                else if (child.GetAttribute("magicDefence") == "")
+                {
+                    baseProperty.setMagicDefence(float.Parse(child.InnerText));
+                }
+                else if (child.GetAttribute("maxSpeed") == "")
+                {
+                    baseProperty.setMaxSpeed(float.Parse(child.InnerText));
+                }
+                else if (child.GetAttribute("maxJump") == "")
+                {
+                    baseProperty.setMaxJump(float.Parse(child.InnerText));
+                }
+                else
+                {
+                    throw new System.Exception();
 
-
-
+                }
             }
-            
-            
-
->>>>>>> a5118a3bd9fb77311ac0ae8aa284180ce3985e6e
         }
 
         void Start()
         {
             m_ActorsManager = GameObject.FindObjectOfType<ActorsManager>();
             DebugUtility.HandleErrorIfNullFindObject<ActorsManager, Actor>(m_ActorsManager, this);
-
-            m_BaseProperties = new ActorProperties();
-            m_PresentProperties = new ActorProperties();
-            m_buffs = GetComponent<ActorBuffManager>();
-            m_buffs.buffChanged += buffsAct;
 
             // Register as an actor
             if (!m_ActorsManager.Actors.Contains(this))
@@ -207,18 +149,37 @@ namespace OneCanRun.Game
             }
         }
 
-        public bool removeModifier(OneCanRun.Game.Share.Modifier mod){
+
+        // public interface are as follows
+
+        public OneCanRun.Game.Share.ActorProperties GetActorProperties()
+        {
+            if (!dirty)
+                return this.exposedProperty;
+
+            // we should only allow the function in single instance only to be excuted once at the same time 
+            calculate();
+
+            return exposedProperty;
+
+        }
+
+        public bool removeModifier(OneCanRun.Game.Share.Modifier mod)
+        {
 
             return this.mModifier.Remove(mod);
 
         }
 
-        
-        public bool removeModifierFromSource(Object obj){
-            bool deleted = false;
-            for(int i = mModifier.Count - 1;i >= 0; i--){
 
-                if(mModifier[i].source == obj){
+        public bool removeModifierFromSource(Object obj)
+        {
+            bool deleted = false;
+            for (int i = mModifier.Count - 1; i >= 0; i--)
+            {
+
+                if (mModifier[i].source == obj)
+                {
                     dirty = true;
                     deleted = true;
                     mModifier.RemoveAt(i);
@@ -228,5 +189,22 @@ namespace OneCanRun.Game
 
             return deleted;
         }
+
+        public void addModifier(OneCanRun.Game.Share.Modifier mod)
+        {
+
+            // experience just linear overwrite
+            if (mod.type == Share.Modifier.ModifierType.experience)
+            {
+                this.mModifier[0].baseValue += mod.baseValue;
+                if (this.mModifier[0].baseValue >= getNextLevelCount())
+                    dirty = true;
+                return;
+            }
+
+
+            this.mModifier.Add(mod);
+        }
+
     }
 }

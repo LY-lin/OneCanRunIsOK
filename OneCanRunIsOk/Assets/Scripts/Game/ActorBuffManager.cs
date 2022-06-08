@@ -16,6 +16,12 @@ namespace OneCanRun.Game
 
         public UnityAction buffChanged;
 
+        public Actor aim_Actor;
+        void Start()
+        {
+            aim_Actor = GetComponent<Actor>();
+        }
+
         void Update()
         {
             timeSpend += Time.deltaTime;
@@ -26,6 +32,7 @@ namespace OneCanRun.Game
         public void buffGain(BuffController newBuff)
         {
             newBuff.getTime = timeSpend;
+            Buff BuffContext = newBuff.getMBuff();
             if (newBuff.getBuffType() == Buff.BufferType.NumBuff)
             {
                 NumBuffList.Add(newBuff);
@@ -39,7 +46,12 @@ namespace OneCanRun.Game
                 WeaponBuffList.Add(newBuff);
             }
             else { }
-            buffChanged?.Invoke();
+            aim_Actor.addModifier(newBuff.healModifier);
+            /*aim_Actor.add;
+            aim_Actor.add;
+            aim_Actor.add;
+            aim_Actor.add;
+            aim_Actor.add;*/
         }
         private bool checkActive(BuffController buff)
         {

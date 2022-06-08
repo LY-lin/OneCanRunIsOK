@@ -9,7 +9,14 @@ namespace OneCanRun.Game.Share
     public class Modifier
     {
         public enum ModifierType{
-
+            experience = 10,
+            healRateBuff=11,
+            physicalAttackBuff=12,
+            magicAttackBuff=13,
+            physicalDefenceBuff=14,
+            magicDefenceBuff=15,
+            maxSpeedBuff=16,
+            maxJumpBuff=17,
         }
         public float baseValue;
         public Object source;
