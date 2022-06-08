@@ -27,15 +27,47 @@ namespace OneCanRun.Game
         private List<OneCanRun.Game.Share.Modifier> mModifier;
         // init it as true as to calculate exposedProperty
         private bool dirty = true;
+        private bool calculating = false; // for ipc semaphore
 
-        // we should consider the IPC in case two calculate function in run time
-        private void calculate()
-        {
+        private void tryCalculate(){
+            if (calculating){
+                while (calculating) ;
+                return;
+            }
+
+            calculate();
 
         }
 
-        private void OnEnable()
-        {
+        // we should consider the IPC in case two calculate function in run time
+        private void calculate(){
+            calculating = true;
+            if(this.mModifier[0].baseValue >= getNextLevelCount()){
+                levelUpdate();
+            }
+            // core function 
+             
+            // left blank
+            // @ to do
+
+            // core function 
+
+            calculating = false;
+
+        }
+
+        private void levelUpdate(){
+
+            //@ to do
+        }
+
+        private ulong getNextLevelCount(){
+            // it should be dynamic but for test
+            return 500;
+        }
+
+        private void OnEnable(){
+
             string fileName = "defaultProperties";
             string configDirectory = System.IO.Directory.GetCurrentDirectory();
             configDirectory += "\\Config\\";
@@ -53,10 +85,17 @@ namespace OneCanRun.Game
                 default:
                     break;
             }
+
+            //initialize property
+
+            // initailize EXP modifier
+            OneCanRun.Game.Share.Modifier modifier = new Share.Modifier(0, Share.Modifier.ModifierType.experience, this);
+            this.mModifier.Add(modifier);
+
             baseProperty = new OneCanRun.Game.Share.ActorProperties();
             exposedProperty = new OneCanRun.Game.Share.ActorProperties();
 
-            // property from file 
+            // default property from file 
             XmlDocument xml = new XmlDocument();
                 xml.Load(configDirectory + fileName);
 
@@ -98,7 +137,6 @@ namespace OneCanRun.Game
         {
             m_ActorsManager = GameObject.FindObjectOfType<ActorsManager>();
             DebugUtility.HandleErrorIfNullFindObject<ActorsManager, Actor>(m_ActorsManager, this);
-
             // Register as an actor
             if (!m_ActorsManager.Actors.Contains(this))
             {
@@ -113,6 +151,34 @@ namespace OneCanRun.Game
             {
                 m_ActorsManager.Actors.Remove(this);
             }
+        }
+
+
+        // public interface are as follows
+
+        public OneCanRun.Game.Share.ActorProperties GetActorProperties(){
+            if (!dirty)
+                return this.exposedProperty;
+
+            // we should only allow the function in single instance only to be excuted once at the same time 
+            tryCalculate();
+
+            return exposedProperty;
+
+        }
+
+        public void addModifier(OneCanRun.Game.Share.Modifier mod){
+
+            // experience just linear overwrite
+            if(mod.type == Share.Modifier.ModifierType.experience){
+                this.mModifier[0].baseValue += mod.baseValue;
+                if (this.mModifier[0].baseValue >= getNextLevelCount())
+                    dirty = true;
+                return;
+            }
+
+
+            this.mModifier.Add(mod);
         }
 
         public bool removeModifier(OneCanRun.Game.Share.Modifier mod){

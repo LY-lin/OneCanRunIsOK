@@ -9,7 +9,7 @@ namespace OneCanRun.Game.Share
     public class Modifier
     {
         public enum ModifierType{
-
+            experience = 10
         }
         public float baseValue;
         public Object source;
