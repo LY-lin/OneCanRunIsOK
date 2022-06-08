@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using OneCanRun.Game.Share;
-using OneCanRun.Game;
-
-namespace OneCanRun.GamePlay
+using UnityEngine.Events;
+namespace OneCanRun.Game
 {
-    public class ActorBufferManager : MonoBehaviour
+    public class ActorBuffManager : MonoBehaviour
     {
-        private List<BuffController> NumBuffList;
-        private List<BuffController> PercentBuffList;
+        public List<BuffController> NumBuffList;
+        public List<BuffController> PercentBuffList;
 
-        private List<BuffController> WeaponBuffList;
+        public List<BuffController> WeaponBuffList;
 
-        public float timeSpend=0;
+        public float timeSpend = 0;
+
+        public UnityAction buffChanged;
 
         private void Update()
         {
@@ -29,21 +30,20 @@ namespace OneCanRun.GamePlay
             {
                 NumBuffList.Add(newBuff);
             }
-            else if(newBuff.getBuffType() == Buff.BufferType.PercentBuff)
+            else if (newBuff.getBuffType() == Buff.BufferType.PercentBuff)
             {
                 PercentBuffList.Add(newBuff);
             }
-            else if(newBuff.getBuffType() == Buff.BufferType.WeaponBuff)
+            else if (newBuff.getBuffType() == Buff.BufferType.WeaponBuff)
             {
                 WeaponBuffList.Add(newBuff);
             }
-            else 
-            {}
-            buffsAct();
+            else { }
+            buffChanged?.Invoke();
         }
         private bool checkActive(BuffController buff)
         {
-            if(timeSpend - buff.getTime >= buff.getExistTime())
+            if (timeSpend - buff.getTime >= buff.getExistTime())
             {
                 return false;
             }
@@ -52,7 +52,7 @@ namespace OneCanRun.GamePlay
 
         public void buffLose()
         {
-            foreach(BuffController m in NumBuffList)
+            foreach (BuffController m in NumBuffList)
             {
                 if (!checkActive(m))
                 {
@@ -73,24 +73,7 @@ namespace OneCanRun.GamePlay
                     WeaponBuffList.Remove(m);
                 }
             }
-        }
-
-        public void buffsAct()
-        {
-            Actor actor = GetComponentInParent<Actor>();
-            ActorProperties properties = actor.getBaseProperties();
-            foreach (BuffController m in NumBuffList)
-            {
-                m.ActorbuffAct(ref properties);
-            }
-            foreach (BuffController m in PercentBuffList)
-            {
-                m.ActorbuffAct(ref properties);
-            }
-            foreach (BuffController m in WeaponBuffList)
-            {
-                m.ActorbuffAct(ref properties);
-            }
+            buffChanged?.Invoke();
         }
     }
 }

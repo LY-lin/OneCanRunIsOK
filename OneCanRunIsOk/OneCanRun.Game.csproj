@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Game\Event.cs" />
     <Compile Include="Assets\Scripts\Game\Share\ActorProperties.cs" />
+    <Compile Include="Assets\Scripts\Game\BuffController.cs" />
     <Compile Include="Assets\Scripts\Game\Health.cs" />
     <Compile Include="Assets\Scripts\Game\GameFlowManager.cs" />
     <Compile Include="Assets\Scripts\Game\GameConstants.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Assets\Scripts\Game\StaticEvents.cs" />
     <Compile Include="Assets\Scripts\Game\ActorsManager.cs" />
     <Compile Include="Assets\Scripts\Game\ObjectiveManager.cs" />
+    <Compile Include="Assets\Scripts\Game\ActorBuffManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Game\OneCanRun.Game.asmdef" />

@@ -57,10 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\GamePlay\PlayerCharacterController.cs" />
-    <Compile Include="Assets\Scripts\GamePlay\ActorBufferManager.cs" />
     <Compile Include="Assets\Scripts\GamePlay\PlayerSkillsManager.cs" />
-    <Compile Include="Assets\Scripts\GamePlay\PlayBuffController.cs" />
-    <Compile Include="Assets\Scripts\GamePlay\BuffController.cs" />
     <Compile Include="Assets\Scripts\GamePlay\PlayerInputHandler.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Objectives\ObjectiveReachPoint.cs" />
     <Compile Include="Assets\Scripts\GamePlay\BulletStandard.cs" />

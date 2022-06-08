@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using OneCanRun.Game.Share;
 
 namespace OneCanRun.Game
@@ -19,9 +20,23 @@ namespace OneCanRun.Game
 
         ActorProperties m_PresentProperties;
 
+        ActorBuffManager m_buffs;
+        
+        private void Awake()
+        {
+            m_buffs = GetComponent<ActorBuffManager>();
+            m_buffs.buffChanged += buffsAct;
+        }
+
         public ActorProperties getBaseProperties()
         {
             return m_BaseProperties;
+        }
+
+        public bool setPresentProperties(ActorProperties newActorProperties)
+        {
+            m_PresentProperties = newActorProperties;
+            return true;
         }
 
         void Start()
@@ -43,6 +58,25 @@ namespace OneCanRun.Game
             {
                 m_ActorsManager.Actors.Remove(this);
             }
+        }
+
+
+        public void buffsAct()
+        {
+            ActorProperties properties = getBaseProperties();
+            foreach (BuffController m in m_buffs.NumBuffList)
+            {
+                m.ActorbuffAct(ref properties);
+            }
+            foreach (BuffController m in m_buffs.PercentBuffList)
+            {
+                m.ActorbuffAct(ref properties);
+            }
+            foreach (BuffController m in m_buffs.WeaponBuffList)
+            {
+                m.ActorbuffAct(ref properties);
+            }
+            setPresentProperties(properties);
         }
     }
 }

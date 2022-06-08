@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using OneCanRun.Game.Share;
 
-namespace OneCanRun.GamePlay
+namespace OneCanRun.Game
 {
     public class BuffController : MonoBehaviour
     {
