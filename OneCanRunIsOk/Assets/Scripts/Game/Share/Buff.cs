@@ -19,24 +19,32 @@ namespace OneCanRun.Game.Share
 
         //生命值恢复速度
         [Header("Buff(Only For NumBuff)")]
-        public float healRateNumBuff;
+        public float healRateBuff;
         //物理攻击力-physical Attack
-        public float physicalAttackNumBuff;
+        public float physicalAttackBuff;
         //魔法攻击力
-        public float magicAttackNumBuff;
+        public float magicAttackBuff;
         //物理防御力
-        public float physicalDefenceNumBuff;
+        public float physicalDefenceBuff;
         //魔法防御力
-        public float magicDefenceNumBuff;
+        public float magicDefenceBuff;
         //最高移动速度
-        public float maxSpeedNumBuff;
+        public float maxSpeedBuff;
         //跳跃力
-        public float maxJumpNumBuff;
+        public float maxJumpBuff;
+
+        public float getHealRateBuff() { return healRateBuff; }
+        public float getPhysicalAttackBuff() { return physicalAttackBuff; }
+        public float getMagicAttackBuff() { return magicAttackBuff; }
+        public float getPhysicalDefenceBuff() { return physicalDefenceBuff; }
+        public float getMagicDefenceBuff() { return magicDefenceBuff; }
+        public float getMaxSpeedBuff() { return maxSpeedBuff; }
+        public float getMaxJumpBuff() { return maxJumpBuff; }
 
         [Header("Buff failure condition")]
         public bool hasExistTime = true;
 
         [Header("Buff Exist Time")]
-        public int ExistTime;
+        public float ExistTime;
     }
 }

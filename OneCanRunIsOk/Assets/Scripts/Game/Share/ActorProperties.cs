@@ -93,11 +93,11 @@ namespace OneCanRun.Game.Share
 
         //ÌøÔ¾Á¦
         private float maxJump;
-        public float getJump()
+        public float getMaxJump()
         {
             return maxJump;
         }
-        public bool setJump(float newJump)
+        public bool setMaxJump(float newJump)
         {
             maxJump = newJump;
             return true;
