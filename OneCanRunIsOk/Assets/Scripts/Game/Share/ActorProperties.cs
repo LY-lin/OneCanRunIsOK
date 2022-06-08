@@ -7,6 +7,7 @@ namespace OneCanRun.Game.Share
     //本类定义了一个角色的所有基础数值，This class defines all the base values for a role
     public class ActorProperties
     {
+<<<<<<< HEAD
         //仅为测试Buff
         public ActorProperties()
         {
@@ -20,6 +21,19 @@ namespace OneCanRun.Game.Share
             healRate = 0;
         }
 
+=======
+
+        // experience
+        private ulong EXP;
+
+        public ulong getEXP(){
+            return EXP;
+        }
+
+        public void setEXP(ulong exp){
+            EXP = exp;
+        }
+>>>>>>> a5118a3bd9fb77311ac0ae8aa284180ce3985e6e
 
         //最大生命值
         private float maxHealth;
