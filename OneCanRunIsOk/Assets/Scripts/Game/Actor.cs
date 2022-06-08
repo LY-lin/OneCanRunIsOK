@@ -90,6 +90,7 @@ namespace OneCanRun.Game
 
             // initailize EXP modifier
             OneCanRun.Game.Share.Modifier modifier = new Share.Modifier(0, Share.Modifier.ModifierType.experience, this);
+            this.mModifier = new List<Share.Modifier>();
             this.mModifier.Add(modifier);
 
             baseProperty = new OneCanRun.Game.Share.ActorProperties();
