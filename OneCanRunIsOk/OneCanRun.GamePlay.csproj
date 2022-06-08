@@ -8,7 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>OneCanRun</RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{40CE134F-9912-0858-92D8-7B16B28CFF40}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -57,13 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\GamePlay\PlayerCharacterController.cs" />
-    <Compile Include="Assets\Scripts\GamePlay\PlayerSkillsManager.cs" />
-    <Compile Include="Assets\Scripts\GamePlay\PlayBuffController.cs" />
     <Compile Include="Assets\Scripts\GamePlay\PlayerInputHandler.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Objectives\ObjectiveReachPoint.cs" />
-    <Compile Include="Assets\Scripts\GamePlay\BulletStandard.cs" />
-    <Compile Include="Assets\Scripts\GamePlay\SkillController.cs" />
     <Compile Include="Assets\Scripts\GamePlay\PlayerWeaponsManager.cs" />
+    <Compile Include="Assets\Scripts\GamePlay\BulletStandard.cs" />
+    <Compile Include="Assets\Scripts\GamePlay\WeaponController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\GamePlay\OneCanRun.GamePlay.asmdef" />
