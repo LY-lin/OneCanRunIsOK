@@ -8,6 +8,7 @@ namespace OneCanRun.Game.Share
     public class ActorProperties
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         //仅为测试Buff
         public ActorProperties()
         {
@@ -22,6 +23,8 @@ namespace OneCanRun.Game.Share
         }
 
 =======
+=======
+>>>>>>> a5118a3bd9fb77311ac0ae8aa284180ce3985e6e
 
         // experience
         private ulong EXP;
@@ -33,6 +36,9 @@ namespace OneCanRun.Game.Share
         public void setEXP(ulong exp){
             EXP = exp;
         }
+<<<<<<< HEAD
+>>>>>>> a5118a3bd9fb77311ac0ae8aa284180ce3985e6e
+=======
 >>>>>>> a5118a3bd9fb77311ac0ae8aa284180ce3985e6e
 
         //最大生命值

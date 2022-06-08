@@ -29,6 +29,7 @@ namespace OneCanRun.Game
         private bool dirty = true;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         ActorProperties m_PresentProperties;
 
         ActorBuffManager m_buffs;
@@ -55,6 +56,72 @@ namespace OneCanRun.Game
             Debug.Log(m_PresentProperties.getMagicAttack());
             return true;
 =======
+            string fileName = "defaultProperties";
+            string configDirectory = System.IO.Directory.GetCurrentDirectory();
+            configDirectory += "\\Config\\";
+            switch (Affiliation)
+            {
+                case affiliationType.allies:
+                    fileName += ".allies.xml";
+                    break;
+                case affiliationType.enemy:
+                    fileName += ".enemy.xml";
+                    break;
+                case affiliationType.neutral:
+                    fileName += ".neutral.xml";
+                    break;
+                default:
+                    break;
+            }
+            baseProperty = new OneCanRun.Game.Share.ActorProperties();
+            exposedProperty = new OneCanRun.Game.Share.ActorProperties();
+
+            // property from file 
+            XmlDocument xml = new XmlDocument();
+                xml.Load(configDirectory + fileName);
+
+            XmlNodeList xmlNodeList = xml.SelectSingleNode("PropertyConfig").ChildNodes;
+
+            foreach(XmlElement child in xmlNodeList){
+                if (child.GetAttribute("exp") == "") {
+                    baseProperty.setEXP(ulong.Parse(child.InnerText));
+                }else if (child.GetAttribute("maxHealth") == "") {
+                    baseProperty.setMaxHealth(float.Parse(child.InnerText));
+                }else if (child.GetAttribute("healRate") == ""){
+                    baseProperty.setHealRate(float.Parse(child.InnerText));
+                }else if (child.GetAttribute("physicalAttack") == ""){
+                    baseProperty.setPhysicalAttack(float.Parse(child.InnerText));
+                }else if (child.GetAttribute("magicAttack") == ""){
+                    baseProperty.setMagicAttack(float.Parse(child.InnerText));
+                }else if (child.GetAttribute("physicalDefence") == ""){
+                    baseProperty.setPhysicalDefence(float.Parse(child.InnerText));
+                }else if (child.GetAttribute("magicDefence") == ""){
+                    baseProperty.setMagicDefence(float.Parse(child.InnerText));
+                }else if (child.GetAttribute("maxSpeed") == ""){
+                    baseProperty.setMaxSpeed(float.Parse(child.InnerText));
+                }else if (child.GetAttribute("maxJump") == ""){
+                    baseProperty.setMaxJump(float.Parse(child.InnerText));
+                }else {
+                    throw new System.Exception();
+                
+                }
+
+
+
+            }
+            
+            
+
+>>>>>>> a5118a3bd9fb77311ac0ae8aa284180ce3985e6e
+=======
+        // we should consider the IPC in case two calculate function in run time
+        private void calculate()
+        {
+
+        }
+
+        private void OnEnable()
+        {
             string fileName = "defaultProperties";
             string configDirectory = System.IO.Directory.GetCurrentDirectory();
             configDirectory += "\\Config\\";
