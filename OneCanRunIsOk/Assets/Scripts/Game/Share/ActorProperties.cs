@@ -8,6 +8,7 @@ namespace OneCanRun.Game.Share
     public class ActorProperties
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         //½öÎª²âÊÔBuff
         public ActorProperties()
         {
@@ -20,6 +21,8 @@ namespace OneCanRun.Game.Share
             magicDefence = 0;
             healRate = 0;
         }
+=======
+>>>>>>> 226bc9b81dea8e27f3baa870fa4348d17f5a9a83
 =======
 >>>>>>> 226bc9b81dea8e27f3baa870fa4348d17f5a9a83
 

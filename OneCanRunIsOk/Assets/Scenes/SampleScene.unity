@@ -205,7 +205,6 @@ GameObject:
   m_Component:
   - component: {fileID: 39439080}
   - component: {fileID: 39439079}
-  - component: {fileID: 39439082}
   - component: {fileID: 39439083}
   m_Layer: 0
   m_Name: GameObject
@@ -230,7 +229,7 @@ MonoBehaviour:
   SkillDescription: 
   SkillIcon: {fileID: 0}
   m_SkillType: 1
-  CoolingTime: 10
+  CoolingTime: 0
 --- !u!4 &39439080
 Transform:
   m_ObjectHideFlags: 0
@@ -246,52 +245,6 @@ Transform:
   m_Father: {fileID: 1882154184}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &39439082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39439078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6a552d5b5b943243964dce88b4fd9f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WeaponName: 
-  WeaponIcon: {fileID: 0}
-  bullet: {fileID: 1254343392523665438, guid: 28ca67a84a75e9642a8da4bee674efbc, type: 3}
-  CrosshairDataDefault:
-    CrosshairSprite: {fileID: 0}
-    CrosshairSize: 0
-    CrosshairColor: {r: 0, g: 0, b: 0, a: 0}
-  WeaponRoot: {fileID: 0}
-  WeaponMuzzle: {fileID: 0}
-  ShootType: 0
-  DelayBetweenShots: 0.5
-  BulletSpreadAngle: 0
-  BulletsPerShot: 1
-  RecoilForce: 1
-  AutomaticReload: 1
-  HasPhysicalBullets: 0
-  ClipSize: 30
-  ShellCasing: {fileID: 0}
-  EjectionPort: {fileID: 0}
-  ShellCasingEjectionForce: 2
-  ShellPoolSize: 1
-  AmmoReloadRate: 1
-  AmmoReloadDelay: 2
-  MaxAmmo: 8
-  AutomaticReleaseOnCharged: 0
-  MaxChargeDuration: 2
-  AmmoUsedOnStartCharge: 1
-  AmmoUsageRateWhileCharging: 1
-  WeaponAnimator: {fileID: 0}
-  MuzzleFlashPrefab: {fileID: 0}
-  UnparentMuzzleFlash: 0
-  ShootSfx: {fileID: 0}
-  ChangeWeaponSfx: {fileID: 0}
-  UseContinuousShootSound: 0
 --- !u!114 &39439083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffObject: {fileID: 230908398740711128, guid: 89def3819bc2be740b3f265957efb47c, type: 3}
+  aim_actorBuffManager: {fileID: 1882154196}
 --- !u!1 &83576587
 GameObject:
   m_ObjectHideFlags: 0
@@ -3050,6 +3004,7 @@ GameObject:
   - component: {fileID: 1456041767}
   - component: {fileID: 1456041762}
   - component: {fileID: 1456041766}
+  - component: {fileID: 1456041771}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -3228,6 +3183,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1456041761}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1456041771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456041761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ec4d9186269d04599c7ed635ddc2e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NumBuffList: []
+  PercentBuffList: []
+  WeaponBuffList: []
+  timeSpend: 0
+  aim_Actor: {fileID: 0}
 --- !u!1 &1473854218
 GameObject:
   m_ObjectHideFlags: 0
@@ -3779,10 +3751,10 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 1.8
-  m_Radius: 0.5
+  m_Radius: 0.35
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.05
+  m_SkinWidth: 0.001
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1882154189
@@ -3983,6 +3955,7 @@ MonoBehaviour:
   PercentBuffList: []
   WeaponBuffList: []
   timeSpend: 0
+  aim_Actor: {fileID: 0}
 --- !u!1 &1892287352
 GameObject:
   m_ObjectHideFlags: 0
