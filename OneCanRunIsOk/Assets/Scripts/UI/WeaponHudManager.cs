@@ -7,7 +7,7 @@ using OneCanRun.Game.Share;
 
 namespace OneCanRun.UI
 {
-    public class WeaponHUDManager : MonoBehaviour
+    public class WeaponHudManager : MonoBehaviour
     {
         [Tooltip("UI panel containing the layoutGroup for displaying weapon ammo")]
         public RectTransform AmmoPanel;
@@ -22,7 +22,7 @@ namespace OneCanRun.UI
         {
             
             m_PlayerWeaponsManager = FindObjectOfType<PlayerWeaponsManager>();
-            DebugUtility.HandleErrorIfNullFindObject<PlayerWeaponsManager, WeaponHUDManager>(m_PlayerWeaponsManager,
+            DebugUtility.HandleErrorIfNullFindObject<PlayerWeaponsManager, WeaponHudManager>(m_PlayerWeaponsManager,
                 this);
 
             WeaponController activeWeapon = m_PlayerWeaponsManager.GetActiveWeapon();
@@ -41,7 +41,7 @@ namespace OneCanRun.UI
         {
             GameObject ammoCounterInstance = Instantiate(AmmoCounterPrefab, AmmoPanel);
             AmmoCounter newAmmoCounter = ammoCounterInstance.GetComponent<AmmoCounter>();
-            DebugUtility.HandleErrorIfNullGetComponent<AmmoCounter, WeaponHUDManager>(newAmmoCounter, this,
+            DebugUtility.HandleErrorIfNullGetComponent<AmmoCounter, WeaponHudManager>(newAmmoCounter, this,
                 ammoCounterInstance.gameObject);
 
             newAmmoCounter.Initialize(newWeapon, weaponIndex);
