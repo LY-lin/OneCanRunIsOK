@@ -57,13 +57,19 @@ namespace OneCanRun.Game
             // left blank
             // @ to do
             ResetExposedProperty();
+            //if(buffManager.NumBuffList.Count>0)
             foreach (BuffController b in buffManager.NumBuffList)
             {
-                Debug.Log("exposedProperty " + exposedProperty.getMagicAttack());
+                Debug.Log(this +" exposedProperty " + exposedProperty.getMagicAttack());
                 b.ActorbuffAct(ref exposedProperty);
-                Debug.Log("After exposedProperty " + exposedProperty.getMagicAttack());
+                Debug.Log(this + " After exposedProperty " + exposedProperty.getMagicAttack());
             }
-
+            foreach (BuffController b in buffManager.PercentBuffList)
+            {
+                Debug.Log(this + " exposedProperty " + exposedProperty.getMagicAttack());
+                b.ActorbuffAct(ref exposedProperty);
+                Debug.Log(this + " After exposedProperty " + exposedProperty.getMagicAttack());
+            }
             // core function 
 
 

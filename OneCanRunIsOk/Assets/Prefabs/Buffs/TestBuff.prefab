@@ -47,10 +47,10 @@ MonoBehaviour:
   type: 0
   healRateBuff: 0
   physicalAttackBuff: 0
-  magicAttackBuff: 100
+  magicAttackBuff: 10
   physicalDefenceBuff: 0
   magicDefenceBuff: 0
   maxSpeedBuff: 0
   maxJumpBuff: 0
   hasExistTime: 1
-  ExistTime: 5
+  ExistTime: 1
