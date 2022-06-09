@@ -42,7 +42,7 @@ namespace OneCanRun.Game
 
             // left blank
             // @ to do
-            exposedProperty = baseProperty;
+            ResetExposedProperty();
             foreach (BuffController b in buffManager.NumBuffList)
             {
                 Debug.Log("exposedProperty " + exposedProperty.getMagicAttack());
@@ -54,7 +54,17 @@ namespace OneCanRun.Game
 
 
         }
+        private void ResetExposedProperty()
+        {
+            exposedProperty.setHealRate(baseProperty.getHealRate());
+            exposedProperty.setMagicAttack(baseProperty.getMagicAttack());
+            exposedProperty.setMagicDefence(baseProperty.getMagicDefence());
+            exposedProperty.setPhysicalAttack(baseProperty.getPhysicalAttack());
+            exposedProperty.setPhysicalDefence(baseProperty.getPhysicalDefence());
+            exposedProperty.setMaxJump(baseProperty.getMaxJump());
+            exposedProperty.setMaxSpeed(baseProperty.getMaxSpeed());
 
+        }
 
         private void levelUpdate(){
 

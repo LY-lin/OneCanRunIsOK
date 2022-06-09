@@ -52,7 +52,8 @@ namespace OneCanRun.Game
         }
         private bool checkActive(BuffController buff)
         {
-            if (timeSpend - buff.getTime >= buff.getExistTime())
+            buff.getTime -= Time.deltaTime;
+            if (buff.getTime < 0)
             {
                 return false;
             }
@@ -77,7 +78,6 @@ namespace OneCanRun.Game
                 for (int i = 0; i < listToDelete.Count; i++)
                 {
                     NumBuffList.Remove(listToDelete[i]);
-
                 }
             }
             //检查PercentBuff
@@ -86,14 +86,14 @@ namespace OneCanRun.Game
                 if (!checkActive(PercentBuffList[i]))
                 {
                     changed = true;
-                    listToDelete.Add(PercentBuffList[i]);
+                    listToPercentDelete.Add(PercentBuffList[i]);
                 }
             }
-            if (listToDelete.Count > 0)
+            if (listToPercentDelete.Count > 0)
             {
-                for (int i = 0; i < listToDelete.Count; i++)
+                for (int i = 0; i < listToPercentDelete.Count; i++)
                 {
-                    NumBuffList.Remove(listToDelete[i]);
+                    PercentBuffList.Remove(listToPercentDelete[i]);
                 }
             }
             if (WeaponBuffList.Count > 0)
