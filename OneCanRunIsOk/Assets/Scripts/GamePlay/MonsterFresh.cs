@@ -15,6 +15,15 @@ namespace OneCanRun.GamePlay
         public GameObject monster2;
         // Start is called before the first frame update
 
+        private int compareMonsterFreshInfo(Game.Share.MonsterFreshInfo a, Game.Share.MonsterFreshInfo b){
+            if (a.time < b.time)
+                return -1;
+            if (a.time > b.time)
+                return 1;
+            return 0;
+
+        }
+
         private void OnEnable(){
             mMonsterList = new List<Game.Share.MonsterFreshInfo>();
             monsterSample = new List<GameObject>();
@@ -60,6 +69,9 @@ namespace OneCanRun.GamePlay
                 Game.Share.MonsterFreshInfo tmp = new Game.Share.MonsterFreshInfo(time, position_x, position_y, position_z, typeID);
                 mMonsterList.Add(tmp);
             }
+
+
+            mMonsterList.Sort(compareMonsterFreshInfo);
 
         }
 

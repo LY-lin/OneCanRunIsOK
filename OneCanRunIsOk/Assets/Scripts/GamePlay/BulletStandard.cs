@@ -78,7 +78,7 @@ namespace OneCanRun.GamePlay
 
         void Update()
         {
-            Debug.Log(Time.time);
+            //Debug.Log(Time.time);
 
             if (m_ProjectileBase.restart){
                 this.Start();
