@@ -39,23 +39,6 @@ namespace OneCanRun.Game
 
         }
 
-        // we should consider the IPC in case two calculate function in run time
-        private void calculate(){
-            calculating = true;
-            if(this.mModifier[0].baseValue >= getNextLevelCount()){
-                levelUpdate();
-            }
-            // core function 
-             
-            // left blank
-            // @ to do
-
-            // core function 
-
-            calculating = false;
-
-        }
-
 
         // we should consider the IPC in case two calculate function in run time
         private void calculate(){
@@ -160,47 +143,10 @@ namespace OneCanRun.Game
                 }
             }
 
-            // initailize EXP modifier
-            OneCanRun.Game.Share.Modifier modifier = new Share.Modifier(0, Share.Modifier.ModifierType.experience, this);
-            this.mModifier = new List<Share.Modifier>();
-            this.mModifier.Add(modifier);
-
-            baseProperty = new OneCanRun.Game.Share.ActorProperties();
-            exposedProperty = new OneCanRun.Game.Share.ActorProperties();
-
-            // default property from file 
-            XmlDocument xml = new XmlDocument();
-                xml.Load(configDirectory + fileName);
-
-            XmlNodeList xmlNodeList = xml.SelectSingleNode("PropertyConfig").ChildNodes;
-
-            foreach(XmlElement child in xmlNodeList){
-                if (child.GetAttribute("exp") == "") {
-                    baseProperty.setEXP(ulong.Parse(child.InnerText));
-                }else if (child.GetAttribute("maxHealth") == "") {
-                    baseProperty.setMaxHealth(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("healRate") == ""){
-                    baseProperty.setHealRate(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("physicalAttack") == ""){
-                    baseProperty.setPhysicalAttack(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("magicAttack") == ""){
-                    baseProperty.setMagicAttack(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("physicalDefence") == ""){
-                    baseProperty.setPhysicalDefence(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("magicDefence") == ""){
-                    baseProperty.setMagicDefence(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("maxSpeed") == ""){
-                    baseProperty.setMaxSpeed(float.Parse(child.InnerText));
-                }else if (child.GetAttribute("maxJump") == ""){
-                    baseProperty.setMaxJump(float.Parse(child.InnerText));
-                }else {
-                    throw new System.Exception();
-                
-                }
 
 
 
-            }
+            
             
         }
 
@@ -275,18 +221,5 @@ namespace OneCanRun.Game
             return deleted;
         }
 
-        public void addModifier(OneCanRun.Game.Share.Modifier mod){
-
-            // experience just linear overwrite
-            if(mod.type == Share.Modifier.ModifierType.experience){
-                this.mModifier[0].baseValue += mod.baseValue;
-                if (this.mModifier[0].baseValue >= getNextLevelCount())
-                    dirty = true;
-                return;
-            }
-
-
-            this.mModifier.Add(mod);
-        }
     }
 }
