@@ -664,6 +664,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: ALLUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5727594920361300353, guid: a417b854ab022be40866a1c613504b64, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727594920361300353, guid: a417b854ab022be40866a1c613504b64, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727594920361300353, guid: a417b854ab022be40866a1c613504b64, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727594920361300353, guid: a417b854ab022be40866a1c613504b64, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: a417b854ab022be40866a1c613504b64, type: 3}
@@ -3057,6 +3073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Affiliation: 1
   AimPoint: {fileID: 1456041764}
+  buffManager: {fileID: 1456041771}
 --- !u!4 &1456041764
 Transform:
   m_ObjectHideFlags: 0
@@ -3204,11 +3221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2ec4d9186269d04599c7ed635ddc2e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumBuffList: []
-  PercentBuffList: []
-  WeaponBuffList: []
   timeSpend: 0
-  aim_Actor: {fileID: 0}
+  aim_Actor: {fileID: 1456041763}
 --- !u!1 &1473854218
 GameObject:
   m_ObjectHideFlags: 0
@@ -3307,6 +3321,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473854218}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1509026942 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5727594919401311682, guid: a417b854ab022be40866a1c613504b64, type: 3}
+  m_PrefabInstance: {fileID: 247197408}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1509026948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509026942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff10474de934234a9bd3c7d490871c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1515218974 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: eaf3edd0ef88ac84c970b62f673ed6b0, type: 3}
@@ -3794,6 +3825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Affiliation: 0
   AimPoint: {fileID: 1882154184}
+  buffManager: {fileID: 0}
 --- !u!82 &1882154192
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3960,9 +3992,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2ec4d9186269d04599c7ed635ddc2e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumBuffList: []
-  PercentBuffList: []
-  WeaponBuffList: []
   timeSpend: 0
   aim_Actor: {fileID: 0}
 --- !u!4 &1914346560 stripped

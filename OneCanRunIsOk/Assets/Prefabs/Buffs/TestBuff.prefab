@@ -53,4 +53,4 @@ MonoBehaviour:
   maxSpeedBuff: 0
   maxJumpBuff: 0
   hasExistTime: 1
-  ExistTime: 8
+  ExistTime: 3

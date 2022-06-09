@@ -61,31 +61,76 @@ namespace OneCanRun.Game
 
         public void buffLose()
         {
-            if(NumBuffList.Count>0)
+            bool changed = false;
+<<<<<<< Updated upstream
+            
+            if (NumBuffList.Count > 0)
+            {
+                int numForNumBuffToDelet[NumBuffList.Count]{ -1};
                 foreach (BuffController m in NumBuffList)
                 {
                     if (!checkActive(m))
                     {
+                        changed = true;
                         NumBuffList.Remove(m);
                     }
                 }
+            }
+                
             if (PercentBuffList.Count > 0)
                 foreach (BuffController m in PercentBuffList)
                 {
                     if (!checkActive(m))
                     {
+                        changed = true;
                         PercentBuffList.Remove(m);
                     }
+=======
+            List<BuffController> listToDelete = new List<BuffController>();
+            List<BuffController> listToPercentDelete = new List<BuffController>();
+            for (int i = 0; i < NumBuffList.Count;i++)
+            {
+                if (!checkActive(NumBuffList[i]))
+                {
+                    changed = true;
+                    listToDelete.Add(NumBuffList[i]);
                 }
+            }
+            if (listToDelete.Count > 0)
+            {
+                for (int i = 0; i < listToDelete.Count; i++)
+                {
+                    NumBuffList.Remove(listToDelete[i]);
+>>>>>>> Stashed changes
+                }
+            }
+            //检查PercentBuff
+            for (int i = 0; i < PercentBuffList.Count; i++)
+            {
+                if (!checkActive(PercentBuffList[i]))
+                {
+                    changed = true;
+                    listToDelete.Add(PercentBuffList[i]);
+                }
+            }
+            if (listToDelete.Count > 0)
+            {
+                for (int i = 0; i < listToDelete.Count; i++)
+                {
+                    NumBuffList.Remove(listToDelete[i]);
+                }
+            }
             if (WeaponBuffList.Count > 0)
                 foreach (BuffController m in WeaponBuffList)
                 {
                     if (!checkActive(m))
                     {
+                        changed = true;
                         WeaponBuffList.Remove(m);
                     }
                 }
-            buffChanged?.Invoke();
+            if(changed)
+                buffChanged?.Invoke();
         }
 
     }
