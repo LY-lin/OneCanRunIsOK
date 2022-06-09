@@ -10,6 +10,13 @@ namespace OneCanRun.GamePlay
         
         private Buff mbuff;
         public float getTime;
+
+        public BuffController(Buff buff)
+        {
+            mbuff = buff;
+            getTime = 0;
+        }
+
         public Buff.BufferType getBuffType()
         {
             return mbuff.type;
