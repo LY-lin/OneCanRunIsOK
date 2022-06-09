@@ -153,13 +153,10 @@ namespace OneCanRun.Game
             }    
         }
 
-        ActorProperties m_BaseProperties;
-
-        ActorProperties m_PresentProperties;
 
         public ActorProperties getBaseProperties()
         {
-            return m_BaseProperties;
+            return baseProperty;
         }
 
         void Start()

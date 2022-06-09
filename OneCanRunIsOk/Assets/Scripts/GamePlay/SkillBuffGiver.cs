@@ -8,10 +8,11 @@ namespace OneCanRun.Game
     {
         public GameObject buffObject;
         private BuffController mbuff;
-        public ActorBuffManager aim_actorBuffManager;
+        private ActorBuffManager aim_actorBuffManager;
 
         public void buffGive()
         {
+            aim_actorBuffManager = GetComponentInParent<ActorBuffManager>();
             Buff aimBuff = buffObject.GetComponent<Buff>();
             mbuff = new BuffController(aimBuff);
             aim_actorBuffManager.buffGain(mbuff);
