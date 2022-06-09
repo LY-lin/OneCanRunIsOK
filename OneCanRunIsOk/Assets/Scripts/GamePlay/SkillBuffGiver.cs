@@ -12,6 +12,7 @@ namespace OneCanRun.Game
 
         public void buffGive()
         {
+            aim_actorBuffManager = GetComponentInParent<ActorBuffManager>();
             Buff aimBuff = buffObject.GetComponent<Buff>();
             mbuff = new BuffController(aimBuff);
             aim_actorBuffManager.buffGain(mbuff);
