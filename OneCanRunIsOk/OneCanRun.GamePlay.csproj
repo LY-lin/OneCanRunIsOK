@@ -68,7 +68,6 @@
     <Compile Include="Assets\Scripts\GamePlay\SkillController.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Pickups\Pickup.cs" />
     <Compile Include="Assets\Scripts\GamePlay\PlayerWeaponsManager.cs" />
-    <Compile Include="Assets\Scripts\GamePlay\ActorBufferManager.cs" />
     <Compile Include="Assets\Scripts\GamePlay\PlayBuffController.cs" />
     <Compile Include="Assets\Scripts\GamePlay\CollisionBuffGiver.cs" />
   </ItemGroup>
