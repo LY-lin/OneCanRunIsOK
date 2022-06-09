@@ -1234,7 +1234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemiesToAssign:
-  - {fileID: 0}
+  - {fileID: 1456041762}
   PathNodes:
   - {fileID: 957172618}
   - {fileID: 385453483}
@@ -3032,6 +3032,7 @@ GameObject:
   - component: {fileID: 1456041762}
   - component: {fileID: 1456041766}
   - component: {fileID: 1456041771}
+  - component: {fileID: 1456041772}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -3223,6 +3224,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeSpend: 0
   aim_Actor: {fileID: 1456041763}
+--- !u!114 &1456041772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456041761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160d4e1000bf43c4389cbeb360044f79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageMultiplier: 1
+  SensibilityToSelfdamage: 0.5
 --- !u!1 &1473854218
 GameObject:
   m_ObjectHideFlags: 0
@@ -3809,7 +3824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcaf624f9a2508d46952961928631c1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 10
+  MaxHealth: 100
   CriticalHealthRatio: 0.3
 --- !u!114 &1882154190
 MonoBehaviour:

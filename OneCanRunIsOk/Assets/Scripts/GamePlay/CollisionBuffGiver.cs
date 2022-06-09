@@ -1,21 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-namespace OneCanRun
+using OneCanRun.Game;
+namespace OneCanRun.GamePlay
 {
     public class CollisionBuffGiver : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        public GameObject buffObject;
+        private BuffController mbuff;
+        private ActorBuffManager aim_actorBuffManager;
 
-        // Update is called once per frame
-        void Update()
+        public void buffGive()
         {
-        
+            
+            aim_actorBuffManager.buffGain(mbuff);
         }
     }
 }

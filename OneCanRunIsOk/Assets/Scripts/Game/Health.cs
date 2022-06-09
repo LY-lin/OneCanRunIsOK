@@ -27,7 +27,7 @@ namespace OneCanRun.Game
 
         void Start()
         {
-            Share.ActorProperties properties = this.gameObject.GetComponent<Actor>().GetActorProperties();
+            Share.ActorProperties properties = GetComponent<Actor>().GetActorProperties();
             MaxHealth = properties.getMaxHealth();
             CurrentHealth = properties.getMaxHealth();
         }
