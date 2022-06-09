@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
+using OneCanRun.Game.Share;
 
 namespace OneCanRun.Game
 {
@@ -21,42 +22,39 @@ namespace OneCanRun.Game
         public Transform AimPoint;
 
         ActorsManager m_ActorsManager;
-
+        private bool dirty;
         private OneCanRun.Game.Share.ActorProperties baseProperty;
         private OneCanRun.Game.Share.ActorProperties exposedProperty;
         private List<OneCanRun.Game.Share.Modifier> mModifier;
-        // init it as true as to calculate exposedProperty
-        private bool dirty = true;
-        private bool calculating = false; // for ipc semaphore
 
         private void tryCalculate(){
-            if (calculating){
-                while (calculating) ;
-                return;
-            }
 
             calculate();
 
         }
 
-
         // we should consider the IPC in case two calculate function in run time
         private void calculate(){
-            calculating = true;
-            if((ulong)this.mModifier[0].baseValue >= getNextLevelCount()){
+            /*if(this.mModifier[0].baseValue >= getNextLevelCount()){
                 levelUpdate();
-            }
+            }*/
             // core function 
 
             // left blank
             // @ to do
             exposedProperty = baseProperty;
+            foreach (BuffController b in buffManager.NumBuffList)
+            {
+                Debug.Log("exposedProperty " + exposedProperty.getMagicAttack());
+                b.ActorbuffAct(ref exposedProperty);
+                Debug.Log("After exposedProperty " + exposedProperty.getMagicAttack());
+            }
 
             // core function 
 
-            calculating = false;
 
         }
+
 
         private void levelUpdate(){
 
@@ -141,20 +139,21 @@ namespace OneCanRun.Game
                 {
                     baseProperty.setMaxJump(float.Parse(child.InnerText));
                 }
-                
-            }
+                else
+                {
+                    throw new System.Exception();
 
-
-
-
-            
-            
+                }
+            }    
         }
 
         void Start()
         {
             m_ActorsManager = GameObject.FindObjectOfType<ActorsManager>();
             DebugUtility.HandleErrorIfNullFindObject<ActorsManager, Actor>(m_ActorsManager, this);
+
+            buffManager = GetComponent<ActorBuffManager>();
+            buffManager.buffChanged += calculate;
             // Register as an actor
             if (!m_ActorsManager.Actors.Contains(this))
             {
@@ -177,12 +176,7 @@ namespace OneCanRun.Game
 
         public OneCanRun.Game.Share.ActorProperties GetActorProperties()
         {
-            if (!dirty)
-                return this.exposedProperty;
-
-            // we should only allow the function in single instance only to be excuted once at the same time 
             tryCalculate();
-
             return exposedProperty;
         }
 
@@ -221,6 +215,9 @@ namespace OneCanRun.Game
 
             return deleted;
         }
+
+        public ActorBuffManager buffManager;
+
 
     }
 }

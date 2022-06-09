@@ -19,14 +19,16 @@ namespace OneCanRun.Game
         public Actor aim_Actor;
         void Start()
         {
+            NumBuffList = new List<BuffController>();
+            PercentBuffList = new List<BuffController>();
+            WeaponBuffList = new List<BuffController>();
             aim_Actor = GetComponent<Actor>();
         }
 
         void Update()
         {
             timeSpend += Time.deltaTime;
-            /*if (timeSpend % 4 <= 0.5)
-                buffLose();*/
+            buffLose();
         }
 
         public void buffGain(BuffController newBuff)
@@ -46,12 +48,7 @@ namespace OneCanRun.Game
                 WeaponBuffList.Add(newBuff);
             }
             else { }
-            aim_Actor.addModifier(newBuff.healModifier);
-            /*aim_Actor.add;
-            aim_Actor.add;
-            aim_Actor.add;
-            aim_Actor.add;
-            aim_Actor.add;*/
+            buffChanged?.Invoke();
         }
         private bool checkActive(BuffController buff)
         {
@@ -64,28 +61,77 @@ namespace OneCanRun.Game
 
         public void buffLose()
         {
-            foreach (BuffController m in NumBuffList)
+            bool changed = false;
+<<<<<<< Updated upstream
+            
+            if (NumBuffList.Count > 0)
             {
-                if (!checkActive(m))
+                int numForNumBuffToDelet[NumBuffList.Count]{ -1};
+                foreach (BuffController m in NumBuffList)
                 {
-                    NumBuffList.Remove(m);
+                    if (!checkActive(m))
+                    {
+                        changed = true;
+                        NumBuffList.Remove(m);
+                    }
                 }
             }
-            foreach (BuffController m in PercentBuffList)
-            {
-                if (!checkActive(m))
+                
+            if (PercentBuffList.Count > 0)
+                foreach (BuffController m in PercentBuffList)
                 {
-                    PercentBuffList.Remove(m);
+                    if (!checkActive(m))
+                    {
+                        changed = true;
+                        PercentBuffList.Remove(m);
+                    }
+=======
+            List<BuffController> listToDelete = new List<BuffController>();
+            List<BuffController> listToPercentDelete = new List<BuffController>();
+            for (int i = 0; i < NumBuffList.Count;i++)
+            {
+                if (!checkActive(NumBuffList[i]))
+                {
+                    changed = true;
+                    listToDelete.Add(NumBuffList[i]);
                 }
             }
-            foreach (BuffController m in WeaponBuffList)
+            if (listToDelete.Count > 0)
             {
-                if (!checkActive(m))
+                for (int i = 0; i < listToDelete.Count; i++)
                 {
-                    WeaponBuffList.Remove(m);
+                    NumBuffList.Remove(listToDelete[i]);
+>>>>>>> Stashed changes
                 }
             }
-            buffChanged?.Invoke();
+            //检查PercentBuff
+            for (int i = 0; i < PercentBuffList.Count; i++)
+            {
+                if (!checkActive(PercentBuffList[i]))
+                {
+                    changed = true;
+                    listToDelete.Add(PercentBuffList[i]);
+                }
+            }
+            if (listToDelete.Count > 0)
+            {
+                for (int i = 0; i < listToDelete.Count; i++)
+                {
+                    NumBuffList.Remove(listToDelete[i]);
+                }
+            }
+            if (WeaponBuffList.Count > 0)
+                foreach (BuffController m in WeaponBuffList)
+                {
+                    if (!checkActive(m))
+                    {
+                        changed = true;
+                        WeaponBuffList.Remove(m);
+                    }
+                }
+            if(changed)
+                buffChanged?.Invoke();
         }
+
     }
 }
