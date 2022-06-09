@@ -17,20 +17,20 @@ namespace OneCanRun.Game.Share
         [Header("Buff Type")]
         public BufferType type;
 
-        //ÉúÃüÖµ»Ö¸´ËÙ¶È
+        //ï¿½ï¿½ï¿½ï¿½Öµï¿½Ö¸ï¿½ï¿½Ù¶ï¿½
         [Header("Buff(Only For NumBuff)")]
         public float healRateBuff;
-        //ÎïÀí¹¥»÷Á¦-physical Attack
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-physical Attack
         public float physicalAttackBuff;
-        //Ä§·¨¹¥»÷Á¦
+        //Ä§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         public float magicAttackBuff;
-        //ÎïÀí·ÀÓùÁ¦
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         public float physicalDefenceBuff;
-        //Ä§·¨·ÀÓùÁ¦
+        //Ä§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         public float magicDefenceBuff;
-        //×î¸ßÒÆ¶¯ËÙ¶È
+        //ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½Ù¶ï¿½
         public float maxSpeedBuff;
-        //ÌøÔ¾Á¦
+        //ï¿½ï¿½Ô¾ï¿½ï¿½
         public float maxJumpBuff;
 
         public float getHealRateBuff() { return healRateBuff; }

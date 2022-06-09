@@ -7,7 +7,7 @@ namespace OneCanRun.AI.Enemies
     [RequireComponent(typeof(EnemyController))]
     public class MovableEnemy : MonoBehaviour
     {
-        // µĞÈËÔÚ´ïµ½¹¥»÷¾àÀëºó£¬ÔÙËõĞ¡Ò»¶¨¹¥»÷¾àÀë²ÅÍ£Ö¹ÒÆ¶¯
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ïµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£Ö¹ï¿½Æ¶ï¿½
         [Tooltip("Fraction of the enemy's attack range at which it will stop moving towards target while attacking")]
         [Range(0f, 1f)]
         public float AttackStopDistanceRatio = 0.5f;
@@ -15,16 +15,16 @@ namespace OneCanRun.AI.Enemies
         [Tooltip("Maximum amount of health")]
         public float maxHealth = 100f;
 
-        // ÎäÆ÷²ÎÊı£¬¾ö¶¨ÊÇ·ñ¿ÉÒÔÇĞ»»ÎäÆ÷
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ğ»ï¿½ï¿½ï¿½ï¿½ï¿½
         [Header("Weapons Parameters")]
         [Tooltip("Allow weapon swapping for this enemy")]
         public bool SwapToNextWeapon = false;
 
-        // »»Ç¹ºó¿ªÇ¹µÄÀäÈ´Ê±¼ä£¬ÔÊĞí»»Ç¹¶¯»­²¥·ÅÍê±Ï
+        // ï¿½ï¿½Ç¹ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½È´Ê±ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         [Tooltip("Time delay between a weapon swap and the next attack")]
         public float DelayAfterWeaponSwap = 0f;
 
-        // ×´Ì¬Ã¶¾ÙÀàĞÍ£¬Ã¶¾ÙµÄÃ¿¸ö±äÁ¿´ú±í¹ÖÎïµÄÒ»¸ö×´Ì¬£¬·Ö±ğÎª£ºÑ²¼ì£¬×·»÷£¬¹¥»÷
+        // ×´Ì¬Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½Ã¶ï¿½Ùµï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½Ö±ï¿½Îªï¿½ï¿½Ñ²ï¿½ì£¬×·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         public enum AIState
         {
             Patrol,
@@ -32,27 +32,27 @@ namespace OneCanRun.AI.Enemies
             Attack,
         }
 
-        // ¹ÖÎïµÄAI×´Ì¬£¬¸ù¾İµ±Ç°×´Ì¬µ÷ÓÃ¹ÖÎï¶ÔÓ¦µÄÖ´ĞĞ¶¯×÷
+        // ï¿½ï¿½ï¿½ï¿½ï¿½AI×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½İµï¿½Ç°×´Ì¬ï¿½ï¿½ï¿½Ã¹ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Ö´ï¿½Ğ¶ï¿½ï¿½ï¿½
         public AIState state;
 
-        // µĞÈË¿ØÖÆÆ÷
+        // ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½
         public EnemyController controller;
-        // ÑªÁ¿ÏµÍ³
+        // Ñªï¿½ï¿½ÏµÍ³
         public Health health;
-        // ÎäÆ÷ÏµÍ³
-        // ¼ÇÂ¼×î½üÒ»´ÎÉä»÷Ê±¼ä
+        // ï¿½ï¿½ï¿½ï¿½ÏµÍ³
+        // ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
         float lastTimeWeaponSwapped = Mathf.NegativeInfinity;
-        // µ±Ç°ÎäÆ÷Ë÷Òı£¬Èç¹ûÊÇ´æÔÚ¶à¸öÎäÆ÷
+        // ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         int currentWeaponIndex;
-        // Ò»¸öÎäÆ÷¶ÔÓ¦Ò»¸öÎäÆ÷¿ØÖÆÆ÷
+        // Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         WeaponController currentWeapon;
-        // »ñÈ¡µĞÈËÉíÉÏËùÓĞ°ó¶¨µÄÎäÆ÷
+        // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ°ó¶¨µï¿½ï¿½ï¿½ï¿½ï¿½
         WeaponController[] weapons;
 
         // Start is called before the first frame update
         void Start()
         {
-            // åˆå§‹åŸºæœ¬å±æ€?
+            // åˆå§‹åŸºæœ¬å±ï¿½?
             maxHealth = 10f;
             controller = GetComponent<EnemyController>();
             DebugUtility.HandleErrorIfNullGetComponent<EnemyController, MovableEnemy>(controller, this, gameObject);
@@ -61,15 +61,15 @@ namespace OneCanRun.AI.Enemies
             DebugUtility.HandleErrorIfNullGetComponent<Health, MovableEnemy>(health, this, gameObject);
             health.MaxHealth = maxHealth;
 
-            // ³õÊ¼»¯ÎäÆ÷
+            // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             FindAndInitializeAllWeapons();
             currentWeapon = GetCurrentWeapon();
             currentWeapon.ShowWeapon(true);
 
-            // ³õÊ¼»¯ÎªÑ²¼ì×´Ì¬
+            // ï¿½ï¿½Ê¼ï¿½ï¿½ÎªÑ²ï¿½ï¿½×´Ì¬
             state = AIState.Patrol;
 
-            //¶©ÔÄÊÂ¼ş
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
             controller.onDetectedTarget += OnDetectedTarget;
             controller.onLostTarget += OnLostTarget;
             health.OnDamaged += OnDamaged;
@@ -85,7 +85,7 @@ namespace OneCanRun.AI.Enemies
             UpdateCurrentAIState();
         }
 
-        // ×´Ì¬±ä»»
+        // ×´Ì¬ï¿½ä»»
         public virtual void UpdateAiStateTransitions()
         {
             switch (state)
@@ -106,7 +106,7 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ´¦Àíµ±Ç°×´Ì¬ĞèÒª×öµÄÊÂ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°×´Ì¬ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         public virtual void UpdateCurrentAIState()
         {
             switch (state)
@@ -141,20 +141,20 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ´¦Àí¹¥»÷ÊÂ¼ş
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
         void Attack(Vector3 enemyPosition)
         {
-            // µĞÈË£¬ÎäÆ÷¸ù²¿Á½µãÁ¬Ïß¼´ÎäÆ÷³¯Ïò
+            // ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             OrientWeaponsTowards(enemyPosition);
 
-            // Éä»÷
+            // ï¿½ï¿½ï¿½
             bool didFire = GetCurrentWeapon().HandleShootInputs(false, true, false);
 
             if (didFire)
             {
-                // ¹¥»÷ÌØĞ§
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§
 
-                // Èç¹û´æÔÚ¶àÖÖÎäÆ÷£¬²¢ÇÒ¿ÉÒÔÇĞ»»ÎäÆ÷£¬ÇĞ»»ÎäÆ÷
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¿ï¿½ï¿½ï¿½ï¿½Ğ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ»ï¿½ï¿½ï¿½ï¿½ï¿½
                 if (SwapToNextWeapon && weapons.Length > 1)
                 {
                     int nextWeaponIndex = (currentWeaponIndex + 1) % weapons.Length;
@@ -163,7 +163,7 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ´¦Àí¼ì²âµ½Ä¿±êÊÂ¼ş
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½âµ½Ä¿ï¿½ï¿½ï¿½Â¼ï¿½
         void OnDetectedTarget()
         {
             if (state == AIState.Patrol)
@@ -172,7 +172,7 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ´¦Àí¶ªÊ§Ä¿±êÊÂ¼ş
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§Ä¿ï¿½ï¿½ï¿½Â¼ï¿½
         void OnLostTarget()
         {
             if (state == AIState.Follow || state == AIState.Attack)
@@ -181,12 +181,12 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ´¦ÀíÊÜÉËÊÂ¼ş
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
         void OnDamaged(float damage, GameObject damageSource)
         {
             controller.EnemyDamaged(damage, damageSource);
 
-            // ÊÜÉËÌØĞ§
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§
         }
 
         void OnDie()
@@ -195,7 +195,7 @@ namespace OneCanRun.AI.Enemies
             controller.EnemyDie();
         }
 
-        // ÕÒµ½²¢³õÊ¼»¯ËùÓĞÎäÆ÷
+        // ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         void FindAndInitializeAllWeapons()
         {
             if (weapons == null)
@@ -203,7 +203,7 @@ namespace OneCanRun.AI.Enemies
                 weapons = GetComponentsInChildren<WeaponController>();
                 DebugUtility.HandleErrorIfNoComponentFound<WeaponController, EnemyController>(weapons.Length, this, gameObject);
 
-                // ³õÊ¼»¯ËùÓĞÎäÆ÷µÄÓµÓĞÕß
+                // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½
                 foreach (WeaponController weapon in weapons)
                 {
                     weapon.Owner = gameObject;
@@ -211,7 +211,7 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ·µ»Øµ±Ç°ÎäÆ÷
+        // ï¿½ï¿½ï¿½Øµï¿½Ç°ï¿½ï¿½ï¿½ï¿½
         WeaponController GetCurrentWeapon()
         {
             FindAndInitializeAllWeapons();
@@ -223,7 +223,7 @@ namespace OneCanRun.AI.Enemies
             return currentWeapon;
         }
 
-        // ÉèÖÃµ±Ç°ÎäÆ÷
+        // ï¿½ï¿½ï¿½Ãµï¿½Ç°ï¿½ï¿½ï¿½ï¿½
         void SetCurrentWeapon(int index)
         {
             currentWeaponIndex = index;
@@ -231,11 +231,11 @@ namespace OneCanRun.AI.Enemies
             lastTimeWeaponSwapped = SwapToNextWeapon ? Time.time : Mathf.NegativeInfinity;
         }
 
-        // µ÷ÕûÎäÆ÷³¯Ïò
-        // µ÷ÕûÎäÆ÷·½Ïò
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         public void OrientWeaponsTowards(Vector3 lookPostion)
         {
-            // ¼ÆËãËùÓĞÎäÆ÷µÄ³¯Ïò£¬²¢¸üĞÂ
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ò£¬²ï¿½ï¿½ï¿½ï¿½ï¿½
             foreach (WeaponController weapon in weapons)
             {
                 Vector3 weaponForward = (lookPostion - weapon.WeaponRoot.transform.position).normalized;

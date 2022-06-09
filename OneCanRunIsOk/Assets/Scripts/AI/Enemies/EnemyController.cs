@@ -6,7 +6,7 @@ using OneCanRun.Game.Share;
 
 namespace OneCanRun.AI.Enemies
 {
-    // ���˿������࣬���˶����Լ�����Ϊ���������Ȩ����������
+    // 敌人控制器类，敌人定义自己的行为并将其控制权交给控制器
     [RequireComponent(typeof(Actor), typeof(NavMeshAgent))]
     public class EnemyController : MonoBehaviour
     {

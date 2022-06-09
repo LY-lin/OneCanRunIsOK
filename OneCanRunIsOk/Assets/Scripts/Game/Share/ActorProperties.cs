@@ -4,10 +4,35 @@ using UnityEngine;
 
 namespace OneCanRun.Game.Share
 {
-    //±¾Àà¶¨ÒåÁËÒ»¸ö½ÇÉ«µÄËùÓÐ»ù´¡ÊýÖµ£¬This class defines all the base values for a role
+    //ï¿½ï¿½ï¿½à¶¨ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½This class defines all the base values for a role
     public class ActorProperties
     {
-        //×î´óÉúÃüÖµ
+
+        //ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Buff
+        public ActorProperties()
+        {
+            maxHealth = 0;
+            maxJump = 0;
+            maxSpeed = 0;
+            physicalAttack = 0;
+            physicalDefence = 0;
+            magicAttack = 0;
+            magicDefence = 0;
+            healRate = 0;
+        }
+
+        // experience
+        private ulong EXP;
+
+        public ulong getEXP(){
+            return EXP;
+        }
+
+        public void setEXP(ulong exp){
+            EXP = exp;
+        }
+
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
         private float maxHealth;
         public float getMaxHealth()
         {
@@ -19,7 +44,7 @@ namespace OneCanRun.Game.Share
             return true;
         }
         
-        //ÉúÃüÖµ»Ö¸´ËÙ¶È
+        //ï¿½ï¿½ï¿½ï¿½Öµï¿½Ö¸ï¿½ï¿½Ù¶ï¿½
         private float healRate;
         public float getHealRate()
         {
@@ -31,7 +56,7 @@ namespace OneCanRun.Game.Share
             return true;
         }
 
-        //ÎïÀí¹¥»÷Á¦-physical Attack
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-physical Attack
         private float physicalAttack;
         public float getPhysicalAttack()
         {
@@ -43,7 +68,7 @@ namespace OneCanRun.Game.Share
             return true;
         }
 
-        //Ä§·¨¹¥»÷Á¦
+        //Ä§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         private float magicAttack;
         public float getMagicAttack()
         {
@@ -55,7 +80,7 @@ namespace OneCanRun.Game.Share
             return true;
         }
 
-        //ÎïÀí·ÀÓùÁ¦
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         private float physicalDefence;
         public float getPhysicalDefence()
         {
@@ -67,7 +92,7 @@ namespace OneCanRun.Game.Share
             return true;
         }
 
-        //Ä§·¨·ÀÓùÁ¦
+        //Ä§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         private float magicDefence;
         public float getMagicDefence()
         {
@@ -79,7 +104,7 @@ namespace OneCanRun.Game.Share
             return true;
         }
 
-        //×î¸ßÒÆ¶¯ËÙ¶È
+        //ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½Ù¶ï¿½
         private float maxSpeed;
         public float getMaxSpeed()
         {
@@ -91,7 +116,7 @@ namespace OneCanRun.Game.Share
             return true;
         }
 
-        //ÌøÔ¾Á¦
+        //ï¿½ï¿½Ô¾ï¿½ï¿½
         private float maxJump;
         public float getMaxJump()
         {
