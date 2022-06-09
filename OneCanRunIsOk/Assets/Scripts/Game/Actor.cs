@@ -139,11 +139,7 @@ namespace OneCanRun.Game
                 {
                     baseProperty.setMaxJump(float.Parse(child.InnerText));
                 }
-                else
-                {
-                    throw new System.Exception();
-
-                }
+                
             }    
         }
 
