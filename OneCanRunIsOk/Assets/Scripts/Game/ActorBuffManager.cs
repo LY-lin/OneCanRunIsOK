@@ -61,19 +61,27 @@ namespace OneCanRun.Game
 
         public void buffLose()
         {
-            if(NumBuffList.Count>0)
+            bool changed = false;
+            
+            if (NumBuffList.Count > 0)
+            {
+                int numForNumBuffToDelet[NumBuffList.Count]{ -1};
                 foreach (BuffController m in NumBuffList)
                 {
                     if (!checkActive(m))
                     {
+                        changed = true;
                         NumBuffList.Remove(m);
                     }
                 }
+            }
+                
             if (PercentBuffList.Count > 0)
                 foreach (BuffController m in PercentBuffList)
                 {
                     if (!checkActive(m))
                     {
+                        changed = true;
                         PercentBuffList.Remove(m);
                     }
                 }
@@ -82,10 +90,12 @@ namespace OneCanRun.Game
                 {
                     if (!checkActive(m))
                     {
+                        changed = true;
                         WeaponBuffList.Remove(m);
                     }
                 }
-            buffChanged?.Invoke();
+            if(changed)
+                buffChanged?.Invoke();
         }
 
     }
