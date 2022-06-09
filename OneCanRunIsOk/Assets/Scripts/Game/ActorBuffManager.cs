@@ -52,7 +52,8 @@ namespace OneCanRun.Game
         }
         private bool checkActive(BuffController buff)
         {
-            if (timeSpend - buff.getTime >= buff.getExistTime())
+            buff.getTime -= Time.deltaTime;
+            if (buff.getTime < 0)
             {
                 return false;
             }
@@ -62,30 +63,7 @@ namespace OneCanRun.Game
         public void buffLose()
         {
             bool changed = false;
-<<<<<<< Updated upstream
-            
-            if (NumBuffList.Count > 0)
-            {
-                int numForNumBuffToDelet[NumBuffList.Count]{ -1};
-                foreach (BuffController m in NumBuffList)
-                {
-                    if (!checkActive(m))
-                    {
-                        changed = true;
-                        NumBuffList.Remove(m);
-                    }
-                }
-            }
-                
-            if (PercentBuffList.Count > 0)
-                foreach (BuffController m in PercentBuffList)
-                {
-                    if (!checkActive(m))
-                    {
-                        changed = true;
-                        PercentBuffList.Remove(m);
-                    }
-=======
+
             List<BuffController> listToDelete = new List<BuffController>();
             List<BuffController> listToPercentDelete = new List<BuffController>();
             for (int i = 0; i < NumBuffList.Count;i++)
@@ -101,7 +79,6 @@ namespace OneCanRun.Game
                 for (int i = 0; i < listToDelete.Count; i++)
                 {
                     NumBuffList.Remove(listToDelete[i]);
->>>>>>> Stashed changes
                 }
             }
             //检查PercentBuff
@@ -110,14 +87,14 @@ namespace OneCanRun.Game
                 if (!checkActive(PercentBuffList[i]))
                 {
                     changed = true;
-                    listToDelete.Add(PercentBuffList[i]);
+                    listToPercentDelete.Add(PercentBuffList[i]);
                 }
             }
-            if (listToDelete.Count > 0)
+            if (listToPercentDelete.Count > 0)
             {
-                for (int i = 0; i < listToDelete.Count; i++)
+                for (int i = 0; i < listToPercentDelete.Count; i++)
                 {
-                    NumBuffList.Remove(listToDelete[i]);
+                    PercentBuffList.Remove(listToPercentDelete[i]);
                 }
             }
             if (WeaponBuffList.Count > 0)

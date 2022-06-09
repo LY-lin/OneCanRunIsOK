@@ -13,7 +13,7 @@ namespace OneCanRun.Game
         public BuffController(Buff buff)
         {
             mbuff = buff;
-            getTime = 0;
+            getTime = buff.ExistTime;
         }
 
         public Buff.BufferType getBuffType()
@@ -61,7 +61,7 @@ namespace OneCanRun.Game
     }
 }
 
-/*工作日志2022.6.8
+/*宸ヤ綔鏃ュ織2022.6.8
             if (buff.type == Buff.BufferType.NumBuff)
             {
                 healModifier = new Modifier(mbuff.getHealRateBuff(), Modifier.ModifierType.healRateBuff, this);
