@@ -269,12 +269,11 @@ namespace OneCanRun.Game.Share
 
         public void StartReloadAnimation()  //???????
         {
-            
-               // GetComponent<Animator>().SetTrigger("Reload");
             IsReloading = true;
+            // GetComponent<Animator>().SetTrigger("Reload");
+
             Reload();
-            
-            
+
         }
 
         void Update()
