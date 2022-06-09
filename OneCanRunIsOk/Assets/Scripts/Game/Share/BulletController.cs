@@ -8,8 +8,8 @@ namespace OneCanRun.Game.Share
     {
 
         //[Tooltip("Speed")]
-        public int speed = 50;
-
+        public float speed;
+        private float mDamage;
         //weapon Controller
         public GameObject Owner { get; private set; }
         public WeaponController WeaponController;
@@ -34,6 +34,15 @@ namespace OneCanRun.Game.Share
         public void Shoot(WeaponController controller)
         {
 
+            speed = (float)controller.speed;
+            // calculate damage
+
+            ActorProperties tmp = controller.Owner.GetComponent<Actor>().GetActorProperties();
+
+            float tmpDamage = tmp.getMagicAttack() + tmp.getPhysicalAttack();
+
+            // calculate damage
+            this.mDamage = tmpDamage + controller.damage;
             WeaponController = controller;
             InitialPosition = transform.position;
             InitialDirection = transform.forward;
@@ -54,7 +63,7 @@ namespace OneCanRun.Game.Share
             Damageable damageable = col.collider.GetComponent<Damageable>();
             if (damageable)
             {
-                damageable.InflictDamage(10f, false, Owner);
+                damageable.InflictDamage(this.mDamage, false, Owner);
                 this.WeaponController.bulletPoolManager.release(this.gameObject);
             }
             this.WeaponController.bulletPoolManager.release(this.gameObject);

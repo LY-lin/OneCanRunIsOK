@@ -94,6 +94,9 @@ namespace OneCanRun.Game.Share
         [Tooltip("Has physical clip on the weapon and ammo shells are ejected when firing")]
         public bool HasPhysicalBullets = false;//武器上有物理弹夹吗?发射时弹壳会弹出吗
 
+        public float damage;
+
+        public float speed = 10f;
 
         [Tooltip("Number of bullets in a clip")]
         public int ClipSize = 30;//单个弹匣的子弹数量
