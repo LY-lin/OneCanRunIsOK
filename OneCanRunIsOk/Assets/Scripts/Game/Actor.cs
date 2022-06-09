@@ -35,9 +35,9 @@ namespace OneCanRun.Game
 
         // we should consider the IPC in case two calculate function in run time
         private void calculate(){
-            if(this.mModifier[0].baseValue >= getNextLevelCount()){
+            /*if(this.mModifier[0].baseValue >= getNextLevelCount()){
                 levelUpdate();
-            }
+            }*/
             // core function 
 
             // left blank
@@ -45,9 +45,9 @@ namespace OneCanRun.Game
             exposedProperty = baseProperty;
             foreach (BuffController b in buffManager.NumBuffList)
             {
-                Debug.Log("exposedProperty" + exposedProperty.getMagicAttack());
+                Debug.Log("exposedProperty " + exposedProperty.getMagicAttack());
                 b.ActorbuffAct(ref exposedProperty);
-                Debug.Log("After exposedProperty" + exposedProperty.getMagicAttack());
+                Debug.Log("After exposedProperty " + exposedProperty.getMagicAttack());
             }
 
             // core function 

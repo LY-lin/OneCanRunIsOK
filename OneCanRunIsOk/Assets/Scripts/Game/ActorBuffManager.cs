@@ -19,6 +19,9 @@ namespace OneCanRun.Game
         public Actor aim_Actor;
         void Start()
         {
+            NumBuffList = new List<BuffController>();
+            PercentBuffList = new List<BuffController>();
+            WeaponBuffList = new List<BuffController>();
             aim_Actor = GetComponent<Actor>();
         }
 
@@ -58,27 +61,30 @@ namespace OneCanRun.Game
 
         public void buffLose()
         {
-            foreach (BuffController m in NumBuffList)
-            {
-                if (!checkActive(m))
+            if(NumBuffList.Count>0)
+                foreach (BuffController m in NumBuffList)
                 {
-                    NumBuffList.Remove(m);
+                    if (!checkActive(m))
+                    {
+                        NumBuffList.Remove(m);
+                    }
                 }
-            }
-            foreach (BuffController m in PercentBuffList)
-            {
-                if (!checkActive(m))
+            if (PercentBuffList.Count > 0)
+                foreach (BuffController m in PercentBuffList)
                 {
-                    PercentBuffList.Remove(m);
+                    if (!checkActive(m))
+                    {
+                        PercentBuffList.Remove(m);
+                    }
                 }
-            }
-            foreach (BuffController m in WeaponBuffList)
-            {
-                if (!checkActive(m))
+            if (WeaponBuffList.Count > 0)
+                foreach (BuffController m in WeaponBuffList)
                 {
-                    WeaponBuffList.Remove(m);
+                    if (!checkActive(m))
+                    {
+                        WeaponBuffList.Remove(m);
+                    }
                 }
-            }
             buffChanged?.Invoke();
         }
 
