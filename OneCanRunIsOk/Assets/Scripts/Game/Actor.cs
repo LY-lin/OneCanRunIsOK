@@ -30,6 +30,8 @@ namespace OneCanRun.Game
 
         public void Awake()
         {
+            baseProperty = new OneCanRun.Game.Share.ActorProperties();
+            exposedProperty = new OneCanRun.Game.Share.ActorProperties();
             m_ActorsManager = GameObject.FindObjectOfType<ActorsManager>();
             DebugUtility.HandleErrorIfNullFindObject<ActorsManager, Actor>(m_ActorsManager, this);
 
@@ -120,8 +122,7 @@ namespace OneCanRun.Game
 
             //OneCanRun.Game.Share.Modifier modifier = new Share.Modifier(0, Share.Modifier.ModifierType.experience, this);
             //mModifier.Add(modifier);
-            baseProperty = new OneCanRun.Game.Share.ActorProperties();
-            exposedProperty = new OneCanRun.Game.Share.ActorProperties();
+            
 
             // property from file 
             XmlDocument xml = new XmlDocument();
