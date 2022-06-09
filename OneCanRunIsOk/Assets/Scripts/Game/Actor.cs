@@ -1,5 +1,5 @@
 using UnityEngine;
-using OneCanRun.Game;
+using OneCanRun.Game.Share;
 
 namespace OneCanRun.Game
 {
@@ -14,6 +14,15 @@ namespace OneCanRun.Game
         public Transform AimPoint;
 
         ActorsManager m_ActorsManager;
+
+        ActorProperties m_BaseProperties;
+
+        ActorProperties m_PresentProperties;
+
+        public ActorProperties getBaseProperties()
+        {
+            return m_BaseProperties;
+        }
 
         void Start()
         {

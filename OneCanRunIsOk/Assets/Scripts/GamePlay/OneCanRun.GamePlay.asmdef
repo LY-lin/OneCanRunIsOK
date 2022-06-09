@@ -1,6 +1,6 @@
 {
     "name": "OneCanRun.GamePlay",
-    "rootNamespace": "",
+    "rootNamespace": "OneCanRun",
     "references": [
         "GUID:8637e5a644d0dda4b8b4f2a6a0d14f99"
     ],

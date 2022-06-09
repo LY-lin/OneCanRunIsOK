@@ -43,7 +43,7 @@ namespace OneCanRun.AI.Enemies
 
         public virtual void HandleDetection(Actor self, Collider[] selfColliders)
         {
-            // ´¦Àí³ğºŞÏûÊ§
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§
             if (KnownDetectedTarget && !IsSeeingTarget && (Time.time - TimeLastSeenTarget) > KnownTargetTimeout)
             {
                 KnownDetectedTarget = null;
@@ -52,53 +52,54 @@ namespace OneCanRun.AI.Enemies
             float sqrDetectRange = DetectionRange * DetectionRange;
             IsSeeingTarget = false;
             float minDistance = Mathf.Infinity;
-            // ±éÀú³¡¾°ÖĞËùÓĞ½ÇÉ«
+            // éå†åœºæ™¯ä¸­æ‰€æœ‰è§’è‰²
             foreach (Actor actor in manager.Actors)
             {
-                // ÊôÓÚ²»Í¬ÕóÓª
+                // ï¿½ï¿½ï¿½Ú²ï¿½Í¬ï¿½ï¿½Óª
                 if (actor.Affiliation != self.Affiliation)
                 {
-                    // ¼ÆËãµĞÈËÓëÍæ¼ÒÖ®¼äµÄ¾àÀë
+                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½
                     float sqrDistance = (actor.transform.position - DetectionSourcePoint.position).sqrMagnitude;
-                    // ¼ÆËãÍæ¼ÒÏà¶ÔÓëµĞÈËÊÓÒ°ÖĞÏßµÄ½Ç¶È
+                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò°ï¿½ï¿½ï¿½ßµÄ½Ç¶ï¿½
                     Vector3 midline = -DetectionSourcePoint.forward;
                     Vector3 direction = actor.AimPoint.position - DetectionSourcePoint.position;
                     float angle = Vector3.Angle(midline, direction);
-                    if (sqrDistance < sqrDetectRange && sqrDistance < minDistance && angle <= DetectionAngle)
+                    // Debug.Log("è§’åº¦ï¼š " + angle + "   è·ç¦»å¹³æ–¹ï¼š" + sqrDistance);
+                    if (sqrDistance < sqrDetectRange && sqrDistance <= minDistance && angle <= DetectionAngle)
                     {
-                        // »ñÈ¡ÊÓÏßÉÏÒ»¶¨¾àÀëµÄËùÓĞ¶ÔÏó
+                        // è·å–è§†çº¿ä¸Šä¸€å®šè·ç¦»çš„æ‰€æœ‰å¯¹è±¡
                         RaycastHit[] hits = Physics.RaycastAll(DetectionSourcePoint.position,
                             (actor.AimPoint.position - DetectionSourcePoint.position).normalized, DetectionRange,
                             -1, QueryTriggerInteraction.Ignore);
-                        // ×îÖÕÄ¿±êÊÇ×î½üµÄ¶ÔÏó£¬ĞÂ½¨¶ÔÏó±£´æ¸ÃÄ¿±ê
+                        // æœ€ç»ˆç›®æ ‡æ˜¯æœ€è¿‘çš„å¯¹è±¡ï¼Œæ–°å»ºå¯¹è±¡ä¿å­˜è¯¥ç›®æ ‡
                         RaycastHit target = new RaycastHit();
-                        // ³õÊ¼»¯£¬¾àÀëÎŞÇîÔ¶
+                        // åˆå§‹åŒ–ï¼Œè·ç¦»æ— ç©·è¿œ
                         target.distance = Mathf.Infinity;
-                        // ²»Ò»¶¨ÕÒµÃµ½
+                        // ä¸ä¸€å®šæ‰¾å¾—åˆ°
                         bool found = false;
                         foreach (RaycastHit hit in hits)
                         {
-                            // ¶ÔÏó²»°üº¬×Ô¼ºµÄ×é¼ş²¢ÇÒ¾àÀë¸üĞ¡Ê±£¬¸üĞÂÄ¿±ê²¢ÉèÖÃfound
-                            if(!selfColliders.Contains(hit.collider) && hit.distance < target.distance)
+                            // å¯¹è±¡ä¸åŒ…å«è‡ªå·±çš„ç»„ä»¶å¹¶ä¸”è·ç¦»æ›´å°æ—¶ï¼Œæ›´æ–°ç›®æ ‡å¹¶è®¾ç½®found
+                            if (!selfColliders.Contains(hit.collider) && hit.distance < target.distance)
                             {
                                 target = hit;
                                 found = true;
                             }
                         }
 
-                        // ÕÒµ½ÁË
+                        // æ‰¾åˆ°äº†
                         if (found)
                         {
-                            // »ñÈ¡¶ÔÏó½ÇÉ«
-                            Actor hitActor = target.collider.GetComponent<Actor>();
-                            // ½ÇÉ«ÊÇÍ¬Ò»¸ö
+                            // è·å–å¯¹è±¡è§’è‰²
+                            Actor hitActor = target.collider.GetComponentInParent<Actor>();
+                            // è§’è‰²æ˜¯åŒä¸€ä¸ª
                             if (hitActor == actor)
                             {
-                                // ÉèÖÃ¿´µ½Ä¿±ê×´Ì¬£¬²¢¸üĞÂµ±Ç°×î¶Ì¾àÀë
+                                // è®¾ç½®çœ‹åˆ°ç›®æ ‡çŠ¶æ€ï¼Œå¹¶æ›´æ–°å½“å‰æœ€çŸ­è·ç¦»
                                 IsSeeingTarget = true;
                                 minDistance = sqrDistance;
 
-                                // ¼ÇÂ¼¿´µ½Ä¿±êµÄ×îĞÂÊÂ¼şÒÔ¼°¼à²âµ½µÄ¶ÔÏó
+                                // è®°å½•çœ‹åˆ°ç›®æ ‡çš„æœ€æ–°äº‹ä»¶ä»¥åŠç›‘æµ‹åˆ°çš„å¯¹è±¡
                                 TimeLastSeenTarget = Time.time;
                                 KnownDetectedTarget = actor.AimPoint.gameObject;
                             }
@@ -107,11 +108,11 @@ namespace OneCanRun.AI.Enemies
                 }
             }
 
-            // ÅĞ¶¨ÊÇ·ñÔÚ¹¥»÷·¶Î§ÄÚ²¿
+            // åˆ¤å®šæ˜¯å¦åœ¨æ”»å‡»èŒƒå›´å†…éƒ¨
             IsTargetInAttackRange = KnownDetectedTarget != null &&
                 Vector3.Distance(transform.position, KnownDetectedTarget.transform.position) <= AttackRange;
 
-            // Èç¹û²»ÖªµÀÄ¿±êµ«ÖªµÀ¼ì²âµ½Ä¿±ê£¬¾ÍÒªÆô¶¯¼ì²âµ½ÊÂ¼ş
+            // å¦‚æœä¸çŸ¥é“ç›®æ ‡ä½†çŸ¥é“æ£€æµ‹åˆ°ç›®æ ‡ï¼Œå°±è¦å¯åŠ¨æ£€æµ‹åˆ°äº‹ä»¶
             if (!HadKnownTarget && KnownDetectedTarget != null)
             {
                 OnDetect();
@@ -125,13 +126,13 @@ namespace OneCanRun.AI.Enemies
             HadKnownTarget = KnownDetectedTarget != null;
         }
 
-        // ¶ªÊ§Ä¿±êÊÂ¼ş
+        // ä¸¢å¤±ç›®æ ‡äº‹ä»¶
         public virtual void OnLostTarget() => onLostTarget?.Invoke();
 
-        // ¼ì²âµ½Íæ¼ÒÊ±¼ä
+        // æ£€æµ‹åˆ°ç©å®¶æ—¶é—´
         public virtual void OnDetect() => onDetectedTarget?.Invoke();
 
-        // ÊÕµ½ÉËº¦ÊÂ¼ş£¨ÎŞÊÓ¼ì²â·¶Î§£©
+        // æ”¶åˆ°ä¼¤å®³äº‹ä»¶ï¼ˆæ— è§†æ£€æµ‹èŒƒå›´ï¼‰
         public virtual void OnDamaged(GameObject damageSource)
         {
             TimeLastSeenTarget = Time.time;

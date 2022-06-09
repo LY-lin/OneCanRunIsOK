@@ -52,7 +52,7 @@ namespace OneCanRun.AI.Enemies
         // Start is called before the first frame update
         void Start()
         {
-            // 初始基本属性
+            // 鍒濆鍩烘湰灞炴�?
             maxHealth = 10f;
             controller = GetComponent<EnemyController>();
             DebugUtility.HandleErrorIfNullGetComponent<EnemyController, MovableEnemy>(controller, this, gameObject);
@@ -80,10 +80,8 @@ namespace OneCanRun.AI.Enemies
         // Update is called once per frame
         void Update()
         {
-            // 先更新当前的状态变更，得到最新状态
             UpdateAiStateTransitions();
 
-            // 根据状态执行相应的动作
             UpdateCurrentAIState();
         }
 
@@ -93,7 +91,6 @@ namespace OneCanRun.AI.Enemies
             switch (state)
             {
                 case AIState.Follow:
-                    // 看到目标且目标在攻击范围内部
                     if (controller.IsSeeingTarget && controller.IsTargetInAttackRange)
                     {
                         state = AIState.Attack;
@@ -101,7 +98,6 @@ namespace OneCanRun.AI.Enemies
                     }
                     break;
                 case AIState.Attack:
-                    // 不在攻击范围内部
                     if (!controller.IsTargetInAttackRange)
                     {
                         state = AIState.Follow;
@@ -188,7 +184,6 @@ namespace OneCanRun.AI.Enemies
         // 处理受伤事件
         void OnDamaged(float damage, GameObject damageSource)
         {
-            Debug.Log(damageSource.name);
             controller.EnemyDamaged(damage, damageSource);
 
             // 受伤特效
@@ -196,6 +191,7 @@ namespace OneCanRun.AI.Enemies
 
         void OnDie()
         {
+            Debug.Log(gameObject.name + " Die");
             controller.EnemyDie();
         }
 

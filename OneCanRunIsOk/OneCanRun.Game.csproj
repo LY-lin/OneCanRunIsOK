@@ -8,7 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>OneCanRun</RootNamespace>
     <ProjectGuid>{31FE8E72-AA61-C945-B617-01FDE253E853}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -57,19 +57,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Game\Event.cs" />
-    <Compile Include="Assets\Scripts\Game\Share\BulletController.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\ActorProperties.cs" />
     <Compile Include="Assets\Scripts\Game\Health.cs" />
     <Compile Include="Assets\Scripts\Game\GameFlowManager.cs" />
     <Compile Include="Assets\Scripts\Game\GameConstants.cs" />
     <Compile Include="Assets\Scripts\Game\EventManager.cs" />
     <Compile Include="Assets\Scripts\Game\EventFactory.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\Buff.cs" />
     <Compile Include="Assets\Scripts\Game\DebugUtility.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\WeaponController.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\ActorBuffer.cs" />
     <Compile Include="Assets\Scripts\Game\Share\Objective.cs" />
     <Compile Include="Assets\Scripts\Game\Actor.cs" />
     <Compile Include="Assets\Scripts\Game\Share\Damageable.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\BulletController.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\BulletPoolManager.cs" />
     <Compile Include="Assets\Scripts\Game\StaticEvents.cs" />
     <Compile Include="Assets\Scripts\Game\ActorsManager.cs" />
-    <Compile Include="Assets\Scripts\Game\Share\WeaponController.cs" />
     <Compile Include="Assets\Scripts\Game\ObjectiveManager.cs" />
   </ItemGroup>
   <ItemGroup>

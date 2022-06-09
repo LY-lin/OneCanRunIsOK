@@ -10,81 +10,105 @@ namespace OneCanRun.GamePlay
     {
         [Header("References")]
         [Tooltip("Reference to the main camera used for the player")]
+        //玩家摄像机
         public Camera PlayerCamera;
 
         [Tooltip("Audio source for footsteps, jump, etc...")]
+        //音源组件
         public AudioSource AudioSource;
 
         [Header("General")]
         [Tooltip("Force applied downward when in the air")]
+        //重力数值
         public float GravityDownForce = 20f;
 
         [Tooltip("Physic layers checked to consider the player grounded")]
+        //物理层
         public LayerMask GroundCheckLayers = -1;
 
         [Tooltip("distance from the bottom of the character controller capsule to test for grounded")]
+        //测试着地距离
         public float GroundCheckDistance = 0.05f;
 
         [Header("Movement")]
         [Tooltip("Max movement speed when grounded (when not sprinting)")]
+        //着地最大移动速度
         public float MaxSpeedOnGround = 10f;
 
         [Tooltip(
             "Sharpness for the movement when grounded, a low value will make the player accelerate and decelerate slowly, a high value will do the opposite")]
+        //类似于加速度，插值时使用的锐度因数
         public float MovementSharpnessOnGround = 15;
 
         [Tooltip("Max movement speed when crouching")]
         [Range(0, 1)]
+        //下蹲速度因数
         public float MaxSpeedCrouchedRatio = 0.5f;
 
         [Tooltip("Max movement speed when not grounded")]
+        //空中最大移动速度
         public float MaxSpeedInAir = 10f;
 
         [Tooltip("Acceleration speed when in the air")]
+        //空中加速度
         public float AccelerationSpeedInAir = 25f;
 
         [Tooltip("Multiplicator for the sprint speed (based on grounded speed)")]
+        //冲刺速度因数
         public float SprintSpeedModifier = 2f;
 
         [Tooltip("Height at which the player dies instantly when falling off the map")]
+        //死亡判定高度
         public float KillHeight = -50f;
 
         [Header("Rotation")]
         [Tooltip("Rotation speed for moving the camera")]
+        //摄像头旋转速度 灵敏度
         public float RotationSpeed = 200f;
 
         [Range(0.1f, 1f)]
         [Tooltip("Rotation speed multiplier when aiming")]
+        //瞄准时摄像头旋转速度
         public float AimingRotationMultiplier = 0.4f;
 
         [Header("Jump")]
         [Tooltip("Force applied upward when jumping")]
+        //跳跃力
         public float JumpForce = 9f;
 
         [Header("Stance")]
         [Tooltip("Ratio (0-1) of the character height where the camera will be at")]
+        //摄像头高度比 相对角色整体
         public float CameraHeightRatio = 0.9f;
 
         [Tooltip("Height of character when standing")]
+        //角色胶囊体高度
         public float CapsuleHeightStanding = 1.8f;
 
         [Tooltip("Height of character when crouching")]
+        //角色
         public float CapsuleHeightCrouching = 0.9f;
 
         [Tooltip("Speed of crouching transitions")]
+        //下蹲加速度
         public float CrouchingSharpness = 10f;
 
         [Header("Audio")]
         [Tooltip("Amount of footstep sounds played when moving one meter")]
-        public float FootstepSfxFrequency = 1f;
+        //脚步频率
+        public float FootstepSfxFrequency = 0.25f;
 
         [Tooltip("Amount of footstep sounds played when moving one meter while sprinting")]
-        public float FootstepSfxFrequencyWhileSprinting = 1f;
+        //冲刺脚步频率
+        public float FootstepSfxFrequencyWhileSprinting = 0.25f;
 
         [Tooltip("Sound played for footsteps")]
+        //脚步声效
         public AudioClip FootstepSfx;
 
+        //跳跃声效
         [Tooltip("Sound played when jumping")] public AudioClip JumpSfx;
+        //着地声效
         [Tooltip("Sound played when landing")] public AudioClip LandSfx;
 
         [Tooltip("Sound played when taking damage froma fall")]
@@ -92,18 +116,23 @@ namespace OneCanRun.GamePlay
 
         [Header("Fall Damage")]
         [Tooltip("Whether the player will recieve damage when hitting the ground at high speed")]
+        //是否开启跌落伤害
         public bool RecievesFallDamage;
 
         [Tooltip("Minimun fall speed for recieving fall damage")]
+        //收到跌落伤害最小速度
         public float MinSpeedForFallDamage = 10f;
 
         [Tooltip("Fall speed for recieving th emaximum amount of fall damage")]
+        //收到满额跌落伤害的速度
         public float MaxSpeedForFallDamage = 30f;
 
         [Tooltip("Damage recieved when falling at the mimimum speed")]
+        //最小跌落伤害
         public float FallDamageAtMinSpeed = 10f;
 
         [Tooltip("Damage recieved when falling at the maximum speed")]
+        //最大跌落伤害
         public float FallDamageAtMaxSpeed = 50f;
 
         public UnityAction<bool> OnStanceChanged;
@@ -190,10 +219,12 @@ namespace OneCanRun.GamePlay
 
             HasJumpedThisFrame = false;
 
+            //着地判定
             bool wasGrounded = IsGrounded;
             GroundCheck();
 
             // landing
+            //该帧着陆，判定着陆与伤害
             if (IsGrounded && !wasGrounded)
             {
                 // Fall damage
@@ -216,6 +247,7 @@ namespace OneCanRun.GamePlay
             }
 
             // crouching
+            //下蹲
             if (m_InputHandler.GetCrouchInputDown())
             {
                 SetCrouchingState(!IsCrouching, false);
@@ -223,9 +255,11 @@ namespace OneCanRun.GamePlay
 
             UpdateCharacterHeight(false);
 
+            //处理角色移动
             HandleCharacterMovement();
         }
 
+        //死亡
         void OnDie()
         {
             IsDead = true;
@@ -236,9 +270,11 @@ namespace OneCanRun.GamePlay
             EventManager.broadcast(Events.PlayerDeathEvent);
         }
 
+        //着地判定
         void GroundCheck()
         {
             // Make sure that the ground check distance while already in air is very small, to prevent suddenly snapping to ground
+            //确保已在空中的地面检查距离非常小，以防止突然弹到地面
             float chosenGroundCheckDistance =
                 IsGrounded ? (m_Controller.skinWidth + GroundCheckDistance) : k_GroundCheckDistanceInAir;
 
@@ -247,11 +283,12 @@ namespace OneCanRun.GamePlay
             m_GroundNormal = Vector3.up;
 
             // only try to detect ground if it's been a short amount of time since last jump; otherwise we may snap to the ground instantly after we try jumping
+            //只有在距离上次跳跃一段时间的情况下，才尝试探测地面；否则，我们可能会在尝试跳跃后立即跳到地上
             if (Time.time >= m_LastTimeJumped + k_JumpGroundingPreventionTime)
             {
                 // if we're grounded, collect info about the ground normal with a downward capsule cast representing our character capsule
-                //������ת��
-                //��������ŵأ��ռ��йص��淨�ߵ���Ϣ��ʹ�����µĽ���Ͷ��������ǵĽ�ɫ����
+                //胶囊体判定
+                //如果我们着地，收集有关地面法线的信息，使用向下的胶囊投射代表我们的角色胶囊
                 if (Physics.CapsuleCast(GetCapsuleBottomHemisphere(), GetCapsuleTopHemisphere(m_Controller.height),
                     m_Controller.radius, Vector3.down, out RaycastHit hit, chosenGroundCheckDistance, GroundCheckLayers,
                     QueryTriggerInteraction.Ignore))
@@ -279,6 +316,7 @@ namespace OneCanRun.GamePlay
         void HandleCharacterMovement()
         {
             // horizontal character rotation
+            // 修改角色Rotate.y以修改左右朝向
             {
                 // rotate the transform with the input speed around its local Y axis
                 transform.Rotate(
@@ -287,18 +325,22 @@ namespace OneCanRun.GamePlay
             }
 
             // vertical camera rotation
+            //修改角色摄像机Rotate.x以修改上下朝向
             {
                 // add vertical inputs to the camera's vertical angle
                 m_CameraVerticalAngle += m_InputHandler.GetLookInputsVertical() * RotationSpeed * RotationMultiplier;
 
                 // limit the camera's vertical angle to min/max
+                //限制90度
                 m_CameraVerticalAngle = Mathf.Clamp(m_CameraVerticalAngle, -89f, 89f);
 
                 // apply the vertical angle as a local rotation to the camera transform along its right axis (makes it pivot up and down)
+                //将垂直角度作为局部旋转沿其右轴应用于摄影机变换（使其上下旋转）
                 PlayerCamera.transform.localEulerAngles = new Vector3(m_CameraVerticalAngle, 0, 0);
             }
 
             // character movement handling
+            //冲刺判定
             bool isSprinting = m_InputHandler.GetSprintInputHeld();
             {
                 if (isSprinting)
@@ -323,6 +365,7 @@ namespace OneCanRun.GamePlay
                                      targetVelocity.magnitude;
 
                     // smoothly interpolate between our current velocity and the target velocity based on acceleration speed
+                    //插值计算当前角色速度，保证平滑的角色速度变化
                     CharacterVelocity = Vector3.Lerp(CharacterVelocity, targetVelocity,
                         MovementSharpnessOnGround * Time.deltaTime);
 
@@ -330,6 +373,7 @@ namespace OneCanRun.GamePlay
                     if (IsGrounded && m_InputHandler.GetJumpInputDown())
                     {
                         // force the crouch state to false
+                        //取消下蹲
                         if (SetCrouchingState(false, false))
                         {
                             // start by canceling out the vertical component of our velocity
@@ -338,8 +382,8 @@ namespace OneCanRun.GamePlay
                             // then, add the jumpSpeed value upwards
                             CharacterVelocity += Vector3.up * JumpForce;
 
-                            // play sound
-                            //AudioSource.PlayOneShot(JumpSfx);
+                            //play sound
+                            AudioSource.PlayOneShot(JumpSfx);
 
                             // remember last time we jumped because we need to prevent snapping to ground for a short time
                             m_LastTimeJumped = Time.time;
@@ -381,17 +425,20 @@ namespace OneCanRun.GamePlay
             }
 
             // apply the final calculated velocity value as a character movement
+            //应用胶囊体移动
             Vector3 capsuleBottomBeforeMove = GetCapsuleBottomHemisphere();
             Vector3 capsuleTopBeforeMove = GetCapsuleTopHemisphere(m_Controller.height);
             m_Controller.Move(CharacterVelocity * Time.deltaTime);
 
             // detect obstructions to adjust velocity accordingly
+            //检测障碍物以相应地调整速度
             m_LatestImpactSpeed = Vector3.zero;
             if (Physics.CapsuleCast(capsuleBottomBeforeMove, capsuleTopBeforeMove, m_Controller.radius,
                 CharacterVelocity.normalized, out RaycastHit hit, CharacterVelocity.magnitude * Time.deltaTime, -1,
                 QueryTriggerInteraction.Ignore))
             {
                 // We remember the last impact speed because the fall damage logic might need it
+                //记录撞击速度
                 m_LatestImpactSpeed = CharacterVelocity;
 
                 CharacterVelocity = Vector3.ProjectOnPlane(CharacterVelocity, hit.normal);
@@ -399,24 +446,28 @@ namespace OneCanRun.GamePlay
         }
 
         // Returns true if the slope angle represented by the given normal is under the slope angle limit of the character controller
+        //如果给定法线表示的倾斜角度低于角色控制器的倾斜角度限制，则返回true
         bool IsNormalUnderSlopeLimit(Vector3 normal)
         {
             return Vector3.Angle(transform.up, normal) <= m_Controller.slopeLimit;
         }
 
         // Gets the center point of the bottom hemisphere of the character controller capsule    
+        //获取角色控制器胶囊的下半球的中心点
         Vector3 GetCapsuleBottomHemisphere()
         {
             return transform.position + (transform.up * m_Controller.radius);
         }
 
         // Gets the center point of the top hemisphere of the character controller capsule    
+        //获取角色控制器胶囊的上半球的中心点
         Vector3 GetCapsuleTopHemisphere(float atHeight)
         {
             return transform.position + (transform.up * (atHeight - m_Controller.radius));
         }
 
         // Gets a reoriented direction that is tangent to a given slope
+        //获取与给定坡度相切的重定向方向
         public Vector3 GetDirectionReorientedOnSlope(Vector3 direction, Vector3 slopeNormal)
         {
             Vector3 directionRight = Vector3.Cross(direction, transform.up);

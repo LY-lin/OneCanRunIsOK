@@ -6,11 +6,11 @@ namespace OneCanRun.AI.Enemies
 {
     public class EnemyManager : MonoBehaviour
     {
-        // µĞÈË¿ØÖÆÆ÷£¬ÓëµĞÈËÒ»Ò»¶ÔÓ¦
+        // æ•Œäººæ§åˆ¶å™¨ï¼Œä¸æ•Œäººä¸€ä¸€å¯¹åº”
         public List<EnemyController> Enemies { get; private set; }
-        // µĞÈË×ÜÊı
+        // æ•Œäººæ€»æ•°
         public int NumberOfEnemiesTotal { get; private set; }
-        // Ê£ÓàµĞÈËÊı
+        // å‰©ä½™æ•Œäººæ•°
         public int NumberOfEnemiesRemaining => Enemies.Count;
 
         void Awake()
@@ -18,7 +18,7 @@ namespace OneCanRun.AI.Enemies
             Enemies = new List<EnemyController>();
         }
 
-        // ×¢²áµĞÈË¿ØÖÆÆ÷
+        // æ³¨å†Œæ•Œäººæ§åˆ¶å™¨
         public void RegisterEnemy(EnemyController enemy)
         {
             Enemies.Add(enemy);
@@ -26,7 +26,7 @@ namespace OneCanRun.AI.Enemies
             NumberOfEnemiesTotal++;
         }
 
-        // ×¢ÏúµĞÈË¿ØÖÆÆ÷£¬²¢µ÷ÓÃÊÂ¼ş¿ØÖÆÆ÷½øĞĞ¹ã²¥£¿
+        // æ³¨é”€æ•Œäººæ§åˆ¶å™¨ï¼Œå¹¶è°ƒç”¨äº‹ä»¶æ§åˆ¶å™¨è¿›è¡Œå¹¿æ’­ï¼Ÿ
         public void UnregisterEnemy(EnemyController enemyKilled)
         {
             int enemiesRemainingNotification = NumberOfEnemiesRemaining - 1;

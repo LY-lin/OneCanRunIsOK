@@ -50,6 +50,9 @@ namespace OneCanRun.Game
         void Start()
         {
             //游戏音量管理
+
+            //
+            
             EndGameFadeCanvasGroup.gameObject.SetActive(false);
         }
 

@@ -6,76 +6,75 @@ using OneCanRun.Game.Share;
 
 namespace OneCanRun.AI.Enemies
 {
-    // µĞÈË¿ØÖÆÆ÷Àà£¬µĞÈË¶¨Òå×Ô¼ºµÄĞĞÎª²¢½«Æä¿ØÖÆÈ¨½»¸ø¿ØÖÆÆ÷
+    // ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£¬ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     [RequireComponent(typeof(Actor), typeof(NavMeshAgent))]
     public class EnemyController : MonoBehaviour
     {
         [Tooltip("The distance at which the enemy considers that it has reached its current path destination point")]
         public float PathReachingRadius = 2f;
 
-        // ×îµÍ¸ß¶È£¬³¬³öËÀÍö£¬¹ÖÎïµôÂäÏûÊ§
+        // æœ€ä½é«˜åº¦ï¼Œè¶…å‡ºæ­»äº¡ï¼Œæ€ªç‰©æ‰è½æ¶ˆå¤±
         [Header("Parameters")]
         [Tooltip("The Y height at which the enemy will be automatically killed (if it falls off of the level)")]
         public float minHeight = -20f;
 
-        // ×ª¶¯ËÙ¶È£¬µĞÈË×ª¶¯ÊÓ½ÇµÄËÙ¶È/Ğı×ªËÙ¶È
+        // è½¬åŠ¨é€Ÿåº¦ï¼Œæ•Œäººè½¬åŠ¨è§†è§’çš„é€Ÿåº¦/æ—‹è½¬é€Ÿåº¦
         [Tooltip("The speed at which the enemy rotates")]
         public float OrientationSpeed = 10f;
 
-        // ËÀÍö³ÖĞøÊ±¼ä£¬¶¯»­
+        // æ­»äº¡æŒç»­æ—¶é—´ï¼ŒåŠ¨ç”»
         [Tooltip("Delay after death where the GameObject is destroyed (to allow for animation)")]
         public float DeathDuration = 0f;
 
-        // µôÂäÕ½ÀûÆ·
+        // æ‰è½æˆ˜åˆ©å“
         [Header("Loot")]
         [Tooltip("The object this enemy can drop when dying")]
         public GameObject LootPrefab;
 
-        // µôÂä¼¸ÂÊ
+        // æ‰è½å‡ ç‡
         [Tooltip("The chance the object has to drop")]
         [Range(0, 1)]
         public float DropRate = 1f;
 
-        // ¶ÔÓ¦µĞÈËµÄËÄ¸öÊÂ¼ş£º¹¥»÷¡¢·¢ÏÖ¡¢¶ªÊ§¡¢ÊÜÉËºÍËÀÍö
+        // ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Ëµï¿½ï¿½Ä¸ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½ï¿½ï¿½ï¿½ï¿½
         public UnityAction onDetectedTarget;
         public UnityAction onLostTarget;
 
-        // ×îĞÂÊÜÉËÊ±¼ä£¬ÓÃÓÚ³ğºŞ¶ªÊ§
+        // æœ€æ–°å—ä¼¤æ—¶é—´ï¼Œç”¨äºä»‡æ¨ä¸¢å¤±
         float lastTimeDamaged = float.NegativeInfinity;
 
-        // ÒıÈëµĞÈËµÄ¼ì²âÄ£¿é
+        // å¼•å…¥æ•Œäººçš„æ£€æµ‹æ¨¡å—
         public EnemyDetectionModule EnemyDetectionModule { get; private set; }
-        // ÒıÈë×Ô´øµÄAIÑ°Â·Ä£¿é
+        // å¼•å…¥è‡ªå¸¦çš„AIå¯»è·¯æ¨¡å—
         public NavMeshAgent NavMeshAgent { get; private set; }
-        // ÒıÈë×Ô¶¨ÒåµÄÑ²¼ìÂ·¾¶
+        // å¼•å…¥è‡ªå®šä¹‰çš„å·¡æ£€è·¯å¾„
         public PatrolPath PatrolPath { get; set; }
 
-        // ÒıÈë½ÇÉ«
+        // ï¿½ï¿½ï¿½ï¿½ï¿½É«
         public Actor actor;
-        // °ó¶¨×´Ì¬£¬ÓÃÓÚµĞÈËµÄ×´Ì¬´¦Àí
+        // ç»‘å®šçŠ¶æ€ï¼Œç”¨äºæ•Œäººçš„çŠ¶æ€å¤„ç†
         public GameObject KnownDetectedTarget => EnemyDetectionModule.KnownDetectedTarget;
         public bool IsTargetInAttackRange => EnemyDetectionModule.IsTargetInAttackRange;
         public bool IsSeeingTarget => EnemyDetectionModule.IsSeeingTarget;
         public bool HadKnownTarget => EnemyDetectionModule.HadKnownTarget;
 
-        // µĞÈË¹ÜÀíÆ÷
+        // æ•Œäººç®¡ç†å™¨
         EnemyManager enemyManager;
-        // ½ÇÉ«¹ÜÀíÆ÷
+        // è§’è‰²ç®¡ç†å™¨
         ActorsManager actorsManager;
-        // ÓÎÏ·½ø³Ì¹ÜÀíÆ÷
+        // æ¸¸æˆè¿›ç¨‹ç®¡ç†å™¨
         GameFlowManager gameFlowManager;
-        // ±£´æ×Ô¼ºµÄ×é¼ş
+        // ä¿å­˜è‡ªå·±çš„ç»„ä»¶
         Collider[] colliders;
-        // µ¼º½Êı¾İÄ£¿é
+        // å¯¼èˆªæ•°æ®æ¨¡å—
         NavigationModule navigationModule;
-        // ¼ÇÂ¼µ±Ç°Ñ²¼ìµÄµ¼º½µã
+        // ï¿½ï¿½Â¼ï¿½ï¿½Ç°Ñ²ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½
         int pathDestinationNodeIndex;
-
 
         // Start is called before the first frame update
         void Start()
         {
-            // ³õÊ¼»¯
+            // åˆå§‹åŒ–
             enemyManager = FindObjectOfType<EnemyManager>();
             DebugUtility.HandleErrorIfNullFindObject<EnemyManager, EnemyController>(enemyManager, this);
 
@@ -92,10 +91,10 @@ namespace OneCanRun.AI.Enemies
             NavMeshAgent = GetComponent<NavMeshAgent>();
             DebugUtility.HandleErrorIfNullGetComponent<NavMeshAgent, EnemyController>(NavMeshAgent, this, gameObject);
 
-            // ×¢²áµĞÈË
+            // æ³¨å†Œæ•Œäºº
             enemyManager.RegisterEnemy(this);
 
-            // ³õÊ¼»¯¼ì²âÄ£¿é
+            // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
             EnemyDetectionModule[] enemyDetectionModules = GetComponentsInChildren<EnemyDetectionModule>();
             DebugUtility.HandleErrorIfNoComponentFound<EnemyDetectionModule, EnemyController>(enemyDetectionModules.Length, this,
                 gameObject);
@@ -121,13 +120,13 @@ namespace OneCanRun.AI.Enemies
         // Update is called once per frame
         void Update()
         {
-            // È·±£ËùÓĞµĞÈË¶¼ÔÚÒ»¶¨¸ß¶È
+            // ç¡®ä¿æ‰€æœ‰æ•Œäººéƒ½åœ¨ä¸€å®šé«˜åº¦
             EnsureIsWithinLevelBounds();
-            // Ã¿Ö¡¶¼Òª¼ì²â
+            // æ¯å¸§éƒ½è¦æ£€æµ‹
             EnemyDetectionModule.HandleDetection(actor, colliders);
         }
 
-        // È·±£ÔÚÏŞÖÆ·¶Î§ÄÚ²¿
+        // ç¡®ä¿åœ¨é™åˆ¶èŒƒå›´å†…éƒ¨
         void EnsureIsWithinLevelBounds()
         {
             if (transform.position.y < minHeight)
@@ -137,23 +136,23 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ´¦Àí¶ªÊ§Ä¿±ê
+        // å¤„ç†ä¸¢å¤±ç›®æ ‡
         void OnLostTarget()
         {
-            // µ÷ÓÃ°ó¶¨µÄµĞÈË¶ªÊ§ÊÂ¼ş
+            // è°ƒç”¨ç»‘å®šçš„æ•Œäººä¸¢å¤±äº‹ä»¶
             onLostTarget.Invoke();
         }
 
-        // ´¦Àí¼ì²âµ½Ä¿±ê
+        // å¤„ç†æ£€æµ‹åˆ°ç›®æ ‡
         void OnDetectTarget()
         {
             onDetectedTarget.Invoke();
         }
 
-        // ´¦ÀíÊÓ½Ç£¬×·×ÙÍæ¼Ò
+        // å¤„ç†è§†è§’ï¼Œè¿½è¸ªç©å®¶
         public void OrientTowards(Vector3 lookPosition)
         {
-            // ¼ÆËãÉäÏß·½Ïò
+            // è®¡ç®—å°„çº¿æ–¹å‘
             Vector3 lookDirection = Vector3.ProjectOnPlane(lookPosition - transform.position, Vector3.up).normalized;
             if(lookDirection.sqrMagnitude != 0f)
             {
@@ -163,22 +162,22 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ÅĞ¶ÏÑ²¼ìÂ·¾¶ÊÇ·ñÓĞĞ§
+        // åˆ¤æ–­å·¡æ£€è·¯å¾„æ˜¯å¦æœ‰æ•ˆ
         bool IsPathValid()
         {
             return PatrolPath && PatrolPath.PathNodes.Count > 0;
         }
 
-        // ÖØÖÃÂ·¾¶Ä¿µÄµØ
+        // é‡ç½®è·¯å¾„ç›®çš„åœ°
         public void resetPathDestination()
         {
             pathDestinationNodeIndex = 0;
         }
 
-        // ÉèÖÃÄ¿µÄµØ×î½üµÄµ¼º½Â·¾¶
+        // è®¾ç½®ç›®çš„åœ°æœ€è¿‘çš„å¯¼èˆªè·¯å¾„
         public void SetPathDestinationToClosestNode()
         {
-            // Â·¾¶ÓĞĞ§
+            // è·¯å¾„æœ‰æ•ˆ
             if (IsPathValid())
             {
                 int closestPathNodeIndex = 0;
@@ -199,7 +198,7 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // »ñÈ¡Â·¾¶µÄÄ¿µÄµØ
+        // è·å–è·¯å¾„çš„ç›®çš„åœ°
         public Vector3 GetDestinationOnPath()
         {
             if (IsPathValid())
@@ -212,7 +211,7 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ÉèÖÃµ¼º½Ä¿µÄµØ
+        // è®¾ç½®å¯¼èˆªç›®çš„åœ°
         public void SetNavDestination(Vector3 destination)
         {
             if (NavMeshAgent)
@@ -221,7 +220,7 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ¸üĞÂÂ·¾¶Ä¿µÄµØ
+        // æ›´æ–°å·¡æ£€èŠ‚ç‚¹
         public void UpdatePathDestination(bool inverseOrder = false)
         {
             if (IsPathValid())
@@ -245,10 +244,10 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // ³¢ÊÔ¹¥»÷
+        // ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½ï¿½
         public bool TryAttack()
         {
-            // ÓÎÏ·Î´½áÊø¾ÍÒª¼ÌĞø¹¥»÷
+            // ï¿½ï¿½Ï·Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (gameFlowManager.GameIsEnding)
             {
                 return false;
@@ -257,24 +256,24 @@ namespace OneCanRun.AI.Enemies
             return true;
         }
 
-        // µĞÈËÊÜÉË
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         public void EnemyDamaged(float damage, GameObject damageSource)
         {
-            // ÓÉÉËº¦À´Ô´£¬ÇÒÉËº¦À´Ô´²»ÊÇµĞÈË
+            // ç”±ä¼¤å®³æ¥æºï¼Œä¸”ä¼¤å®³æ¥æºä¸æ˜¯æ•Œäºº
             if (damageSource && !damageSource.GetComponent<EnemyController>())
             {
-                // µĞÈËÊÜÉËºóÒª¸üĞÂ¼ì²â×´Ì¬£¨ÎŞÊÓ¼ì²â·¶Î§£©
+                // æ•Œäººå—ä¼¤åè¦æ›´æ–°æ£€æµ‹çŠ¶æ€ï¼ˆæ— è§†æ£€æµ‹èŒƒå›´ï¼‰
                 EnemyDetectionModule.OnDamaged(damageSource);
 
-                // ¸üĞÂÊÜÉËÊ±¼ä
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
                 lastTimeDamaged = Time.time;
 
-                // ´¦ÀíÊÜÉËÒôĞ§
+                // å¤„ç†å—ä¼¤éŸ³æ•ˆ
 
             }
         }
 
-        // µĞÈËËÀÍö
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         public void EnemyDie()
         {
             // tells the game flow manager to handle the enemy destuction
@@ -284,7 +283,7 @@ namespace OneCanRun.AI.Enemies
             Destroy(gameObject, DeathDuration);
         }
 
-        // ³¢ÊÔµôÂäÕ½ÀûÆ·
+        // ï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½Õ½ï¿½ï¿½Æ·
         public bool TryDropItem()
         {
             if (DropRate == 0 || LootPrefab == null)

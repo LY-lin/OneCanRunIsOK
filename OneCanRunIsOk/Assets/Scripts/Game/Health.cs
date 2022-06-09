@@ -51,8 +51,6 @@ namespace OneCanRun.Game
             float healthBefore = CurrentHealth;
             CurrentHealth -= damage;
             CurrentHealth = Mathf.Clamp(CurrentHealth, 0f, MaxHealth);
-
-            Debug.Log(CurrentHealth);
             
             // call OnDamage action
             float trueDamageAmount = healthBefore - CurrentHealth;
@@ -83,7 +81,6 @@ namespace OneCanRun.Game
             if (CurrentHealth <= 0f)
             {
                 m_IsDead = true;
-                Debug.Log("I'm died");
                 OnDie?.Invoke();
                 Destroy(this.gameObject);
             }

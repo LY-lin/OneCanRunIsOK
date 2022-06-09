@@ -9,7 +9,6 @@ namespace OneCanRun.GamePlay
     [RequireComponent(typeof(PlayerInputHandler))]
     public class PlayerWeaponsManager : MonoBehaviour
     {
-
         //武器状态 手持-放下-放下预备-手持预备
         public enum WeaponSwitchState
         {
@@ -121,6 +120,7 @@ namespace OneCanRun.GamePlay
 
         void Start()
         {
+            //PlayerWeaponsManager.mPlayerWeaponsManager = this;
             //当前无武器 武器索引为-1
             ActiveWeaponIndex = -1;
             m_WeaponSwitchState = WeaponSwitchState.Down;
