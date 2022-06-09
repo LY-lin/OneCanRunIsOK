@@ -8,7 +8,7 @@ namespace OneCanRun.Game
     {
         public GameObject buffObject;
         private BuffController mbuff;
-        public ActorBuffManager aim_actorBuffManager;
+        private ActorBuffManager aim_actorBuffManager;
 
         public void buffGive()
         {

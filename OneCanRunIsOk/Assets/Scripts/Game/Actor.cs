@@ -70,6 +70,7 @@ namespace OneCanRun.Game
         }
         private void ResetExposedProperty()
         {
+            exposedProperty.setMaxHealth(baseProperty.getMaxHealth());
             exposedProperty.setHealRate(baseProperty.getHealRate());
             exposedProperty.setMagicAttack(baseProperty.getMagicAttack());
             exposedProperty.setMagicDefence(baseProperty.getMagicDefence());
@@ -167,13 +168,10 @@ namespace OneCanRun.Game
             }    
         }
 
-        ActorProperties m_BaseProperties;
-
-        ActorProperties m_PresentProperties;
 
         public ActorProperties getBaseProperties()
         {
-            return m_BaseProperties;
+            return baseProperty;
         }
 
         void Start()
