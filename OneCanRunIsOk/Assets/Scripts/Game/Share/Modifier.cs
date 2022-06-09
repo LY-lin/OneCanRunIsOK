@@ -18,6 +18,13 @@ namespace OneCanRun.Game.Share
             magicDefenceBuff=15,
             maxSpeedBuff=16,
             maxJumpBuff=17,
+            p_healRateBuff = 21,
+            p_physicalAttackBuff = 22,
+            p_magicAttackBuff = 23,
+            p_physicalDefenceBuff = 24,
+            p_magicDefenceBuff = 25,
+            p_maxSpeedBuff = 26,
+            p_maxJumpBuff = 27,
 
         }
         public float baseValue;

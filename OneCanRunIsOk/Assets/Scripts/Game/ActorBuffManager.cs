@@ -25,8 +25,7 @@ namespace OneCanRun.Game
         void Update()
         {
             timeSpend += Time.deltaTime;
-            /*if (timeSpend % 4 <= 0.5)
-                buffLose();*/
+            buffLose();
         }
 
         public void buffGain(BuffController newBuff)
@@ -46,12 +45,7 @@ namespace OneCanRun.Game
                 WeaponBuffList.Add(newBuff);
             }
             else { }
-            aim_Actor.addModifier(newBuff.healModifier);
-            /*aim_Actor.add;
-            aim_Actor.add;
-            aim_Actor.add;
-            aim_Actor.add;
-            aim_Actor.add;*/
+            buffChanged?.Invoke();
         }
         private bool checkActive(BuffController buff)
         {
@@ -87,5 +81,6 @@ namespace OneCanRun.Game
             }
             buffChanged?.Invoke();
         }
+
     }
 }
