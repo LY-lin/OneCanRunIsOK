@@ -1,0 +1,16 @@
+<MonsterConfig>
+  <Wave id="0">
+    <Time time="">5</Time>
+    <Position_x position_x="">10</Position_x>
+    <Position_y position_y="">1</Position_y>
+    <Position_z position_z="">7</Position_z>
+    <TypeID typeID="">0</TypeID>
+  </Wave>
+  <Wave id="1">
+    <Time time="">20</Time>
+    <Position_x position_x="">10</Position_x>
+    <Position_y position_y="">1</Position_y>
+    <Position_z position_z="">7</Position_z>
+    <TypeID typeID="">0</TypeID>
+  </Wave>
+</MonsterConfig>
