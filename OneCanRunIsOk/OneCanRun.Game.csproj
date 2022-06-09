@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\Game\GameFlowManager.cs" />
     <Compile Include="Assets\Scripts\Game\Share\Modifier.cs" />
     <Compile Include="Assets\Scripts\Game\GameConstants.cs" />
+    <Compile Include="Assets\Scripts\Game\BuffController.cs" />
     <Compile Include="Assets\Scripts\Game\EventManager.cs" />
     <Compile Include="Assets\Scripts\Game\EventFactory.cs" />
     <Compile Include="Assets\Scripts\Game\Share\Buff.cs" />
@@ -77,7 +78,6 @@
     <Compile Include="Assets\Scripts\Game\StaticEvents.cs" />
     <Compile Include="Assets\Scripts\Game\ActorsManager.cs" />
     <Compile Include="Assets\Scripts\Game\ObjectiveManager.cs" />
-    <Compile Include="Assets\Scripts\Game\BuffController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Game\OneCanRun.Game.asmdef" />

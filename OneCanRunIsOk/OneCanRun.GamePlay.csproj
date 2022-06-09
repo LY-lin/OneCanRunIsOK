@@ -57,7 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\GamePlay\PlayerCharacterController.cs" />
+    <Compile Include="Assets\Scripts\GamePlay\ActorBufferManager.cs" />
     <Compile Include="Assets\Scripts\GamePlay\PlayerSkillsManager.cs" />
+    <Compile Include="Assets\Scripts\GamePlay\PlayBuffController.cs" />
     <Compile Include="Assets\Scripts\GamePlay\BuffController.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Pickups\BuffPickup.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Pickups\HealthPickup.cs" />
@@ -69,8 +71,6 @@
     <Compile Include="Assets\Scripts\GamePlay\SkillController.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Pickups\Pickup.cs" />
     <Compile Include="Assets\Scripts\GamePlay\PlayerWeaponsManager.cs" />
-    <Compile Include="Assets\Scripts\GamePlay\ActorBufferManager.cs" />
-    <Compile Include="Assets\Scripts\GamePlay\PlayBuffController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\GamePlay\OneCanRun.GamePlay.asmdef" />
