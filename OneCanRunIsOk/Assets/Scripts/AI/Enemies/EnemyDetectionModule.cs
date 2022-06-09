@@ -19,6 +19,9 @@ namespace OneCanRun.AI.Enemies
         [Tooltip("Time before an enemy abandons a known target that it can't see anymore")]
         public float KnownTargetTimeout = 4f;
 
+        [Tooltip("The max angle at which the enemy can see its target in its horizon")]
+        public float DetectionAngle = 60f;
+
         public UnityAction onDetectedTarget;
         public UnityAction onLostTarget;
 
@@ -55,8 +58,14 @@ namespace OneCanRun.AI.Enemies
                 // ���ڲ�ͬ��Ӫ
                 if (actor.Affiliation != self.Affiliation)
                 {
+                    // ������������֮��ľ���
                     float sqrDistance = (actor.transform.position - DetectionSourcePoint.position).sqrMagnitude;
-                    if (sqrDistance < sqrDetectRange && sqrDistance < minDistance)
+                    // �����������������Ұ���ߵĽǶ�
+                    Vector3 midline = -DetectionSourcePoint.forward;
+                    Vector3 direction = actor.AimPoint.position - DetectionSourcePoint.position;
+                    float angle = Vector3.Angle(midline, direction);
+                    // Debug.Log("角度： " + angle + "   距离平方：" + sqrDistance);
+                    if (sqrDistance < sqrDetectRange && sqrDistance <= minDistance && angle <= DetectionAngle)
                     {
                         // 获取视线上一定距离的所有对象
                         RaycastHit[] hits = Physics.RaycastAll(DetectionSourcePoint.position,
@@ -82,7 +91,7 @@ namespace OneCanRun.AI.Enemies
                         if (found)
                         {
                             // 获取对象角色
-                            Actor hitActor = target.collider.GetComponent<Actor>();
+                            Actor hitActor = target.collider.GetComponentInParent<Actor>();
                             // 角色是同一个
                             if (hitActor == actor)
                             {
@@ -128,12 +137,6 @@ namespace OneCanRun.AI.Enemies
         {
             TimeLastSeenTarget = Time.time;
             KnownDetectedTarget = damageSource;
-
-        }
-
-        // 攻击事件
-        public virtual void OnAttack()
-        {
 
         }
     }

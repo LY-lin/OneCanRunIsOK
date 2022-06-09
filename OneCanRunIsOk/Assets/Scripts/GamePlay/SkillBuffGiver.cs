@@ -1,9 +1,8 @@
 using OneCanRun.Game.Share;
 using UnityEngine;
-using OneCanRun.Game;
 
 
-namespace OneCanRun.GamePlay
+namespace OneCanRun.Game
 {
     public class SkillBuffGiver : MonoBehaviour
     {

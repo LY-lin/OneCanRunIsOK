@@ -7,7 +7,7 @@ using OneCanRun.Game.Share;
 namespace OneCanRun.AI.Enemies
 {
     // 敌人控制器类，敌人定义自己的行为并将其控制权交给控制器
-    [RequireComponent(typeof(Health), typeof(Actor), typeof(NavMeshAgent))]
+    [RequireComponent(typeof(Actor), typeof(NavMeshAgent))]
     public class EnemyController : MonoBehaviour
     {
         [Tooltip("The distance at which the enemy considers that it has reached its current path destination point")]
@@ -36,21 +36,9 @@ namespace OneCanRun.AI.Enemies
         [Range(0, 1)]
         public float DropRate = 1f;
 
-        // ���������������Ƿ�����л�����
-        [Header("Weapons Parameters")]
-        [Tooltip("Allow weapon swapping for this enemy")]
-        public bool SwapToNextWeapon = false;
-
-        // ���֮�����ȴʱ��
-        [Tooltip("Time delay between a weapon swap and the next attack")]
-        public float DelayAfterWeaponSwap = 0f;
-
         // ��Ӧ���˵��ĸ��¼������������֡���ʧ�����˺�����
-        public UnityAction onAttack;
         public UnityAction onDetectedTarget;
         public UnityAction onLostTarget;
-        public UnityAction onDamaged;
-        public UnityAction onDie;
 
         // 最新受伤时间，用于仇恨丢失
         float lastTimeDamaged = float.NegativeInfinity;
@@ -61,9 +49,8 @@ namespace OneCanRun.AI.Enemies
         public NavMeshAgent NavMeshAgent { get; private set; }
         // 引入自定义的巡检路径
         public PatrolPath PatrolPath { get; set; }
-        // 引入敌人的血量系统
-        public Health health;
-        // 引入角色
+
+        // �����ɫ
         public Actor actor;
         // 绑定状态，用于敌人的状态处理
         public GameObject KnownDetectedTarget => EnemyDetectionModule.KnownDetectedTarget;
@@ -83,14 +70,6 @@ namespace OneCanRun.AI.Enemies
         NavigationModule navigationModule;
         // ��¼��ǰѲ��ĵ�����
         int pathDestinationNodeIndex;
-        // ��¼���һ�����ʱ��
-        float lastTimeWeaponSwapped = Mathf.NegativeInfinity;
-        // ��ǰ��������������Ǵ��ڶ������
-        int currentWeaponIndex;
-        // һ��������Ӧһ������������
-        WeaponController currentWeapon;
-        // ��ȡ�����������а󶨵�����
-        WeaponController[] weapons;
 
         // Start is called before the first frame update
         void Start()
@@ -105,9 +84,6 @@ namespace OneCanRun.AI.Enemies
             gameFlowManager = FindObjectOfType<GameFlowManager>();
             DebugUtility.HandleErrorIfNullFindObject<GameFlowManager, EnemyController>(gameFlowManager, this);
 
-            health = GetComponent<Health>();
-            DebugUtility.HandleErrorIfNullGetComponent<Health, EnemyController>(health, this, gameObject);
-
             actor = GetComponent<Actor>();
             DebugUtility.HandleErrorIfNullGetComponent<Actor, EnemyController>(actor, this, gameObject);
 
@@ -118,16 +94,7 @@ namespace OneCanRun.AI.Enemies
             // 注册敌人
             enemyManager.RegisterEnemy(this);
 
-            // ��ʼ������
-            FindAndInitializeAllWeapons();
-            currentWeapon = GetCurrentWeapon();
-            currentWeapon.ShowWeapon(true);
-
-            // �����¼�
-            health.OnDie += OnDie;
-            health.OnDamaged += OnDamaged;
-
-            // 初始化检测模块
+            // ��ʼ�����ģ��
             EnemyDetectionModule[] enemyDetectionModules = GetComponentsInChildren<EnemyDetectionModule>();
             DebugUtility.HandleErrorIfNoComponentFound<EnemyDetectionModule, EnemyController>(enemyDetectionModules.Length, this,
                 gameObject);
@@ -136,7 +103,6 @@ namespace OneCanRun.AI.Enemies
             EnemyDetectionModule = enemyDetectionModules[0];
             EnemyDetectionModule.onDetectedTarget += OnDetectTarget;
             EnemyDetectionModule.onLostTarget += OnLostTarget;
-            onAttack += EnemyDetectionModule.OnAttack;
 
             NavigationModule[] navigationModules = GetComponentsInChildren<NavigationModule>();
             DebugUtility.HandleWarningIfDuplicateObjects<EnemyDetectionModule, EnemyController>(enemyDetectionModules.Length,
@@ -254,7 +220,7 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // 
+        // 更新巡检节点
         public void UpdatePathDestination(bool inverseOrder = false)
         {
             if (IsPathValid())
@@ -278,44 +244,8 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // Ѱ�Ҳ���ʼ����������
-        void FindAndInitializeAllWeapons()
-        {
-            if (weapons == null)
-            {
-                weapons = GetComponentsInChildren<WeaponController>();
-                DebugUtility.HandleErrorIfNoComponentFound<WeaponController, EnemyController>(weapons.Length, this, gameObject);
-
-                // ��ʼ������������ӵ����
-                foreach (WeaponController weapon in weapons)
-                {
-                    weapon.Owner = gameObject;
-                }
-            }
-        }
-
-        // ��ȡ��ǰ����
-        public WeaponController GetCurrentWeapon()
-        {
-            FindAndInitializeAllWeapons();
-            if (currentWeapon == null)
-            {
-                SetCurrentWeapon(0);
-            }
-            DebugUtility.HandleErrorIfNullGetComponent<WeaponController, EnemyController>(currentWeapon, this, gameObject);
-            return currentWeapon;
-        }
-
-        // ���õ�ǰ����
-        public void SetCurrentWeapon(int index)
-        {
-            currentWeaponIndex = index;
-            currentWeapon = weapons[currentWeaponIndex];
-            lastTimeWeaponSwapped = SwapToNextWeapon ? Time.time : Mathf.NegativeInfinity;
-        }
-
         // ���Թ���
-        public bool TryAttack(Vector3 enemyPosition)
+        public bool TryAttack()
         {
             // ��Ϸδ������Ҫ��������
             if (gameFlowManager.GameIsEnding)
@@ -323,45 +253,11 @@ namespace OneCanRun.AI.Enemies
                 return false;
             }
 
-            // ���ˣ����������������߼���������
-            OrientWeaponsTowards(enemyPosition);
-
-            if (lastTimeWeaponSwapped + DelayAfterWeaponSwap >= Time.time)
-            {
-                return false;
-            }
-
-            // ���
-            bool didFire = GetCurrentWeapon().HandleShootInputs(false, true, false);
-            Debug.Log(GetCurrentWeapon().GetMyCurrentAmmo());
-
-            if (didFire && onAttack != null)
-            {
-                onAttack.Invoke();
-
-                if (SwapToNextWeapon && weapons.Length > 1)
-                {
-                    int nextWeaponIndex = (currentWeaponIndex + 1) % weapons.Length;
-                    SetCurrentWeapon(nextWeaponIndex);
-                }
-            }
-
-            return didFire;
-        }
-
-        // ������������
-        public void OrientWeaponsTowards(Vector3 lookPostion)
-        {
-            // �������������ĳ��򣬲�����
-            foreach (WeaponController weapon in weapons)
-            {
-                Vector3 weaponForward = (lookPostion - weapon.WeaponRoot.transform.position).normalized;
-                weapon.transform.forward = weaponForward;
-            }
+            return true;
         }
 
         // ��������
-        void OnDamaged(float damage, GameObject damageSource)
+        public void EnemyDamaged(float damage, GameObject damageSource)
         {
             // 由伤害来源，且伤害来源不是敌人
             if (damageSource && !damageSource.GetComponent<EnemyController>())
@@ -369,10 +265,7 @@ namespace OneCanRun.AI.Enemies
                 // 敌人受伤后要更新检测状态（无视检测范围）
                 EnemyDetectionModule.OnDamaged(damageSource);
 
-                // 敌人自定义受伤事件
-                onDamaged?.Invoke();
-
-                // 更新受伤时间
+                // ��������ʱ��
                 lastTimeDamaged = Time.time;
 
                 // 处理受伤音效
@@ -380,7 +273,8 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        void OnDie()
+        // ��������
+        public void EnemyDie()
         {
             // tells the game flow manager to handle the enemy destuction
             enemyManager.UnregisterEnemy(this);
@@ -389,6 +283,7 @@ namespace OneCanRun.AI.Enemies
             Destroy(gameObject, DeathDuration);
         }
 
+        // ���Ե���ս��Ʒ
         public bool TryDropItem()
         {
             if (DropRate == 0 || LootPrefab == null)

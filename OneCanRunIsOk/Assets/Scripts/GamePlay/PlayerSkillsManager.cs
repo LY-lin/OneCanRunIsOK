@@ -10,10 +10,10 @@ namespace OneCanRun.GamePlay
     [RequireComponent(typeof(PlayerInputHandler))]
     public class PlayerSkillsManager : MonoBehaviour
     {
-        [Tooltip("³õÊ¼Ð¯´ø¼¼ÄÜ")]
+        [Tooltip("ï¿½ï¿½Ê¼Ð¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
         public SkillController StartSkill;
 
-        [Tooltip("¼¼ÄÜÊÍ·ÅÎ»ÖÃ")]
+        [Tooltip("ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½Î»ï¿½ï¿½")]
         public Transform SkillSocket;
 
         PlayerInputHandler m_InputHandler;
@@ -31,17 +31,17 @@ namespace OneCanRun.GamePlay
 
         void Update()
         {
-            //Ê¹ÓÃ¼¼ÄÜ
+            //Ê¹ï¿½Ã¼ï¿½ï¿½ï¿½
             if (m_InputHandler.GetUseSkillButtonDown())
             {
                 CurrentSkillInstance.UseSkill();
             }
         }
 
-        //¸Ä±äµ±Ç°¼¼ÄÜ
+        //ï¿½Ä±äµ±Ç°ï¿½ï¿½ï¿½ï¿½
         void ChangeCurrentSkill(SkillController skillPrefab)
         {
-            //É¾³ýÔ­¼¼ÄÜÊµÀý
+            //É¾ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
             if (CurrentSkillInstance != null)
             {
                 Destroy(CurrentSkillInstance.gameObject);
@@ -54,7 +54,7 @@ namespace OneCanRun.GamePlay
             CurrentSkillInstance.Owner = gameObject;
             CurrentSkillInstance.UpdateOwner();
 
-            //ÈôÎªCastÀàÐÍ
+            //ï¿½ï¿½ÎªCastï¿½ï¿½ï¿½ï¿½
             if(CurrentSkillInstance.m_SkillType== SkillType.Cast)
             {
                 WeaponController m_SkillWeapon= CurrentSkillInstance.GetComponent<WeaponController>();

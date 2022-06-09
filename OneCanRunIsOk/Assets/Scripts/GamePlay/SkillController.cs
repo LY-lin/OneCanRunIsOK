@@ -7,50 +7,50 @@ using OneCanRun.Game.Share;
 
 namespace OneCanRun.GamePlay
 {
-    //¼¼ÄÜÀàÐÍ
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public enum SkillType
     {
-        //Í¶Éä¹¥»÷-Èç»ðÇòµÈ
+        //Í¶ï¿½ä¹¥ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Cast,
-        //ÔöÒæ×´Ì¬-Èç»Ö¸´HP¡¢Ìá¸ß¹¥»÷Á¦µÈ
+        //ï¿½ï¿½ï¿½ï¿½×´Ì¬-ï¿½ï¿½Ö¸ï¿½HPï¿½ï¿½ï¿½ï¿½ß¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Buff,
-        //ÕÙ»½Îï-ÅÚÌ¨¡¢»úÆ÷ÈË¡¢ÕÙ»½ÎïµÈ
+        //ï¿½Ù»ï¿½ï¿½ï¿½-ï¿½ï¿½Ì¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¡ï¿½ï¿½Ù»ï¿½ï¿½ï¿½ï¿½
         Summon,
     }
 
     public class SkillController : MonoBehaviour
     {
-        [Header("Í¨ÓÃÉèÖÃ")]
-        [Tooltip("¼¼ÄÜÃû³Æ")]
+        [Header("Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
+        [Tooltip("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
         public string SkillName;
 
-        [Tooltip("¼¼ÄÜÃèÊö")]
+        [Tooltip("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
         public string SkillDescription;
 
-        [Tooltip("¼¼ÄÜÍ¼±ê")]
+        [Tooltip("ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½")]
         public Sprite SkillIcon;
 
-        [Tooltip("¼¼ÄÜÀàÐÍ-Í¶Éä/ÔöÒæ/ÕÙ»½")]
+        [Tooltip("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-Í¶ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½/ï¿½Ù»ï¿½")]
         public SkillType m_SkillType;
 
-        [Tooltip("¼¼ÄÜÀäÈ´Ê±¼ä")]
+        [Tooltip("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´Ê±ï¿½ï¿½")]
         public float CoolingTime = 10f;
 
-        [Header("Í¶ÉäÀàÐÍÉèÖÃ")]
+        [Header("Í¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
         
-        [Header("ÔöÒæÀàÐÍÉèÖÃ")]
+        [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
 
-        [Header("ÕÙ»½ÀàÐÍÉèÖÃ")]
+        [Header("ï¿½Ù»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
 
-        //ÉÏ´ÎÊ¹ÓÃ¼¼ÄÜÊ±¼ä
+        //ï¿½Ï´ï¿½Ê¹ï¿½Ã¼ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
         float m_LastTimeUse = Mathf.NegativeInfinity;
-        //ÊÊÅä³É¼¼ÄÜµÄÎäÆ÷¿ØÖÆÆ÷
+        //ï¿½ï¿½ï¿½ï¿½É¼ï¿½ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         WeaponController m_SkillWeapon;
-        //³ÖÓÐÕßµÄActor£¬´æ·Å½ÇÉ«»ù´¡ÊýÖµ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ßµï¿½Actorï¿½ï¿½ï¿½ï¿½Å½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
         Actor m_Actor;
-        //Ô´Ô¤ÖÆ¼þ
+        //Ô´Ô¤ï¿½Æ¼ï¿½
         public GameObject SourcePrefab { get; set; }
-        //³ÖÓÐÕß
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         public GameObject Owner { get; set; }
 
         void Awake()
@@ -68,10 +68,10 @@ namespace OneCanRun.GamePlay
 
         //}
 
-        //Ê¹ÓÃ¸Ã¼¼ÄÜ
+        //Ê¹ï¿½Ã¸Ã¼ï¿½ï¿½ï¿½
         public bool UseSkill()
         {
-            //ÈÔÔÚÀäÈ´ÖÐ
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½
             if (m_LastTimeUse + CoolingTime > Time.time)
             {
                 Debug.Log("Cooling!");
@@ -80,7 +80,7 @@ namespace OneCanRun.GamePlay
 
             m_LastTimeUse = Time.time;
 
-            //ÅÐ¶Ï¼¼ÄÜÀàÐÍ
+            //ï¿½Ð¶Ï¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             switch (m_SkillType)
             {
                 case SkillType.Cast:
@@ -102,14 +102,14 @@ namespace OneCanRun.GamePlay
             return true;
         }
         
-        //Í¶Éä¼¼ÄÜÊµÏÖ
+        //Í¶ï¿½ä¼¼ï¿½ï¿½Êµï¿½ï¿½
         void UseCastSkill()
         {
             m_SkillWeapon.HandleShootInputs(true, false, false);
             Debug.Log("Cast!");
         }
 
-        //ÔöÒæ¼¼ÄÜÊµÏÖ
+        //ï¿½ï¿½ï¿½æ¼¼ï¿½ï¿½Êµï¿½ï¿½
         void UseBuffSkill()
         {
             SkillBuffGiver m_SkillBuffGiver = GetComponent<SkillBuffGiver>();
@@ -121,13 +121,13 @@ namespace OneCanRun.GamePlay
 
         }
 
-        //ÕÙ»½¼¼ÄÜÊµÏÖ
+        //ï¿½Ù»ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
         void UseSummonSkill()
         {
             Debug.Log("Summon!");
         }
         
-        //¸üÐÂ¸Ã¼¼ÄÜµÄ³ÖÓÐÕß
+        //ï¿½ï¿½ï¿½Â¸Ã¼ï¿½ï¿½ÜµÄ³ï¿½ï¿½ï¿½ï¿½ï¿½
         public void UpdateOwner()
         {
             m_Actor = Owner.GetComponent<Actor>();

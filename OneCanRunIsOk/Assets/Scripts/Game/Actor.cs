@@ -143,6 +143,15 @@ namespace OneCanRun.Game
             }    
         }
 
+        ActorProperties m_BaseProperties;
+
+        ActorProperties m_PresentProperties;
+
+        public ActorProperties getBaseProperties()
+        {
+            return m_BaseProperties;
+        }
+
         void Start()
         {
             m_ActorsManager = GameObject.FindObjectOfType<ActorsManager>();
