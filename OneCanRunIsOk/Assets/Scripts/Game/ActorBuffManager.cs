@@ -63,7 +63,6 @@ namespace OneCanRun.Game
         public void buffLose()
         {
             bool changed = false;
-
             List<BuffController> listToDelete = new List<BuffController>();
             List<BuffController> listToPercentDelete = new List<BuffController>();
             for (int i = 0; i < NumBuffList.Count;i++)

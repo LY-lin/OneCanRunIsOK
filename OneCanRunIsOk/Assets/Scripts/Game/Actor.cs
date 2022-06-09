@@ -78,7 +78,7 @@ namespace OneCanRun.Game
 
         private void OnEnable()
         {
-
+            mModifier = new List<Share.Modifier>();
             string fileName = "defaultProperties";
             string configDirectory = System.IO.Directory.GetCurrentDirectory();
             configDirectory += "\\Config\\";
@@ -97,7 +97,8 @@ namespace OneCanRun.Game
                     break;
             }
 
-            //OneCanRun.Game.Share.Modifier modifier = new Share.Modifier(0, Share.Modifier.ModifierType.experience, this);
+            OneCanRun.Game.Share.Modifier modifier = new Share.Modifier(0, Share.Modifier.ModifierType.experience, this);
+            mModifier.Add(modifier);
             baseProperty = new OneCanRun.Game.Share.ActorProperties();
             exposedProperty = new OneCanRun.Game.Share.ActorProperties();
 
@@ -109,48 +110,56 @@ namespace OneCanRun.Game
 
             foreach (XmlElement child in xmlNodeList)
             {
-                if (child.GetAttribute("exp") == "")
+                //XmlNodeList a = child.GetElementsByTagName("EXP");
+                //string a = child.GetAttribute("exp");
+                //string a = child.Name;
+                if (child.Name == "EXP")
                 {
                     baseProperty.setEXP(ulong.Parse(child.InnerText));
                 }
-                else if (child.GetAttribute("maxHealth") == "")
+                if (child.Name == "MAXHEALTH")
                 {
                     baseProperty.setMaxHealth(float.Parse(child.InnerText));
                 }
-                else if (child.GetAttribute("healRate") == "")
+                if (child.Name == "HEALRATE")
                 {
                     baseProperty.setHealRate(float.Parse(child.InnerText));
                 }
-                else if (child.GetAttribute("physicalAttack") == "")
+                if (child.Name == "PHYSICALATTACK")
                 {
                     baseProperty.setPhysicalAttack(float.Parse(child.InnerText));
                 }
-                else if (child.GetAttribute("magicAttack") == "")
+                if (child.Name == "MAGICATTACK")
                 {
                     baseProperty.setMagicAttack(float.Parse(child.InnerText));
                 }
-                else if (child.GetAttribute("physicalDefence") == "")
+                if (child.Name == "PHYSICALDEFENCE")
                 {
                     baseProperty.setPhysicalDefence(float.Parse(child.InnerText));
                 }
-                else if (child.GetAttribute("magicDefence") == "")
+                if (child.Name == "MAGICDEFENCE")
                 {
                     baseProperty.setMagicDefence(float.Parse(child.InnerText));
                 }
-                else if (child.GetAttribute("maxSpeed") == "")
+                if (child.Name == "MAXSPEED")
                 {
                     baseProperty.setMaxSpeed(float.Parse(child.InnerText));
                 }
-                else if (child.GetAttribute("maxJump") == "")
+                if (child.Name == "MAXJUMP")
                 {
                     baseProperty.setMaxJump(float.Parse(child.InnerText));
                 }
-                else
-                {
-                    throw new System.Exception();
-
-                }
+                
             }    
+        }
+
+        ActorProperties m_BaseProperties;
+
+        ActorProperties m_PresentProperties;
+
+        public ActorProperties getBaseProperties()
+        {
+            return m_BaseProperties;
         }
 
         void Start()

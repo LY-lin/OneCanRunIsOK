@@ -450,6 +450,8 @@ MonoBehaviour:
   RecoilForce: 1
   AutomaticReload: 1
   HasPhysicalBullets: 0
+  damage: 0
+  speed: 0
   ClipSize: 30
   ShellCasing: {fileID: 0}
   EjectionPort: {fileID: 0}
