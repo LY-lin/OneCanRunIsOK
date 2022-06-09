@@ -195,70 +195,6 @@ Transform:
   m_Father: {fileID: 1229920023}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &39439078
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 39439080}
-  - component: {fileID: 39439079}
-  - component: {fileID: 39439083}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &39439079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39439078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6af01779345aa664c85a6bc91204c961, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillName: 
-  SkillDescription: 
-  SkillIcon: {fileID: 0}
-  m_SkillType: 1
-  CoolingTime: 0
---- !u!4 &39439080
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39439078}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12, y: -0.5, z: 7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1882154184}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &39439083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39439078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f98268829959694fa1943a83564cdb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buffObject: {fileID: 230908398740711128, guid: 89def3819bc2be740b3f265957efb47c, type: 3}
-  aim_actorBuffManager: {fileID: 1882154196}
 --- !u!1 &83576587
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,6 +1091,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 5fc0e3d37ec294384aaa0b18e537ff86, type: 3}
+--- !u!1 &612010811
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 612010812}
+  m_Layer: 7
+  m_Name: SkillSocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &612010812
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612010811}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 963194228}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &639186182
 GameObject:
   m_ObjectHideFlags: 0
@@ -1919,6 +1886,7 @@ Transform:
   m_Children:
   - {fileID: 683655695}
   - {fileID: 1229920023}
+  - {fileID: 612010812}
   m_Father: {fileID: 1882154184}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1970,6 +1938,7 @@ MonoBehaviour:
   DetectionRange: 20
   AttackRange: 10
   KnownTargetTimeout: 4
+  DetectionAngle: 60
 --- !u!1001 &1008628411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3057,9 +3026,6 @@ MonoBehaviour:
   DeathDuration: 0
   LootPrefab: {fileID: 0}
   DropRate: 1
-  SwapToNextWeapon: 0
-  DelayAfterWeaponSwap: 0
-  health: {fileID: 1456041765}
   actor: {fileID: 1456041763}
 --- !u!114 &1456041763
 MonoBehaviour:
@@ -3121,11 +3087,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackStopDistanceRatio: 0.5
-  detectDistance: 10
   maxHealth: 10
-  attckDistance: 10
+  SwapToNextWeapon: 0
+  DelayAfterWeaponSwap: 0
   state: 0
   controller: {fileID: 1456041762}
+  health: {fileID: 0}
 --- !u!195 &1456041767
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3715,7 +3682,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 39439080}
   - {fileID: 963194228}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -3937,7 +3903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingWeapons:
-  - {fileID: 963746503092480719, guid: a35b9285b89ccef4686aa56df0f2a3d8, type: 3}
+  - {fileID: 963746503092480719, guid: f5ecf3f83e00dce488c7c8e7e377478b, type: 3}
   WeaponCamera: {fileID: 963194227}
   WeaponParentSocket: {fileID: 38422358}
   DefaultWeaponPosition: {fileID: 401497594}
@@ -3980,8 +3946,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da7a12211e19e14387015f5421488d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartSkill: {fileID: 39439079}
-  SkillSocket: {fileID: 0}
+  StartSkill: {fileID: 3930991074181903278, guid: 43428ad6aedf6b9418e3defccb995ba4, type: 3}
+  SkillSocket: {fileID: 612010812}
 --- !u!114 &1882154196
 MonoBehaviour:
   m_ObjectHideFlags: 0
