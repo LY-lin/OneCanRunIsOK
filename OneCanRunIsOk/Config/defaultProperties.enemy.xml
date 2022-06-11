@@ -1,6 +1,6 @@
 <PropertyConfig>
   <EXP exp="">0</EXP>
-  <MAXHEALTH maxHealth="">100</MAXHEALTH>
+  <MAXHEALTH maxHealth="">2000</MAXHEALTH>
   <HEALRATE healRate="">1</HEALRATE>
   <PHYSICALATTACK physicalAttack="">1</PHYSICALATTACK>
   <MAGICATTACK magicAttack="">1</MAGICATTACK>
