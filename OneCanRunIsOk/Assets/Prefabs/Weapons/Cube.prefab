@@ -99,13 +99,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponName: 
-  WeaponIcon: {fileID: 21300000, guid: d977df5edeb809f41b362e4bc5d35645, type: 3}
-  bullet: {fileID: 1254343392523665438, guid: 28ca67a84a75e9642a8da4bee674efbc, type: 3}
+  WeaponIcon: {fileID: 0}
+  RemoteWeapon: 1
+  WeaponRoot: {fileID: 963746503092480717}
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 0}
     CrosshairSize: 0
     CrosshairColor: {r: 0, g: 0, b: 0, a: 0}
-  WeaponRoot: {fileID: 963746503092480717}
+  DefalutTransform: {fileID: 0}
+  AttackTransfrom: {fileID: 0}
+  Points: []
+  DelayBetweenAttacks: 0.5
+  bullet: {fileID: 1254343392523665438, guid: 28ca67a84a75e9642a8da4bee674efbc, type: 3}
   WeaponMuzzle: {fileID: 963746503783218575}
   ShootType: 1
   DelayBetweenShots: 0.1
