@@ -122,8 +122,8 @@ namespace OneCanRun.AI.Enemies
                     break;
                 case AIState.Attack:
                     if (Vector3.Distance(controller.KnownDetectedTarget.transform.position,
-                            controller.EnemyDetectionModule.DetectionSourcePoint.position)
-                        >= (AttackStopDistanceRatio * controller.EnemyDetectionModule.AttackRange))
+                            controller.DetectionModule.DetectionSourcePoint.position)
+                        >= (AttackStopDistanceRatio * controller.DetectionModule.AttackRange))
                     {
                         controller.SetNavDestination(controller.KnownDetectedTarget.transform.position);
                     }
@@ -184,6 +184,7 @@ namespace OneCanRun.AI.Enemies
         // ���������¼�
         void OnDamaged(float damage, GameObject damageSource)
         {
+            Debug.Log("Enemy On Damaged, current health: " + health.CurrentHealth);
             controller.EnemyDamaged(damage, damageSource);
 
             // ������Ч

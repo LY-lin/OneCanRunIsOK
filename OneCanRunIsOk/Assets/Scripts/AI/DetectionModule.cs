@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using OneCanRun.Game;
 
-namespace OneCanRun.AI.Enemies
+namespace OneCanRun.AI
 {
-    public class EnemyDetectionModule : MonoBehaviour
+    public class DetectionModule : MonoBehaviour
     {
         [Tooltip("The point representing the source of target-detection raycasts for the enemy AI")]
         public Transform DetectionSourcePoint;
@@ -38,7 +38,7 @@ namespace OneCanRun.AI.Enemies
         void Start()
         {
             manager = FindObjectOfType<ActorsManager>();
-            DebugUtility.HandleErrorIfNullFindObject<ActorsManager, EnemyDetectionModule>(manager, this);
+            DebugUtility.HandleErrorIfNullFindObject<ActorsManager, DetectionModule>(manager, this);
         }
 
         public virtual void HandleDetection(Actor self, Collider[] selfColliders)
