@@ -77,7 +77,7 @@ namespace OneCanRun.GamePlay
 
         void Start()
         {
-        
+            counter = mMonsterList.Count;
         }
 
         // Update is called once per frame

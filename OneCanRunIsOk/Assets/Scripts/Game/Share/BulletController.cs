@@ -62,6 +62,8 @@ namespace OneCanRun.Game.Share
             }
 
             Actor target = col.gameObject.GetComponent<Actor>();
+            //if (target == null)
+                //return;
             if (target)
             {
                 if (target.Affiliation == this.shooterType)
