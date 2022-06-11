@@ -302,7 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponName: AR1
   WeaponIcon: {fileID: 21300000, guid: d977df5edeb809f41b362e4bc5d35645, type: 3}
-  bullet: {fileID: 3659995153115176983, guid: a6bf6ea75afdae94e82481dd0d440975, type: 3}
+  bullet: {fileID: 1254343392523665438, guid: 28ca67a84a75e9642a8da4bee674efbc, type: 3}
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 0}
     CrosshairSize: 0

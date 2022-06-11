@@ -36,14 +36,15 @@ namespace OneCanRun.GamePlay
         [Tooltip("������ȴʱ��")]
         public float CoolingTime = 10f;
 
+        /*
         [Header("Ͷ����������")]
-        
+
         [Header("������������")]
 
         [Header("�ٻ���������")]
-
+        */
         //�ϴ�ʹ�ü���ʱ��
-        float m_LastTimeUse = Mathf.NegativeInfinity;
+        public float m_LastTimeUse { get; private set; }
         //����ɼ��ܵ�����������
         WeaponController m_SkillWeapon;
         //�����ߵ�Actor����Ž�ɫ������ֵ
@@ -61,6 +62,7 @@ namespace OneCanRun.GamePlay
                 DebugUtility.HandleErrorIfNullGetComponent<WeaponController, SkillController>(m_SkillWeapon,
                     this, gameObject);
             }
+            m_LastTimeUse = Mathf.NegativeInfinity;
         }
 
         //void Update()
