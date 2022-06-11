@@ -8,7 +8,7 @@ namespace OneCanRun.UI
 {
     public class PlayerHPBar : MonoBehaviour
     {
-        [Tooltip("Image component dispplaying current health")]
+        [Tooltip("Image component displaying current health")]
         public Image HealthFillImage;
         [Tooltip("Component to animate the color when empty or full")]
         public FillBarColorChange FillBarColorChange;

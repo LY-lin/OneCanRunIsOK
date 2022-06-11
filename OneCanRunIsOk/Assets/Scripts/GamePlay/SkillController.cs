@@ -34,14 +34,15 @@ namespace OneCanRun.Game.Share
         [Tooltip("技能冷却时间")]
         public float CoolingTime = 10f;
 
+        /*
         [Header("投射类型设置")]
-        
+
         [Header("增益类型设置")]
 
         [Header("召唤类型设置")]
-
+        */
         //上次使用技能时间
-        float m_LastTimeUse = Mathf.NegativeInfinity;
+        public float m_LastTimeUse { get; private set; }
         //适配成技能的武器控制器
         WeaponController m_SkillWeapon;
         //源预制件
@@ -49,6 +50,7 @@ namespace OneCanRun.Game.Share
 
         void Awake()
         {
+            m_LastTimeUse = Mathf.NegativeInfinity;
             m_SkillWeapon = GetComponent<WeaponController>();
             DebugUtility.HandleErrorIfNullGetComponent<WeaponController, SkillController>(m_SkillWeapon,
                 this, gameObject);

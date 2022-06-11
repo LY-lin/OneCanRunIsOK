@@ -30,7 +30,7 @@ namespace OneCanRun.UI
             
             HealthBarPivot.LookAt(Camera.main.transform.position);
             if (HideFullHealthBar)
-                HealthBarPivot.gameObject.SetActive(HealthImage.fillAmount < (1 - 1 / m_health.MaxHealth));
+                HealthBarPivot.gameObject.SetActive(HealthImage.fillAmount < (1 - 0.1f / m_health.MaxHealth));
         }
     }
 }
