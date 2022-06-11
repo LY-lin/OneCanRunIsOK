@@ -29,8 +29,12 @@ namespace OneCanRun.UI
         // Start is called before the first frame update
         void Start()
         {
-            m_skillController = GetComponent<SkillController>();
-            DebugUtility.HandleErrorIfNullGetComponent<SkillController, SkillCoolDown>(m_skillController, this,m_skillController.gameObject);
+            PlayerSkillsManager playerSkillsManager = FindObjectOfType<PlayerSkillsManager>();
+            DebugUtility.HandleErrorIfNullFindObject<PlayerSkillsManager, SkillCoolDown>(playerSkillsManager,
+                this);
+
+            m_skillController = playerSkillsManager.GetComponent<SkillController>();
+            DebugUtility.HandleErrorIfNullGetComponent<SkillController, SkillCoolDown>(m_skillController, this, playerSkillsManager.gameObject);
 
         }
 
