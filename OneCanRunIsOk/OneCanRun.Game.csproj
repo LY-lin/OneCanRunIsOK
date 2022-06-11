@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Game\GameConstants.cs" />
     <Compile Include="Assets\Scripts\Game\BuffController.cs" />
     <Compile Include="Assets\Scripts\Game\EventManager.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\WeaponRayTestBase.cs" />
     <Compile Include="Assets\Scripts\Game\EventFactory.cs" />
     <Compile Include="Assets\Scripts\Game\Share\Buff.cs" />
     <Compile Include="Assets\Scripts\Game\ActorBuffManager.cs" />
