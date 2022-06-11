@@ -316,7 +316,7 @@ MonoBehaviour:
   RecoilForce: 1
   AutomaticReload: 0
   HasPhysicalBullets: 1
-  damage: 200
+  damage: 50
   speed: 40
   ClipSize: 30
   ShellCasing: {fileID: 0}

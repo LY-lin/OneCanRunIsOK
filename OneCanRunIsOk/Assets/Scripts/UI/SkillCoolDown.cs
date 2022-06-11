@@ -13,10 +13,9 @@ namespace OneCanRun.UI
     {
         [Tooltip("Image component displaying current last Cool down time")]
         public Image CoolDownTimeImage;
-        [Tooltip("Default foreground color")]
-        public Color DefaultCoolColor;
-        [Tooltip("Flash foreground color when  want to use but cooling")]
-        public Color FlashCoolColor;
+        [Tooltip("Warning cooling image")]
+        public Image Warning;
+
         [Tooltip("Skill Image")]
         public Image SkillIcon;
 
@@ -26,6 +25,7 @@ namespace OneCanRun.UI
         PlayerInputHandler playerInputHandler;
         SkillController m_skillController;
         float LastTimeButton = Mathf.NegativeInfinity;    //上次冷却中按下技能键的时间
+        bool ifTip;
         // Start is called before the first frame update
         void Start()
         {
@@ -33,28 +33,41 @@ namespace OneCanRun.UI
             DebugUtility.HandleErrorIfNullFindObject<PlayerSkillsManager, SkillCoolDown>(playerSkillsManager,
                 this);
 
-            m_skillController = playerSkillsManager.GetComponent<SkillController>();
-            DebugUtility.HandleErrorIfNullGetComponent<SkillController, SkillCoolDown>(m_skillController, this, playerSkillsManager.gameObject);
+            playerInputHandler = FindObjectOfType<PlayerInputHandler>();
+            DebugUtility.HandleErrorIfNullFindObject<PlayerInputHandler, PlayerWeaponsManager>(playerInputHandler, this);
 
+            Debug.Log(playerSkillsManager.CurrentSkillInstance);
+            m_skillController = playerSkillsManager.CurrentSkillInstance;
+            Cooling.gameObject.SetActive(false);
+            Warning.gameObject.SetActive(false);
+            ifTip = false;
         }
 
         // Update is called once per frame
         void Update()
         {
-            float lastTimeRatio = 1 - (Time.time - m_skillController.m_LastTimeUse / m_skillController.CoolingTime);
-            CoolDownTimeImage.fillAmount = (lastTimeRatio) > 0 ? lastTimeRatio : 0 ;
-            CoolDownTimeImage.gameObject.SetActive(lastTimeRatio < (1 - 0.1f / m_skillController.CoolingTime) && lastTimeRatio>0);
-
-            if (CoolDownTimeImage.fillAmount > 0 && playerInputHandler.GetUseSkillButtonDown())
+             
+            if (CoolDownTimeImage.fillAmount >0 && playerInputHandler.GetUseSkillButtonDown())
             {
-                CoolDownTimeImage.color = FlashCoolColor;
                 LastTimeButton = Time.time;
+                Cooling.gameObject.SetActive(true);
+                ifTip = true;
+                Warning.gameObject.SetActive(true);
             }
-            else
+
+            
+            float lastTimeRatio = 1 - (Time.time - m_skillController.m_LastTimeUse )/ m_skillController.CoolingTime;
+
+            CoolDownTimeImage.fillAmount = (lastTimeRatio) > 0 ? lastTimeRatio : 0;
+            CoolDownTimeImage.gameObject.SetActive(lastTimeRatio <= 1 && lastTimeRatio > 0);
+
+
+            if (CoolDownTimeImage.fillAmount == 0 || (ifTip&&Time.time-LastTimeButton > 1f))
             {
-                CoolDownTimeImage.color = DefaultCoolColor;
+                Cooling.gameObject.SetActive(false);
+                Warning.gameObject.SetActive(false);
+                ifTip = false;
             }
-            Cooling.gameObject.SetActive(Time.time - LastTimeButton > 1f);
 
         }
     }

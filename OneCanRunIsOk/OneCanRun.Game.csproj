@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\Game\StaticEvents.cs" />
     <Compile Include="Assets\Scripts\Game\ActorsManager.cs" />
     <Compile Include="Assets\Scripts\Game\ObjectiveManager.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\MeleeController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Game\OneCanRun.Game.asmdef" />
