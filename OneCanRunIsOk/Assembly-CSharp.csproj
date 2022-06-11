@@ -837,9 +837,9 @@
       <Project>{31FE8E72-AA61-C945-B617-01FDE253E853}</Project>
       <Name>OneCanRun.Game</Name>
     </ProjectReference>
-    <ProjectReference Include="Enemies.AI.csproj">
-      <Project>{C7FBDE88-1F05-2294-09A3-9B8FD007F3A6}</Project>
-      <Name>Enemies.AI</Name>
+    <ProjectReference Include="NewAssembly.csproj">
+      <Project>{12F5B481-6E83-B172-7A85-373443F9A58B}</Project>
+      <Name>NewAssembly</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

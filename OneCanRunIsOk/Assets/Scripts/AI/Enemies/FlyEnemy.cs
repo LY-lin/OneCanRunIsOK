@@ -131,8 +131,8 @@ namespace OneCanRun.AI.Enemies
                     break;
                 case AIState.Attack:
                     if (Vector3.Distance(controller.KnownDetectedTarget.transform.position,
-                            controller.EnemyDetectionModule.DetectionSourcePoint.position)
-                        >= (AttackStopDistanceRatio * controller.EnemyDetectionModule.AttackRange))
+                            controller.DetectionModule.DetectionSourcePoint.position)
+                        >= (AttackStopDistanceRatio * controller.DetectionModule.AttackRange))
                     {
                         Fly(controller.KnownDetectedTarget.transform.position);
                     }
