@@ -21,13 +21,13 @@ namespace OneCanRun.UI
         void Start()
         {
             m_health = GetComponent<Health>();
+            
         }
 
         // Update is called once per frame
         void Update()
         {
             HealthImage.fillAmount = m_health.CurrentHealth / m_health.MaxHealth;
-            
             HealthBarPivot.LookAt(Camera.main.transform.position);
             if (HideFullHealthBar)
                 HealthBarPivot.gameObject.SetActive(HealthImage.fillAmount < (1 - 0.1f / m_health.MaxHealth));

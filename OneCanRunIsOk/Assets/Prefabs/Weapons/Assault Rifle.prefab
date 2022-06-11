@@ -307,7 +307,7 @@ MonoBehaviour:
     CrosshairSprite: {fileID: 0}
     CrosshairSize: 0
     CrosshairColor: {r: 0, g: 0, b: 0, a: 0}
-  WeaponRoot: {fileID: 100002}
+  WeaponRoot: {fileID: 100006}
   WeaponMuzzle: {fileID: 4978071067295733055}
   ShootType: 1
   DelayBetweenShots: 0.1
@@ -316,7 +316,7 @@ MonoBehaviour:
   RecoilForce: 1
   AutomaticReload: 0
   HasPhysicalBullets: 1
-  damage: 200
+  damage: 50
   speed: 40
   ClipSize: 30
   ShellCasing: {fileID: 0}
