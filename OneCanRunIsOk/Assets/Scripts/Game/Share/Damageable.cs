@@ -43,6 +43,7 @@ namespace OneCanRun.Game.Share
                 }
 
                 // apply the damages
+                Debug.Log(totalDamage);
                 Health.TakeDamage(totalDamage, damageSource);
             }
         }

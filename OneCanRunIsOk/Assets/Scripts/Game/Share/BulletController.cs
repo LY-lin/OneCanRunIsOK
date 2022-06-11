@@ -34,7 +34,7 @@ namespace OneCanRun.Game.Share
         // weapon should provide the speed, but...not implement
         public void Shoot(WeaponController controller)
         {
-
+            
             speed = (float)controller.speed;
             // calculate damage
 
@@ -49,7 +49,7 @@ namespace OneCanRun.Game.Share
             InitialDirection = transform.forward;
             InheritedMuzzleVelocity = controller.MuzzleWorldVelocity;
             InitialCharge = controller.CurrentCharge;
-
+            Debug.Log("shoot"+ this.mDamage);
             OnShoot?.Invoke();
         }
 
@@ -77,6 +77,7 @@ namespace OneCanRun.Game.Share
                 if (finalDamage < 0f)
                     finalDamage = 0f;
                 damageable.InflictDamage(finalDamage, false, Owner);
+
                 this.WeaponController.bulletPoolManager.release(this.gameObject);
             }
             this.WeaponController.bulletPoolManager.release(this.gameObject);
