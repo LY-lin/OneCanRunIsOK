@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3518232687224908066}
   - component: {fileID: 3518232687224908067}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: EnemyDetectionModule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3518232687459098563}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: GunMuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3518232687919279758}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: WeaponRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 3518232688380857609}
   - component: {fileID: 3518232688380857615}
   - component: {fileID: 3518232688380857614}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Weapon_Lay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,8 +308,9 @@ GameObject:
   - component: {fileID: 3518232688857872045}
   - component: {fileID: 3518232688857872040}
   - component: {fileID: 3518232688857872044}
-  - component: {fileID: -1136250832426735309}
-  m_Layer: 7
+  - component: {fileID: 8790146402733780871}
+  - component: {fileID: 2481453914667691605}
+  m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,7 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcaf624f9a2508d46952961928631c1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 500
+  MaxHealth: 50
   CriticalHealthRatio: 0.3
 --- !u!114 &3518232688857872041
 MonoBehaviour:
@@ -422,7 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d969d81babd6c4cbfe5d3bb8cad7d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Affiliation: 2
+  Affiliation: 1
   AimPoint: {fileID: 0}
   buffManager: {fileID: 0}
 --- !u!195 &3518232688857872045
@@ -485,7 +486,21 @@ MonoBehaviour:
   state: 0
   controller: {fileID: 3518232688857872040}
   health: {fileID: 3518232688857872047}
---- !u!114 &-1136250832426735309
+--- !u!114 &8790146402733780871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3518232688857872043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160d4e1000bf43c4389cbeb360044f79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageMultiplier: 1
+  SensibilityToSelfdamage: 0.5
+--- !u!114 &2481453914667691605
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -498,8 +513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeSpend: 0
-  lastTime: 0
-  aim_Actor: {fileID: 0}
+  aim_Actor: {fileID: 3518232688857872041}
 --- !u!1 &3518232688936388526
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +523,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3518232688936388527}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: GunRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

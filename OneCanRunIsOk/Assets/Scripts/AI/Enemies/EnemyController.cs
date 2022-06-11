@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
 using OneCanRun.Game;
-using OneCanRun.Game.Share;
+using OneCanRun.AI;
 
 namespace OneCanRun.AI.Enemies
 {
@@ -44,7 +44,7 @@ namespace OneCanRun.AI.Enemies
         float lastTimeDamaged = float.NegativeInfinity;
 
         // 引入敌人的检测模块
-        public EnemyDetectionModule EnemyDetectionModule { get; private set; }
+        public DetectionModule DetectionModule { get; private set; }
         // 引入自带的AI寻路模块
         public NavMeshAgent NavMeshAgent { get; private set; }
         // 引入自定义的巡检路径
@@ -53,10 +53,10 @@ namespace OneCanRun.AI.Enemies
         // �����ɫ
         public Actor actor;
         // 绑定状态，用于敌人的状态处理
-        public GameObject KnownDetectedTarget => EnemyDetectionModule.KnownDetectedTarget;
-        public bool IsTargetInAttackRange => EnemyDetectionModule.IsTargetInAttackRange;
-        public bool IsSeeingTarget => EnemyDetectionModule.IsSeeingTarget;
-        public bool HadKnownTarget => EnemyDetectionModule.HadKnownTarget;
+        public GameObject KnownDetectedTarget => DetectionModule.KnownDetectedTarget;
+        public bool IsTargetInAttackRange => DetectionModule.IsTargetInAttackRange;
+        public bool IsSeeingTarget => DetectionModule.IsSeeingTarget;
+        public bool HadKnownTarget => DetectionModule.HadKnownTarget;
 
         // 敌人管理器
         EnemyManager enemyManager;
@@ -95,17 +95,17 @@ namespace OneCanRun.AI.Enemies
             enemyManager.RegisterEnemy(this);
 
             // ��ʼ�����ģ��
-            EnemyDetectionModule[] enemyDetectionModules = GetComponentsInChildren<EnemyDetectionModule>();
-            DebugUtility.HandleErrorIfNoComponentFound<EnemyDetectionModule, EnemyController>(enemyDetectionModules.Length, this,
+            DetectionModule[] enemyDetectionModules = GetComponentsInChildren<DetectionModule>();
+            DebugUtility.HandleErrorIfNoComponentFound<DetectionModule, EnemyController>(enemyDetectionModules.Length, this,
                 gameObject);
-            DebugUtility.HandleWarningIfDuplicateObjects<EnemyDetectionModule, EnemyController>(enemyDetectionModules.Length,
+            DebugUtility.HandleWarningIfDuplicateObjects<DetectionModule, EnemyController>(enemyDetectionModules.Length,
                 this, gameObject);
-            EnemyDetectionModule = enemyDetectionModules[0];
-            EnemyDetectionModule.onDetectedTarget += OnDetectTarget;
-            EnemyDetectionModule.onLostTarget += OnLostTarget;
+            DetectionModule = enemyDetectionModules[0];
+            DetectionModule.onDetectedTarget += OnDetectTarget;
+            DetectionModule.onLostTarget += OnLostTarget;
 
             NavigationModule[] navigationModules = GetComponentsInChildren<NavigationModule>();
-            DebugUtility.HandleWarningIfDuplicateObjects<EnemyDetectionModule, EnemyController>(enemyDetectionModules.Length,
+            DebugUtility.HandleWarningIfDuplicateObjects<DetectionModule, EnemyController>(enemyDetectionModules.Length,
                 this, gameObject);
             // Override navmesh agent data
             if (navigationModules.Length > 0)
@@ -123,7 +123,7 @@ namespace OneCanRun.AI.Enemies
             // 确保所有敌人都在一定高度
             EnsureIsWithinLevelBounds();
             // 每帧都要检测
-            EnemyDetectionModule.HandleDetection(actor, colliders);
+            DetectionModule.HandleDetection(actor, colliders);
         }
 
         // 确保在限制范围内部
@@ -263,7 +263,7 @@ namespace OneCanRun.AI.Enemies
             if (damageSource && !damageSource.GetComponent<EnemyController>())
             {
                 // 敌人受伤后要更新检测状态（无视检测范围）
-                EnemyDetectionModule.OnDamaged(damageSource);
+                DetectionModule.OnDamaged(damageSource);
 
                 // ��������ʱ��
                 lastTimeDamaged = Time.time;
