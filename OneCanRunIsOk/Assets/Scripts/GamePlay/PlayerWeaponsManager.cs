@@ -152,89 +152,65 @@ namespace OneCanRun.GamePlay
             // shoot handling
             WeaponController activeWeapon = GetActiveWeapon();
 
-            if (activeWeapon.RemoteWeapon)
+            //换弹中
+            if (activeWeapon != null && activeWeapon.IsReloading)
+                return;
+
+
+            if (activeWeapon != null && m_WeaponSwitchState == WeaponSwitchState.Up)
             {
-
-                //换弹中
-                if (activeWeapon != null && activeWeapon.IsReloading)
+                if (activeWeapon.HasPhysicalBullets && m_InputHandler.GetReloadButtonDown() && activeWeapon.CurrentAmmoRatio < 1.0f)
+                {
+                    
+                    //IsAiming = false;
+                    activeWeapon.StartReloadAnimation();
+                    //activeWeapon.Reload();
                     return;
-
-
-                if (activeWeapon != null && m_WeaponSwitchState == WeaponSwitchState.Up)
-                {
-                    if (activeWeapon.HasPhysicalBullets && m_InputHandler.GetReloadButtonDown() && activeWeapon.CurrentAmmoRatio < 1.0f)
-                    {
-
-                        //IsAiming = false;
-                        activeWeapon.StartReloadAnimation();
-                        //activeWeapon.Reload();
-                        return;
-                    }
-                    // handle aiming down sights
-                    //IsAiming = m_InputHandler.GetAimInputHeld();
-
-                    // handle shooting
-                    //判断是否在持续开火-计算后坐力
-                    bool hasFired = activeWeapon.HandleShootInputs(
-                        m_InputHandler.GetFireInputDown(),
-                        m_InputHandler.GetFireInputHeld(),
-                        m_InputHandler.GetFireInputReleased());
-
-                    // Handle accumulating recoil
-                    //计算后坐力
-                    if (hasFired)
-                    {
-                        m_AccumulatedRecoil += Vector3.back * activeWeapon.RecoilForce;
-                        m_AccumulatedRecoil = Vector3.ClampMagnitude(m_AccumulatedRecoil, MaxRecoilDistance);
-                    }
                 }
+                // handle aiming down sights
+                //IsAiming = m_InputHandler.GetAimInputHeld();
 
-                // weapon switch handling
+                // handle shooting
+                //判断是否在持续开火-计算后坐力
+                bool hasFired = activeWeapon.HandleShootInputs(
+                    m_InputHandler.GetFireInputDown(),
+                    m_InputHandler.GetFireInputHeld(),
+                    m_InputHandler.GetFireInputReleased());
 
-                //if (!IsAiming &&
-                //    (activeWeapon == null || !activeWeapon.IsCharging) &&
-                //    (m_WeaponSwitchState == WeaponSwitchState.Up || m_WeaponSwitchState == WeaponSwitchState.Down))
-
-                //武器切换控制
-                if ((activeWeapon == null || !activeWeapon.IsCharging) &&
-                    (m_WeaponSwitchState == WeaponSwitchState.Up || m_WeaponSwitchState == WeaponSwitchState.Down))
+                // Handle accumulating recoil
+                //计算后坐力
+                if (hasFired)
                 {
-                    int switchWeaponInput = m_InputHandler.GetSwitchWeaponInput();
-                    //滚轴输入
-                    if (switchWeaponInput != 0)
-                    {
-                        bool switchUp = switchWeaponInput > 0;
-                        SwitchWeapon(switchUp);
-                    }
-                    else
-                    {
-                        switchWeaponInput = m_InputHandler.GetSelectWeaponInput();
-                        //按键输入 1-9
-                        if (switchWeaponInput != 0)
-                        {
-                            if (GetWeaponAtSlotIndex(switchWeaponInput - 1) != null)
-                                SwitchToWeaponIndex(switchWeaponInput - 1);
-                        }
-                    }
+                    m_AccumulatedRecoil += Vector3.back * activeWeapon.RecoilForce;
+                    m_AccumulatedRecoil = Vector3.ClampMagnitude(m_AccumulatedRecoil, MaxRecoilDistance);
                 }
             }
-            else
-            {
-                if (activeWeapon != null && activeWeapon.isAttacking)
-                    return;
-                if (activeWeapon != null && m_WeaponSwitchState == WeaponSwitchState.Up)
-                {
-                    bool hasFired = activeWeapon.HandleAttackInputs(
-                       m_InputHandler.GetFireInputDown(),
-                       m_InputHandler.GetFireInputHeld());
 
-                    if(hasFired)
+            // weapon switch handling
+
+            //if (!IsAiming &&
+            //    (activeWeapon == null || !activeWeapon.IsCharging) &&
+            //    (m_WeaponSwitchState == WeaponSwitchState.Up || m_WeaponSwitchState == WeaponSwitchState.Down))
+
+            //武器切换控制
+            if ((activeWeapon == null || !activeWeapon.IsCharging) &&
+                (m_WeaponSwitchState == WeaponSwitchState.Up || m_WeaponSwitchState == WeaponSwitchState.Down))
+            {
+                int switchWeaponInput = m_InputHandler.GetSwitchWeaponInput();
+                //滚轴输入
+                if (switchWeaponInput != 0)
+                {
+                    bool switchUp = switchWeaponInput > 0;
+                    SwitchWeapon(switchUp);
+                }
+                else
+                {
+                    switchWeaponInput = m_InputHandler.GetSelectWeaponInput();
+                    //按键输入 1-9
+                    if (switchWeaponInput != 0)
                     {
-                        activeWeapon.StartAttackAnimation();
-                    }
-                    else
-                    {
-                    
+                        if (GetWeaponAtSlotIndex(switchWeaponInput - 1) != null)
+                            SwitchToWeaponIndex(switchWeaponInput - 1);
                     }
                 }
             }
