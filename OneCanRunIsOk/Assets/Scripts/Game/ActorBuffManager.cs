@@ -13,6 +13,7 @@ namespace OneCanRun.Game
         public List<BuffController> WeaponBuffList;
 
         public float timeSpend = 0;
+        public float lastTime = 0;
 
         public UnityAction buffChanged;
 
@@ -28,12 +29,13 @@ namespace OneCanRun.Game
         void Update()
         {
             timeSpend += Time.deltaTime;
-            buffLose();
+            buffLose(timeSpend-lastTime);
+            lastTime = timeSpend;
         }
 
         public void buffGain(BuffController newBuff)
         {
-            newBuff.getTime = timeSpend;
+            //newBuff.getTime = timeSpend;
             Buff BuffContext = newBuff.getMBuff();
             if (newBuff.getBuffType() == Buff.BufferType.NumBuff)
             {
@@ -50,24 +52,24 @@ namespace OneCanRun.Game
             else { }
             buffChanged?.Invoke();
         }
-        private bool checkActive(BuffController buff)
+        private bool checkActive(BuffController buff,float time)
         {
-            buff.getTime -= Time.deltaTime;
+            buff.getTime -= time;
             if (buff.getTime < 0)
             {
-                return false;
+                 return false;
             }
             return true;
         }
 
-        public void buffLose()
+        public void buffLose(float time)
         {
             bool changed = false;
             List<BuffController> listToDelete = new List<BuffController>();
             List<BuffController> listToPercentDelete = new List<BuffController>();
             for (int i = 0; i < NumBuffList.Count;i++)
             {
-                if (!checkActive(NumBuffList[i]))
+                if (!checkActive(NumBuffList[i],time))
                 {
                     changed = true;
                     listToDelete.Add(NumBuffList[i]);
@@ -83,7 +85,7 @@ namespace OneCanRun.Game
             //检查PercentBuff
             for (int i = 0; i < PercentBuffList.Count; i++)
             {
-                if (!checkActive(PercentBuffList[i]))
+                if (!checkActive(PercentBuffList[i], time))
                 {
                     changed = true;
                     listToPercentDelete.Add(PercentBuffList[i]);
@@ -99,7 +101,7 @@ namespace OneCanRun.Game
             if (WeaponBuffList.Count > 0)
                 foreach (BuffController m in WeaponBuffList)
                 {
-                    if (!checkActive(m))
+                    if (!checkActive(m, time))
                     {
                         changed = true;
                         WeaponBuffList.Remove(m);

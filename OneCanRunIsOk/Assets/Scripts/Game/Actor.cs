@@ -22,11 +22,27 @@ namespace OneCanRun.Game
         public Transform AimPoint;
 
         ActorsManager m_ActorsManager;
-        private bool dirty;
         private OneCanRun.Game.Share.ActorProperties baseProperty;
         private OneCanRun.Game.Share.ActorProperties exposedProperty;
-        private List<OneCanRun.Game.Share.Modifier> mModifier;
+        //private List<OneCanRun.Game.Share.Modifier> mModifier;
+        public ActorBuffManager buffManager;
 
+
+        public void Awake()
+        {
+            baseProperty = new OneCanRun.Game.Share.ActorProperties();
+            exposedProperty = new OneCanRun.Game.Share.ActorProperties();
+            m_ActorsManager = GameObject.FindObjectOfType<ActorsManager>();
+            DebugUtility.HandleErrorIfNullFindObject<ActorsManager, Actor>(m_ActorsManager, this);
+
+            buffManager = GetComponent<ActorBuffManager>();
+            buffManager.buffChanged += calculate;
+            // Register as an actor
+            if (!m_ActorsManager.Actors.Contains(this))
+            {
+                m_ActorsManager.Actors.Add(this);
+            }
+        }
         private void tryCalculate(){
 
             calculate();
@@ -43,19 +59,26 @@ namespace OneCanRun.Game
             // left blank
             // @ to do
             ResetExposedProperty();
+            //if(buffManager.NumBuffList.Count>0)
             foreach (BuffController b in buffManager.NumBuffList)
             {
-                Debug.Log("exposedProperty " + exposedProperty.getMagicAttack());
+                Debug.Log(this +" exposedProperty " + exposedProperty.getMagicAttack());
                 b.ActorbuffAct(ref exposedProperty);
-                Debug.Log("After exposedProperty " + exposedProperty.getMagicAttack());
+                Debug.Log(this + " After exposedProperty " + exposedProperty.getMagicAttack());
             }
-
+            foreach (BuffController b in buffManager.PercentBuffList)
+            {
+                Debug.Log(this + " exposedProperty " + exposedProperty.getMagicAttack());
+                b.ActorbuffAct(ref exposedProperty);
+                Debug.Log(this + " After exposedProperty " + exposedProperty.getMagicAttack());
+            }
             // core function 
 
 
         }
         private void ResetExposedProperty()
         {
+            exposedProperty.setMaxHealth(baseProperty.getMaxHealth());
             exposedProperty.setHealRate(baseProperty.getHealRate());
             exposedProperty.setMagicAttack(baseProperty.getMagicAttack());
             exposedProperty.setMagicDefence(baseProperty.getMagicDefence());
@@ -78,7 +101,7 @@ namespace OneCanRun.Game
 
         private void OnEnable()
         {
-            mModifier = new List<Share.Modifier>();
+            //mModifier = new List<Share.Modifier>();
             string fileName = "defaultProperties";
             string configDirectory = System.IO.Directory.GetCurrentDirectory();
             configDirectory += "\\Config\\";
@@ -97,10 +120,9 @@ namespace OneCanRun.Game
                     break;
             }
 
-            OneCanRun.Game.Share.Modifier modifier = new Share.Modifier(0, Share.Modifier.ModifierType.experience, this);
-            mModifier.Add(modifier);
-            baseProperty = new OneCanRun.Game.Share.ActorProperties();
-            exposedProperty = new OneCanRun.Game.Share.ActorProperties();
+            //OneCanRun.Game.Share.Modifier modifier = new Share.Modifier(0, Share.Modifier.ModifierType.experience, this);
+            //mModifier.Add(modifier);
+            
 
             // property from file 
             XmlDocument xml = new XmlDocument();
@@ -153,27 +175,15 @@ namespace OneCanRun.Game
             }    
         }
 
-        ActorProperties m_BaseProperties;
-
-        ActorProperties m_PresentProperties;
 
         public ActorProperties getBaseProperties()
         {
-            return m_BaseProperties;
+            return baseProperty;
         }
 
         void Start()
         {
-            m_ActorsManager = GameObject.FindObjectOfType<ActorsManager>();
-            DebugUtility.HandleErrorIfNullFindObject<ActorsManager, Actor>(m_ActorsManager, this);
-
-            buffManager = GetComponent<ActorBuffManager>();
-            buffManager.buffChanged += calculate;
-            // Register as an actor
-            if (!m_ActorsManager.Actors.Contains(this))
-            {
-                m_ActorsManager.Actors.Add(this);
-            }
+            
         }
 
         void OnDestroy()
@@ -195,43 +205,7 @@ namespace OneCanRun.Game
             return exposedProperty;
         }
 
-        public void addModifier(OneCanRun.Game.Share.Modifier mod){
 
-            // experience just linear overwrite
-            if(mod.type == Share.Modifier.ModifierType.experience){
-                this.mModifier[0].baseValue += mod.baseValue;
-                if (this.mModifier[0].baseValue >= getNextLevelCount())
-                    dirty = true;
-                return;
-            }
-
-
-            this.mModifier.Add(mod);
-        }
-
-        public bool removeModifier(OneCanRun.Game.Share.Modifier mod){
-
-            return this.mModifier.Remove(mod);
-
-        }
-
-        
-        public bool removeModifierFromSource(Object obj){
-            bool deleted = false;
-            for(int i = mModifier.Count - 1;i >= 0; i--){
-
-                if(mModifier[i].source == obj){
-                    dirty = true;
-                    deleted = true;
-                    mModifier.RemoveAt(i);
-                }
-
-            }
-
-            return deleted;
-        }
-
-        public ActorBuffManager buffManager;
 
 
     }

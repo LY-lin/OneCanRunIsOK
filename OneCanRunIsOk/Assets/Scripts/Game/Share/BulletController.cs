@@ -1,7 +1,7 @@
 
 using UnityEngine;
 using UnityEngine.Events;
-
+using OneCanRun.Game;
 namespace OneCanRun.Game.Share
 {
     public class BulletController : MonoBehaviour
@@ -10,6 +10,7 @@ namespace OneCanRun.Game.Share
         //[Tooltip("Speed")]
         public float speed;
         private float mDamage;
+        private affiliationType shooterType;
         //weapon Controller
         public GameObject Owner { get; private set; }
         public WeaponController WeaponController;
@@ -33,12 +34,12 @@ namespace OneCanRun.Game.Share
         // weapon should provide the speed, but...not implement
         public void Shoot(WeaponController controller)
         {
-
+            
             speed = (float)controller.speed;
             // calculate damage
 
             ActorProperties tmp = controller.Owner.GetComponent<Actor>().GetActorProperties();
-
+            this.shooterType = controller.Owner.GetComponent<Actor>().Affiliation;
             float tmpDamage = tmp.getMagicAttack() + tmp.getPhysicalAttack();
 
             // calculate damage
@@ -48,7 +49,7 @@ namespace OneCanRun.Game.Share
             InitialDirection = transform.forward;
             InheritedMuzzleVelocity = controller.MuzzleWorldVelocity;
             InitialCharge = controller.CurrentCharge;
-
+            Debug.Log("shoot"+ this.mDamage);
             OnShoot?.Invoke();
         }
 
@@ -60,10 +61,25 @@ namespace OneCanRun.Game.Share
                 return;
             }
 
+            Actor target = col.gameObject.GetComponent<Actor>();
+            //if (target == null)
+                //return;
+            if (target)
+            {
+                if (target.Affiliation == this.shooterType)
+                    return;
+            }
+
             Damageable damageable = col.collider.GetComponent<Damageable>();
             if (damageable)
             {
-                damageable.InflictDamage(this.mDamage, false, Owner);
+                Actor actor = col.gameObject.GetComponent<Actor>();
+                ActorProperties colliderProperty = actor.GetActorProperties();
+                float finalDamage = this.mDamage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
+                if (finalDamage < 0f)
+                    finalDamage = 0f;
+                damageable.InflictDamage(finalDamage, false, Owner);
+
                 this.WeaponController.bulletPoolManager.release(this.gameObject);
             }
             this.WeaponController.bulletPoolManager.release(this.gameObject);

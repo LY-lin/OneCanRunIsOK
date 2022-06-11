@@ -9,17 +9,7 @@ namespace OneCanRun.Game.Share
     {
 
         //��Ϊ����Buff
-        public ActorProperties()
-        {
-            maxHealth = 0;
-            maxJump = 0;
-            maxSpeed = 0;
-            physicalAttack = 0;
-            physicalDefence = 0;
-            magicAttack = 0;
-            magicDefence = 0;
-            healRate = 0;
-        }
+
 
         // experience
         private ulong EXP;
