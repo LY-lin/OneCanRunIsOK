@@ -56,10 +56,10 @@ namespace OneCanRun.Game.Share
         // if collision happens, it will be called
         void OnCollisionEnter(Collision col)
         {
-            if (col.gameObject.layer == LayerMask.NameToLayer("weapon"))
+            /*if (col.gameObject.layer == LayerMask.NameToLayer("weapon"))
             {
                 return;
-            }
+            }*/
 
             Actor target = col.gameObject.GetComponent<Actor>();
             //if (target == null)
@@ -70,12 +70,17 @@ namespace OneCanRun.Game.Share
                     return;
             }
 
-            Damageable damageable = col.collider.GetComponent<Damageable>();
+            Damageable damageable = col.collider.GetComponentInParent<Damageable>();
+            
             if (damageable)
             {
+                Debug.Log(col.collider);
                 Actor actor = col.gameObject.GetComponent<Actor>();
                 ActorProperties colliderProperty = actor.GetActorProperties();
                 float finalDamage = this.mDamage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
+                Debug.Log(this.mDamage);
+                Debug.Log(colliderProperty.getPhysicalDefence());
+                Debug.Log(colliderProperty.getMagicDefence());
                 if (finalDamage < 0f)
                     finalDamage = 0f;
                 damageable.InflictDamage(finalDamage, false, Owner);
