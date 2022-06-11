@@ -37,14 +37,12 @@ namespace OneCanRun.Game.Share
         [Tooltip("The name that will be displayed in the UI for this weapon")]
         public string WeaponName;   //武器名
 
+
         [Tooltip("The image that will be displayed in the UI for this weapon")]
         public Sprite WeaponIcon;   //武器显示在UI的小图标
 
-        [Tooltip("choose weapon type, Remote or Melee")]
-        public bool RemoteWeapon = true;
-
-        [Tooltip("The root object for the weapon, this is what will be deactivated when the weapon isn't active")]
-        public GameObject WeaponRoot;   //武器使用的模型
+        [Tooltip("Bullet profebs")]
+        public GameObject bullet;
 
         [Tooltip("Default data for the crosshair")]
         public CrosshairData CrosshairDataDefault;//默认的准心数据
@@ -53,26 +51,10 @@ namespace OneCanRun.Game.Share
         [Tooltip("Data for the crosshair when targeting an enemy")]
         public CrosshairData CrosshairDataTargetInSight;//瞄准时的准信数据
         */
-        
-        [Header("Internal References for Melee Weapons")]
 
-        [Tooltip("Melee Weapon default transform")]
-        public Transform DefalutTransform;
-
-        [Tooltip("Melee Weapon attacking finished Transform")]
-        public Transform AttackTransfrom;
-        
-        [Tooltip("ray test points")]
-        public Transform[] Points; //射线发射点
-
-
-
-        [Tooltip("Minimum duration between two attacks")]
-        public float DelayBetweenAttacks = 3f;
-
-        [Header("Internal References for Remote Weapons")]
-        [Tooltip("Bullet profebs")]
-        public GameObject bullet;
+        [Header("Internal References")]
+        [Tooltip("The root object for the weapon, this is what will be deactivated when the weapon isn't active")]
+        public GameObject WeaponRoot;   //武器使用的模型
 
         [Tooltip("Tip of the weapon, where the projectiles are shot")]
         public Transform WeaponMuzzle;  //武器发射弹丸的地方
@@ -80,6 +62,10 @@ namespace OneCanRun.Game.Share
         [Header("Shoot Parameters")]
         [Tooltip("The type of weapon wil affect how it shoots")]
         public WeaponShootType ShootType;
+
+        /*
+        [Tooltip("The projectile prefab")] 
+        public ProjectileBase ProjectilePrefab;//子弹的预制件*/
 
         [Tooltip("Minimum duration between two shots")]
         public float DelayBetweenShots = 0.5f;  //两次射击之间的最短间隔
@@ -180,7 +166,6 @@ namespace OneCanRun.Game.Share
         AudioSource m_ContinuousShootAudioSource = null;*/
         bool m_WantsToShoot = false;
 
-        
 
         //射击时的Action
         public UnityAction OnShoot;
@@ -188,14 +173,14 @@ namespace OneCanRun.Game.Share
 
         int m_CarriedPhysicalBullets;//携带的物理子弹量
         float m_CurrentAmmo;    //现在的弹药
-        float m_LastTimeShot = Mathf.NegativeInfinity;  //上次射击的时间 = 负无穷大
-        float m_LastTimeAttack = Mathf.NegativeInfinity; //上次近战攻击时间
+        float m_LastTimeShot = Mathf.NegativeInfinity;  //上次射击的实现 = 负无穷大
         public float LastChargeTriggerTimestamp { get; private set; }   //上次触发充能的时间戳
         Vector3 m_LastMuzzlePosition;   //上次枪口的位置
         public BulletPoolManager bulletPoolManager;
+        // Update is called once per frame
 
-        public WeaponRayTestBase rayTest;
 
+        
 
         public GameObject Owner { get; set; }           //拥有者
         public GameObject SourcePrefab { get; set; }    //源预制件  
@@ -204,8 +189,7 @@ namespace OneCanRun.Game.Share
         public bool IsWeaponActive { get; private set; }    //武器是否可动
         public bool IsCooling { get; private set; }         //是否在冷却中
         public float CurrentCharge { get; private set; }    //？
-        public Vector3 MuzzleWorldVelocity { get; private set; }    //
-        public bool isAttacking { get; private set; }//物理攻击是否在攻击中
+        public Vector3 MuzzleWorldVelocity { get; private set; }    //枪口在时世界中的速率
 
         public float GetAmmoNeededToShoot() =>
             (ShootType != WeaponShootType.Charge ?
@@ -225,24 +209,19 @@ namespace OneCanRun.Game.Share
 
         void Awake()
         {
-            if (RemoteWeapon)
-            {
-                this.bulletPoolManager = new BulletPoolManager(this.bullet);
-                m_CurrentAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
-                MaxAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
-                m_CarriedPhysicalBullets = Mathf.RoundToInt(m_CurrentAmmo);
-                //m_CarriedPhysicalBullets = HasPhysicalBullets ? ClipSize : 0;//?��????????????????????????0
-                m_LastMuzzlePosition = WeaponMuzzle.position;
-            }
-            else
-            {
-                this.rayTest = new WeaponRayTestBase(); 
-            }
-            /*
+            this.bulletPoolManager = new BulletPoolManager(this.bullet);
+            m_CurrentAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
+            MaxAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
+            m_CarriedPhysicalBullets = Mathf.RoundToInt(m_CurrentAmmo);
+            //m_CarriedPhysicalBullets = HasPhysicalBullets ? ClipSize : 0;//?��????????????????????????0
+            m_LastMuzzlePosition = WeaponMuzzle.position;
+
+
             m_ShootAudioSource = GetComponent<AudioSource>();
             DebugUtility.HandleErrorIfNullGetComponent<AudioSource, WeaponController>(m_ShootAudioSource, this,
                 gameObject);
-            */
+
+
             /*
             if (UseContinuousShootSound)
             {
@@ -254,7 +233,7 @@ namespace OneCanRun.Game.Share
                 m_ContinuousShootAudioSource.loop = true;
             }*/
 
-
+            
         }
 
         //PickUp????????
@@ -296,33 +275,21 @@ namespace OneCanRun.Game.Share
             
             GetComponent<Animator>().SetTrigger("Reload");
             IsReloading = true;
-            // GetComponent<Animator>().SetTrigger("Reload");
-
             Reload();
-
+            
+            
         }
 
         void Update()
         {
-            if (RemoteWeapon)
-            {
-                UpdateAmmo();
-                UpdateCharge();
-                UpdateContinuousShootSound();
+            UpdateAmmo();
+            UpdateCharge();
+            UpdateContinuousShootSound();
 
-                if (Time.deltaTime > 0)
-                {
-                    MuzzleWorldVelocity = (WeaponMuzzle.position - m_LastMuzzlePosition) / Time.deltaTime;
-                    m_LastMuzzlePosition = WeaponMuzzle.position;
-                }
-            }
-            else
+            if (Time.deltaTime > 0)
             {
-                if (Time.deltaTime > 0)
-                {
-                    if (m_LastTimeAttack + 1 >= Time.time)
-                        isAttacking = false;
-                }
+                MuzzleWorldVelocity = (WeaponMuzzle.position - m_LastMuzzlePosition) / Time.deltaTime;
+                m_LastMuzzlePosition = WeaponMuzzle.position;
             }
         }
 
@@ -473,16 +440,7 @@ namespace OneCanRun.Game.Share
             }
         }
 
-        public bool HandleAttackInputs(bool inputDown, bool inputHeld)
-        {
-            if(inputDown||inputHeld)
-            {
-                return TryAttack();
-            }
-            return false;
-        }
-
-       bool TryShoot()
+        bool TryShoot()
         {
             
             if (m_CurrentAmmo >= 1f
@@ -495,22 +453,6 @@ namespace OneCanRun.Game.Share
             }
 
             return false;
-        }
-
-        bool TryAttack()
-        {
-            if(m_LastTimeAttack + DelayBetweenAttacks>=Time.time&&!isAttacking)
-            {
-                m_LastTimeAttack = Time.time;
-                HandleAttack();
-                return true;
-            }
-            return false;
-        }
-
-        public void StopAttack()
-        {
-            isAttacking = false;
         }
 
         bool TryBeginCharge()
@@ -544,18 +486,6 @@ namespace OneCanRun.Game.Share
             }
 
             return false;
-        }
-
-        void HandleAttack()
-        {
-            isAttacking = true;
-            
-            rayTest.Attack(this);
-        }
-        
-        public void StartAttackAnimation()
-        {
-            GetComponent<Animator>().SetTrigger("Attack");
         }
 
         void HandleShoot()
@@ -597,11 +527,10 @@ namespace OneCanRun.Game.Share
             m_LastTimeShot = Time.time;
 
             // play shoot SFX
-            /*
             if (ShootSfx && !UseContinuousShootSound)
             {
                 m_ShootAudioSource.PlayOneShot(ShootSfx);
-            }*/
+            }
 
             // Trigger attack animation if there is any
             if (WeaponAnimator)
