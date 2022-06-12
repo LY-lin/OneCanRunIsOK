@@ -191,7 +191,7 @@ namespace OneCanRun.Game.Share
 
         float m_LastTimeAttack = Mathf.NegativeInfinity;    //  上次攻击结束时间
 
-        
+
 
         public GameObject Owner { get; set; }           //拥有者
         public GameObject SourcePrefab { get; set; }    //源预制件  
@@ -216,7 +216,7 @@ namespace OneCanRun.Game.Share
 
         const string k_AnimAttackParameter = "Attack";
 
-   
+
 
         void Awake()
         {
@@ -251,7 +251,7 @@ namespace OneCanRun.Game.Share
                 m_ContinuousShootAudioSource.loop = true;
             }*/
 
-            
+
         }
 
         //PickUp????????
@@ -261,14 +261,12 @@ namespace OneCanRun.Game.Share
         {
             /*
             Rigidbody nextShell = m_PhysicalAmmoPool.Dequeue();
-
             nextShell.transform.position = EjectionPort.transform.position;
             nextShell.transform.rotation = EjectionPort.transform.rotation;
             nextShell.gameObject.SetActive(true);
             nextShell.transform.SetParent(null);
             nextShell.collisionDetectionMode = CollisionDetectionMode.Continuous;
             nextShell.AddForce(nextShell.transform.up * ShellCasingEjectionForce, ForceMode.Impulse);
-
             m_PhysicalAmmoPool.Enqueue(nextShell);
             */
 
@@ -280,19 +278,19 @@ namespace OneCanRun.Game.Share
 
         public void Reload()   //??????????
         {
-            
-                m_CurrentAmmo = ClipSize;
-                m_CarriedPhysicalBullets = Mathf.RoundToInt(m_CurrentAmmo);
-                IsReloading = false;
-               
+
+            m_CurrentAmmo = ClipSize;
+            m_CarriedPhysicalBullets = Mathf.RoundToInt(m_CurrentAmmo);
+            IsReloading = false;
+
         }
 
         public void StartReloadAnimation()  //???????
         {
-            
+
             GetComponent<Animator>().SetTrigger("Reload");
             IsReloading = true;
- 
+
         }
 
         void Update()
@@ -309,7 +307,7 @@ namespace OneCanRun.Game.Share
                     m_LastMuzzlePosition = WeaponMuzzle.position;
                 }
             }
-            
+
         }
 
         void UpdateAmmo()
@@ -420,7 +418,7 @@ namespace OneCanRun.Game.Share
 
         public bool HandleAttackInputs(bool inputDown, bool inputHeld)
         {
-            if(inputDown||inputHeld)
+            if (inputDown || inputHeld)
             {
                 return TryAttack();
             }
@@ -442,7 +440,7 @@ namespace OneCanRun.Game.Share
                 case WeaponShootType.Automatic:
                     if (inputHeld)
                     {
-                        
+
                         return TryShoot();
                     }
 
@@ -469,7 +467,7 @@ namespace OneCanRun.Game.Share
 
         bool TryAttack()
         {
-            if(m_LastTimeShot + DelayBetweenAttacks < Time.time)
+            if (m_LastTimeShot + DelayBetweenAttacks < Time.time)
             {
                 HandleAttack();
                 return true;
@@ -478,7 +476,7 @@ namespace OneCanRun.Game.Share
         }
         bool TryShoot()
         {
-            
+
             if (m_CurrentAmmo >= 1f
                 && m_LastTimeShot + DelayBetweenShots < Time.time)
             {
@@ -491,7 +489,7 @@ namespace OneCanRun.Game.Share
             return false;
         }
 
-        
+
         bool TryBeginCharge()
         {
             if (!IsCharging

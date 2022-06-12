@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AR Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 400002}
   - component: {fileID: 3300002}
   - component: {fileID: 2300002}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AR Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 400004}
   - component: {fileID: 3300004}
   - component: {fileID: 2300004}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AR Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 1111756528895451107}
   - component: {fileID: 5534321149048483853}
   - component: {fileID: 3783763803777480834}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Assault Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,16 +300,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a552d5b5b943243964dce88b4fd9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RemoteWeapons: 0
   WeaponName: AR1
   WeaponIcon: {fileID: 21300000, guid: d977df5edeb809f41b362e4bc5d35645, type: 3}
-  bullet: {fileID: 1254343392523665438, guid: 28ca67a84a75e9642a8da4bee674efbc, type: 3}
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 0}
     CrosshairSize: 0
     CrosshairColor: {r: 0, g: 0, b: 0, a: 0}
   WeaponRoot: {fileID: 100006}
+  DamagableBox: {fileID: 0}
+  DelayBetweenAttacks: 0
   WeaponMuzzle: {fileID: 4978071067295733055}
   ShootType: 1
+  bullet: {fileID: 1254343392523665438, guid: 28ca67a84a75e9642a8da4bee674efbc, type: 3}
   DelayBetweenShots: 0.1
   BulletSpreadAngle: 0
   BulletsPerShot: 1
@@ -461,7 +464,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8127934187125067785}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AR Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -492,7 +495,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4978071067295733055}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AR Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
