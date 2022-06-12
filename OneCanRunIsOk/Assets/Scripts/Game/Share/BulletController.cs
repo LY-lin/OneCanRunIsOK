@@ -6,6 +6,11 @@ namespace OneCanRun.Game.Share
 {
     public class BulletController : MonoBehaviour
     {
+        [Tooltip("击中特效")]
+        public GameObject ImpactVfx;
+        [Tooltip("击中特效持续时间")]
+        public float ImpactVfxLifetime = 5f;
+
 
         //[Tooltip("Speed")]
         public float speed;
@@ -61,6 +66,7 @@ namespace OneCanRun.Game.Share
                 return;
             }*/
 
+
             Actor target = col.gameObject.GetComponent<Actor>();
             //if (target == null)
                 //return;
@@ -68,6 +74,17 @@ namespace OneCanRun.Game.Share
             {
                 if (target.Affiliation == this.shooterType)
                     return;
+            }
+
+            //特效
+            if (ImpactVfx)
+            {
+                GameObject impactVfxInstance = Instantiate(ImpactVfx, this.gameObject.transform.position,
+                    Quaternion.LookRotation(col.gameObject.transform.up));
+                if (ImpactVfxLifetime > 0)
+                {
+                    Destroy(impactVfxInstance.gameObject, ImpactVfxLifetime);
+                }
             }
 
             Damageable damageable = col.collider.GetComponentInParent<Damageable>();

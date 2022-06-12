@@ -325,15 +325,15 @@ MonoBehaviour:
   DelayBetweenAttacks: 0
   WeaponMuzzle: {fileID: 4978071067295733055}
   ShootType: 1
-  bullet: {fileID: 1254343392523665438, guid: 28ca67a84a75e9642a8da4bee674efbc, type: 3}
+  bullet: {fileID: 1734307153417951284, guid: bd0f0e8585f3d1440ae91a23c533d5e5, type: 3}
   DelayBetweenShots: 0.1
   BulletSpreadAngle: 0
   BulletsPerShot: 1
   RecoilForce: 1
   AutomaticReload: 0
   HasPhysicalBullets: 1
-  damage: 50
-  speed: 40
+  damage: 20
+  speed: 45
   ClipSize: 30
   ShellCasing: {fileID: 0}
   EjectionPort: {fileID: 0}
