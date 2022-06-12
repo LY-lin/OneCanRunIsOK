@@ -51,6 +51,7 @@ namespace OneCanRun.Game.Share
             Damageable damageable = col.collider.GetComponent<Damageable>();
             if(damageable)
             {
+                Debug.Log(1);
                 Actor actor = col.gameObject.GetComponent<Actor>();
                 ActorProperties colliderProperty = actor.GetActorProperties();
                 float finalDamage = this.Damage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
