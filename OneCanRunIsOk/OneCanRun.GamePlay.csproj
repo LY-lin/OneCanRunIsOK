@@ -53,7 +53,7 @@
     <UnityVersion>2022.1.1f1c1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="D:\software\VS\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\GamePlay\PlayerCharacterController.cs" />
@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\GamePlay\SkillBuffGiver.cs" />
     <Compile Include="Assets\Scripts\GamePlay\PlayerInputHandler.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Objectives\ObjectiveReachPoint.cs" />
+    <Compile Include="Assets\Scripts\GamePlay\DetectBuffGiver.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Pickups\WeaponPickup.cs" />
     <Compile Include="Assets\Scripts\GamePlay\BulletStandard.cs" />
     <Compile Include="Assets\Scripts\GamePlay\MonsterFresh.cs" />
