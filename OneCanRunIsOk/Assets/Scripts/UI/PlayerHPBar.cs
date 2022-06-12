@@ -32,7 +32,7 @@ namespace OneCanRun.UI
         // Update is called once per frame
         void Update()
         {
-            HealthFillImage.fillAmount = Mathf.Lerp(1, m_PlayerHealth.CurrentHealth / m_PlayerHealth.MaxHealth, 10 * Time.deltaTime);
+            HealthFillImage.fillAmount = m_PlayerHealth.CurrentHealth / m_PlayerHealth.MaxHealth;
             FillBarColorChange.UpdateVisual(m_PlayerHealth.CurrentHealth / m_PlayerHealth.MaxHealth);
         }
     }

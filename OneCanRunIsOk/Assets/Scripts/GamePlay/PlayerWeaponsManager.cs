@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using OneCanRun.Game;
 using OneCanRun.Game.Share;
 using UnityEngine;
@@ -501,8 +501,7 @@ namespace OneCanRun.GamePlay
                     // spawn the weapon prefab as child of the weapon socket
                     WeaponController weaponInstance = Instantiate(weaponPrefab, WeaponParentSocket);
                     weaponInstance.transform.localPosition = Vector3.zero;
-                    weaponInstance.transform.localRotation = Quaternion.identity;
-
+                    //weaponInstance.transform.localRotation = Quaternion.identity;
                     // Set owner to this gameObject so the weapon can alter projectile/damage logic accordingly
                     weaponInstance.Owner = gameObject;
                     weaponInstance.SourcePrefab = weaponPrefab.gameObject;

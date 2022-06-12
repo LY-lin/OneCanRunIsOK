@@ -176,7 +176,7 @@ namespace OneCanRun.Game.Share
         AudioSource m_ContinuousShootAudioSource = null;*/
         bool m_WantsToShoot = false;
 
-
+            
         //射击时的Action
         public UnityAction OnShoot;
         public event Action OnShootProcessed;
