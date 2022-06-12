@@ -159,30 +159,37 @@ namespace OneCanRun.GamePlay
 
             if (activeWeapon != null && m_WeaponSwitchState == WeaponSwitchState.Up)
             {
-                if (activeWeapon.HasPhysicalBullets && m_InputHandler.GetReloadButtonDown() && activeWeapon.CurrentAmmoRatio < 1.0f)
+                if (activeWeapon.RemoteWeapons)
                 {
-                    
-                    //IsAiming = false;
-                    activeWeapon.StartReloadAnimation();
-                    //activeWeapon.Reload();
-                    return;
+                    if (activeWeapon.HasPhysicalBullets && m_InputHandler.GetReloadButtonDown() && activeWeapon.CurrentAmmoRatio < 1.0f)
+                    {
+
+                        //IsAiming = false;
+                        activeWeapon.StartReloadAnimation();
+                        //activeWeapon.Reload();
+                        return;
+                    }
+                    // handle aiming down sights
+                    //IsAiming = m_InputHandler.GetAimInputHeld();
+
+                    // handle shooting
+                    //判断是否在持续开火-计算后坐力
+                    bool hasFired = activeWeapon.HandleShootInputs(
+                        m_InputHandler.GetFireInputDown(),
+                        m_InputHandler.GetFireInputHeld(),
+                        m_InputHandler.GetFireInputReleased());
+
+                    // Handle accumulating recoil
+                    //计算后坐力
+                    if (hasFired)
+                    {
+                        m_AccumulatedRecoil += Vector3.back * activeWeapon.RecoilForce;
+                        m_AccumulatedRecoil = Vector3.ClampMagnitude(m_AccumulatedRecoil, MaxRecoilDistance);
+                    }
                 }
-                // handle aiming down sights
-                //IsAiming = m_InputHandler.GetAimInputHeld();
-
-                // handle shooting
-                //判断是否在持续开火-计算后坐力
-                bool hasFired = activeWeapon.HandleShootInputs(
-                    m_InputHandler.GetFireInputDown(),
-                    m_InputHandler.GetFireInputHeld(),
-                    m_InputHandler.GetFireInputReleased());
-
-                // Handle accumulating recoil
-                //计算后坐力
-                if (hasFired)
+                else
                 {
-                    m_AccumulatedRecoil += Vector3.back * activeWeapon.RecoilForce;
-                    m_AccumulatedRecoil = Vector3.ClampMagnitude(m_AccumulatedRecoil, MaxRecoilDistance);
+                    bool hasAttacked = activeWeapon.HandleAttackInputs(m_InputHandler.GetFireInputDown(), m_InputHandler.GetFireInputHeld());
                 }
             }
 
@@ -508,6 +515,10 @@ namespace OneCanRun.GamePlay
                     weaponInstance.SourcePrefab = weaponPrefab.gameObject;
                     weaponInstance.ShowWeapon(false);
 
+                    if(!weaponInstance.RemoteWeapons)
+                    {
+                        weaponInstance.InitMelee();
+                    }
                     // Assign the first person layer to the weapon
                     int layerIndex =
                         Mathf.RoundToInt(Mathf.Log(FpsWeaponLayer.value,

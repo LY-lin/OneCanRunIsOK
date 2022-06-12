@@ -233,12 +233,9 @@ namespace OneCanRun.Game.Share
                 m_ShootAudioSource = GetComponent<AudioSource>();
                 DebugUtility.HandleErrorIfNullGetComponent<AudioSource, WeaponController>(m_ShootAudioSource, this,
                     gameObject);
+                CurrentAmmoRatio = m_CurrentAmmo / MaxAmmo;
             }
-            else
-            {
-                DamagableBox.SetActive(false);
-                DamagableBox.GetComponent<MeleeController>().Init(this);
-            }
+
 
             /*
             if (UseContinuousShootSound)
@@ -253,7 +250,11 @@ namespace OneCanRun.Game.Share
 
             
         }
-
+        public void InitMelee()
+        {
+            DamagableBox.GetComponent<MeleeController>().Init(this);
+            DamagableBox.SetActive(false);
+        }
         //PickUp????????
         //public void AddCarriablePhysicalBullets(int count) => m_CarriedPhysicalBullets = Mathf.Max(m_CarriedPhysicalBullets + count, MaxAmmo);
 
@@ -535,7 +536,7 @@ namespace OneCanRun.Game.Share
         {
             DamagableBox.SetActive(true);
             DamagableBox.GetComponent<MeleeController>().Init(this);
-            GetComponent<Animator>().SetTrigger("Attack");
+            GetComponent<Animator>().SetTrigger("Reload");
 
 
         }

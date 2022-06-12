@@ -15,7 +15,7 @@ namespace OneCanRun.Game.Share
         public void Init(WeaponController wc)
         {
             this.wc = wc;
-            Damage = this.wc.damage;
+            Damage = wc.damage;
             this.attackerType = wc.Owner.GetComponent<Actor>().Affiliation;
             this.Owner = wc.Owner;
 
