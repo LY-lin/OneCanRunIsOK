@@ -15,7 +15,7 @@ namespace OneCanRun.Game.Share
         public void Init(WeaponController wc)
         {
             this.wc = wc;
-            Damage = this.wc.damage;
+            Damage = wc.damage;
             this.attackerType = wc.Owner.GetComponent<Actor>().Affiliation;
             this.Owner = wc.Owner;
 
@@ -51,6 +51,7 @@ namespace OneCanRun.Game.Share
             Damageable damageable = col.collider.GetComponent<Damageable>();
             if(damageable)
             {
+                Debug.Log(1);
                 Actor actor = col.gameObject.GetComponent<Actor>();
                 ActorProperties colliderProperty = actor.GetActorProperties();
                 float finalDamage = this.Damage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();

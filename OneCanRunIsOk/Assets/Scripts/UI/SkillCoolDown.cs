@@ -36,7 +36,6 @@ namespace OneCanRun.UI
             playerInputHandler = FindObjectOfType<PlayerInputHandler>();
             DebugUtility.HandleErrorIfNullFindObject<PlayerInputHandler, PlayerWeaponsManager>(playerInputHandler, this);
 
-            Debug.Log(playerSkillsManager.CurrentSkillInstance);
             m_skillController = playerSkillsManager.CurrentSkillInstance;
             Cooling.gameObject.SetActive(false);
             Warning.gameObject.SetActive(false);

@@ -10,10 +10,13 @@ namespace OneCanRun.UI
     {
         [Tooltip("Image component dispplaying current health")]
         public Image HealthFillImage;
-        [Tooltip("Component to animate the color when empty or full")]
-        public FillBarColorChange FillBarColorChange;
+        [Tooltip("Image component when healthing")]
+        public Image Healthing;
 
         Health m_PlayerHealth;
+        float m_LastTimeHealth;
+        bool ifHealth;
+        float m_LastRatio = 1;
         // Start is called before the first frame update
         void Start()
         {
@@ -26,14 +29,25 @@ namespace OneCanRun.UI
             DebugUtility.HandleErrorIfNullGetComponent<Health, PlayerHPBar>(m_PlayerHealth, this,
                 playerCharacterController.gameObject);
 
-            FillBarColorChange.Initialize(1f, 0.1f);
         }
 
         // Update is called once per frame
         void Update()
         {
             HealthFillImage.fillAmount = m_PlayerHealth.CurrentHealth / m_PlayerHealth.MaxHealth;
-            FillBarColorChange.UpdateVisual(m_PlayerHealth.CurrentHealth / m_PlayerHealth.MaxHealth);
+           if(m_LastRatio<HealthFillImage.fillAmount)
+            {
+                m_LastTimeHealth = Time.time;
+                ifHealth = true;
+            }
+
+           if(ifHealth&& Time.time- m_LastTimeHealth > 1f)
+            {
+                ifHealth = false;
+            }
+
+            m_LastRatio = HealthFillImage.fillAmount;
+            Healthing.gameObject.SetActive(ifHealth);
         }
     }
 }

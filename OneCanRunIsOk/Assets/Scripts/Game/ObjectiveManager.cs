@@ -13,7 +13,6 @@ namespace OneCanRun.Game
         void Awake()
         {
             Objective.OnObjectiveCreated += RegisterObjective;
-            Debug.Log(m_Objectives);
         }
 
         void RegisterObjective(Objective objective) => m_Objectives.Add(objective);
