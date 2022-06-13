@@ -186,7 +186,6 @@ namespace OneCanRun.AI.Enemies
         void OnDamaged(float damage, GameObject damageSource)
         {
             //Debug.Log("Enemy On Damaged, current health: " + health.CurrentHealth);
-            controller.EnemyDamaged(damage, damageSource);
 
             // ������Ч
         }

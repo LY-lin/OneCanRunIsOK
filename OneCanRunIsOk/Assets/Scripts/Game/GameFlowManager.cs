@@ -79,6 +79,11 @@ namespace OneCanRun.Game
         void OnAllObjectivesCompleted(AllObjectivesCompletedEvent evt) => EndGame(true);
         void OnPlayerDeath(PlayerDeathEvent evt) => EndGame(false);
 
+        void OnApplicationPause(bool pause)
+        {
+            
+        }
+
         void EndGame(bool win)
         {
             // unlocks the cursor before leaving the scene, to be able to click buttons
