@@ -53,7 +53,7 @@
     <UnityVersion>2022.1.1f1c1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\MyPrograms\Program Files (x86)\Visual Studio 2019\IDE\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
@@ -872,9 +872,9 @@
       <Project>{31FE8E72-AA61-C945-B617-01FDE253E853}</Project>
       <Name>OneCanRun.Game</Name>
     </ProjectReference>
-    <ProjectReference Include="NewAssembly.csproj">
-      <Project>{12F5B481-6E83-B172-7A85-373443F9A58B}</Project>
-      <Name>NewAssembly</Name>
+    <ProjectReference Include="OneCanRun.AI.csproj">
+      <Project>{81D137B4-3957-F2B6-92A0-8BBCF4B3B9E0}</Project>
+      <Name>OneCanRun.AI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

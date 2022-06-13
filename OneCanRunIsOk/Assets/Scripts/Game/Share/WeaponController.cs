@@ -64,6 +64,8 @@ namespace OneCanRun.Game.Share
         [Tooltip("Delay between two attacks")]
         public float DelayBetweenAttacks;
 
+        [Tooltip("damage")]
+        public float damage;
 
         [Header("Remote Weapons' Internal References")]
         [Tooltip("Tip of the weapon, where the projectiles are shot")]
@@ -104,7 +106,7 @@ namespace OneCanRun.Game.Share
         [Tooltip("Has physical clip on the weapon and ammo shells are ejected when firing")]
         public bool HasPhysicalBullets = false;//武器上有物理弹夹吗?发射时弹壳会弹出吗
 
-        public float damage;
+        
 
         public float speed = 10f;
 
@@ -253,7 +255,7 @@ namespace OneCanRun.Game.Share
         public void InitMelee()
         {
             DamagableBox.GetComponent<MeleeController>().Init(this);
-            DamagableBox.SetActive(false);
+            DamagableBox.gameObject.SetActive(false);
         }
         //PickUp????????
         //public void AddCarriablePhysicalBullets(int count) => m_CarriedPhysicalBullets = Mathf.Max(m_CarriedPhysicalBullets + count, MaxAmmo);
@@ -419,7 +421,7 @@ namespace OneCanRun.Game.Share
 
         public bool HandleAttackInputs(bool inputDown, bool inputHeld)
         {
-            if (inputDown || inputHeld)
+            if ((inputDown || inputHeld)&&!DamagableBox.gameObject.activeSelf)
             {
                 return TryAttack();
             }
@@ -525,16 +527,17 @@ namespace OneCanRun.Game.Share
         }
         void EndAttack()
         {
+            
             DamagableBox.GetComponent<MeleeController>().ReleaseDic();
-            DamagableBox.SetActive(false);
+            DamagableBox.gameObject.SetActive(false);
             m_LastTimeAttack = Time.time;
 
         }
         void HandleAttack()
         {
-            DamagableBox.SetActive(true);
-            DamagableBox.GetComponent<MeleeController>().Init(this);
-            GetComponent<Animator>().SetTrigger("Reload");
+            DamagableBox.gameObject.SetActive(true);
+            //DamagableBox.GetComponent<MeleeController>().Init(this);
+            GetComponent<Animator>().SetTrigger("Attack");
 
 
         }

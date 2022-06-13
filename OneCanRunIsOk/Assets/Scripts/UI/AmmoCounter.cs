@@ -83,6 +83,7 @@ namespace OneCanRun.UI
             m_PlayerWeaponsManager = FindObjectOfType<PlayerWeaponsManager>();
             DebugUtility.HandleErrorIfNullFindObject<PlayerWeaponsManager, AmmoCounter>(m_PlayerWeaponsManager, this);
 
+
             WeaponIndexText.text = (WeaponCounterIndex + 1).ToString();//枪械标号
 
             FillBarColorChange.Initialize(1f, m_Weapon.GetAmmoNeededToShoot());
@@ -107,6 +108,16 @@ namespace OneCanRun.UI
                 BulletCounter.text = m_Weapon.GetCarriedPhysicalBullets().ToString();
 
                 FillBarColorChange.UpdateVisual(currenFillRatio);
+
+                isActiveWeapon = m_Weapon == m_PlayerWeaponsManager.GetActiveWeapon();
+
+                
+                CanvasGroup.alpha = Mathf.Lerp(CanvasGroup.alpha, isActiveWeapon ? 1f : UnselectedOpacity,
+                Time.deltaTime * 10);
+                AmmoBackgroundImage.gameObject.SetActive(isActiveWeapon);
+                transform.localScale = Vector3.Lerp(transform.localScale, isActiveWeapon ? Vector3.one : UnselectedScale,
+                    Time.deltaTime * 10);
+                ControlKeysRoot.SetActive(!isActiveWeapon);
 
                 //当当前子弹量为0时，Reload提示弹出
                 Reload.gameObject.SetActive(m_Weapon.GetCarriedPhysicalBullets() == 0 && m_Weapon.GetCurrentAmmo() == 0 && m_Weapon.IsWeaponActive && !m_Weapon.IsReloading);

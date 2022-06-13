@@ -22,8 +22,10 @@ namespace OneCanRun.Game
 
         public float GetRatio() => CurrentHealth / MaxHealth;
         public bool IsCritical() => GetRatio() <= CriticalHealthRatio;
+
+        public bool m_IsDead;
+
         Share.ActorProperties properties;
-        bool m_IsDead;
         float totalTime = 1f;
         void Start()
         {
@@ -94,7 +96,16 @@ namespace OneCanRun.Game
             {
                 m_IsDead = true;
                 OnDie?.Invoke();
-                Destroy(this.gameObject);
+                GameObject player = GameObject.Find("Player1");
+                if (player)
+                {
+                    OneCanRun.Game.Actor mPlayer = player.GetComponent<Actor>();
+                    Share.Modifier mod = new Share.Modifier(400, Share.Modifier.ModifierType.experience, this);
+                    mPlayer.addModifier(mod);
+                }
+                Share.MonsterPoolManager monsterPoolManager = Game.Share.MonsterPoolManager.getInstance();
+                monsterPoolManager.release(this.gameObject);
+                //Destroy(this.gameObject);
             }
         }
     }

@@ -32,14 +32,16 @@ namespace OneCanRun.UI
             PlayerSkillsManager playerSkillsManager = FindObjectOfType<PlayerSkillsManager>();
             DebugUtility.HandleErrorIfNullFindObject<PlayerSkillsManager, SkillCoolDown>(playerSkillsManager,
                 this);
-
+            
             playerInputHandler = FindObjectOfType<PlayerInputHandler>();
             DebugUtility.HandleErrorIfNullFindObject<PlayerInputHandler, PlayerWeaponsManager>(playerInputHandler, this);
 
             m_skillController = playerSkillsManager.CurrentSkillInstance;
+            SkillIcon.sprite = m_skillController.SkillIcon;
             Cooling.gameObject.SetActive(false);
             Warning.gameObject.SetActive(false);
             ifTip = false;
+
         }
 
         // Update is called once per frame
