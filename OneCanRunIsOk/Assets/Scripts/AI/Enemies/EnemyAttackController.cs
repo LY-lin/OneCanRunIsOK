@@ -48,6 +48,7 @@ namespace OneCanRun.AI.Enemies
         // Start is called before the first frame update
         void Start()
         {
+            
             weapons = weaponList.ToArray();
             foreach(WeaponController weapon in weapons)
             {

@@ -6,7 +6,7 @@ namespace OneCanRun.Game.Share
     public class MonsterPoolManager : MonoBehaviour
     {
         private static MonsterPoolManager monsterPoolManagerPtr = null;
-        private const int cacheSize = 200;
+        private const int cacheSize = 50;
         private static GameObject monster;
         private static GameObject[] dataStream = new GameObject[cacheSize];
         private static GameObject parent;
