@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
 using OneCanRun.Game;
-using OneCanRun.Game.Share;
+using OneCanRun.AI;
 
 namespace OneCanRun.AI.Enemies
 {
@@ -36,9 +36,9 @@ namespace OneCanRun.AI.Enemies
         [Range(0, 1)]
         public float DropRate = 1f;
 
+        // ��Ӧ���˵��ĸ��¼������������֡���ʧ�����˺�����
         public UnityAction onDetectedTarget;
         public UnityAction onLostTarget;
-        public UnityAction onDamaged;
 
         // 最新受伤时间，用于仇恨丢失
         float lastTimeDamaged = float.NegativeInfinity;
@@ -50,10 +50,7 @@ namespace OneCanRun.AI.Enemies
         // 引入自定义的巡检路径
         public PatrolPath PatrolPath { get; set; }
 
-        public EnemyAttackController attackController;
-
-        public Health health;
-
+        // �����ɫ
         public Actor actor;
         // 绑定状态，用于敌人的状态处理
         public GameObject KnownDetectedTarget => DetectionModule.KnownDetectedTarget;
@@ -71,7 +68,7 @@ namespace OneCanRun.AI.Enemies
         Collider[] colliders;
         // 导航数据模块
         NavigationModule navigationModule;
-        
+        // ��¼��ǰѲ��ĵ�����
         int pathDestinationNodeIndex;
 
         // Start is called before the first frame update
@@ -94,18 +91,10 @@ namespace OneCanRun.AI.Enemies
             NavMeshAgent = GetComponent<NavMeshAgent>();
             DebugUtility.HandleErrorIfNullGetComponent<NavMeshAgent, EnemyController>(NavMeshAgent, this, gameObject);
 
-            health = GetComponent<Health>();
-            DebugUtility.HandleErrorIfNullGetComponent<Health, EnemyController>(health, this, gameObject);
-
-            attackController = GetComponent<EnemyAttackController>();
-            DebugUtility.HandleErrorIfNullGetComponent<EnemyAttackController, EnemyController>(attackController, this, gameObject);
-
-            health.OnDamaged += OnDamaged;
-            health.OnDie += OnDie;
-
             // 注册敌人
             enemyManager.RegisterEnemy(this);
 
+            // ��ʼ�����ģ��
             DetectionModule[] enemyDetectionModules = GetComponentsInChildren<DetectionModule>();
             DebugUtility.HandleErrorIfNoComponentFound<DetectionModule, EnemyController>(enemyDetectionModules.Length, this,
                 gameObject);
@@ -255,40 +244,40 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
+        // ���Թ���
         public bool TryAttack()
         {
+            // ��Ϸδ������Ҫ��������
             if (gameFlowManager.GameIsEnding)
             {
                 return false;
             }
 
-            attackController.UpdateAttackState(KnownDetectedTarget.transform.position);
-            attackController.Attack(KnownDetectedTarget.transform.position);
-
             return true;
         }
 
-        void OnDamaged(float damage, GameObject damageSource)
+        // ��������
+        public void EnemyDamaged(float damage, GameObject damageSource)
         {
-            // test if the damage source is the player
+            // 由伤害来源，且伤害来源不是敌人
             if (damageSource && !damageSource.GetComponent<EnemyController>())
             {
-                // pursue the player
+                // 敌人受伤后要更新检测状态（无视检测范围）
                 DetectionModule.OnDamaged(damageSource);
 
-                onDamaged?.Invoke();
+                // ��������ʱ��
+                lastTimeDamaged = Time.time;
+
+                // 处理受伤音效
+
             }
         }
 
-        void OnDie()
+        // ��������
+        public void EnemyDie()
         {
+            // tells the game flow manager to handle the enemy destuction
             enemyManager.UnregisterEnemy(this);
-
-            // loot an object
-            if (TryDropItem())
-            {
-                Instantiate(LootPrefab, transform.position, Quaternion.identity);
-            }
 
             // this will call the OnDestroy function
             //Destroy(gameObject, DeathDuration);
@@ -296,6 +285,7 @@ namespace OneCanRun.AI.Enemies
             temp.release(this.gameObject);
         }
 
+        // ���Ե���ս��Ʒ
         public bool TryDropItem()
         {
             if (DropRate == 0 || LootPrefab == null)
