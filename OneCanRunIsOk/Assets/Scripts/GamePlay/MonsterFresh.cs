@@ -114,7 +114,7 @@ namespace OneCanRun.GamePlay
             
 
             if((int)Time.time >= mMonsterList[counter].time){
-                Debug.Log("Fresh!");
+                //Debug.Log("Fresh!");
                 Game.Share.MonsterFreshInfo current = mMonsterList[counter];
                 GameObject.Instantiate(monsterSample[current.typeID], new Vector3(current.position_x, current.position_y, current.position_z),
                     new Quaternion(0, 0, 0, 0), this.transform);
