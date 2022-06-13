@@ -62,15 +62,15 @@ namespace OneCanRun.Game
             //if(buffManager.NumBuffList.Count>0)
             foreach (BuffController b in buffManager.NumBuffList)
             {
-                Debug.Log(this +" exposedProperty " + exposedProperty.getMagicAttack());
+                //Debug.Log(this +" exposedProperty " + exposedProperty.getMagicAttack());
                 b.ActorbuffAct(ref exposedProperty);
-                Debug.Log(this + " After exposedProperty " + exposedProperty.getMagicAttack());
+               // Debug.Log(this + " After exposedProperty " + exposedProperty.getMagicAttack());
             }
             foreach (BuffController b in buffManager.PercentBuffList)
             {
-                Debug.Log(this + " exposedProperty " + exposedProperty.getMagicAttack());
+               // Debug.Log(this + " exposedProperty " + exposedProperty.getMagicAttack());
                 b.ActorbuffAct(ref exposedProperty);
-                Debug.Log(this + " After exposedProperty " + exposedProperty.getMagicAttack());
+              //  Debug.Log(this + " After exposedProperty " + exposedProperty.getMagicAttack());
             }
             // core function 
 

@@ -54,17 +54,17 @@ namespace OneCanRun.Game.Share
             InitialDirection = transform.forward;
             InheritedMuzzleVelocity = controller.MuzzleWorldVelocity;
             InitialCharge = controller.CurrentCharge;
-            Debug.Log("shoot"+ this.mDamage);
+            //Debug.Log("shoot"+ this.mDamage);
             OnShoot?.Invoke();
         }
 
         // if collision happens, it will be called
         void OnCollisionEnter(Collision col)
         {
-            /*if (col.gameObject.layer == LayerMask.NameToLayer("weapon"))
+            if (col.gameObject.layer == LayerMask.NameToLayer("weapon"))
             {
                 return;
-            }*/
+            }
 
 
             Actor target = col.gameObject.GetComponent<Actor>();
@@ -91,13 +91,13 @@ namespace OneCanRun.Game.Share
             
             if (damageable)
             {
-                Debug.Log(col.collider);
+                //Debug.Log(col.collider);
                 Actor actor = col.gameObject.GetComponent<Actor>();
                 ActorProperties colliderProperty = actor.GetActorProperties();
                 float finalDamage = this.mDamage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
-                Debug.Log(this.mDamage);
+              /*  Debug.Log(this.mDamage);
                 Debug.Log(colliderProperty.getPhysicalDefence());
-                Debug.Log(colliderProperty.getMagicDefence());
+                Debug.Log(colliderProperty.getMagicDefence());*/
                 if (finalDamage < 0f)
                     finalDamage = 0f;
                 damageable.InflictDamage(finalDamage, false, Owner);
