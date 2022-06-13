@@ -186,6 +186,7 @@ namespace OneCanRun.AI.Enemies
         void OnDamaged(float damage, GameObject damageSource)
         {
             //Debug.Log("Enemy On Damaged, current health: " + health.CurrentHealth);
+            controller.EnemyDamaged(damage, damageSource);
 
             // ������Ч
         }
@@ -193,7 +194,6 @@ namespace OneCanRun.AI.Enemies
         void OnDie()
         {
             Debug.Log(gameObject.name + " Die");
-            controller.EnemyDie();
         }
 
         // �ҵ�����ʼ����������

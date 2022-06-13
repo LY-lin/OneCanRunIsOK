@@ -307,7 +307,6 @@ GameObject:
   - component: {fileID: 3518232688857872041}
   - component: {fileID: 3518232688857872045}
   - component: {fileID: 3518232688857872040}
-  - component: {fileID: 3518232688857872044}
   - component: {fileID: 8790146402733780871}
   - component: {fileID: 2481453914667691605}
   - component: {fileID: 5767701766520463951}
@@ -425,9 +424,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d969d81babd6c4cbfe5d3bb8cad7d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Affiliation: 1
+  Affiliation: 2
   AimPoint: {fileID: 0}
-  buffManager: {fileID: 0}
+  buffManager: {fileID: 2481453914667691605}
 --- !u!195 &3518232688857872045
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -468,26 +467,9 @@ MonoBehaviour:
   DeathDuration: 0
   LootPrefab: {fileID: 0}
   DropRate: 1
-  actor: {fileID: 3518232688857872041}
---- !u!114 &3518232688857872044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3518232688857872043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a211bd37143c82346a93100b7fcdf44e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AttackStopDistanceRatio: 0.5
-  maxHealth: 100
-  SwapToNextWeapon: 0
-  DelayAfterWeaponSwap: 0
-  state: 0
-  controller: {fileID: 3518232688857872040}
+  attackController: {fileID: 0}
   health: {fileID: 3518232688857872047}
+  actor: {fileID: 3518232688857872041}
 --- !u!114 &8790146402733780871
 MonoBehaviour:
   m_ObjectHideFlags: 0

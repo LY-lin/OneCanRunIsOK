@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using OneCanRun.Game;
 using OneCanRun.Game.Share;
 using UnityEngine;
@@ -153,36 +153,46 @@ namespace OneCanRun.GamePlay
             WeaponController activeWeapon = GetActiveWeapon();
 
             //换弹中
-            if (activeWeapon != null && activeWeapon.IsReloading)
+            if (activeWeapon != null &&activeWeapon.RemoteWeapons&&activeWeapon.IsReloading)
+                return;
+
+            if (activeWeapon != null && !activeWeapon.RemoteWeapons && activeWeapon.DamagableBox.gameObject.activeSelf)
                 return;
 
 
             if (activeWeapon != null && m_WeaponSwitchState == WeaponSwitchState.Up)
             {
-                if (activeWeapon.HasPhysicalBullets && m_InputHandler.GetReloadButtonDown() && activeWeapon.CurrentAmmoRatio < 1.0f)
+                if (activeWeapon.RemoteWeapons)
                 {
-                    
-                    //IsAiming = false;
-                    activeWeapon.StartReloadAnimation();
-                    //activeWeapon.Reload();
-                    return;
+                    if (activeWeapon.HasPhysicalBullets && m_InputHandler.GetReloadButtonDown() && activeWeapon.CurrentAmmoRatio < 1.0f)
+                    {
+
+                        //IsAiming = false;
+                        activeWeapon.StartReloadAnimation();
+                        //activeWeapon.Reload();
+                        return;
+                    }
+                    // handle aiming down sights
+                    //IsAiming = m_InputHandler.GetAimInputHeld();
+
+                    // handle shooting
+                    //判断是否在持续开火-计算后坐力
+                    bool hasFired = activeWeapon.HandleShootInputs(
+                        m_InputHandler.GetFireInputDown(),
+                        m_InputHandler.GetFireInputHeld(),
+                        m_InputHandler.GetFireInputReleased());
+
+                    // Handle accumulating recoil
+                    //计算后坐力
+                    if (hasFired)
+                    {
+                        m_AccumulatedRecoil += Vector3.back * activeWeapon.RecoilForce;
+                        m_AccumulatedRecoil = Vector3.ClampMagnitude(m_AccumulatedRecoil, MaxRecoilDistance);
+                    }
                 }
-                // handle aiming down sights
-                //IsAiming = m_InputHandler.GetAimInputHeld();
-
-                // handle shooting
-                //判断是否在持续开火-计算后坐力
-                bool hasFired = activeWeapon.HandleShootInputs(
-                    m_InputHandler.GetFireInputDown(),
-                    m_InputHandler.GetFireInputHeld(),
-                    m_InputHandler.GetFireInputReleased());
-
-                // Handle accumulating recoil
-                //计算后坐力
-                if (hasFired)
+                else
                 {
-                    m_AccumulatedRecoil += Vector3.back * activeWeapon.RecoilForce;
-                    m_AccumulatedRecoil = Vector3.ClampMagnitude(m_AccumulatedRecoil, MaxRecoilDistance);
+                    bool hasAttacked = activeWeapon.HandleAttackInputs(m_InputHandler.GetFireInputDown(), m_InputHandler.GetFireInputHeld());
                 }
             }
 
@@ -501,13 +511,16 @@ namespace OneCanRun.GamePlay
                     // spawn the weapon prefab as child of the weapon socket
                     WeaponController weaponInstance = Instantiate(weaponPrefab, WeaponParentSocket);
                     weaponInstance.transform.localPosition = Vector3.zero;
-                    weaponInstance.transform.localRotation = Quaternion.identity;
-
+                    //weaponInstance.transform.localRotation = Quaternion.identity;
                     // Set owner to this gameObject so the weapon can alter projectile/damage logic accordingly
                     weaponInstance.Owner = gameObject;
                     weaponInstance.SourcePrefab = weaponPrefab.gameObject;
                     weaponInstance.ShowWeapon(false);
 
+                    if(!weaponInstance.RemoteWeapons)
+                    {
+                        weaponInstance.InitMelee();
+                    }
                     // Assign the first person layer to the weapon
                     int layerIndex =
                         Mathf.RoundToInt(Mathf.Log(FpsWeaponLayer.value,

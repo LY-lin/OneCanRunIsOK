@@ -1,9 +1,8 @@
 {
-    "name": "NewAssembly",
-    "rootNamespace": "",
+    "name": "OneCanRun.AI",
+    "rootNamespace": "OneCanRun",
     "references": [
-        "GUID:8637e5a644d0dda4b8b4f2a6a0d14f99",
-        "GUID:0f22c178320b61648a79d67dcd86d50e"
+        "GUID:8637e5a644d0dda4b8b4f2a6a0d14f99"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

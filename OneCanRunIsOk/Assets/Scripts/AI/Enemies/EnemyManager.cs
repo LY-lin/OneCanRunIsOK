@@ -21,16 +21,13 @@ namespace OneCanRun.AI.Enemies
         // 注册敌人控制器
         public void RegisterEnemy(EnemyController enemy)
         {
-            if (!Enemies.Contains(enemy))
-            {
-                Enemies.Add(enemy);
+            Enemies.Add(enemy);
 
-                NumberOfEnemiesTotal++;
+            NumberOfEnemiesTotal++;
 
-                GameObject myPath = GameObject.Find("path");
-                PatrolPath patrol = myPath.GetComponent<PatrolPath>();
-                patrol.addEnemy(enemy);
-            }
+            GameObject myPath = GameObject.Find("path");
+            PatrolPath patrol = myPath.GetComponent<PatrolPath>();
+            patrol.addEnemy(enemy);
         }
 
         // 注销敌人控制器，并调用事件控制器进行广播？

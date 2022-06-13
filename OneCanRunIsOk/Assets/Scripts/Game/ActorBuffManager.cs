@@ -54,6 +54,9 @@ namespace OneCanRun.Game
         }
         private bool checkActive(BuffController buff,float time)
         {
+            //如果buff永久生效
+            if (buff.getExistTime() < 0)
+                return true;
             buff.getTime -= time;
             if (buff.getTime < 0)
             {
@@ -110,6 +113,22 @@ namespace OneCanRun.Game
             if(changed)
                 buffChanged?.Invoke();
         }
+        public void buffDelete(BuffController buff)
+        {
+            Buff.BufferType aimType = buff.getBuffType();
+            switch (aimType)
+            {
+                case Buff.BufferType.NumBuff:
+                    NumBuffList.Remove(buff);
+                    buffChanged?.Invoke();
+                    break;
 
+                case Buff.BufferType.PercentBuff:
+                    PercentBuffList.Remove(buff);
+                    buffChanged?.Invoke();
+                    break;
+            }
+
+        }
     }
 }
