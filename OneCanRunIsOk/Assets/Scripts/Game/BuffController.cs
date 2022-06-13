@@ -9,13 +9,11 @@ namespace OneCanRun.Game
     {
         
         private Buff mbuff;
-        bool isForever;
         public float getTime;
         public BuffController(Buff buff)
         {
             mbuff = buff;
             getTime = buff.ExistTime;
-            isForever = !buff.hasExistTime;
         }
 
         public Buff.BufferType getBuffType()
@@ -25,8 +23,6 @@ namespace OneCanRun.Game
 
         public float getExistTime()
         {
-            if (isForever)
-                return -10;
             return mbuff.ExistTime;
         }
 

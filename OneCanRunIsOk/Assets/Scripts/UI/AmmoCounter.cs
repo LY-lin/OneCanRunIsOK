@@ -59,10 +59,19 @@ namespace OneCanRun.UI
 
         void Awake()
         {
-            AmmoFillImage.fillAmount = 1;
+            
             //EventManager.AddListener<AmmoPickupEvent>(OnAmmoPickup);
         }
 
+        void OnAmmoPickup(AmmoPickupEvent evt)
+        {
+            /*
+            if (evt.Weapon == m_Weapon)
+            {
+                BulletCounter.text = m_Weapon.GetCarriedPhysicalBullets().ToString();
+            }
+            */
+        }
 
         public void Initialize(WeaponController weapon, int weaponIndex)
         {
@@ -70,7 +79,7 @@ namespace OneCanRun.UI
             m_Weapon = weapon;
             WeaponCounterIndex = weaponIndex;
             WeaponImage.sprite = weapon.WeaponIcon;
-            if (!weapon.HasPhysicalBullets||!weapon.RemoteWeapons)
+            if (!weapon.HasPhysicalBullets)
                 BulletCounter.transform.parent.gameObject.SetActive(false);//非物理子弹强，剩余子弹量不可见
             else
             {
@@ -78,7 +87,6 @@ namespace OneCanRun.UI
             }
 
             Reload.gameObject.SetActive(false);
-            Reloading.gameObject.SetActive(false);
             //Reloading.gameObject.SetActive(true);
             m_PlayerWeaponsManager = FindObjectOfType<PlayerWeaponsManager>();
             DebugUtility.HandleErrorIfNullFindObject<PlayerWeaponsManager, AmmoCounter>(m_PlayerWeaponsManager, this);
@@ -91,28 +99,32 @@ namespace OneCanRun.UI
 
         void Update()
         {
+            
+            float currenFillRatio = m_Weapon.CurrentAmmoRatio;
+            
+            AmmoFillImage.fillAmount = Mathf.Lerp(AmmoFillImage.fillAmount, currenFillRatio,
+                Time.deltaTime * AmmoFillMovementSharpness);//子弹条的根据当前弹量比的平滑变化
+           
+            BulletCounter.text = m_Weapon.GetCarriedPhysicalBullets().ToString();
+
             bool isActiveWeapon = m_Weapon == m_PlayerWeaponsManager.GetActiveWeapon();
 
-
+            CanvasGroup.alpha = Mathf.Lerp(CanvasGroup.alpha, isActiveWeapon ? 1f : UnselectedOpacity,
+                Time.deltaTime * 10);//非正在使用枪子弹条的透明度平滑变化
             transform.localScale = Vector3.Lerp(transform.localScale, isActiveWeapon ? Vector3.one : UnselectedScale,
                 Time.deltaTime * 10);//非正在使用枪子弹条的大小平滑变化
             ControlKeysRoot.SetActive(!isActiveWeapon);
-            if (m_Weapon.RemoteWeapons)
-            {
-                float currenFillRatio = m_Weapon.CurrentAmmoRatio;
 
-                AmmoFillImage.fillAmount = Mathf.Lerp(AmmoFillImage.fillAmount, currenFillRatio,
-                    Time.deltaTime * AmmoFillMovementSharpness);//子弹条的根据当前弹量比的平滑变化
+            FillBarColorChange.UpdateVisual(currenFillRatio);
 
-                BulletCounter.text = m_Weapon.GetCarriedPhysicalBullets().ToString();
-
-                FillBarColorChange.UpdateVisual(currenFillRatio);
-
-                //当当前子弹量为0时，Reload提示弹出
-                Reload.gameObject.SetActive(m_Weapon.GetCarriedPhysicalBullets() == 0 && m_Weapon.GetCurrentAmmo() == 0 && m_Weapon.IsWeaponActive && !m_Weapon.IsReloading);
-                Reloading.gameObject.SetActive(m_Weapon.IsReloading);
-            }
+            //当当前子弹量为0时，Reload提示弹出
+            Reload.gameObject.SetActive(m_Weapon.GetCarriedPhysicalBullets() == 0 && m_Weapon.GetCurrentAmmo() == 0 && m_Weapon.IsWeaponActive&&!m_Weapon.IsReloading);
+            Reloading.gameObject.SetActive(m_Weapon.IsReloading);
         }
 
+        void Destroy()
+        {
+           // EventManager.RemoveListener<AmmoPickupEvent>(OnAmmoPickup);
+        }
     }
 }

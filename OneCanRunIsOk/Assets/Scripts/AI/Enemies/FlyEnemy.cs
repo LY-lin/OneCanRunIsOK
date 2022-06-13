@@ -7,7 +7,7 @@ namespace OneCanRun.AI.Enemies
     [RequireComponent(typeof(Health), typeof(EnemyController))]
     public class FlyEnemy : MonoBehaviour
     {
-        // æ•Œäººåœ¨è¾¾åˆ°æ”»å‡»è·ç¦»åï¼Œå†ç¼©å°ä¸€å®šæ”»å‡»è·ç¦»æ‰åœæ­¢ç§»åŠ¨
+        // µĞÈËÔÚ´ïµ½¹¥»÷¾àÀëºó£¬ÔÙËõĞ¡Ò»¶¨¹¥»÷¾àÀë²ÅÍ£Ö¹ÒÆ¶¯
         [Tooltip("Fraction of the enemy's attack range at which it will stop moving towards target while attacking")]
         [Range(0f, 1f)]
         public float AttackStopDistanceRatio = 0.5f;
@@ -15,16 +15,16 @@ namespace OneCanRun.AI.Enemies
         [Tooltip("Maximum amount of health")]
         public float maxHealth = 100f;
 
-        // æ­¦å™¨å‚æ•°ï¼Œå†³å®šæ˜¯å¦å¯ä»¥åˆ‡æ¢æ­¦å™¨
+        // ÎäÆ÷²ÎÊı£¬¾ö¶¨ÊÇ·ñ¿ÉÒÔÇĞ»»ÎäÆ÷
         [Header("Weapons Parameters")]
         [Tooltip("Allow weapon swapping for this enemy")]
         public bool SwapToNextWeapon = false;
 
-        // æ¢æªåå¼€æªçš„å†·å´æ—¶é—´ï¼Œå…è®¸æ¢æªåŠ¨ç”»æ’­æ”¾å®Œæ¯•
+        // »»Ç¹ºó¿ªÇ¹µÄÀäÈ´Ê±¼ä£¬ÔÊĞí»»Ç¹¶¯»­²¥·ÅÍê±Ï
         [Tooltip("Time delay between a weapon swap and the next attack")]
         public float DelayAfterWeaponSwap = 0f;
 
-        // çŠ¶æ€æšä¸¾ç±»å‹ï¼Œæšä¸¾çš„æ¯ä¸ªå˜é‡ä»£è¡¨æ€ªç‰©çš„ä¸€ä¸ªçŠ¶æ€ï¼Œåˆ†åˆ«ä¸ºï¼šå·¡æ£€ï¼Œè¿½å‡»ï¼Œæ”»å‡»
+        // ×´Ì¬Ã¶¾ÙÀàĞÍ£¬Ã¶¾ÙµÄÃ¿¸ö±äÁ¿´ú±í¹ÖÎïµÄÒ»¸ö×´Ì¬£¬·Ö±ğÎª£ºÑ²¼ì£¬×·»÷£¬¹¥»÷
         public enum AIState
         {
             Patrol,
@@ -32,21 +32,21 @@ namespace OneCanRun.AI.Enemies
             Attack,
         }
 
-        // æ€ªç‰©çš„AIçŠ¶æ€ï¼Œæ ¹æ®å½“å‰çŠ¶æ€è°ƒç”¨æ€ªç‰©å¯¹åº”çš„æ‰§è¡ŒåŠ¨ä½œ
+        // ¹ÖÎïµÄAI×´Ì¬£¬¸ù¾İµ±Ç°×´Ì¬µ÷ÓÃ¹ÖÎï¶ÔÓ¦µÄÖ´ĞĞ¶¯×÷
         public AIState state;
 
-        // æ•Œäººæ§åˆ¶å™¨
+        // µĞÈË¿ØÖÆÆ÷
         public EnemyController controller;
-        // è¡€é‡ç³»ç»Ÿ
+        // ÑªÁ¿ÏµÍ³
         public Health health;
-        // æ­¦å™¨ç³»ç»Ÿ
-        // è®°å½•æœ€è¿‘ä¸€æ¬¡å°„å‡»æ—¶é—´
+        // ÎäÆ÷ÏµÍ³
+        // ¼ÇÂ¼×î½üÒ»´ÎÉä»÷Ê±¼ä
         float lastTimeWeaponSwapped = Mathf.NegativeInfinity;
-        // å½“å‰æ­¦å™¨ç´¢å¼•ï¼Œå¦‚æœæ˜¯å­˜åœ¨å¤šä¸ªæ­¦å™¨
+        // µ±Ç°ÎäÆ÷Ë÷Òı£¬Èç¹ûÊÇ´æÔÚ¶à¸öÎäÆ÷
         int currentWeaponIndex;
-        // ä¸€ä¸ªæ­¦å™¨å¯¹åº”ä¸€ä¸ªæ­¦å™¨æ§åˆ¶å™¨
+        // Ò»¸öÎäÆ÷¶ÔÓ¦Ò»¸öÎäÆ÷¿ØÖÆÆ÷
         WeaponController currentWeapon;
-        // è·å–æ•Œäººèº«ä¸Šæ‰€æœ‰ç»‘å®šçš„æ­¦å™¨
+        // »ñÈ¡µĞÈËÉíÉÏËùÓĞ°ó¶¨µÄÎäÆ÷
         WeaponController[] weapons;
 
         public CharacterController characterController;
@@ -57,26 +57,31 @@ namespace OneCanRun.AI.Enemies
         // Start is called before the first frame update
         void Start()
         {
-            // åˆå§‹åŒ–
+            // ³õÊ¼»¯
+            maxHealth = 10f;
             controller = GetComponent<EnemyController>();
             DebugUtility.HandleErrorIfNullGetComponent<EnemyController, FlyEnemy>(controller, this, gameObject);
+
+            health = GetComponent<Health>();
+            DebugUtility.HandleErrorIfNullGetComponent<Health, FlyEnemy>(health, this, gameObject);
+            health.MaxHealth = maxHealth;
 
             characterController = GetComponent<CharacterController>();
             DebugUtility.HandleErrorIfNullGetComponent<CharacterController, FlyEnemy>(characterController, this, gameObject);
 
-            // åˆå§‹åŒ–æ­¦å™¨
+            // ³õÊ¼»¯ÎäÆ÷
             FindAndInitializeAllWeapons();
             currentWeapon = GetCurrentWeapon();
             currentWeapon.ShowWeapon(true);
 
-            // åˆå§‹åŒ–ä¸ºå·¡æ£€çŠ¶æ€
+            // ³õÊ¼»¯ÎªÑ²¼ì×´Ì¬
             state = AIState.Patrol;
 
-            //è®¢é˜…äº‹ä»¶
+            //¶©ÔÄÊÂ¼ş
             controller.onDetectedTarget += OnDetectedTarget;
             controller.onLostTarget += OnLostTarget;
-            controller.SetPathDestinationToClosestNode();
-            controller.onDamaged += OnDamaged;
+            health.OnDamaged += OnDamaged;
+            health.OnDie += OnDie;
 
         }
 
@@ -88,7 +93,7 @@ namespace OneCanRun.AI.Enemies
             UpdateCurrentAIState();
         }
 
-        // çŠ¶æ€å˜æ¢
+        // ×´Ì¬±ä»»
         public virtual void UpdateAiStateTransitions()
         {
             switch (state)
@@ -109,7 +114,7 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // å¤„ç†å½“å‰çŠ¶æ€éœ€è¦åšçš„äº‹
+        // ´¦Àíµ±Ç°×´Ì¬ĞèÒª×öµÄÊÂ
         public virtual void UpdateCurrentAIState()
         {
             switch (state)
@@ -145,20 +150,20 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // å¤„ç†æ”»å‡»äº‹ä»¶
+        // ´¦Àí¹¥»÷ÊÂ¼ş
         void Attack(Vector3 enemyPosition)
         {
-            // æ•Œäººï¼Œæ­¦å™¨æ ¹éƒ¨ä¸¤ç‚¹è¿çº¿å³æ­¦å™¨æœå‘
+            // µĞÈË£¬ÎäÆ÷¸ù²¿Á½µãÁ¬Ïß¼´ÎäÆ÷³¯Ïò
             OrientWeaponsTowards(enemyPosition);
 
-            // å°„å‡»
+            // Éä»÷
             bool didFire = GetCurrentWeapon().HandleShootInputs(false, true, false);
 
             if (didFire)
             {
-                // æ”»å‡»ç‰¹æ•ˆ
+                // ¹¥»÷ÌØĞ§
 
-                // å¦‚æœå­˜åœ¨å¤šç§æ­¦å™¨ï¼Œå¹¶ä¸”å¯ä»¥åˆ‡æ¢æ­¦å™¨ï¼Œåˆ‡æ¢æ­¦å™¨
+                // Èç¹û´æÔÚ¶àÖÖÎäÆ÷£¬²¢ÇÒ¿ÉÒÔÇĞ»»ÎäÆ÷£¬ÇĞ»»ÎäÆ÷
                 if (SwapToNextWeapon && weapons.Length > 1)
                 {
                     int nextWeaponIndex = (currentWeaponIndex + 1) % weapons.Length;
@@ -175,7 +180,7 @@ namespace OneCanRun.AI.Enemies
             characterController.Move(fly * Time.deltaTime);
         }
 
-        // å¤„ç†æ£€æµ‹åˆ°ç›®æ ‡äº‹ä»¶
+        // ´¦Àí¼ì²âµ½Ä¿±êÊÂ¼ş
         void OnDetectedTarget()
         {
             if (state == AIState.Patrol)
@@ -184,7 +189,7 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // å¤„ç†ä¸¢å¤±ç›®æ ‡äº‹ä»¶
+        // ´¦Àí¶ªÊ§Ä¿±êÊÂ¼ş
         void OnLostTarget()
         {
             if (state == AIState.Follow || state == AIState.Attack)
@@ -193,13 +198,20 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // å¤„ç†å—ä¼¤äº‹ä»¶
-        void OnDamaged()
+        // ´¦ÀíÊÜÉËÊÂ¼ş
+        void OnDamaged(float damage, GameObject damageSource)
         {
-            // å—ä¼¤ç‰¹æ•ˆ
+            controller.EnemyDamaged(damage, damageSource);
+
+            // ÊÜÉËÌØĞ§
         }
 
-        // æ‰¾åˆ°å¹¶åˆå§‹åŒ–æ‰€æœ‰æ­¦å™¨
+        void OnDie()
+        {
+            controller.EnemyDie();
+        }
+
+        // ÕÒµ½²¢³õÊ¼»¯ËùÓĞÎäÆ÷
         void FindAndInitializeAllWeapons()
         {
             if (weapons == null)
@@ -207,7 +219,7 @@ namespace OneCanRun.AI.Enemies
                 weapons = GetComponentsInChildren<WeaponController>();
                 DebugUtility.HandleErrorIfNoComponentFound<WeaponController, EnemyController>(weapons.Length, this, gameObject);
 
-                // åˆå§‹åŒ–æ‰€æœ‰æ­¦å™¨çš„æ‹¥æœ‰è€…
+                // ³õÊ¼»¯ËùÓĞÎäÆ÷µÄÓµÓĞÕß
                 foreach (WeaponController weapon in weapons)
                 {
                     weapon.Owner = gameObject;
@@ -215,7 +227,7 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
-        // è¿”å›å½“å‰æ­¦å™¨
+        // ·µ»Øµ±Ç°ÎäÆ÷
         WeaponController GetCurrentWeapon()
         {
             FindAndInitializeAllWeapons();
@@ -227,7 +239,7 @@ namespace OneCanRun.AI.Enemies
             return currentWeapon;
         }
 
-        // è®¾ç½®å½“å‰æ­¦å™¨
+        // ÉèÖÃµ±Ç°ÎäÆ÷
         void SetCurrentWeapon(int index)
         {
             currentWeaponIndex = index;
@@ -235,10 +247,10 @@ namespace OneCanRun.AI.Enemies
             lastTimeWeaponSwapped = SwapToNextWeapon ? Time.time : Mathf.NegativeInfinity;
         }
 
-        // è°ƒæ•´æ­¦å™¨æœå‘
+        // µ÷ÕûÎäÆ÷³¯Ïò
         public void OrientWeaponsTowards(Vector3 lookPostion)
         {
-            // è®¡ç®—æ‰€æœ‰æ­¦å™¨çš„æœå‘ï¼Œå¹¶æ›´æ–°
+            // ¼ÆËãËùÓĞÎäÆ÷µÄ³¯Ïò£¬²¢¸üĞÂ
             foreach (WeaponController weapon in weapons)
             {
                 Vector3 weaponForward = (lookPostion - weapon.WeaponRoot.transform.position).normalized;

@@ -6,11 +6,6 @@ namespace OneCanRun.Game.Share
 {
     public class BulletController : MonoBehaviour
     {
-        [Tooltip("击中特效")]
-        public GameObject ImpactVfx;
-        [Tooltip("击中特效持续时间")]
-        public float ImpactVfxLifetime = 5f;
-
 
         //[Tooltip("Speed")]
         public float speed;
@@ -66,7 +61,6 @@ namespace OneCanRun.Game.Share
                 return;
             }
 
-
             Actor target = col.gameObject.GetComponent<Actor>();
             //if (target == null)
                 //return;
@@ -76,28 +70,12 @@ namespace OneCanRun.Game.Share
                     return;
             }
 
-            //特效
-            if (ImpactVfx)
-            {
-                GameObject impactVfxInstance = Instantiate(ImpactVfx, this.gameObject.transform.position,
-                    Quaternion.LookRotation(col.gameObject.transform.up));
-                if (ImpactVfxLifetime > 0)
-                {
-                    Destroy(impactVfxInstance.gameObject, ImpactVfxLifetime);
-                }
-            }
-
-            Damageable damageable = col.collider.GetComponentInParent<Damageable>();
-            
+            Damageable damageable = col.collider.GetComponent<Damageable>();
             if (damageable)
             {
-                //Debug.Log(col.collider);
                 Actor actor = col.gameObject.GetComponent<Actor>();
                 ActorProperties colliderProperty = actor.GetActorProperties();
                 float finalDamage = this.mDamage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
-              /*  Debug.Log(this.mDamage);
-                Debug.Log(colliderProperty.getPhysicalDefence());
-                Debug.Log(colliderProperty.getMagicDefence());*/
                 if (finalDamage < 0f)
                     finalDamage = 0f;
                 damageable.InflictDamage(finalDamage, false, Owner);
