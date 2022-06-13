@@ -6,7 +6,7 @@ namespace OneCanRun.GamePlay
 {
     public class WeaponPickup : Pickup
     {
-        [Tooltip("´ıÊ°È¡ÎäÆ÷")]
+        [Tooltip("å¾…æ‹¾å–æ­¦å™¨")]
         public WeaponController WeaponPrefab;
 
         Interactive m_Interactive;
@@ -20,17 +20,23 @@ namespace OneCanRun.GamePlay
             
 
             // Set all children layers to default (to prefent seeing weapons through meshes)
-            //ÇĞ»»Í¼²ã
+            //åˆ‡æ¢å›¾å±‚
             foreach (Transform t in GetComponentsInChildren<Transform>())
             {
                 if (t != transform)
                     t.gameObject.layer = 0;
             }
+            m_Interactive.beInteracted += bePickup;
         }
 
-        protected override void Update()
+        /*protected override void Update()
         {
             base.Update();
+
+        }*/
+
+        protected void bePickup()
+        {
             if (m_Interactive.hasInteracted == true)
             {
                 OnPicked(m_Interactive.m_PlayerCharacterController);
@@ -39,9 +45,8 @@ namespace OneCanRun.GamePlay
                 EventManager.broadcast(evt);
             }
         }
-
         void OnTriggerEnter(Collider other) { }
-        ////Åö×²´¥·¢½ûÓÃ
+        ////ç¢°æ’è§¦å‘ç¦ç”¨
         //void OnTriggerEnter(Collider other)
         //{
         //    PlayerCharacterController pickingPlayer = other.GetComponent<PlayerCharacterController>();
@@ -56,7 +61,7 @@ namespace OneCanRun.GamePlay
         //    }
         //}
 
-        //ÖØĞ´Ê°È¡º¯Êı
+        //é‡å†™æ‹¾å–å‡½æ•°
         protected override void OnPicked(PlayerCharacterController byPlayer)
         {
             PlayerWeaponsManager playerWeaponsManager = byPlayer.GetComponent<PlayerWeaponsManager>();

@@ -561,7 +561,7 @@ namespace OneCanRun.GamePlay
                 lastInteractive = hit.collider.GetComponentInParent<Interactive>();
                 if (lastInteractive != null)
                 {
-                    //Debug.Log("Watching!");
+// Debug.Log("Watching!");
                     //判断距离
                     if (Vector3.Distance(PlayerCamera.transform.position, hit.transform.position) <= InteractiveRange)
                     {
@@ -571,7 +571,9 @@ namespace OneCanRun.GamePlay
                         {
                             lastInteractive.showInteractiveUI = false;
                             lastInteractive.hasInteracted = true;
+                            
                             lastInteractive.m_PlayerCharacterController = this;
+                            lastInteractive.beInteracted.Invoke();
                         }
                     }
 

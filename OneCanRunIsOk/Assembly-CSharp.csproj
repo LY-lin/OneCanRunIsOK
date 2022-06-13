@@ -106,9 +106,12 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Scripts\ParticleSystemController\Serializables.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
+    <Compile Include="Assets\Hit &amp; Slashes Vol.3\SelfDestruct.cs" />
+    <Compile Include="Assets\RFX_Scripts\Destroy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\RFX_Scripts\HowtoPlay.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Readme.txt" />
     <None Include="Assets\Polytope Studio\Lowpoly Medieval Environments\Sources\Shaders\PT_Water_Shader_WebGl.shader" />
