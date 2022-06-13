@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using OneCanRun.Game.Share;
+using OneCanRun.GamePlay;
 
 namespace OneCanRun.AI.Enemies
 {
@@ -9,6 +10,12 @@ namespace OneCanRun.AI.Enemies
     {
         [Tooltip("Weapons which are carried by the enemy")]
         public List<WeaponController> weaponList = new List<WeaponController>();
+
+        [Tooltip("Skills which are carried by the enemy")]
+        public List<SkillController> skillList = new List<SkillController>();
+
+        [Tooltip("Weapons which are carried by the enemy")]
+        public List<Transform> SkillSocketList = new List<Transform>();
 
         [Tooltip("Melee limit attack range")]
         public float MeleeRange;
@@ -30,7 +37,10 @@ namespace OneCanRun.AI.Enemies
 
         WeaponController[] weapons;
 
+        SkillController[] skills;
+
         int currentWeaponIndex = 0;
+        int currentSkillIndex = 0;
 
         // Start is called before the first frame update
         void Start()
@@ -39,6 +49,15 @@ namespace OneCanRun.AI.Enemies
             foreach(WeaponController weapon in weapons)
             {
                 weapon.Owner = gameObject;
+            }
+
+            skills = skillList.ToArray();
+            foreach(SkillController skill in skills)
+            {
+                if(skill.m_SkillType == SkillType.Cast)
+                {
+                    skill.setWeaponOwner(gameObject);
+                }
             }
         }
 
@@ -69,6 +88,7 @@ namespace OneCanRun.AI.Enemies
                     AttackByWeapon(target);
                     break;
                 case AttackState.Skill:
+                    AttackBySkill();
                     break;
                 default:
                     break;
@@ -87,7 +107,8 @@ namespace OneCanRun.AI.Enemies
 
         public void AttackBySkill()
         {
-
+            SkillController skillController = skills[currentSkillIndex];
+            skillController.UseSkill();
         }
 
         public void AttackByMelee()
