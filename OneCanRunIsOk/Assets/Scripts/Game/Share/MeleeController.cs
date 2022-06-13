@@ -46,13 +46,11 @@ namespace OneCanRun.Game.Share
             Actor target = col.gameObject.GetComponent<Actor>();
             if (target)
             {
-                Debug.Log("ERRRRR");
                 if (target.Affiliation == this.attackerType)
                     return;
             }
 
             Damageable damageable = col.collider.GetComponent<Damageable>();
-            Debug.Log("123  "+damageable);
             if (damageable&&!dic.ContainsKey(damageable.gameObject))
             {
                 
@@ -63,8 +61,6 @@ namespace OneCanRun.Game.Share
                 float finalDamage = this.Damage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
                 if (finalDamage < 0f)
                     finalDamage = 0f;
-                Debug.Log(dic);
-                Debug.Log(finalDamage);
                 damageable.InflictDamage(finalDamage, false, Owner);
 
             }

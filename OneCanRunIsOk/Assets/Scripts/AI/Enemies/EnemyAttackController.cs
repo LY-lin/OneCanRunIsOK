@@ -14,8 +14,8 @@ namespace OneCanRun.AI.Enemies
         [Tooltip("Skills which are carried by the enemy")]
         public List<SkillController> skillList = new List<SkillController>();
 
-        [Tooltip("Weapons which are carried by the enemy")]
-        public List<Transform> SkillSocketList = new List<Transform>();
+        [Tooltip("Skills which are carried by the enemy")]
+        public List<WeaponController> MeleeList = new List<WeaponController>();
 
         [Tooltip("Melee limit attack range")]
         public float MeleeRange;
@@ -39,8 +39,11 @@ namespace OneCanRun.AI.Enemies
 
         SkillController[] skills;
 
+        WeaponController[] melees;
+
         int currentWeaponIndex = 0;
         int currentSkillIndex = 0;
+        int currentMeleeIndex = 0;
 
         // Start is called before the first frame update
         void Start()
@@ -58,6 +61,13 @@ namespace OneCanRun.AI.Enemies
                 {
                     skill.setWeaponOwner(gameObject);
                 }
+            }
+
+            melees = MeleeList.ToArray();
+            foreach (WeaponController melee in melees)
+            {
+                melee.Owner = gameObject;
+                melee.InitMelee();
             }
         }
 
@@ -83,12 +93,22 @@ namespace OneCanRun.AI.Enemies
             switch (attackState)
             {
                 case AttackState.Melee:
+                    if(melees.Length != 0)
+                    {
+                        AttackByMelee();
+                    }
                     break;
                 case AttackState.Weapon:
-                    AttackByWeapon(target);
+                    if(weapons.Length !=0)
+                    {
+                        AttackByWeapon(target);
+                    }
                     break;
                 case AttackState.Skill:
-                    AttackBySkill();
+                    if(skills.Length != 0)
+                    {
+                        AttackBySkill();
+                    }
                     break;
                 default:
                     break;
@@ -113,7 +133,8 @@ namespace OneCanRun.AI.Enemies
 
         public void AttackByMelee()
         {
-
+            WeaponController melee = melees[currentWeaponIndex];
+            melee.HandleAttackInputs(false, true);
         }
     }
 }
