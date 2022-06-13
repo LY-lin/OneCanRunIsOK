@@ -34,6 +34,9 @@ namespace OneCanRun.Game.Share
 
 
         [Header("Information")]
+        [Tooltip("if it is RemoteWeapons")]
+        public bool RemoteWeapons;
+
         [Tooltip("The name that will be displayed in the UI for this weapon")]
         public string WeaponName;   //武器名
 
@@ -41,8 +44,7 @@ namespace OneCanRun.Game.Share
         [Tooltip("The image that will be displayed in the UI for this weapon")]
         public Sprite WeaponIcon;   //武器显示在UI的小图标
 
-        [Tooltip("Bullet profebs")]
-        public GameObject bullet;
+
 
         [Tooltip("Default data for the crosshair")]
         public CrosshairData CrosshairDataDefault;//默认的准心数据
@@ -52,10 +54,18 @@ namespace OneCanRun.Game.Share
         public CrosshairData CrosshairDataTargetInSight;//瞄准时的准信数据
         */
 
-        [Header("Internal References")]
         [Tooltip("The root object for the weapon, this is what will be deactivated when the weapon isn't active")]
         public GameObject WeaponRoot;   //武器使用的模型
 
+        [Header("Melee Weapons' Internal Reference(Only active when RemoteWeapons is false)")]
+        [Tooltip("Damagable Box")]
+        public GameObject DamagableBox;
+
+        [Tooltip("Delay between two attacks")]
+        public float DelayBetweenAttacks;
+
+
+        [Header("Remote Weapons' Internal References")]
         [Tooltip("Tip of the weapon, where the projectiles are shot")]
         public Transform WeaponMuzzle;  //武器发射弹丸的地方
 
@@ -63,9 +73,9 @@ namespace OneCanRun.Game.Share
         [Tooltip("The type of weapon wil affect how it shoots")]
         public WeaponShootType ShootType;
 
-        /*
-        [Tooltip("The projectile prefab")] 
-        public ProjectileBase ProjectilePrefab;//子弹的预制件*/
+        [Tooltip("Bullet profebs")]
+        public GameObject bullet;
+
 
         [Tooltip("Minimum duration between two shots")]
         public float DelayBetweenShots = 0.5f;  //两次射击之间的最短间隔
@@ -166,7 +176,7 @@ namespace OneCanRun.Game.Share
         AudioSource m_ContinuousShootAudioSource = null;*/
         bool m_WantsToShoot = false;
 
-
+            
         //射击时的Action
         public UnityAction OnShoot;
         public event Action OnShootProcessed;
@@ -179,8 +189,9 @@ namespace OneCanRun.Game.Share
         public BulletPoolManager bulletPoolManager;
         // Update is called once per frame
 
+        float m_LastTimeAttack = Mathf.NegativeInfinity;    //  上次攻击结束时间
 
-        
+
 
         public GameObject Owner { get; set; }           //拥有者
         public GameObject SourcePrefab { get; set; }    //源预制件  
@@ -205,21 +216,25 @@ namespace OneCanRun.Game.Share
 
         const string k_AnimAttackParameter = "Attack";
 
-   
+
 
         void Awake()
         {
-            this.bulletPoolManager = new BulletPoolManager(this.bullet);
-            m_CurrentAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
-            MaxAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
-            m_CarriedPhysicalBullets = Mathf.RoundToInt(m_CurrentAmmo);
-            //m_CarriedPhysicalBullets = HasPhysicalBullets ? ClipSize : 0;//?��????????????????????????0
-            m_LastMuzzlePosition = WeaponMuzzle.position;
+            if (RemoteWeapons)
+            {
+                this.bulletPoolManager = new BulletPoolManager(this.bullet);
+                m_CurrentAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
+                MaxAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
+                m_CarriedPhysicalBullets = Mathf.RoundToInt(m_CurrentAmmo);
+                //m_CarriedPhysicalBullets = HasPhysicalBullets ? ClipSize : 0;//?��????????????????????????0
+                m_LastMuzzlePosition = WeaponMuzzle.position;
 
 
-            m_ShootAudioSource = GetComponent<AudioSource>();
-            DebugUtility.HandleErrorIfNullGetComponent<AudioSource, WeaponController>(m_ShootAudioSource, this,
-                gameObject);
+                m_ShootAudioSource = GetComponent<AudioSource>();
+                DebugUtility.HandleErrorIfNullGetComponent<AudioSource, WeaponController>(m_ShootAudioSource, this,
+                    gameObject);
+                CurrentAmmoRatio = m_CurrentAmmo / MaxAmmo;
+            }
 
 
             /*
@@ -233,9 +248,13 @@ namespace OneCanRun.Game.Share
                 m_ContinuousShootAudioSource.loop = true;
             }*/
 
-            
-        }
 
+        }
+        public void InitMelee()
+        {
+            DamagableBox.GetComponent<MeleeController>().Init(this);
+            DamagableBox.SetActive(false);
+        }
         //PickUp????????
         //public void AddCarriablePhysicalBullets(int count) => m_CarriedPhysicalBullets = Mathf.Max(m_CarriedPhysicalBullets + count, MaxAmmo);
 
@@ -243,14 +262,12 @@ namespace OneCanRun.Game.Share
         {
             /*
             Rigidbody nextShell = m_PhysicalAmmoPool.Dequeue();
-
             nextShell.transform.position = EjectionPort.transform.position;
             nextShell.transform.rotation = EjectionPort.transform.rotation;
             nextShell.gameObject.SetActive(true);
             nextShell.transform.SetParent(null);
             nextShell.collisionDetectionMode = CollisionDetectionMode.Continuous;
             nextShell.AddForce(nextShell.transform.up * ShellCasingEjectionForce, ForceMode.Impulse);
-
             m_PhysicalAmmoPool.Enqueue(nextShell);
             */
 
@@ -262,35 +279,36 @@ namespace OneCanRun.Game.Share
 
         public void Reload()   //??????????
         {
-            
-                m_CurrentAmmo = ClipSize;
-                m_CarriedPhysicalBullets = Mathf.RoundToInt(m_CurrentAmmo);
 
-                IsReloading = false;
-               
+            m_CurrentAmmo = ClipSize;
+            m_CarriedPhysicalBullets = Mathf.RoundToInt(m_CurrentAmmo);
+            IsReloading = false;
+
         }
 
         public void StartReloadAnimation()  //???????
         {
-            
+
             GetComponent<Animator>().SetTrigger("Reload");
             IsReloading = true;
-            Reload();
-            
-            
+
         }
 
         void Update()
         {
-            UpdateAmmo();
-            UpdateCharge();
-            UpdateContinuousShootSound();
-
-            if (Time.deltaTime > 0)
+            if (RemoteWeapons)
             {
-                MuzzleWorldVelocity = (WeaponMuzzle.position - m_LastMuzzlePosition) / Time.deltaTime;
-                m_LastMuzzlePosition = WeaponMuzzle.position;
+                UpdateAmmo();
+                UpdateCharge();
+                UpdateContinuousShootSound();
+
+                if (Time.deltaTime > 0)
+                {
+                    MuzzleWorldVelocity = (WeaponMuzzle.position - m_LastMuzzlePosition) / Time.deltaTime;
+                    m_LastMuzzlePosition = WeaponMuzzle.position;
+                }
             }
+
         }
 
         void UpdateAmmo()
@@ -399,6 +417,14 @@ namespace OneCanRun.Game.Share
             m_LastTimeShot = Time.time;
         }
 
+        public bool HandleAttackInputs(bool inputDown, bool inputHeld)
+        {
+            if (inputDown || inputHeld)
+            {
+                return TryAttack();
+            }
+            return false;
+        }
         public bool HandleShootInputs(bool inputDown, bool inputHeld, bool inputUp)
         {
             m_WantsToShoot = inputDown || inputHeld;
@@ -415,7 +441,7 @@ namespace OneCanRun.Game.Share
                 case WeaponShootType.Automatic:
                     if (inputHeld)
                     {
-                        
+
                         return TryShoot();
                     }
 
@@ -440,9 +466,18 @@ namespace OneCanRun.Game.Share
             }
         }
 
+        bool TryAttack()
+        {
+            if (m_LastTimeShot + DelayBetweenAttacks < Time.time)
+            {
+                HandleAttack();
+                return true;
+            }
+            return false;
+        }
         bool TryShoot()
         {
-            
+
             if (m_CurrentAmmo >= 1f
                 && m_LastTimeShot + DelayBetweenShots < Time.time)
             {
@@ -454,6 +489,7 @@ namespace OneCanRun.Game.Share
 
             return false;
         }
+
 
         bool TryBeginCharge()
         {
@@ -487,7 +523,21 @@ namespace OneCanRun.Game.Share
 
             return false;
         }
+        void EndAttack()
+        {
+            DamagableBox.GetComponent<MeleeController>().ReleaseDic();
+            DamagableBox.SetActive(false);
+            m_LastTimeAttack = Time.time;
 
+        }
+        void HandleAttack()
+        {
+            DamagableBox.SetActive(true);
+            DamagableBox.GetComponent<MeleeController>().Init(this);
+            GetComponent<Animator>().SetTrigger("Reload");
+
+
+        }
         void HandleShoot()
         {
             int bulletsPerShotFinal = ShootType == WeaponShootType.Charge

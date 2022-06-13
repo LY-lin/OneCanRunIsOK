@@ -22,14 +22,23 @@ namespace OneCanRun.Game
 
         public float GetRatio() => CurrentHealth / MaxHealth;
         public bool IsCritical() => GetRatio() <= CriticalHealthRatio;
-
+        Share.ActorProperties properties;
         bool m_IsDead;
-
+        float totalTime = 1f;
         void Start()
         {
-            Share.ActorProperties properties = GetComponent<Actor>().GetActorProperties();
+            properties = GetComponent<Actor>().GetActorProperties();
             MaxHealth = properties.getMaxHealth();
             CurrentHealth = properties.getMaxHealth();
+        }
+        void Update()
+        {
+            totalTime -= Time.deltaTime;
+            if (totalTime <= 0f)
+            {
+                Heal(properties.getHealRate());
+                totalTime = 1f;
+            }
         }
 
         public void Heal(float healAmount)
@@ -44,6 +53,7 @@ namespace OneCanRun.Game
             {
                 OnHealed?.Invoke(trueHealAmount);
             }
+
         }
 
         public void TakeDamage(float damage, GameObject damageSource)
@@ -54,7 +64,6 @@ namespace OneCanRun.Game
             float healthBefore = CurrentHealth;
             CurrentHealth -= damage;
             CurrentHealth = Mathf.Clamp(CurrentHealth, 0f, MaxHealth);
-            
             // call OnDamage action
             float trueDamageAmount = healthBefore - CurrentHealth;
             if (trueDamageAmount > 0f)
