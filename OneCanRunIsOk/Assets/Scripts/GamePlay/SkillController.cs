@@ -76,7 +76,6 @@ namespace OneCanRun.GamePlay
             //������ȴ��
             if (m_LastTimeUse + CoolingTime > Time.time)
             {
-                Debug.Log("Cooling!");
                 return false;
             }
 
