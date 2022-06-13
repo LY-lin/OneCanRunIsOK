@@ -215,6 +215,17 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
+        //进行交互按下输入
+        public bool GetInteractButtonDown()
+        {
+            if (CanProcessInput())
+            {
+                return Input.GetButtonDown(GameConstants.k_ButtonInteract);
+            }
+
+            return false;
+        }
+
         //切换武器输入-滚轴
         public int GetSwitchWeaponInput()
         {
@@ -232,10 +243,10 @@ namespace OneCanRun.GamePlay
                     return -1;
                 else if (Input.GetAxis(axisName) < 0f)
                     return 1;
-                else if (Input.GetAxis(GameConstants.k_ButtonNameNextWeapon) > 0f)
-                    return -1;
-                else if (Input.GetAxis(GameConstants.k_ButtonNameNextWeapon) < 0f)
-                    return 1;
+                //else if (Input.GetAxis(GameConstants.k_ButtonNameNextWeapon) > 0f)
+                //    return -1;
+                //else if (Input.GetAxis(GameConstants.k_ButtonNameNextWeapon) < 0f)
+                //    return 1;
             }
 
             return 0;

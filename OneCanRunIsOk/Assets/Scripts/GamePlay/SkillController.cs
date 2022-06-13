@@ -69,10 +69,6 @@ namespace OneCanRun.GamePlay
         //{
 
         //}
-        public void setWeaponOwner(GameObject gameObject)
-        {
-            m_SkillWeapon.Owner = gameObject;
-        }
 
         //ʹ�øü���
         public bool UseSkill()
