@@ -61,10 +61,6 @@ namespace OneCanRun.GamePlay
         //死亡判定高度
         public float KillHeight = -50f;
 
-        [Tooltip("Range of Interact")]
-        //可交互的范围
-        public float InteractiveRange = 10f;
-
         [Header("Rotation")]
         [Tooltip("Rotation speed for moving the camera")]
         //摄像头旋转速度 灵敏度
@@ -146,9 +142,6 @@ namespace OneCanRun.GamePlay
         public bool HasJumpedThisFrame { get; private set; }
         public bool IsDead { get; private set; }
         public bool IsCrouching { get; private set; }
-
-        //上次看向的可交互物体
-        Interactive lastInteractive;
 
         public float RotationMultiplier
         {
@@ -264,8 +257,6 @@ namespace OneCanRun.GamePlay
 
             //处理角色移动
             HandleCharacterMovement();
-            //处理交互
-            HandleInteract();
         }
 
         //死亡
@@ -545,38 +536,6 @@ namespace OneCanRun.GamePlay
 
             IsCrouching = crouched;
             return true;
-        }
-
-        void HandleInteract()
-        {
-            if (lastInteractive)
-            {
-                lastInteractive.showInteractiveUI = false;
-            }
-            //检测是否看向敌人
-            if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out RaycastHit hit,
-                1000, -1))
-            {
-                //Debug.Log("Watching!");
-                lastInteractive = hit.collider.GetComponentInParent<Interactive>();
-                if (lastInteractive != null)
-                {
-                    //Debug.Log("Watching!");
-                    //判断距离
-                    if (Vector3.Distance(PlayerCamera.transform.position, hit.transform.position) <= InteractiveRange)
-                    {
-                        //Debug.Log(lastInteractive.description);
-                        lastInteractive.showInteractiveUI = true;
-                        if (m_InputHandler.GetInteractButtonDown())
-                        {
-                            lastInteractive.showInteractiveUI = false;
-                            lastInteractive.hasInteracted = true;
-                            lastInteractive.m_PlayerCharacterController = this;
-                        }
-                    }
-
-                }
-            }
         }
     }
 }

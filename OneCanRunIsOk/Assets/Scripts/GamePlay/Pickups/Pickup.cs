@@ -45,7 +45,7 @@ namespace OneCanRun.GamePlay
             m_StartPosition = transform.position;
         }
 
-        protected virtual void Update()
+        void Update()
         {
             // Handle bobbing
             //ÉÏÏÂ¶¶¶¯
