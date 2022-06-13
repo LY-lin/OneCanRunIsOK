@@ -153,7 +153,10 @@ namespace OneCanRun.GamePlay
             WeaponController activeWeapon = GetActiveWeapon();
 
             //换弹中
-            if (activeWeapon != null && activeWeapon.IsReloading)
+            if (activeWeapon != null &&activeWeapon.RemoteWeapons&&activeWeapon.IsReloading)
+                return;
+
+            if (activeWeapon != null && !activeWeapon.RemoteWeapons && activeWeapon.DamagableBox.gameObject.activeSelf)
                 return;
 
 

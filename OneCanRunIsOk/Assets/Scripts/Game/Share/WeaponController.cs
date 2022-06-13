@@ -536,8 +536,7 @@ namespace OneCanRun.Game.Share
         void HandleAttack()
         {
             DamagableBox.gameObject.SetActive(true);
-            DamagableBox.GetComponent<MeleeController>().Init(this);
-            Debug.Log(DamagableBox.gameObject.activeSelf);
+            //DamagableBox.GetComponent<MeleeController>().Init(this);
             GetComponent<Animator>().SetTrigger("Attack");
 
 
