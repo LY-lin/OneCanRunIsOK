@@ -24,6 +24,10 @@ namespace OneCanRun.AI.Enemies
             Enemies.Add(enemy);
 
             NumberOfEnemiesTotal++;
+
+            GameObject myPath = GameObject.Find("path");
+            PatrolPath patrol = myPath.GetComponent<PatrolPath>();
+            patrol.addEnemy(enemy);
         }
 
         // 注销敌人控制器，并调用事件控制器进行广播？

@@ -50,7 +50,7 @@ namespace OneCanRun.GamePlay
 
         [Tooltip("How fast the weapon bob is applied, the bigger value the fastest")]
         //上下抖动速度
-        public float BobSharpness = 10f;
+        public float BobSharpness = 1.0f;
 
         [Tooltip("Distance the weapon bobs when not aiming")]
         //上下抖动距离
@@ -153,7 +153,10 @@ namespace OneCanRun.GamePlay
             WeaponController activeWeapon = GetActiveWeapon();
 
             //换弹中
-            if (activeWeapon != null && activeWeapon.IsReloading)
+            if (activeWeapon != null &&activeWeapon.RemoteWeapons&&activeWeapon.IsReloading)
+                return;
+
+            if (activeWeapon != null && !activeWeapon.RemoteWeapons && activeWeapon.DamagableBox.gameObject.activeSelf)
                 return;
 
 

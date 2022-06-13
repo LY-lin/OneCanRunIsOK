@@ -75,7 +75,7 @@ namespace OneCanRun.AI.Enemies
         int pathDestinationNodeIndex;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             // 初始化
             enemyManager = FindObjectOfType<EnemyManager>();
@@ -291,7 +291,9 @@ namespace OneCanRun.AI.Enemies
             }
 
             // this will call the OnDestroy function
-            Destroy(gameObject, DeathDuration);
+            //Destroy(gameObject, DeathDuration);
+            Game.Share.MonsterPoolManager temp = Game.Share.MonsterPoolManager.getInstance();
+            temp.release(this.gameObject);
         }
 
         public bool TryDropItem()

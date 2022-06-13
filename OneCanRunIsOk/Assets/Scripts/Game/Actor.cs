@@ -24,12 +24,19 @@ namespace OneCanRun.Game
         ActorsManager m_ActorsManager;
         private OneCanRun.Game.Share.ActorProperties baseProperty;
         private OneCanRun.Game.Share.ActorProperties exposedProperty;
-        //private List<OneCanRun.Game.Share.Modifier> mModifier;
+        private List<OneCanRun.Game.Share.Modifier> mModifier;
+        private ActorAttribute actorAttribute;
         public ActorBuffManager buffManager;
+        private bool dirty = true;
+        public bool isPlayer = false;
 
 
         public void Awake()
         {
+            actorAttribute = new ActorAttribute();
+            mModifier = new List<Modifier>();
+            OneCanRun.Game.Share.Modifier modifier = new Share.Modifier(0, Share.Modifier.ModifierType.experience, this);
+            mModifier.Add(modifier);
             baseProperty = new OneCanRun.Game.Share.ActorProperties();
             exposedProperty = new OneCanRun.Game.Share.ActorProperties();
             m_ActorsManager = GameObject.FindObjectOfType<ActorsManager>();
@@ -49,11 +56,15 @@ namespace OneCanRun.Game
 
         }
 
-        // we should consider the IPC in case two calculate function in run time
+        
         private void calculate(){
-            /*if(this.mModifier[0].baseValue >= getNextLevelCount()){
+
+
+            if(this.mModifier[0].baseValue >= getNextLevelCount()){
                 levelUpdate();
-            }*/
+            }
+
+
             // core function 
 
             // left blank
@@ -64,13 +75,13 @@ namespace OneCanRun.Game
             {
                 //Debug.Log(this +" exposedProperty " + exposedProperty.getMagicAttack());
                 b.ActorbuffAct(ref exposedProperty);
-               // Debug.Log(this + " After exposedProperty " + exposedProperty.getMagicAttack());
+                //Debug.Log(this + " After exposedProperty " + exposedProperty.getMagicAttack());
             }
             foreach (BuffController b in buffManager.PercentBuffList)
             {
-               // Debug.Log(this + " exposedProperty " + exposedProperty.getMagicAttack());
+                //Debug.Log(this + " exposedProperty " + exposedProperty.getMagicAttack());
                 b.ActorbuffAct(ref exposedProperty);
-              //  Debug.Log(this + " After exposedProperty " + exposedProperty.getMagicAttack());
+                //Debug.Log(this + " After exposedProperty " + exposedProperty.getMagicAttack());
             }
             // core function 
 
@@ -90,8 +101,34 @@ namespace OneCanRun.Game
         }
 
         private void levelUpdate(){
+            if (!this.isPlayer){
 
-            //@ to do
+                return;
+            }
+            // update level up data, including level up seriesly
+            // reset experice
+            this.actorAttribute.point2allocate += 5;
+            int strenthEnhanced = 1;
+            int techniqueEnhanced = 1;
+            int intelligenceEnhanced = 1;
+            this.mModifier[0].baseValue = 0;
+
+            //update base
+
+            // strenthEnhanced
+            baseProperty.setMaxHealth(baseProperty.getMaxHealth() + strenthEnhanced *2);
+            baseProperty.setPhysicalDefence(baseProperty.getPhysicalDefence() + strenthEnhanced);
+            baseProperty.setMagicDefence(baseProperty.getMagicDefence() + strenthEnhanced);
+            baseProperty.setPhysicalAttack(baseProperty.getPhysicalAttack() + strenthEnhanced * 3);
+            // intelligence
+            baseProperty.setMagicAttack(baseProperty.getMagicAttack() + intelligenceEnhanced);
+            // technique
+            baseProperty.setPhysicalAttack(baseProperty.getPhysicalAttack() + techniqueEnhanced);
+            baseProperty.setMaxSpeed(baseProperty.getMaxSpeed() * (1 + 0.1f * techniqueEnhanced));
+
+
+            Debug.Log("level up");
+
         }
 
         private ulong getNextLevelCount(){
@@ -205,7 +242,12 @@ namespace OneCanRun.Game
             return exposedProperty;
         }
 
+        public void addModifier(Modifier mod){
+            if (mod.type != Modifier.ModifierType.experience)
+                throw new System.Exception();
 
+            mModifier[0].baseValue += mod.baseValue;
+        }
 
 
     }

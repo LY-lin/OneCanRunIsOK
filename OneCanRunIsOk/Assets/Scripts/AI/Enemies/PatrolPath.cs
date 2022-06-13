@@ -41,6 +41,12 @@ namespace OneCanRun.AI.Enemies
             return PathNodes[nodeIndex].position;
         }
 
+        public void addEnemy(EnemyController enemy)
+        {
+            EnemiesToAssign.Add(enemy);
+            enemy.PatrolPath = this;
+        }
+
         void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.cyan;

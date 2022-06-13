@@ -540,7 +540,7 @@ MonoBehaviour:
   timeSpend: 0
   lastTime: 0
   aim_Actor: {fileID: 3518232688857872041}
---- !u!114 &2038857251615066401
+--- !u!114 &5767701766520463951
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -549,7 +549,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3518232688857872043}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98f0f4a07a4c0f445be61e3f01b67d73, type: 3}
+  m_Script: {fileID: 11500000, guid: 88c4f2ee06680e443b6a414558c2a58d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AttackStopDistanceRatio: 0.5
