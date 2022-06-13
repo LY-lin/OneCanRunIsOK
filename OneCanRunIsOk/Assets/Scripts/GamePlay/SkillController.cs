@@ -119,7 +119,7 @@ namespace OneCanRun.GamePlay
                 this, gameObject);
             m_SkillBuffGiver.buffGive();
         
-        Debug.Log("Buff!");
+        //Debug.Log("Buff!");
 
         }
 

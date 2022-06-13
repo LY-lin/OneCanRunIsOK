@@ -113,6 +113,7 @@ namespace OneCanRun.AI.Enemies
             {
                 case AIState.Patrol:
                     controller.UpdatePathDestination();
+                    //Debug.Log(controller.GetDestinationOnPath());
                     controller.SetNavDestination(controller.GetDestinationOnPath());
                     break;
                 case AIState.Follow:
@@ -184,7 +185,7 @@ namespace OneCanRun.AI.Enemies
         // ���������¼�
         void OnDamaged(float damage, GameObject damageSource)
         {
-            Debug.Log("Enemy On Damaged, current health: " + health.CurrentHealth);
+            //Debug.Log("Enemy On Damaged, current health: " + health.CurrentHealth);
             controller.EnemyDamaged(damage, damageSource);
 
             // ������Ч

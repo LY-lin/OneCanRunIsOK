@@ -10,7 +10,11 @@ namespace OneCanRun.GamePlay
         private List<OneCanRun.Game.Share.MonsterFreshInfo> mMonsterList;
         private static int counter = 0;
         private List<GameObject> monsterSample;
-
+        private int waveNumber = 4;
+        public int timeInterval = 20;
+        private int timeCounter = 0;
+        private int frameInterval = 0;
+        private Game.Share.MonsterPoolManager monsterPoolManager;
         public GameObject monster1;
         public GameObject monster2;
         // Start is called before the first frame update
@@ -26,11 +30,14 @@ namespace OneCanRun.GamePlay
 
         private void OnEnable(){
             mMonsterList = new List<Game.Share.MonsterFreshInfo>();
+            frameInterval = (int)(((float)timeInterval)/Time.deltaTime);
             monsterSample = new List<GameObject>();
             if (monster1 != null)
                 monsterSample.Add(monster1);
             if (monster2 != null)
                 monsterSample.Add(monster2);
+            // add monster
+
 
             // read config from file
             string configDirectory = System.IO.Directory.GetCurrentDirectory();
@@ -78,13 +85,33 @@ namespace OneCanRun.GamePlay
         void Start()
         {
             counter = mMonsterList.Count;
+            Game.Share.MonsterPoolManager.initialization(this.gameObject, monsterSample[0]);
+            monsterPoolManager = Game.Share.MonsterPoolManager.getInstance();
         }
 
         // Update is called once per frame
         void Update()
         {
+
+            //refreshAllFreeMonster();
+
+            //return;
+            if (Time.frameCount % frameInterval == 0){
+                refreshOneWave();
+
+            }
+
+
+            if (monsterPoolManager.activeNumber == 0)
+            {
+                refreshOneWave();
+                //GameObject temp = monsterPoolManager.getObject(new Vector3(42, 0.7f, 22));
+            }
+
             if (counter >= mMonsterList.Count)
                 return;
+            
+            
 
             if((int)Time.time >= mMonsterList[counter].time){
                 Debug.Log("Fresh!");
@@ -93,6 +120,22 @@ namespace OneCanRun.GamePlay
                     new Quaternion(0, 0, 0, 0), this.transform);
 
                 counter++;
+            }
+
+        }
+
+        void refreshAllFreeMonster(){
+            while (monsterPoolManager.activeNumber < monsterPoolManager.getCacheSize()){
+                //monsterPoolManager.getObject(new Vector3(64, 5, 60));
+                GameObject temp = monsterPoolManager.getObject(new Vector3(42, 0.7f, 22));
+                
+            }
+
+        }
+
+        void refreshOneWave(){
+            for(int i = 0;i < waveNumber; i++){
+                GameObject temp = monsterPoolManager.getObject(new Vector3(42, 0.7f, 22));
             }
 
         }

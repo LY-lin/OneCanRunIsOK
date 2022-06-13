@@ -49,7 +49,7 @@ namespace OneCanRun.Game.Share
             InitialDirection = transform.forward;
             InheritedMuzzleVelocity = controller.MuzzleWorldVelocity;
             InitialCharge = controller.CurrentCharge;
-            Debug.Log("shoot"+ this.mDamage);
+            //Debug.Log("shoot"+ this.mDamage);
             OnShoot?.Invoke();
         }
 
