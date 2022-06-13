@@ -65,12 +65,14 @@
     <Compile Include="Assets\Scripts\GamePlay\SkillBuffGiver.cs" />
     <Compile Include="Assets\Scripts\GamePlay\PlayerInputHandler.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Objectives\ObjectiveReachPoint.cs" />
+    <Compile Include="Assets\Scripts\GamePlay\DetectBuffGiver.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Pickups\WeaponPickup.cs" />
     <Compile Include="Assets\Scripts\GamePlay\BulletStandard.cs" />
     <Compile Include="Assets\Scripts\GamePlay\MonsterFresh.cs" />
     <Compile Include="Assets\Scripts\GamePlay\SkillController.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Pickups\Pickup.cs" />
     <Compile Include="Assets\Scripts\GamePlay\PlayerWeaponsManager.cs" />
+    <Compile Include="Assets\Scripts\GamePlay\Interactives\Interactive.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\GamePlay\OneCanRun.GamePlay.asmdef" />

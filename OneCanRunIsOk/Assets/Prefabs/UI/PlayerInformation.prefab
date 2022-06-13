@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0}
+  m_Color: {r: 0, g: 1, b: 0, a: 0.7176471}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -169,9 +169,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2266369706885754965}
   - {fileID: 2845022019053491173}
   - {fileID: 2845022019074336653}
-  - {fileID: 2266369706885754965}
   - {fileID: 2845022018937294916}
   m_Father: {fileID: 2845022018122580869}
   m_RootOrder: -1
@@ -278,8 +278,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2845022018307528794}
-  - component: {fileID: 1662923852532815607}
-  - component: {fileID: 5960596837414012435}
   m_Layer: 0
   m_Name: PlayerInformation
   m_TagString: Untagged
@@ -308,41 +306,6 @@ RectTransform:
   m_AnchoredPosition: {x: 129.8, y: 126.1}
   m_SizeDelta: {x: 260.5, y: 255.55}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1662923852532815607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2845022019037210961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbefa358f2df8ba4b9ab17f8b04950f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HealthFillImage: {fileID: 2845022019053491172}
-  FillBarColorChange: {fileID: 5960596837414012435}
---- !u!114 &5960596837414012435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2845022019037210961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cf8ae20b56e7c24da5cf1b030a9be95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ForegroundImage: {fileID: 2845022019053491172}
-  DefaultForegroundColor: {r: 1, g: 0, b: 0, a: 1}
-  FlashForegroundColorFull: {r: 0, g: 1, b: 0.034408808, a: 0.53333336}
-  BackgroundImage: {fileID: 1261201775350304031}
-  DefaultBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
-  FlashBackgroundColorEmpty: {r: 0, g: 0, b: 0, a: 0}
-  FullValue: 1
-  EmptyValue: 0
-  ColorChangeSharpness: 5
 --- !u!1 &2845022019053491194
 GameObject:
   m_ObjectHideFlags: 0

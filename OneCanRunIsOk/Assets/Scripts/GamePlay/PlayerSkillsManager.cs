@@ -17,7 +17,7 @@ namespace OneCanRun.GamePlay
         public Transform SkillSocket;
 
         PlayerInputHandler m_InputHandler;
-        SkillController CurrentSkillInstance;
+        public SkillController CurrentSkillInstance { get; private set; }
 
         void Start()
         {

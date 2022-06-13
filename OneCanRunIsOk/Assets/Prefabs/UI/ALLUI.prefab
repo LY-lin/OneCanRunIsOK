@@ -32,7 +32,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5727594919530415308}
-  - {fileID: 5727594920522682101}
+  - {fileID: 1211707604858556902}
   m_Father: {fileID: 5727594919401311680}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 5727594919401311686}
   - component: {fileID: 5727594919401311681}
   - component: {fileID: 5727594919401311687}
+  - component: {fileID: 1742125984080668468}
   m_Layer: 0
   m_Name: ALLUI
   m_TagString: Untagged
@@ -197,6 +198,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AmmoPanel: {fileID: 5727594919530415308}
   AmmoCounterPrefab: {fileID: 645032500860478885, guid: 6d1dda29d548b2141a7ee77c19934d09, type: 3}
+--- !u!114 &1742125984080668468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5727594919401311682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff10474de934234a9bd3c7d490871c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5727594919530415311
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +473,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1001 &7495974709087213231
+--- !u!1001 &4011394271593187772
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -559,8 +572,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: a4600550a00a15844ad5a49e4464a5ba, type: 3}
---- !u!224 &5727594920522682101 stripped
+--- !u!224 &1211707604858556902 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2845022018307528794, guid: a4600550a00a15844ad5a49e4464a5ba, type: 3}
-  m_PrefabInstance: {fileID: 7495974709087213231}
+  m_PrefabInstance: {fileID: 4011394271593187772}
   m_PrefabAsset: {fileID: 0}

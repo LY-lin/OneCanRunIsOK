@@ -194,7 +194,6 @@ namespace OneCanRun.AI.Enemies
         void OnDie()
         {
             Debug.Log(gameObject.name + " Die");
-            controller.EnemyDie();
         }
 
         // �ҵ�����ʼ����������
