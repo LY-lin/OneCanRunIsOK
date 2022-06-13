@@ -103,9 +103,6 @@ namespace OneCanRun.AI.Enemies
             health.OnDamaged += OnDamaged;
             health.OnDie += OnDie;
 
-            // 注册敌人
-            enemyManager.RegisterEnemy(this);
-
             DetectionModule[] enemyDetectionModules = GetComponentsInChildren<DetectionModule>();
             DebugUtility.HandleErrorIfNoComponentFound<DetectionModule, EnemyController>(enemyDetectionModules.Length, this,
                 gameObject);
@@ -126,6 +123,12 @@ namespace OneCanRun.AI.Enemies
                 NavMeshAgent.angularSpeed = navigationModule.AngularSpeed;
                 NavMeshAgent.acceleration = navigationModule.Acceleration;
             }
+        }
+
+        void Start()
+        {
+            // 注册敌人
+            enemyManager.RegisterEnemy(this);
         }
 
         // Update is called once per frame
