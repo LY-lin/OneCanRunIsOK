@@ -53,7 +53,7 @@
     <UnityVersion>2022.1.1f1c1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\MyPrograms\Program Files (x86)\Visual Studio 2019\IDE\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Game\Event.cs" />
@@ -65,14 +65,12 @@
     <Compile Include="Assets\Scripts\Game\BuffController.cs" />
     <Compile Include="Assets\Scripts\Game\EventManager.cs" />
     <Compile Include="Assets\Scripts\Game\EventFactory.cs" />
-    <Compile Include="Assets\Scripts\Game\Share\MonsterPoolManager.cs" />
     <Compile Include="Assets\Scripts\Game\Share\MeleeController.cs" />
     <Compile Include="Assets\Scripts\Game\Share\Buff.cs" />
     <Compile Include="Assets\Scripts\Game\ActorBuffManager.cs" />
     <Compile Include="Assets\Scripts\Game\DebugUtility.cs" />
     <Compile Include="Assets\Scripts\Game\Share\WeaponController.cs" />
     <Compile Include="Assets\Scripts\Game\Share\ActorBuffer.cs" />
-    <Compile Include="Assets\Scripts\Game\Share\ActorAttribute.cs" />
     <Compile Include="Assets\Scripts\Game\Share\MonsterFreshInfo.cs" />
     <Compile Include="Assets\Scripts\Game\Share\Objective.cs" />
     <Compile Include="Assets\Scripts\Game\Actor.cs" />
@@ -82,6 +80,8 @@
     <Compile Include="Assets\Scripts\Game\StaticEvents.cs" />
     <Compile Include="Assets\Scripts\Game\ActorsManager.cs" />
     <Compile Include="Assets\Scripts\Game\ObjectiveManager.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\ActorAttribute.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\MonsterPoolManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Game\OneCanRun.Game.asmdef" />
