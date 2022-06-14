@@ -1,21 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace OneCanRun.GamePlay
 {
-    //¿É½»»¥×é¼şÖ»×÷Îª½á¹¹Ìå£¬Ö÷ÒªµÄÅĞ¶ÏÂß¼­Î»ÓÚPlayCharacterController.HandleInteract()ÖĞ
+    //å¯äº¤äº’ç»„ä»¶åªä½œä¸ºç»“æ„ä½“ï¼Œä¸»è¦çš„åˆ¤æ–­é€»è¾‘ä½äºPlayCharacterController.HandleInteract()ä¸­
     public class Interactive : MonoBehaviour
     {
-        [Tooltip("½»»¥ÄÚÈİÃèÊö")]
+        [Tooltip("äº¤äº’å†…å®¹æè¿°")]
         public string description;
 
-        //ÊÇ·ñÕ¹Ê¾UI
+        //æ˜¯å¦å±•ç¤ºUI
         public bool showInteractiveUI = false;
-        //ÊÇ·ñ½»»¥
+        //æ˜¯å¦äº¤äº’
         public bool hasInteracted = false;
-        //½»»¥µÄÍæ¼Ò¿ØÖÆÆ÷
+        //äº¤äº’çš„ç©å®¶æ§åˆ¶å™¨
         public PlayerCharacterController m_PlayerCharacterController;
 
+        public UnityAction beInteracted;
+        
     }
 }

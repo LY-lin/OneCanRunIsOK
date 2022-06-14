@@ -323,6 +323,7 @@ MonoBehaviour:
   WeaponRoot: {fileID: 100006}
   DamagableBox: {fileID: 0}
   DelayBetweenAttacks: 0
+  damage: 20
   WeaponMuzzle: {fileID: 4978071067295733055}
   ShootType: 1
   bullet: {fileID: 1734307153417951284, guid: bd0f0e8585f3d1440ae91a23c533d5e5, type: 3}
@@ -332,7 +333,6 @@ MonoBehaviour:
   RecoilForce: 1
   AutomaticReload: 0
   HasPhysicalBullets: 1
-  damage: 20
   speed: 45
   ClipSize: 30
   ShellCasing: {fileID: 0}
@@ -523,7 +523,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8749272572771826303}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.38, z: 16.78}
+  m_LocalPosition: {x: 0, y: 0.38, z: 16.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -108,7 +108,7 @@ namespace OneCanRun.Game.Share
 
         
 
-        public float speed = 10f;
+        public float speed = 100f;
 
         [Tooltip("Number of bullets in a clip")]
         public int ClipSize = 30;//单个弹匣的子弹数量
