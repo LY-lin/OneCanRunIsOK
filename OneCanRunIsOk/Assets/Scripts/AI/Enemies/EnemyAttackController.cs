@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using OneCanRun.Game;
 using OneCanRun.Game.Share;
 using OneCanRun.GamePlay;
 
@@ -15,7 +16,7 @@ namespace OneCanRun.AI.Enemies
         public List<SkillController> skillList = new List<SkillController>();
 
         [Tooltip("Skills which are carried by the enemy")]
-        public List<WeaponController> MeleeList = new List<WeaponController>();
+        public List<BodyMeleeController> MeleeList = new List<BodyMeleeController>();
 
         [Tooltip("Melee limit attack range")]
         public float MeleeRange;
@@ -25,6 +26,10 @@ namespace OneCanRun.AI.Enemies
 
         [Tooltip("Skill limit attack range")]
         public float SkillRange;
+
+        [Tooltip("Skill limit attack range")]
+        [Min(1.1f)]
+        public float MeleeInterval = 2f;
 
         public enum AttackState
         {
@@ -39,15 +44,23 @@ namespace OneCanRun.AI.Enemies
 
         SkillController[] skills;
 
-        WeaponController[] melees;
+        BodyMeleeController[] melees;
+
+        Actor actor;
+
+        Animator anim;
 
         int currentWeaponIndex = 0;
         int currentSkillIndex = 0;
         int currentMeleeIndex = 0;
+        float latestMeleeAttackTime = float.NegativeInfinity;
 
         // Start is called before the first frame update
         void Start()
         {
+
+            actor = GetComponent<Actor>();
+            DebugUtility.HandleErrorIfNullGetComponent<Actor, EnemyAttackController>(actor, this, gameObject);
             
             weapons = weaponList.ToArray();
             foreach(WeaponController weapon in weapons)
@@ -65,11 +78,13 @@ namespace OneCanRun.AI.Enemies
             }
 
             melees = MeleeList.ToArray();
-            foreach (WeaponController melee in melees)
+            foreach (BodyMeleeController melee in melees)
             {
-                melee.Owner = gameObject;
-                melee.InitMelee();
+                melee.init(actor);
             }
+
+            anim = GetComponent<Animator>();
+            DebugUtility.HandleErrorIfNullGetComponent<Animator, EnemyAttackController>(anim, this, gameObject);
         }
 
         public void UpdateAttackState(Vector3 targetPostion)
@@ -94,8 +109,9 @@ namespace OneCanRun.AI.Enemies
             switch (attackState)
             {
                 case AttackState.Melee:
-                    if(melees.Length != 0)
+                    if(melees.Length != 0 && latestMeleeAttackTime + MeleeInterval <= Time.time)
                     {
+                        melees[currentMeleeIndex].preOneAttack();
                         AttackByMelee();
                     }
                     break;
@@ -134,8 +150,8 @@ namespace OneCanRun.AI.Enemies
 
         public void AttackByMelee()
         {
-            WeaponController melee = melees[currentWeaponIndex];
-            melee.HandleAttackInputs(false, true);
+            latestMeleeAttackTime = Time.time;
+            anim.SetTrigger("isAttack");
         }
     }
 }

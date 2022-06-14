@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7957058710647198419}
   - component: {fileID: 5128007571714356570}
   - component: {fileID: 1356623182602662491}
+  - component: {fileID: 7241724197125026345}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -27,7 +28,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1739566059105349221}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -38,7 +39,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 552, y: 259.5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1.5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7957058710647198419
@@ -103,6 +104,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &7241724197125026345
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739566059105349221}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1795560430182727037
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,9 +297,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   information: {fileID: 7327697885667594797}
-  Buttopn: {fileID: 2646410019029659670}
+  CanvasGroup: {fileID: 8755536536549768838}
   HideFar: 1
-  distance: 0
+  distance: 500
 --- !u!1 &7581189752292264751
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +327,7 @@ RectTransform:
   m_GameObject: {fileID: 7581189752292264751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3474546006808457725}

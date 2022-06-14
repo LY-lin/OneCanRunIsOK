@@ -12,8 +12,12 @@ namespace OneCanRun.UI
         [Tooltip("text information")]
         public TextMeshProUGUI information;
 
+        /*
         [Tooltip("Tips for Button")]
         public RectTransform Button;
+        */
+        [Tooltip("Canvas Group")]
+        public Transform CanvasGroup;
 
         [Tooltip("if too far to see")]
         public bool HideFar = true;
@@ -25,7 +29,7 @@ namespace OneCanRun.UI
         private Interactive interactive;
         void Start()
         {
-            interactive = GetComponent<Interactive>();
+            interactive = GetComponentInParent<Interactive>();
             information.text =interactive.description;
         }
 
@@ -34,14 +38,15 @@ namespace OneCanRun.UI
         {
             if (interactive.showInteractiveUI)
             {
-                PlayerCharacterController player = FindObjectOfType<PlayerCharacterController>();
-                DebugUtility.HandleErrorIfNullFindObject<PlayerCharacterController, Interactive>(player, this);
+                GameObject player = GameObject.Find("Player1"); //FindObjectOfType<PlayerCharacterController>();
+                
 
-                Vector3 position1 = player.transform.parent.localPosition;
+                Vector3 position1 = player.transform.position;
                 Vector3 position2 = this.transform.parent.localPosition;
                 if (HideFar && Vector3.Distance(position1, position2) < distance)
                 {
                     this.gameObject.SetActive(true);
+                    CanvasGroup.LookAt(-Camera.main.transform.position);
                 }
                 else
                 {
