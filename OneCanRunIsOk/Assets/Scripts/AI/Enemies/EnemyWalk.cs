@@ -23,11 +23,16 @@ namespace OneCanRun.AI.Enemies
 
         public EnemyController controller;
 
+        Animator anim;
+
         // Start is called before the first frame update
         void Start()
         {
             controller = GetComponent<EnemyController>();
-            DebugUtility.HandleErrorIfNullGetComponent<EnemyController, MovableEnemy>(controller, this, gameObject);
+            DebugUtility.HandleErrorIfNullGetComponent<EnemyController, EnemyWalk>(controller, this, gameObject);
+            
+            anim = GetComponent<Animator>();
+            DebugUtility.HandleErrorIfNullGetComponent<Animator, EnemyWalk>(anim, this, gameObject);
 
             state = AIState.Patrol;
 
@@ -35,6 +40,8 @@ namespace OneCanRun.AI.Enemies
             controller.onLostTarget += OnLostTarget;
             controller.SetPathDestinationToClosestNode();
             controller.onDamaged += OnDamaged;
+
+            anim.SetBool("isRun", true);
         }
 
         // Update is called once per frame
