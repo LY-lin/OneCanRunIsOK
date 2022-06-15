@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\GamePlay\PlayerInputHandler.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Dropable.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Objectives\ObjectiveReachPoint.cs" />
+    <Compile Include="Assets\Scripts\GamePlay\SpecialSkills\TonadoIceForPlayer.cs" />
     <Compile Include="Assets\Scripts\GamePlay\DetectBuffGiver.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Pickups\WeaponPickup.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Interactives\ChestContoller.cs" />
