@@ -1,9 +1,7 @@
 
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using OneCanRun.GamePlay;
-using OneCanRun.Game;
 
 namespace OneCanRun.UI
 {
@@ -18,6 +16,9 @@ namespace OneCanRun.UI
         */
         [Tooltip("Canvas Group")]
         public Transform CanvasGroup;
+
+        [Tooltip("Canvas Group")]
+        public CanvasGroup CanvasG;
 
         [Tooltip("if too far to see")]
         public bool HideFar = true;
@@ -38,24 +39,13 @@ namespace OneCanRun.UI
         {
             if (interactive.showInteractiveUI)
             {
-                GameObject player = GameObject.Find("Player1"); //FindObjectOfType<PlayerCharacterController>();
-                
 
-                Vector3 position1 = player.transform.position;
-                Vector3 position2 = this.transform.parent.localPosition;
-                if (HideFar && Vector3.Distance(position1, position2) < distance)
-                {
-                    this.gameObject.SetActive(true);
+                    CanvasG.alpha = 1;
                     CanvasGroup.LookAt(-Camera.main.transform.position);
-                }
-                else
-                {
-                    this.gameObject.SetActive(false);
-                }
             }
             else
             {
-                this.gameObject.SetActive(false);
+                CanvasG.alpha = 0;
             }
         }
     }
