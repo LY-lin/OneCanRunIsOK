@@ -137,10 +137,14 @@ namespace OneCanRun.GamePlay
         //Special - get the using point
         public void UseSpSkill(Vector3 aimingPoint)
         {
+            if (m_LastTimeUse + CoolingTime > Time.time)
+            {
+                return;
+            }
             GameObject VfxInstance = Instantiate(UsingVfx, aimingPoint, Quaternion.identity);
             TonadoIceForPlayer Tonado = VfxInstance.GetComponent<TonadoIceForPlayer>();
             Tonado.Owner = this.Owner;
-            //Destroy(VfxInstance.gameObject, 10);
+            Destroy(VfxInstance.gameObject, 10);
             Debug.Log(aimingPoint);
         }
 

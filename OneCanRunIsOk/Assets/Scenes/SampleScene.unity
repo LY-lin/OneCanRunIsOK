@@ -2942,6 +2942,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartSkill: {fileID: 4654144126487180559, guid: 5e9d6336e11a594418faeccf7ba898b8, type: 3}
+  StartSpSkill: {fileID: 2480305087403844136, guid: a81161b5a39e29c4aa8b5521c76ef14b, type: 3}
   SkillSocket: {fileID: 752986709}
 --- !u!114 &2136025597
 MonoBehaviour:
@@ -2971,8 +2972,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartingWeapons:
   - {fileID: 1111756528895451107, guid: 2fa235b84a44e534b9f87bfc7492f491, type: 3}
-  - {fileID: 963746503092480719, guid: a35b9285b89ccef4686aa56df0f2a3d8, type: 3}
-  - {fileID: -8736037925254248466, guid: 96a0164465d19a24d970235cb172fd17, type: 3}
+  - {fileID: 963746503092480719, guid: f5ecf3f83e00dce488c7c8e7e377478b, type: 3}
   WeaponCamera: {fileID: 1300745943}
   WeaponParentSocket: {fileID: 995022589}
   DefaultWeaponPosition: {fileID: 1212960848}
