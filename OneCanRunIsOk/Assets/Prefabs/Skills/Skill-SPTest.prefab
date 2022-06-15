@@ -51,4 +51,4 @@ MonoBehaviour:
   CoolingTime: 10
   UsingRange: 10
   AimingVfx: {fileID: 100000, guid: 880bc6becc440a047bba527f57da1a9c, type: 3}
-  UsingVfx: {fileID: 100008, guid: 573a5ee39da8e9249b5a3a3f1f0daac3, type: 3}
+  UsingVfx: {fileID: 100008, guid: 5b30d84272f7f8f4fa4cae7f0ed2b286, type: 3}

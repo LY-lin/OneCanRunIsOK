@@ -58,15 +58,15 @@ namespace OneCanRun.GamePlay
                     }
                     else
                     {
-                        activeAimingVfx = Instantiate(CurrentSpSkillInstance.AimingVfx, SkillSocket);
-                        activeAimingVfx.transform.position = hit.point;
-                        activeAimingVfx.transform.rotation = Quaternion.identity;
+                        activeAimingVfx = Instantiate(CurrentSpSkillInstance.AimingVfx, hit.point, Quaternion.identity);
+                        //activeAimingVfx.transform.position = hit.point;
+                        //activeAimingVfx.transform.rotation = Quaternion.identity;
                     }
                 }
                 if (m_InputHandler.GetUseSPSkillButtonDown())
                 {
-                    Transform aimTransform = activeAimingVfx.transform;
-                    CurrentSpSkillInstance.UseSpSkill(aimTransform);
+                    //Transform aimingPoint = activeAimingVfx.transform.position;
+                    CurrentSpSkillInstance.UseSpSkill(activeAimingVfx.transform.position);
                     isAiming = false;
                     Destroy(activeAimingVfx);
                 }

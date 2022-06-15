@@ -44,8 +44,6 @@ namespace OneCanRun.GamePlay
         public GameObject AimingVfx;
         public GameObject UsingVfx;
 
-        GameObject VfxInstance;
-
         //last time of using skill
         public float m_LastTimeUse { get; private set; }
         //cast use
@@ -136,11 +134,13 @@ namespace OneCanRun.GamePlay
         }
         
         //Special - get the using point
-        public void UseSpSkill(Transform aimTransform)
+        public void UseSpSkill(Vector3 aimingPoint)
         {
-            VfxInstance = Instantiate(UsingVfx, aimTransform);
+            GameObject VfxInstance = Instantiate(UsingVfx, aimingPoint, Quaternion.identity);
+            TonadoIceForPlayer Tonado = VfxInstance.GetComponent<TonadoIceForPlayer>();
+            Tonado.Owner = this.Owner;
             //Destroy(VfxInstance.gameObject, 10);
-            Debug.Log(aimTransform.position);
+            Debug.Log(aimingPoint);
         }
 
         //get the property
