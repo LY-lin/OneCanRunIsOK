@@ -10,48 +10,49 @@ namespace OneCanRun.GamePlay
     //��������
     public enum SkillType
     {
-        //Ͷ�乥��-������
+        //cast skill which be like bullet
         Cast,
-        //����״̬-��ָ�HP����߹�������
+        //give a buff
         Buff,
-        //�ٻ���-��̨�������ˡ��ٻ����
+        //create some objects
         Summon,
+        //special skill, such as flying, creating a storm
+        Special,
     }
 
     public class SkillController : MonoBehaviour
     {
-        [Header("ͨ������")]
-        [Tooltip("��������")]
+        [Header("Skill information")]
+        //[Tooltip("��������")]
         public string SkillName;
 
-        [Tooltip("��������")]
+        //[Tooltip("��������")]
         public string SkillDescription;
 
-        [Tooltip("����ͼ��")]
+        //[Tooltip("����ͼ��")]
         public Sprite SkillIcon;
 
-        [Tooltip("��������-Ͷ��/����/�ٻ�")]
+        //[Tooltip("��������-Ͷ��/����/�ٻ�")]
         public SkillType m_SkillType;
 
-        [Tooltip("������ȴʱ��")]
+        //[Tooltip("������ȴʱ��")]
         public float CoolingTime = 10f;
 
-        /*
-        [Header("Ͷ����������")]
+        public float UsingRange = 10f;
 
-        [Header("������������")]
+        [Header("Skill VFX")]
+        public GameObject AimingVfx;
+        public GameObject UsingVfx;
 
-        [Header("�ٻ���������")]
-        */
-        //�ϴ�ʹ�ü���ʱ��
+        //last time of using skill
         public float m_LastTimeUse { get; private set; }
-        //����ɼ��ܵ�����������
+        //cast use
         WeaponController m_SkillWeapon;
-        //�����ߵ�Actor����Ž�ɫ������ֵ
+        //get the properity
         Actor m_Actor;
-        //ԴԤ�Ƽ�
+        //prefab
         public GameObject SourcePrefab { get; set; }
-        //������
+        //owner
         public GameObject Owner { get; set; }
 
         void Awake()
@@ -75,10 +76,10 @@ namespace OneCanRun.GamePlay
             m_SkillWeapon.Owner = gameObject;
         }
 
-        //ʹ�øü���
+        //interface
         public bool UseSkill()
         {
-            //������ȴ��
+            //CD?
             if (m_LastTimeUse + CoolingTime > Time.time)
             {
                 return false;
@@ -86,7 +87,7 @@ namespace OneCanRun.GamePlay
 
             m_LastTimeUse = Time.time;
 
-            //�жϼ�������
+            //switch type
             switch (m_SkillType)
             {
                 case SkillType.Cast:
@@ -108,14 +109,14 @@ namespace OneCanRun.GamePlay
             return true;
         }
         
-        //Ͷ�似��ʵ��
+        //cast
         void UseCastSkill()
         {
             m_SkillWeapon.HandleShootInputs(true, false, false);
             //Debug.Log("Cast!");
         }
 
-        //���漼��ʵ��
+        //buff
         void UseBuffSkill()
         {
             SkillBuffGiver m_SkillBuffGiver = GetComponent<SkillBuffGiver>();
@@ -127,13 +128,27 @@ namespace OneCanRun.GamePlay
 
         }
 
-        //�ٻ�����ʵ��
+        //summon
         void UseSummonSkill()
         {
             Debug.Log("Summon!");
         }
         
-        //���¸ü��ܵĳ�����
+        //Special - get the using point
+        public void UseSpSkill(Vector3 aimingPoint)
+        {
+            if (m_LastTimeUse + CoolingTime > Time.time)
+            {
+                return;
+            }
+            GameObject VfxInstance = Instantiate(UsingVfx, aimingPoint, Quaternion.identity);
+            TonadoIceForPlayer Tonado = VfxInstance.GetComponent<TonadoIceForPlayer>();
+            Tonado.Owner = this.Owner;
+            Destroy(VfxInstance.gameObject, 10);
+            Debug.Log(aimingPoint);
+        }
+
+        //get the property
         public void UpdateOwner()
         {
             m_Actor = Owner.GetComponent<Actor>();

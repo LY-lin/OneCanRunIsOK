@@ -215,6 +215,17 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
+        //使用特殊技能按下输入
+        public bool GetUseSPSkillButtonDown()
+        {
+            if (CanProcessInput())
+            {
+                return Input.GetButtonDown(GameConstants.k_ButtonUseSPSkill);
+            }
+
+            return false;
+        }
+
         //进行交互按下输入
         public bool GetInteractButtonDown()
         {
