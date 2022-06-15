@@ -38,10 +38,10 @@ namespace OneCanRun.GamePlay
                 {
                     Actor actor = col.gameObject.GetComponent<Actor>();
                     ActorProperties colliderProperty = actor.GetActorProperties();
-                    float finalDamage = damage * Time.deltaTime - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
+                    float finalDamage = damage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
                     if (finalDamage < 0f)
                         finalDamage = 0f;
-                    damageable.InflictDamage(finalDamage, false, Owner);
+                    damageable.InflictDamage(finalDamage * Time.deltaTime, false, Owner);
 
                     //displacement of affectedColliders
                     col.gameObject.transform.position = Vector3.MoveTowards(col.gameObject.transform.position, this.gameObject.transform.position, displacementSpeed * Time.deltaTime);
