@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 33471256917590228}
   - component: {fileID: 23061063287705904}
   - component: {fileID: 64755190323124722}
-  - component: {fileID: 205964856472307008}
   m_Layer: 0
   m_Name: forestpack_stone_large_1
   m_TagString: Untagged
@@ -99,22 +98,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: c3199ed8a622e464b8357f9974d55417, type: 3}
---- !u!205 &205964856472307008
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1198013417640408}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: -0.023014367, y: -0.040138483, z: -0.050029814}
-  m_Size: 1.0093129
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.03
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 23061063287705904}
-  m_Enabled: 1

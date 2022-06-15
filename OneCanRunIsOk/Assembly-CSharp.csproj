@@ -53,7 +53,7 @@
     <UnityVersion>2022.1.1f1c1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="D:\software\VS\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\InteractTip.cs" />
@@ -111,52 +111,118 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\StdLib.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Debug\Waveform.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\RFX_Scripts\HowtoPlay.txt" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\MultiScaleVOUpsample.compute" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\Distortion.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\ExposureHistogram.hlsl" />
     <None Include="Assets\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Readme.txt" />
+    <None Include="Assets\SineVFX\TranslucentCrystals\Resources\Shaders\SkyboxProceduralDesaturated.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\Texture3DLerp.compute" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\DeferredFog.shader" />
     <None Include="Assets\Polytope Studio\Lowpoly Medieval Environments\Sources\Shaders\PT_Water_Shader_WebGl.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\TemporalAntialiasing.shader" />
+    <None Include="Assets\SineVFX\TranslucentCrystals\Readme.txt" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\FastApproximateAntialiasing.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\SubpixelMorphologicalAntialiasing.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\Dithering.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\Bloom.shader" />
     <None Include="Assets\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\Additive_Scroll01.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Debug\Vectorscope.compute" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Sampling.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\CopyStdFromTexArray.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Supercyan Free Forest Sample\Shaders\Legacy\CelShader.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\Lut3DBaker.compute" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Debug\Waveform.compute" />
     <None Include="Assets\Supercyan Free Forest Sample\Shaders\SupercyanShaderLighting.cginc" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\API\PSSL.hlsl" />
     <None Include="Assets\Polytope Studio\Lowpoly Medieval Environments\Sources\Shaders\PT_Vegetation_Plants_Shader.shader" />
+    <None Include="Assets\SineVFX\TranslucentCrystals\_SRP\!!!_ReadBeforeImport_!!!.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Debug\LightMeter.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\AutoExposure.compute" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\MultiScaleVORender.compute" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\Texture2DLerp.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\SubpixelMorphologicalAntialiasingBridge.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\DiskKernels.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\API\D3D11.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\MultiScaleVODownsample2.compute" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\ScalableAO.hlsl" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Supercyan Free Forest Sample\Shaders\SupercyanShader.shader" />
     <None Include="Assets\Polytope Studio\Lowpoly Medieval Environments\Sources\Shaders\PT_Vegetation_Opaque_Shader_VS.shader" />
     <None Include="Assets\Polytope Studio\Lowpoly Medieval Environments\Sources\Shaders\PT_Vegetation_Opaque_Shader.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\MultiScaleVO.shader" />
     <None Include="Assets\Polytope Studio\Lowpoly Medieval Environments\Sources\Shaders\PT_Vegetation_Foliage_Shader.shader" />
     <None Include="Assets\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\AdditiveMobile_Scroll01.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Debug\Vectorscope.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\API\D3D9.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\ScalableAO.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\ACES.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\FinalPass.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Debug\Histogram.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\AlphaBlendedMobile_Scroll01.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Debug\Histogram.compute" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\API\Switch.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\API\Metal.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\Uber.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\xRLib.hlsl" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\CopyStdFromDoubleWide.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\SineVFX\TranslucentCrystals\Resources\Shaders\Crystal.shader" />
     <None Include="Assets\Polytope Studio\Lowpoly Medieval Environments\Sources\Shaders\PT_Water_Shader.shader" />
     <None Include="Assets\Polytope Studio\Lowpoly Medieval Environments\Sources\Shaders\PT_Vegetation_Flowers_Shader.shader" />
     <None Include="Assets\Polytope Studio\Lowpoly Medieval Environments\Sources\Shaders\PT_Rock_Shader_VS.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Debug\Overlays.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\API\PSP2.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\ScreenSpaceReflections.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\DepthOfField.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\DiscardAlpha.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\API\OpenGL.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\Lut2DBaker.shader" />
     <None Include="Assets\Polytope Studio\Lowpoly Medieval Environments\Sources\Shaders\PT_Vegetation_Plants_Shader_VS.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\Additive_EdgeSoft.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\CopyStd.shader" />
     <None Include="Assets\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\AlphaBlended_EdgeSoft.shader" />
     <None Include="Assets\Polytope Studio\Lowpoly Medieval Environments\Sources\Shaders\PT_Vegetation_Flowers_Shader_VS.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\MotionBlur.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\MultiScaleVODownsample1.compute" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\Fog.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\ExposureHistogram.compute" />
     <None Include="Assets\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Shaders\AlphaBlended_Scroll01.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\GrainBaker.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\GaussianDownsample.compute" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\ScreenSpaceReflections.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\API\XboxOne.hlsl" />
     <None Include="Assets\Polytope Studio\Lowpoly Medieval Environments\Sources\Shaders\PT_Rock_Shader.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\Copy.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\API\D3D12.hlsl" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\DepthOfField.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\Polytope Studio\Lowpoly Medieval Environments\Sources\Shaders\VS_indirect.cginc" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\SubpixelMorphologicalAntialiasing.hlsl" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\API\Vulkan.hlsl" />
     <None Include="Assets\Polytope Studio\Lowpoly Medieval Environments\Sources\Shaders\PT_Vegetation_Foliage_Shader_VS.shader" />
+    <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Colors.hlsl" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
   </ItemGroup>
@@ -868,6 +934,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{F7BBDC21-4B72-92F8-377D-537A08843381}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
     <ProjectReference Include="OneCanRun.GamePlay.csproj">
       <Project>{40CE134F-9912-0858-92D8-7B16B28CFF40}</Project>
       <Name>OneCanRun.GamePlay</Name>
@@ -879,6 +949,10 @@
     <ProjectReference Include="OneCanRun.AI.csproj">
       <Project>{81D137B4-3957-F2B6-92A0-8BBCF4B3B9E0}</Project>
       <Name>OneCanRun.AI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Postprocessing.Runtime.csproj">
+      <Project>{211C3D56-52E6-23C9-024E-0280203D7EE2}</Project>
+      <Name>Unity.Postprocessing.Runtime</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
