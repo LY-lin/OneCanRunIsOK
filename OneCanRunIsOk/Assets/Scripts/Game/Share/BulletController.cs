@@ -34,7 +34,7 @@ namespace OneCanRun.Game.Share
 
         public float InitialCharge { get; private set; }
 
-        public UnityAction OnShoot;
+        //public UnityAction OnShoot;
 
         // weapon should provide the speed, but...not implement
         public void Shoot(WeaponController controller)
@@ -55,13 +55,14 @@ namespace OneCanRun.Game.Share
             InheritedMuzzleVelocity = controller.MuzzleWorldVelocity;
             InitialCharge = controller.CurrentCharge;
             //Debug.Log("shoot"+ this.mDamage);
-            OnShoot?.Invoke();
+            //OnShoot?.Invoke();
         }
 
         // if collision happens, it will be called
         void OnCollisionEnter(Collision col)
         {
-            if (col.gameObject.layer == LayerMask.NameToLayer("weapon"))
+            if (col.gameObject.layer == LayerMask.NameToLayer("weapon") ||
+                col.gameObject.layer == LayerMask.NameToLayer("physical dectect nut not collision"))
             {
                 return;
             }

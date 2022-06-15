@@ -63,6 +63,7 @@ namespace OneCanRun.Game.Share
         public void release(GameObject objcect)
         {
             objcect.GetComponent<BulletController>().restart = true;
+            
             objcect.SetActive(false);
             for (int i = 0; i < cacheSize; i++)
             {
