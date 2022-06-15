@@ -38,20 +38,10 @@ namespace OneCanRun.UI
         {
             if (interactive.showInteractiveUI)
             {
-                GameObject player = GameObject.Find("Player1"); //FindObjectOfType<PlayerCharacterController>();
-                
-
-                Vector3 position1 = player.transform.position;
-                Vector3 position2 = this.transform.parent.localPosition;
-                if (HideFar && Vector3.Distance(position1, position2) < distance)
-                {
+              
                     this.gameObject.SetActive(true);
                     CanvasGroup.LookAt(-Camera.main.transform.position);
-                }
-                else
-                {
-                    this.gameObject.SetActive(false);
-                }
+                    //this.gameObject.SetActive(false);
             }
             else
             {

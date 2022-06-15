@@ -28,6 +28,7 @@ namespace OneCanRun.Game
         public const string k_ButtonNameCancel = "Cancel";
         public const string k_ButtonReload = "Reload";
         public const string k_ButtonUseSkill = "Use Skill";
+        public const string k_ButtonUseSPSkill = "Use SP Skill";
         public const string k_ButtonInteract = "Interact";
     }
 }

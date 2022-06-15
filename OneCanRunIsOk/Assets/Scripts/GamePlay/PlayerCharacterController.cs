@@ -553,15 +553,15 @@ namespace OneCanRun.GamePlay
             {
                 lastInteractive.showInteractiveUI = false;
             }
-            //检测是否看向敌人
+            //检测看向
             if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out RaycastHit hit,
                 1000, -1))
             {
-                //Debug.Log("Watching!");
+                //Debug.Log(hit.point);
                 lastInteractive = hit.collider.GetComponentInParent<Interactive>();
                 if (lastInteractive != null)
                 {
-// Debug.Log("Watching!");
+                    // Debug.Log("Watching!");
                     //判断距离
                     if (Vector3.Distance(PlayerCamera.transform.position, hit.transform.position) <= InteractiveRange)
                     {

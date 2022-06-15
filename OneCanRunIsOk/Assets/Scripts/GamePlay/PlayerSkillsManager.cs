@@ -10,14 +10,23 @@ namespace OneCanRun.GamePlay
     [RequireComponent(typeof(PlayerInputHandler))]
     public class PlayerSkillsManager : MonoBehaviour
     {
-        [Tooltip("��ʼЯ������")]
+        [Tooltip("the initial skill")]
         public SkillController StartSkill;
 
-        [Tooltip("�����ͷ�λ��")]
+        [Tooltip("the initial Special skill")]
+        public SkillController StartSpSkill;
+
+        [Tooltip("where the skill use")]
         public Transform SkillSocket;
 
         PlayerInputHandler m_InputHandler;
         public SkillController CurrentSkillInstance { get; private set; }
+        public SkillController CurrentSpSkillInstance { get; private set; }
+
+        //if is aiming the special skill
+        bool isAiming = false;
+
+        GameObject activeAimingVfx;
 
         void Start()
         {
@@ -26,22 +35,53 @@ namespace OneCanRun.GamePlay
                 gameObject);
 
             ChangeCurrentSkill(StartSkill);
+            ChangeCurrentSpSkill(StartSpSkill);
         }
 
 
         void Update()
         {
-            //ʹ�ü���
-            if (m_InputHandler.GetUseSkillButtonDown())
+            //aiming
+            if (!isAiming && m_InputHandler.GetUseSPSkillButtonDown())
+            {
+                isAiming = true;
+            }
+            else if(isAiming)
+            {
+                //aiming ray
+                if (Physics.Raycast(SkillSocket.position, SkillSocket.forward, out RaycastHit hit,
+                CurrentSpSkillInstance.UsingRange, -1))
+                {
+                    if (activeAimingVfx)
+                    {
+                        activeAimingVfx.transform.position = hit.point;
+                    }
+                    else
+                    {
+                        activeAimingVfx = Instantiate(CurrentSpSkillInstance.AimingVfx, SkillSocket);
+                        activeAimingVfx.transform.position = hit.point;
+                        activeAimingVfx.transform.rotation = Quaternion.identity;
+                    }
+                }
+                if (m_InputHandler.GetUseSPSkillButtonDown())
+                {
+                    Transform aimTransform = activeAimingVfx.transform;
+                    CurrentSpSkillInstance.UseSpSkill(aimTransform);
+                    isAiming = false;
+                    Destroy(activeAimingVfx);
+                }
+            }
+            //get input for skill using
+            else if (m_InputHandler.GetUseSkillButtonDown())
             {
                 CurrentSkillInstance.UseSkill();
             }
         }
 
-        //�ı䵱ǰ����
+        //change the instance of skill
         void ChangeCurrentSkill(SkillController skillPrefab)
         {
-            //ɾ��ԭ����ʵ��
+            //destroy the old one before updating
             if (CurrentSkillInstance != null)
             {
                 Destroy(CurrentSkillInstance.gameObject);
@@ -54,12 +94,30 @@ namespace OneCanRun.GamePlay
             CurrentSkillInstance.Owner = gameObject;
             CurrentSkillInstance.UpdateOwner();
 
-            //��ΪCast����
+            //if cast, set the owner
             if(CurrentSkillInstance.m_SkillType== SkillType.Cast)
             {
                 WeaponController m_SkillWeapon= CurrentSkillInstance.GetComponent<WeaponController>();
                 m_SkillWeapon.Owner = gameObject;
             }
         }
+
+        void ChangeCurrentSpSkill(SkillController skillPrefab)
+        {
+            //destroy the old one before updating
+            if (CurrentSpSkillInstance != null)
+            {
+                Destroy(CurrentSpSkillInstance.gameObject);
+            }
+            CurrentSpSkillInstance = Instantiate(skillPrefab, SkillSocket);
+            CurrentSpSkillInstance.transform.localPosition = Vector3.zero;
+            CurrentSpSkillInstance.transform.localRotation = Quaternion.identity;
+
+            CurrentSpSkillInstance.SourcePrefab = skillPrefab.gameObject;
+            CurrentSpSkillInstance.Owner = gameObject;
+            CurrentSpSkillInstance.UpdateOwner();
+
+           }
+        
     }
 }
