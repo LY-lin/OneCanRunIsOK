@@ -615,9 +615,14 @@ namespace OneCanRun.Game.Share
             // initialization
             GameObject tempBullet = bulletPoolManager.getObject(WeaponMuzzle.position, Quaternion.LookRotation(shootDirection));
             tempBullet.transform.position = WeaponMuzzle.position;
+            Vector3 testForRotation = new Vector3(0, 0, 0);
+            tempBullet.transform.rotation = new Quaternion();
+
+
             tempBullet.transform.forward = shootDirection;
+            Debug.Log(shootDirection);
             tempBullet.GetComponent<BulletController>().Shoot(this);
-            tempBullet.GetComponent<BulletController>().OnShoot?.Invoke();
+            //tempBullet.GetComponent<BulletController>().OnShoot?.Invoke();
 
 
 

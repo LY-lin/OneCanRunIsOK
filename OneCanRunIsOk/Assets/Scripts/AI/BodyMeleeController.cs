@@ -33,7 +33,7 @@ namespace OneCanRun.AI
             {
                 return;
             }*/
-            Debug.Log("Enemy Collision!");
+            //Debug.Log("Enemy Collision!");
             Actor target = col.gameObject.GetComponent<Actor>();
             if (target)
             {
