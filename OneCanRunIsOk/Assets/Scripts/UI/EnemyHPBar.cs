@@ -20,13 +20,14 @@ namespace OneCanRun.UI
         Health m_health;
         void Start()
         {
-            m_health = GetComponent<Health>();
-            
+            m_health = GetComponentInParent<Health>();
+            Debug.Log(m_health);
         }
 
         // Update is called once per frame
         void Update()
         {
+           //Debug.Log(m_health.CurrentHealth);
             HealthImage.fillAmount = m_health.CurrentHealth / m_health.MaxHealth;
             HealthBarPivot.LookAt(Camera.main.transform.position);
             if (HideFullHealthBar)

@@ -38,7 +38,6 @@ namespace OneCanRun.GamePlay
         Vector3 m_TrajectoryCorrectionVector;
         Vector3 m_ConsumedTrajectoryCorrectionVector;
 
-
         private void Start()
         {
             
@@ -55,8 +54,6 @@ namespace OneCanRun.GamePlay
             m_LastRootPosition = m_ProjectileBase.transform.position;
             m_Velocity = transform.forward * m_ProjectileBase.speed;
             transform.position += m_ProjectileBase.InheritedMuzzleVelocity * Time.deltaTime;
-            
-
             // get weaponController
             WeaponController wp = m_ProjectileBase.WeaponController;
 
@@ -73,13 +70,14 @@ namespace OneCanRun.GamePlay
                 m_TrajectoryCorrectionVector = Vector3.ProjectOnPlane(-cameraToMuzzle,
                     playerWeaponsManager.WeaponCamera.transform.forward);
                 m_ConsumedTrajectoryCorrectionVector = new Vector3(0,0,0);
+               // Debug.Log(transform.position);
             }
         }
 
         void Update()
         {
             //Debug.Log(Time.time);
-
+            
             if (m_ProjectileBase.restart){
                 this.Start();
                 m_ProjectileBase.restart = false;
@@ -96,7 +94,7 @@ namespace OneCanRun.GamePlay
             // Drift towards trajectory override (this is so that projectiles can be centered 
             // with the camera center even though the actual weapon is offset)
             if (m_HasTrajectoryOverride && m_ConsumedTrajectoryCorrectionVector.sqrMagnitude <
-                m_TrajectoryCorrectionVector.sqrMagnitude)
+                m_TrajectoryCorrectionVector.sqrMagnitude )
             {
                 Vector3 correctionLeft = m_TrajectoryCorrectionVector - m_ConsumedTrajectoryCorrectionVector;
                 float distanceThisFrame = (transform.position - m_LastRootPosition).magnitude;

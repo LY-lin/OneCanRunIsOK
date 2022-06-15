@@ -1,9 +1,8 @@
 
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using OneCanRun.GamePlay;
-using OneCanRun.Game;
+using UnityEngine.UI;
 
 namespace OneCanRun.UI
 {
@@ -16,8 +15,11 @@ namespace OneCanRun.UI
         [Tooltip("Tips for Button")]
         public RectTransform Button;
         */
+        [Tooltip("Pivot")]
+        public Transform Pivot;
+
         [Tooltip("Canvas Group")]
-        public Transform CanvasGroup;
+        public CanvasGroup plane;
 
         [Tooltip("if too far to see")]
         public bool HideFar = true;
@@ -38,14 +40,13 @@ namespace OneCanRun.UI
         {
             if (interactive.showInteractiveUI)
             {
-              
-                    this.gameObject.SetActive(true);
-                    CanvasGroup.LookAt(-Camera.main.transform.position);
-                    //this.gameObject.SetActive(false);
+                plane.gameObject.SetActive(true);
+                Pivot.LookAt(Camera.main.transform.position);
             }
             else
             {
-                this.gameObject.SetActive(false);
+
+                plane.gameObject.SetActive(false);
             }
         }
     }
