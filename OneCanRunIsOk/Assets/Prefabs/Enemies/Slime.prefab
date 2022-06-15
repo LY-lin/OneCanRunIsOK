@@ -577,6 +577,8 @@ MonoBehaviour:
   skillList: []
   MeleeList:
   - {fileID: 1642041084}
+  AttackList:
+  - isAttack
   MeleeRange: 3
   WeaponRange: 6
   SkillRange: 9

@@ -18,6 +18,9 @@ namespace OneCanRun.AI.Enemies
         [Tooltip("Skills which are carried by the enemy")]
         public List<BodyMeleeController> MeleeList = new List<BodyMeleeController>();
 
+        [Tooltip("attack animation which are carried by the enemy")]
+        public List<string> AttackList = new List<string>();
+
         [Tooltip("Melee limit attack range")]
         public float MeleeRange;
 
@@ -46,6 +49,8 @@ namespace OneCanRun.AI.Enemies
 
         BodyMeleeController[] melees;
 
+        string[] attacks;
+
         Actor actor;
 
         Animator anim;
@@ -53,6 +58,7 @@ namespace OneCanRun.AI.Enemies
         int currentWeaponIndex = 0;
         int currentSkillIndex = 0;
         int currentMeleeIndex = 0;
+        int currentAttackIndex = 0;
         float latestMeleeAttackTime = float.NegativeInfinity;
 
         // Start is called before the first frame update
@@ -85,6 +91,8 @@ namespace OneCanRun.AI.Enemies
 
             anim = GetComponent<Animator>();
             DebugUtility.HandleErrorIfNullGetComponent<Animator, EnemyAttackController>(anim, this, gameObject);
+
+            attacks = AttackList.ToArray();
         }
 
         public void UpdateAttackState(Vector3 targetPostion)
@@ -151,7 +159,8 @@ namespace OneCanRun.AI.Enemies
         public void AttackByMelee()
         {
             latestMeleeAttackTime = Time.time;
-            anim.SetTrigger("isAttack");
+            anim.SetTrigger(attacks[currentAttackIndex]);
+            currentAttackIndex = (currentAttackIndex + 1)%attacks.Length;
         }
     }
 }
