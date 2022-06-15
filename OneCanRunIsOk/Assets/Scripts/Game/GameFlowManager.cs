@@ -71,19 +71,14 @@ namespace OneCanRun.Game
                 // See if it's time to load the end scene (after the delay)
                 if (Time.time >= m_TimeLoadEndGameScene)
                 {
-                    SceneManager.LoadScene(0);
+                    LoadingHelper.Instance.LoadScene("SampleScene");
+                    //SceneManager.LoadScene(0);
                     GameIsEnding = false;
                 }
             }
         }
         void OnAllObjectivesCompleted(AllObjectivesCompletedEvent evt) => EndGame(true);
         void OnPlayerDeath(PlayerDeathEvent evt) => EndGame(false);
-
-        void OnApplicationPause(bool pause)
-        {
-            
-        }
-
         void EndGame(bool win)
         {
             // unlocks the cursor before leaving the scene, to be able to click buttons

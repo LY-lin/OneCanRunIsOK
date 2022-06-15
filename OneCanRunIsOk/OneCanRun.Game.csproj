@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -83,6 +83,9 @@
     <Compile Include="Assets\Scripts\Game\ActorsManager.cs" />
     <Compile Include="Assets\Scripts\Game\ObjectiveManager.cs" />
     <Compile Include="Assets\Scripts\Game\Share\DropList.cs" />
+    <Compile Include="Assets\Scripts\Game\Loading\LoadingHelper.cs" />
+    <Compile Include="Assets\Scripts\Game\Loading\SceneDataPasser.cs" />
+    <Compile Include="Assets\Scripts\Game\Loading\LoadingContoller.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Game\OneCanRun.Game.asmdef" />

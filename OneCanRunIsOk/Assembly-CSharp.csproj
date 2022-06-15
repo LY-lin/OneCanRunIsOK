@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -954,13 +954,14 @@
     <ProjectReference Include="Unity.Postprocessing.Runtime.csproj">
       <Project>{211C3D56-52E6-23C9-024E-0280203D7EE2}</Project>
       <Name>Unity.Postprocessing.Runtime</Name>
-    <ProjectReference Include="UniBT.Editor.csproj">
-      <Project>{09D64CE5-2B45-F0EB-654C-8216518798BE}</Project>
-      <Name>UniBT.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="UniBT.csproj">
       <Project>{87D97AA6-C7D8-50D2-CCC1-4BDE607489C1}</Project>
       <Name>UniBT</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniBT.Editor.csproj">
+      <Project>{09D64CE5-2B45-F0EB-654C-8216518798BE}</Project>
+      <Name>UniBT.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Example.csproj">
       <Project>{C2022C2F-615A-EE99-F534-F24E412FD4C5}</Project>
