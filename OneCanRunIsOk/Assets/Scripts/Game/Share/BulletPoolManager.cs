@@ -74,10 +74,5 @@ namespace OneCanRun.Game.Share
             }
 
         }
-
-        public GameObject getCollector()
-        {
-            return collector;
-        }
     }
 }

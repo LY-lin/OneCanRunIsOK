@@ -46,8 +46,6 @@ namespace OneCanRun.Game.Share
         [Tooltip("The image that will be displayed in the UI for this weapon")]
         public Sprite WeaponIcon;   //武器显示在UI的小图标
 
-        [Tooltip("Weapon's Description")]
-        public string description;
 
 
         [Tooltip("Default data for the crosshair")]
@@ -625,7 +623,7 @@ namespace OneCanRun.Game.Share
 
 
             tempBullet.transform.forward = shootDirection;
-            //Debug.Log(shootDirection);
+            Debug.Log(shootDirection);
             tempBullet.GetComponent<BulletController>().Shoot(this);
             //tempBullet.GetComponent<BulletController>().OnShoot?.Invoke();
 

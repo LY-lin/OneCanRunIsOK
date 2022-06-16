@@ -214,9 +214,6 @@ namespace OneCanRun.GamePlay
             // force the crouch state to false when starting
             SetCrouchingState(false, true);
             UpdateCharacterHeight(true);
-
-            //allow flash
-            Physics.autoSyncTransforms = true;
         }
 
         void Update()

@@ -19835,7 +19835,6 @@ MonoBehaviour:
   TrajectoryCorrectionDistance: 5
   InheritWeaponVelocity: 0
   Damage: 40
-  m_HasTrajectoryOverride: 0
 --- !u!114 &6701857066079489881
 MonoBehaviour:
   m_ObjectHideFlags: 0
