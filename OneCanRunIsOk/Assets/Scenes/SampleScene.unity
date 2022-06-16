@@ -235,7 +235,6 @@ GameObject:
   m_Component:
   - component: {fileID: 47318869}
   - component: {fileID: 47318871}
-  - component: {fileID: 47318870}
   m_Layer: 0
   m_Name: MiniMapCamera
   m_TagString: Untagged
@@ -258,14 +257,6 @@ Transform:
   m_Father: {fileID: 2147054328}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!81 &47318870
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 47318868}
-  m_Enabled: 1
 --- !u!20 &47318871
 Camera:
   m_ObjectHideFlags: 0
@@ -3527,7 +3518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartSkill: {fileID: 4654144126487180559, guid: 5e9d6336e11a594418faeccf7ba898b8, type: 3}
-  StartSpSkill: {fileID: 2480305087403844136, guid: a81161b5a39e29c4aa8b5521c76ef14b, type: 3}
+  StartSpSkill: {fileID: 2480305087403844136, guid: f14d724f1a8db64438770a03e8f8c7b9, type: 3}
   SkillSocket: {fileID: 752986709}
 --- !u!114 &2136025597
 MonoBehaviour:
