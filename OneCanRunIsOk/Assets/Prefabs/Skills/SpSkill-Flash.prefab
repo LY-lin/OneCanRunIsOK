@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6487561500433061341}
   - component: {fileID: 2480305087403844136}
   m_Layer: 0
-  m_Name: Skill-SPTest
+  m_Name: SpSkill-Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,11 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af01779345aa664c85a6bc91204c961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: 
+  SkillName: Flash
   SkillDescription: 
   SkillIcon: {fileID: 0}
   m_SkillType: 3
-  CoolingTime: 10
+  m_SpSkillType: 2
+  CoolingTime: 0
   UsingRange: 10
+  ExistingTime: 10
   AimingVfx: {fileID: 100000, guid: 880bc6becc440a047bba527f57da1a9c, type: 3}
-  UsingVfx: {fileID: 100008, guid: 5b30d84272f7f8f4fa4cae7f0ed2b286, type: 3}
+  UsingVfx: {fileID: 0}

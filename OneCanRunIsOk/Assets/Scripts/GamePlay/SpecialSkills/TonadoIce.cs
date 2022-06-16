@@ -6,7 +6,7 @@ using OneCanRun.Game.Share;
 
 namespace OneCanRun.GamePlay
 {
-    public class TonadoIceForPlayer : MonoBehaviour
+    public class TonadoIce : MonoBehaviour
     {
         [Tooltip("impact radius of the tonado")]
         public float radius= 3f;
@@ -20,10 +20,6 @@ namespace OneCanRun.GamePlay
         public GameObject Owner;
 
         // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
 
         // Update is called once per frame
         void Update()
