@@ -872,3 +872,4 @@ MonoBehaviour:
   ShadowsToggle: {fileID: 8190264201040189045}
   InvincibilityToggle: {fileID: 8190264201040189045}
   FramerateToggle: {fileID: 8190264201040189045}
+  BackPack: {fileID: 0}

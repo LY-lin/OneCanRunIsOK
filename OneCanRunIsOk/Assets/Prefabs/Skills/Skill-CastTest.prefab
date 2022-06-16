@@ -50,7 +50,12 @@ MonoBehaviour:
   SkillDescription: test test
   SkillIcon: {fileID: 21300000, guid: 72380b41d05ed2041af4334193e63e20, type: 3}
   m_SkillType: 0
+  m_SpSkillType: 0
   CoolingTime: 2
+  UsingRange: 10
+  ExistingTime: 10
+  AimingVfx: {fileID: 0}
+  UsingVfx: {fileID: 0}
 --- !u!114 &4654144126487180544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,6 +71,7 @@ MonoBehaviour:
   RemoteWeapons: 1
   WeaponName: 
   WeaponIcon: {fileID: 0}
+  description: 
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 0}
     CrosshairSize: 0
