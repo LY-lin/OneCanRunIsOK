@@ -82,7 +82,7 @@ MonoBehaviour:
   damage: 50
   WeaponMuzzle: {fileID: 4654144126487180558}
   ShootType: 0
-  bullet: {fileID: 448241730253387703, guid: 842e8f930c663d4469a4c38f923efa64, type: 3}
+  bullet: {fileID: 1823173409967616, guid: ef48ff28d9f1dc04d9acc396a9381b2f, type: 3}
   DelayBetweenShots: 0.5
   BulletSpreadAngle: 0
   BulletsPerShot: 1

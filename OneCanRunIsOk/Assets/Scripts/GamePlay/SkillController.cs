@@ -198,6 +198,8 @@ namespace OneCanRun.GamePlay
             GameObject VfxInstance = Instantiate(UsingVfx, aimingPoint + Vector3.up * 15, Quaternion.AngleAxis(-90f,Vector3.right));
             WeaponController FireSource = VfxInstance.GetComponent<WeaponController>();
             FireSource.Owner = this.Owner;
+            //销毁子弹池与Vfx实例
+            Destroy(FireSource.bulletPoolManager.getCollector(), ExistingTime + 3);
             Destroy(VfxInstance.gameObject, ExistingTime);
         }
 

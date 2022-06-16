@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Game\Share\BulletPoolManager.cs" />
     <Compile Include="Assets\Scripts\Game\StaticEvents.cs" />
     <Compile Include="Assets\Scripts\Game\ActorsManager.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\AoeCalculator.cs" />
     <Compile Include="Assets\Scripts\Game\Loading\LoadingHelper.cs" />
     <Compile Include="Assets\Scripts\Game\ObjectiveManager.cs" />
   </ItemGroup>

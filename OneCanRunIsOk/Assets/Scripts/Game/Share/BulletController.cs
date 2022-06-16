@@ -11,6 +11,9 @@ namespace OneCanRun.Game.Share
         [Tooltip("击中特效持续时间")]
         public float ImpactVfxLifetime = 5f;
 
+        [Tooltip("if is Aoe")]
+        public bool isAoe = false;
+
 
         //[Tooltip("Speed")]
         public float speed;
@@ -88,22 +91,32 @@ namespace OneCanRun.Game.Share
                 }
             }
 
-            Damageable damageable = col.collider.GetComponentInParent<Damageable>();
-            
-            if (damageable)
-            {
-                //Debug.Log(col.collider);
-                Actor actor = col.gameObject.GetComponent<Actor>();
-                ActorProperties colliderProperty = actor.GetActorProperties();
-                float finalDamage = this.mDamage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
-              /*  Debug.Log(this.mDamage);
-                Debug.Log(colliderProperty.getPhysicalDefence());
-                Debug.Log(colliderProperty.getMagicDefence());*/
-                if (finalDamage < 0f)
-                    finalDamage = 0f;
-                damageable.InflictDamage(finalDamage, false, Owner);
 
+            if (isAoe)
+            {
+                AoeCalculator ac=GetComponent< AoeCalculator>();
+                Collider bulletCol = GetComponent<Collider>();
+                ac.AoeCalculating(bulletCol.transform.position, mDamage, Owner);
                 this.WeaponController.bulletPoolManager.release(this.gameObject);
+            }
+            else
+            {
+                Damageable damageable = col.collider.GetComponentInParent<Damageable>();
+                if (damageable)
+                {
+                    //Debug.Log(col.collider);
+                    Actor actor = col.gameObject.GetComponent<Actor>();
+                    ActorProperties colliderProperty = actor.GetActorProperties();
+                    float finalDamage = this.mDamage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
+                    /*  Debug.Log(this.mDamage);
+                      Debug.Log(colliderProperty.getPhysicalDefence());
+                      Debug.Log(colliderProperty.getMagicDefence());*/
+                    if (finalDamage < 0f)
+                        finalDamage = 0f;
+                    damageable.InflictDamage(finalDamage, false, Owner);
+
+                    this.WeaponController.bulletPoolManager.release(this.gameObject);
+                }
             }
             this.WeaponController.bulletPoolManager.release(this.gameObject);
         }
