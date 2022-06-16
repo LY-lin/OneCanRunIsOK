@@ -71,7 +71,8 @@ namespace OneCanRun.AI.Enemies
         Collider[] colliders;
         // 导航数据模块
         NavigationModule navigationModule;
-        
+
+        private const int dropRate = 10;
         int pathDestinationNodeIndex;
 
         // Start is called before the first frame update
@@ -301,7 +302,8 @@ namespace OneCanRun.AI.Enemies
 
         public bool TryDropItem()
         {
-            if (DropRate == 0 || LootPrefab == null)
+            int result = Random.Range(0, 100);
+            if (DropRate == 0 || LootPrefab == null || result <= this.DropRate)
                 return false;
             else if (DropRate == 1)
                 return true;

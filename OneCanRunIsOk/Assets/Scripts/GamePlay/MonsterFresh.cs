@@ -84,7 +84,7 @@ namespace OneCanRun.GamePlay
 
         void Start()
         {
-            counter = mMonsterList.Count;
+            //counter = mMonsterList.Count;
             Game.Share.MonsterPoolManager.initialization(this.gameObject, monsterSample[0]);
             monsterPoolManager = Game.Share.MonsterPoolManager.getInstance();
         }
@@ -97,14 +97,16 @@ namespace OneCanRun.GamePlay
 
             //return;
             if (Time.frameCount % frameInterval == 0){
-                refreshOneWave();
+                
+                //refreshOneWave();
 
             }
 
 
             if (monsterPoolManager.activeNumber == 0)
             {
-                refreshOneWave();
+                
+                //refreshOneWave();
                 //GameObject temp = monsterPoolManager.getObject(new Vector3(42, 0.7f, 22));
             }
 

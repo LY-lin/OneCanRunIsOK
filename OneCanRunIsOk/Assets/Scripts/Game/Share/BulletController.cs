@@ -10,8 +10,8 @@ namespace OneCanRun.Game.Share
         public GameObject ImpactVfx;
         [Tooltip("击中特效持续时间")]
         public float ImpactVfxLifetime = 5f;
-
-
+        public GameObject hurtNumber;
+        public DamageType damageType;
         //[Tooltip("Speed")]
         public float speed;
         private float mDamage;
@@ -36,6 +36,11 @@ namespace OneCanRun.Game.Share
 
         //public UnityAction OnShoot;
 
+        public void setDamageType(DamageType _type){
+            this.damageType = _type;
+
+        }
+
         // weapon should provide the speed, but...not implement
         public void Shoot(WeaponController controller)
         {
@@ -45,7 +50,15 @@ namespace OneCanRun.Game.Share
 
             ActorProperties tmp = controller.Owner.GetComponent<Actor>().GetActorProperties();
             this.shooterType = controller.Owner.GetComponent<Actor>().Affiliation;
-            float tmpDamage = tmp.getMagicAttack() + tmp.getPhysicalAttack();
+            float tmpDamage = 0;// tmp.getMagicAttack() + tmp.getPhysicalAttack();
+
+            if(this.damageType == DamageType.magic){
+                tmpDamage = tmp.getMagicAttack();
+
+            }
+            else{
+                tmpDamage = tmp.getPhysicalAttack();
+            }
 
             // calculate damage
             this.mDamage = tmpDamage + controller.damage;
@@ -92,22 +105,44 @@ namespace OneCanRun.Game.Share
             
             if (damageable)
             {
-                //Debug.Log(col.collider);
-                Actor actor = col.gameObject.GetComponent<Actor>();
-                ActorProperties colliderProperty = actor.GetActorProperties();
-                float finalDamage = this.mDamage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
-              /*  Debug.Log(this.mDamage);
-                Debug.Log(colliderProperty.getPhysicalDefence());
-                Debug.Log(colliderProperty.getMagicDefence());*/
-                if (finalDamage < 0f)
-                    finalDamage = 0f;
+                Actor actor = col.gameObject.GetComponentInParent<Actor>();
+
+                float finalDamage = calculateDamage(actor.GetActorProperties());
                 damageable.InflictDamage(finalDamage, false, Owner);
 
                 this.WeaponController.bulletPoolManager.release(this.gameObject);
+                GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
+                if(hurtNumber && hurtNumberParent){
+                    GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
+                    hurt.transform.position = this.transform.position;
+                    hurt.GetComponent<HurtNumber>().init(finalDamage, this.damageType);
+                   
+
+                }
+
             }
             this.WeaponController.bulletPoolManager.release(this.gameObject);
         }
 
+
+        private float calculateDamage(ActorProperties colliderProperty)
+        {
+            if (colliderProperty == null)
+                return 0;
+            float finalDamage = 0;
+            if (this.damageType == DamageType.magic)
+            {
+                finalDamage = this.mDamage -  colliderProperty.getMagicDefence();
+            }
+            else
+            {
+                finalDamage = this.mDamage - colliderProperty.getPhysicalDefence();
+            }
+            if (finalDamage < 0f)
+                finalDamage = 0f;
+
+            return finalDamage;
+        }
 
     }
 

@@ -8,9 +8,14 @@ public class StartScene : MonoBehaviour{
 
     float time = 5f;
     bool load = false;
-    public void loadGame(){
-        LoadingHelper.Instance.LoadScene("SampleScene");
+    public void startGame()
+    {
 
+        LoadingHelper.Instance.LoadScene("StarMenu");
+    }
+    public void loadGame(){
+        
+        LoadingHelper.Instance.LoadScene("SampleScene");
     }
 
 }

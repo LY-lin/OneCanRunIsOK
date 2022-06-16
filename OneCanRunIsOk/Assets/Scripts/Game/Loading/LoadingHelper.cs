@@ -11,7 +11,7 @@ namespace OneCanRun.Game
     public static LoadingHelper Instance = new LoadingHelper();
 
     private const string LoadingSceneName = "LoadingScene";
-    private const string DefaultSceneName = "StartMune";
+    private const string DefaultSceneName = "StarMenu";
 
     private bool isLoading = false;
     private string nextSceneName = null;
@@ -20,7 +20,8 @@ namespace OneCanRun.Game
     {
         if (isLoading)
         {
-            Debug.LogError("The last one was still being doing.");
+            SceneManager.LoadScene(DefaultSceneName, LoadSceneMode.Single);
+                isLoading = false;
             return;
         }
 

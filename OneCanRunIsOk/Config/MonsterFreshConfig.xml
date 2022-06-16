@@ -1,9 +1,149 @@
 <MonsterConfig>
   <Wave id="0">
     <Time time="">5</Time>
-    <Position_x position_x="">64</Position_x>
-    <Position_y position_y="">5</Position_y>
-    <Position_z position_z="">60</Position_z>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
     <TypeID typeID="">0</TypeID>
+  </Wave>
+  <Wave id="1">
+    <Time time="">5</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">0</TypeID>
+  </Wave>
+  <Wave id="2">
+    <Time time="">5</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">0</TypeID>
+  </Wave>
+  <Wave id="3">
+    <Time time="">5</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">0</TypeID>
+  </Wave>
+  <Wave id="4">
+    <Time time="">5</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">0</TypeID>
+  </Wave>
+  <Wave id="5">
+    <Time time="">20</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">0</TypeID>
+  </Wave>
+  <Wave id="6">
+    <Time time="">20</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">0</TypeID>
+  </Wave>
+  <Wave id="7">
+    <Time time="">20</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">0</TypeID>
+  </Wave>
+  <Wave id="8">
+    <Time time="">20</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">0</TypeID>
+  </Wave>
+  <Wave id="9">
+    <Time time="">20</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">1</TypeID>
+  </Wave>
+  <Wave id="10">
+    <Time time="">20</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">1</TypeID>
+  </Wave>
+  <Wave id="11">
+    <Time time="">40</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">0</TypeID>
+  </Wave>
+  <Wave id="12">
+    <Time time="">40</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">1</TypeID>
+  </Wave>
+  <Wave id="13">
+    <Time time="">40</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">0</TypeID>
+  </Wave>
+  <Wave id="14">
+    <Time time="">40</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">1</TypeID>
+  </Wave>
+  <Wave id="15">
+    <Time time="">40</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">0</TypeID>
+  </Wave>
+  <Wave id="16">
+    <Time time="">40</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">1</TypeID>
+  </Wave>
+  <Wave id="17">
+    <Time time="">40</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">0</TypeID>
+  </Wave>
+  <Wave id="18">
+    <Time time="">40</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">1</TypeID>
+  </Wave>
+  <Wave id="19">
+    <Time time="">40</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">0</TypeID>
+  </Wave>
+  <Wave id="20">
+    <Time time="">40</Time>
+    <Position_x position_x="">41</Position_x>
+    <Position_y position_y="">2.8</Position_y>
+    <Position_z position_z="">22</Position_z>
+    <TypeID typeID="">1</TypeID>
   </Wave>
 </MonsterConfig>

@@ -142,20 +142,52 @@ namespace OneCanRun.Game
             string fileName = "defaultProperties";
             string configDirectory = System.IO.Directory.GetCurrentDirectory();
             configDirectory += "\\Config\\";
+            Renderer[] renderers;
             switch (Affiliation)
             {
                 case affiliationType.allies:
                     fileName += ".allies.xml";
+                    renderers = this.gameObject.GetComponentsInChildren<Renderer>();
+                    foreach (Renderer renderer in renderers)
+                    {
+                        if (renderer.gameObject.layer == LayerMask.NameToLayer("MiniMap"))
+                        {
+                            renderer.material.color = new Color(255, 255, 255);
+                            break;
+                        }
+                    }
                     break;
                 case affiliationType.enemy:
                     fileName += ".enemy.xml";
+                    //this.gameObject.GetComponent<Renderer>().material.color = new Color(255, 0, 0);
+                    renderers = this.gameObject.GetComponentsInChildren<Renderer>();
+                    foreach(Renderer renderer in renderers)
+                    {
+                        if(renderer.gameObject.layer == LayerMask.NameToLayer("MiniMap"))
+                        {
+                            renderer.material.color = new Color(255, 0, 0);
+                            break;
+                        }
+                    }
+                    Debug.Log(fileName);    
                     break;
                 case affiliationType.neutral:
                     fileName += ".neutral.xml";
+                    renderers = this.gameObject.GetComponentsInChildren<Renderer>();
+                    foreach (Renderer renderer in renderers)
+                    {
+                        if (renderer.gameObject.layer == LayerMask.NameToLayer("MiniMap"))
+                        {
+                            renderer.material.color = new Color(255, 255, 0);
+                            break;
+                        }
+                    }
                     break;
                 default:
                     break;
             }
+
+            
 
             //OneCanRun.Game.Share.Modifier modifier = new Share.Modifier(0, Share.Modifier.ModifierType.experience, this);
             //mModifier.Add(modifier);

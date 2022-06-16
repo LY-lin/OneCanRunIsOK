@@ -74,6 +74,7 @@ namespace OneCanRun.GamePlay
         public void setWeaponOwner(GameObject gameObject)
         {
             m_SkillWeapon.Owner = gameObject;
+            
         }
 
         //interface
@@ -112,7 +113,10 @@ namespace OneCanRun.GamePlay
         //cast
         void UseCastSkill()
         {
+
+            m_SkillWeapon.damageType = DamageType.magic;
             m_SkillWeapon.HandleShootInputs(true, false, false);
+            
             //Debug.Log("Cast!");
         }
 
