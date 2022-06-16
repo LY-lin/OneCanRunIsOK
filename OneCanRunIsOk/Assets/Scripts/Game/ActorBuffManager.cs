@@ -36,7 +36,7 @@ namespace OneCanRun.Game
         public void buffGain(BuffController newBuff)
         {
             //newBuff.getTime = timeSpend;
-            Buff BuffContext = newBuff.getMBuff();
+                 Buff BuffContext = newBuff.getMBuff();
             if (newBuff.getBuffType() == Buff.BufferType.NumBuff)
             {
                 NumBuffList.Add(newBuff);

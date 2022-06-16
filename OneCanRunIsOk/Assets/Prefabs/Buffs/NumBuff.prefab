@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 927281462185983436}
   - component: {fileID: -2395946979236021228}
   m_Layer: 0
-  m_Name: TestBuff
+  m_Name: NumBuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   healRateBuff: 0
-  physicalAttackBuff: 0
+  physicalAttackBuff: 10
   magicAttackBuff: 10
   physicalDefenceBuff: 0
   magicDefenceBuff: 0

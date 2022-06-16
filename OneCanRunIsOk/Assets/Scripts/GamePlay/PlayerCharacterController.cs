@@ -324,6 +324,7 @@ namespace OneCanRun.GamePlay
 
         void HandleCharacterMovement()
         {
+            MaxSpeedOnGround = GetComponent<Actor>().GetActorProperties().getMaxSpeed();
             // horizontal character rotation
             // 修改角色Rotate.y以修改左右朝向
             {
