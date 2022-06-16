@@ -10,6 +10,10 @@ namespace OneCanRun.Game.Share
         public GameObject ImpactVfx;
         [Tooltip("击中特效持续时间")]
         public float ImpactVfxLifetime = 5f;
+        public GameObject hurtNumber;
+        public DamageType damageType;
+        [Tooltip("if is Aoe")]
+        public bool isAoe = false;
 
 
         //[Tooltip("Speed")]
@@ -39,7 +43,7 @@ namespace OneCanRun.Game.Share
         // weapon should provide the speed, but...not implement
         public void Shoot(WeaponController controller)
         {
-            
+
             speed = (float)controller.speed;
             // calculate damage
 
@@ -70,7 +74,7 @@ namespace OneCanRun.Game.Share
 
             Actor target = col.gameObject.GetComponent<Actor>();
             //if (target == null)
-                //return;
+            //return;
             if (target)
             {
                 if (target.Affiliation == this.shooterType)
@@ -88,27 +92,60 @@ namespace OneCanRun.Game.Share
                 }
             }
 
-            Damageable damageable = col.collider.GetComponentInParent<Damageable>();
-            
-            if (damageable)
-            {
-                //Debug.Log(col.collider);
-                Actor actor = col.gameObject.GetComponent<Actor>();
-                ActorProperties colliderProperty = actor.GetActorProperties();
-                float finalDamage = this.mDamage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
-              /*  Debug.Log(this.mDamage);
-                Debug.Log(colliderProperty.getPhysicalDefence());
-                Debug.Log(colliderProperty.getMagicDefence());*/
-                if (finalDamage < 0f)
-                    finalDamage = 0f;
-                damageable.InflictDamage(finalDamage, false, Owner);
 
+            if (isAoe)
+            {
+                AoeCalculator ac = GetComponent<AoeCalculator>();
+                Collider bulletCol = GetComponent<Collider>();
+                ac.AoeCalculating(bulletCol.transform.position, mDamage, Owner);
                 this.WeaponController.bulletPoolManager.release(this.gameObject);
             }
-            this.WeaponController.bulletPoolManager.release(this.gameObject);
+            else
+            {
+                Damageable damageable = col.collider.GetComponentInParent<Damageable>();
+                if (damageable)
+                {
+                    Actor actor = col.gameObject.GetComponentInParent<Actor>();
+
+                    float finalDamage = calculateDamage(actor.GetActorProperties());
+                    damageable.InflictDamage(finalDamage, false, Owner);
+
+                    this.WeaponController.bulletPoolManager.release(this.gameObject);
+                    GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
+                    if (hurtNumber && hurtNumberParent)
+                    {
+                        GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
+                        hurt.transform.position = this.transform.position;
+                        hurt.GetComponent<HurtNumber>().init(finalDamage, this.damageType);
+
+
+                    }
+
+                }
+                this.WeaponController.bulletPoolManager.release(this.gameObject);
+            }
         }
 
 
+        private float calculateDamage(ActorProperties colliderProperty)
+        {
+            if (colliderProperty == null)
+                return 0;
+            float finalDamage = 0;
+            if (this.damageType == DamageType.magic)
+            {
+                finalDamage = this.mDamage - colliderProperty.getMagicDefence();
+            }
+            else
+            {
+                finalDamage = this.mDamage - colliderProperty.getPhysicalDefence();
+            }
+            if (finalDamage < 0f)
+                finalDamage = 0f;
+
+            return finalDamage;
+        }
     }
+
 
 }

@@ -24139,6 +24139,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 3
   height: 6
-  damage: 20
+  damage: 1
   displacementSpeed: 10
   Owner: {fileID: 0}

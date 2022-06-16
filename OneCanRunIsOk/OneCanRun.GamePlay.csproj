@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -65,9 +65,11 @@
     <Compile Include="Assets\Scripts\GamePlay\SkillBuffGiver.cs" />
     <Compile Include="Assets\Scripts\GamePlay\PlayerInputHandler.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Dropable.cs" />
+    <Compile Include="Assets\Scripts\GamePlay\SpecialSkills\FireRain.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Objectives\ObjectiveReachPoint.cs" />
-    <Compile Include="Assets\Scripts\GamePlay\SpecialSkills\TonadoIceForPlayer.cs" />
+    <Compile Include="Assets\Scripts\GamePlay\SpecialSkills\TonadoIce.cs" />
     <Compile Include="Assets\Scripts\GamePlay\DetectBuffGiver.cs" />
+    <Compile Include="Assets\Scripts\GamePlay\BulletNoOverride.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Pickups\WeaponPickup.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Interactives\ChestContoller.cs" />
     <Compile Include="Assets\Scripts\GamePlay\BulletStandard.cs" />

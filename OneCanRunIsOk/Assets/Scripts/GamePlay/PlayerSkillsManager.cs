@@ -42,7 +42,7 @@ namespace OneCanRun.GamePlay
         void Update()
         {
             //aiming
-            if (!isAiming && m_InputHandler.GetUseSPSkillButtonDown())
+            if (!isAiming && m_InputHandler.GetUseSPSkillButtonDown() && !CurrentSpSkillInstance.isCooling())
             {
                 isAiming = true;
             }

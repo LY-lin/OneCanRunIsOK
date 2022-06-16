@@ -20,6 +20,14 @@ namespace OneCanRun.GamePlay
         Special,
     }
 
+    public enum SpSkillType
+    {
+        //there are 3 special skills
+        Tonado,
+        FireRain,
+        Flash,
+    }
+
     public class SkillController : MonoBehaviour
     {
         [Header("Skill information")]
@@ -34,11 +42,15 @@ namespace OneCanRun.GamePlay
 
         //[Tooltip("��������-Ͷ��/����/�ٻ�")]
         public SkillType m_SkillType;
+        public SpSkillType m_SpSkillType;
 
         //[Tooltip("������ȴʱ��")]
         public float CoolingTime = 10f;
 
         public float UsingRange = 10f;
+
+        //exist time of the tonado
+        public float ExistingTime = 10f;
 
         [Header("Skill VFX")]
         public GameObject AimingVfx;
@@ -57,7 +69,7 @@ namespace OneCanRun.GamePlay
 
         void Awake()
         {
-            Debug.Log(System.GC.GetTotalMemory(true));
+            //Debug.Log(System.GC.GetTotalMemory(true));
             if (m_SkillType == SkillType.Cast)
             {
                 m_SkillWeapon = GetComponent<WeaponController>();
@@ -76,11 +88,21 @@ namespace OneCanRun.GamePlay
             m_SkillWeapon.Owner = gameObject;
         }
 
+        public bool isCooling()
+        {
+            if (m_LastTimeUse + CoolingTime > Time.time)
+            {
+                Debug.Log("this skill is Cooling!");
+                return true;
+            }
+            return false;
+        }
+
         //interface
         public bool UseSkill()
         {
             //CD?
-            if (m_LastTimeUse + CoolingTime > Time.time)
+            if (isCooling())
             {
                 return false;
             }
@@ -112,6 +134,7 @@ namespace OneCanRun.GamePlay
         //cast
         void UseCastSkill()
         {
+            m_SkillWeapon.damageType = Game.Share.DamageType.magic;
             m_SkillWeapon.HandleShootInputs(true, false, false);
             //Debug.Log("Cast!");
         }
@@ -133,19 +156,61 @@ namespace OneCanRun.GamePlay
         {
             Debug.Log("Summon!");
         }
-        
+
         //Special - get the using point
-        public void UseSpSkill(Vector3 aimingPoint)
+        public bool UseSpSkill(Vector3 aimingPoint)
         {
-            if (m_LastTimeUse + CoolingTime > Time.time)
+
+            m_LastTimeUse = Time.time;
+
+            //switch type
+            switch (m_SpSkillType)
             {
-                return;
+                case SpSkillType.Tonado:
+                    Tonado(aimingPoint);
+                    break;
+
+                case SpSkillType.FireRain:
+                    FireRain(aimingPoint);
+                    break;
+
+                case SpSkillType.Flash:
+                    Flash(aimingPoint);
+                    break;
+
+                default:
+                    break;
             }
+
+            return true;
+        }
+
+        //
+        void Tonado(Vector3 aimingPoint)
+        {
             GameObject VfxInstance = Instantiate(UsingVfx, aimingPoint, Quaternion.identity);
-            TonadoIceForPlayer Tonado = VfxInstance.GetComponent<TonadoIceForPlayer>();
+            TonadoIce Tonado = VfxInstance.GetComponent<TonadoIce>();
             Tonado.Owner = this.Owner;
-            Destroy(VfxInstance.gameObject, 10);
-            Debug.Log(aimingPoint);
+            Destroy(VfxInstance.gameObject, ExistingTime);
+        }
+
+        void FireRain(Vector3 aimingPoint)
+        {
+            GameObject VfxInstance = Instantiate(UsingVfx, aimingPoint + Vector3.up * 15, Quaternion.AngleAxis(-90f,Vector3.right));
+            WeaponController FireSource = VfxInstance.GetComponent<WeaponController>();
+            FireSource.Owner = this.Owner;
+            //销毁子弹池与Vfx实例
+            Destroy(FireSource.bulletPoolManager.getCollector(), ExistingTime + 3);
+            Destroy(VfxInstance.gameObject, ExistingTime);
+        }
+
+        void Flash(Vector3 aimingPoint)
+        {
+            //PlayerCharacterController m_playerCharacterController = Owner.GetComponent<PlayerCharacterController>();
+            //m_playerCharacterController.transform.position = aimingPoint;
+            //Physics.autoSyncTransforms = true;
+            Owner.transform.position = aimingPoint;
+            Debug.Log(Owner.transform.position);
         }
 
         //get the property
