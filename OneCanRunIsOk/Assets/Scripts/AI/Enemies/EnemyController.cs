@@ -138,6 +138,11 @@ namespace OneCanRun.AI.Enemies
             enemyManager.RegisterEnemy(this);
         }
 
+        private void OnEnable()
+        {
+            NavMeshAgent.enabled = true;
+        }
+
         // Update is called once per frame
         void Update()
         {
@@ -304,6 +309,11 @@ namespace OneCanRun.AI.Enemies
 
             NavMeshAgent.enabled = false;
 
+        }
+
+        public void EnterDeathQueue()
+        {
+            Debug.Log(this.gameObject.name);
             // loot an object
             if (TryDropItem())
             {
@@ -313,7 +323,7 @@ namespace OneCanRun.AI.Enemies
             // this will call the OnDestroy function
             //Destroy(gameObject, DeathDuration);
             Game.Share.MonsterPoolManager temp = Game.Share.MonsterPoolManager.getInstance();
-            if( temp == null)
+            if (temp == null)
             {
                 Destroy(gameObject, DeathDuration);
             }
