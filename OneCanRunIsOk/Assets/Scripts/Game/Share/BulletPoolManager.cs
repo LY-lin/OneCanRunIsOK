@@ -63,7 +63,7 @@ namespace OneCanRun.Game.Share
         public void release(GameObject objcect)
         {
             objcect.GetComponent<BulletController>().restart = true;
-            
+            objcect.GetComponent<Rigidbody>().ResetInertiaTensor();
             objcect.SetActive(false);
             for (int i = 0; i < cacheSize; i++)
             {

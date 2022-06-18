@@ -44,6 +44,9 @@ namespace OneCanRun.Game.Share
         [Tooltip("The image that will be displayed in the UI for this weapon")]
         public Sprite WeaponIcon;   //武器显示在UI的小图标
 
+        [Tooltip("Image that show the weapon root")]
+        public Sprite WeaponImg;
+
         [Tooltip("Weapon's Description")]
         public string description;
 
@@ -622,7 +625,6 @@ namespace OneCanRun.Game.Share
 
 
             tempBullet.transform.forward = shootDirection;
-            Debug.Log(shootDirection);
             tempBullet.GetComponent<BulletController>().Shoot(this);
             //tempBullet.GetComponent<BulletController>().OnShoot?.Invoke();
 

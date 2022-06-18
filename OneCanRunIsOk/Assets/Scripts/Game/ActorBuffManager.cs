@@ -16,9 +16,11 @@ namespace OneCanRun.Game
         public float lastTime = 0;
 
         public UnityAction buffChanged;
-
+        //用于通知UI发生了BUFF的获取和损失
+        public UnityAction<BuffController> buffGained;
+        public UnityAction<BuffController> buffLost;
         public Actor aim_Actor;
-        void Start()
+        void Awake()
         {
             NumBuffList = new List<BuffController>();
             PercentBuffList = new List<BuffController>();
@@ -29,7 +31,7 @@ namespace OneCanRun.Game
         void Update()
         {
             timeSpend += Time.deltaTime;
-            buffLose(timeSpend-lastTime);
+            buffLose(timeSpend - lastTime);
             lastTime = timeSpend;
         }
 
@@ -51,8 +53,9 @@ namespace OneCanRun.Game
             }
             else { }
             buffChanged?.Invoke();
+            buffGained?.Invoke(newBuff);
         }
-        private bool checkActive(BuffController buff,float time)
+        private bool checkActive(BuffController buff, float time)
         {
             //如果buff永久生效
             if (buff.getExistTime() < 0)
@@ -60,7 +63,7 @@ namespace OneCanRun.Game
             buff.getTime -= time;
             if (buff.getTime < 0)
             {
-                 return false;
+                return false;
             }
             return true;
         }
@@ -70,9 +73,9 @@ namespace OneCanRun.Game
             bool changed = false;
             List<BuffController> listToDelete = new List<BuffController>();
             List<BuffController> listToPercentDelete = new List<BuffController>();
-            for (int i = 0; i < NumBuffList.Count;i++)
+            for (int i = 0; i < NumBuffList.Count; i++)
             {
-                if (!checkActive(NumBuffList[i],time))
+                if (!checkActive(NumBuffList[i], time))
                 {
                     changed = true;
                     listToDelete.Add(NumBuffList[i]);
@@ -83,6 +86,7 @@ namespace OneCanRun.Game
                 for (int i = 0; i < listToDelete.Count; i++)
                 {
                     NumBuffList.Remove(listToDelete[i]);
+                    buffLost?.Invoke(listToDelete[i]);
                 }
             }
             //检查PercentBuff
@@ -99,6 +103,7 @@ namespace OneCanRun.Game
                 for (int i = 0; i < listToPercentDelete.Count; i++)
                 {
                     PercentBuffList.Remove(listToPercentDelete[i]);
+                    buffLost?.Invoke(listToDelete[i]);
                 }
             }
             if (WeaponBuffList.Count > 0)
@@ -110,7 +115,7 @@ namespace OneCanRun.Game
                         WeaponBuffList.Remove(m);
                     }
                 }
-            if(changed)
+            if (changed)
                 buffChanged?.Invoke();
         }
         public void buffDelete(BuffController buff)
@@ -128,7 +133,7 @@ namespace OneCanRun.Game
                     buffChanged?.Invoke();
                     break;
             }
-
+            buffLost?.Invoke(buff);
         }
     }
 }
