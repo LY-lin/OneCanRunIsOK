@@ -24139,6 +24139,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 3
   height: 6
-  damage: 1
-  displacementSpeed: 10
+  damage: 10
+  displacementSpeed: 5
+  deltaCount: 50
   Owner: {fileID: 0}
+  hurtNumber: {fileID: 5852126615502880303, guid: 545f182ccbdf99248b402347b988fe26, type: 3}
+  damageType: 1

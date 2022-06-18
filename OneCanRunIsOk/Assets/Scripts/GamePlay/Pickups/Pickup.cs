@@ -7,24 +7,24 @@ namespace OneCanRun.GamePlay
     [RequireComponent(typeof(Rigidbody), typeof(Collider))]
     public class Pickup : MonoBehaviour
     {
-        [Tooltip("ÉÏÏÂ¶¶¶¯ÆµÂÊ")]
+        [Tooltip("ä¸Šä¸‹æŠ–åŠ¨é¢‘ç‡")]
         public float VerticalBobFrequency = 1f;
 
-        [Tooltip("ÉÏÏÂ¶¶¶¯¾àÀë")]
+        [Tooltip("ä¸Šä¸‹æŠ–åŠ¨è·ç¦»")]
         public float BobbingAmount = 1f;
 
-        [Tooltip("Ğı×ªËÙ¶È")] public float RotatingSpeed = 360f;
+        [Tooltip("æ—‹è½¬é€Ÿåº¦")] public float RotatingSpeed = 360f;
 
-        [Tooltip("Ê°È¡ÒôĞ§")] public AudioClip PickupSfx;
-        [Tooltip("Ê°È¡ÌØĞ§")] public GameObject PickupVfxPrefab;
+        [Tooltip("æ‹¾å–éŸ³æ•ˆ")] public AudioClip PickupSfx;
+        [Tooltip("æ‹¾å–ç‰¹æ•ˆ")] public GameObject PickupVfxPrefab;
 
-        //¸ÕÌå
+        //åˆšä½“
         public Rigidbody PickupRigidbody { get; private set; }
-        //Åö×²Ìå
+        //ç¢°æ’ä½“
         Collider m_Collider;
-        //³õÊ¼Î»ÖÃ
+        //åˆå§‹ä½ç½®
         Vector3 m_StartPosition;
-        //ÊÇ·ñÒÑ²¥·ÅÊ°È¡·´À¡
+        //æ˜¯å¦å·²æ’­æ”¾æ‹¾å–åé¦ˆ
         bool m_HasPlayedFeedback;
 
         protected virtual void Start()
@@ -35,33 +35,34 @@ namespace OneCanRun.GamePlay
             DebugUtility.HandleErrorIfNullGetComponent<Collider, Pickup>(m_Collider, this, gameObject);
 
             // ensure the physics setup is a kinematic rigidbody trigger
-            //ÊÇ·ñÔË¶¯
-            PickupRigidbody.isKinematic = true;
-            //´¥·¢ÉèÖÃ
-            m_Collider.isTrigger = true;
+            //æ˜¯å¦è¿åŠ¨
+            //PickupRigidbody.isKinematic = true;
+            //PickupRigidbody.useGravity = true;
+            //è§¦å‘è®¾ç½®
+            //m_Collider.isTrigger = true;
 
             // Remember start position for animation
-            //¼ÇÂ¼³õÊ¼Î»ÖÃ
-            m_StartPosition = transform.position;
+            //è®°å½•åˆå§‹ä½ç½®
+            //m_StartPosition = transform.position;
         }
 
         protected virtual void Update()
         {
             // Handle bobbing
-            //ÉÏÏÂ¶¶¶¯
-            float bobbingAnimationPhase = ((Mathf.Sin(Time.time * VerticalBobFrequency) * 0.5f) + 0.5f) * BobbingAmount;
-            transform.position = m_StartPosition + Vector3.up * bobbingAnimationPhase;
+            //ä¸Šä¸‹æŠ–åŠ¨
+            //float bobbingAnimationPhase = ((Mathf.Sin(Time.time * VerticalBobFrequency) * 0.5f) + 0.5f) * BobbingAmount;
+            //transform.position = m_StartPosition + Vector3.up * bobbingAnimationPhase;
 
             // Handle rotating
-            //Ğı×ª
+            //æ—‹è½¬
             transform.Rotate(Vector3.up, RotatingSpeed * Time.deltaTime, Space.Self);
         }
 
-        //Åö×²´¥·¢
+        //ç¢°æ’è§¦å‘
         void OnTriggerEnter(Collider other)
         {
-            PlayerCharacterController pickingPlayer = other.GetComponent<PlayerCharacterController>();
-
+                PlayerCharacterController pickingPlayer = other.GetComponent<PlayerCharacterController>();
+            if(pickingPlayer==GameObject.Find("Player1").GetComponent<PlayerCharacterController>())
             if (pickingPlayer != null)
             {
                 OnPicked(pickingPlayer);
@@ -72,10 +73,11 @@ namespace OneCanRun.GamePlay
             }
         }
 
-        //¾ßÌåÊ°È¡º¯Êı
+        //å…·ä½“æ‹¾å–å‡½æ•°
         protected virtual void OnPicked(PlayerCharacterController playerController)
         {
             PlayPickupFeedback();
+            
         }
 
         public void PlayPickupFeedback()
@@ -94,6 +96,7 @@ namespace OneCanRun.GamePlay
             }
 
             m_HasPlayedFeedback = true;
+            Destroy(gameObject);
         }
     }
 }

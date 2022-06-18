@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1782089685690102404}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.962, z: 0}
+  m_LocalPosition: {x: 0, y: 1.204, z: 0.672}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -269,7 +269,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2966504387972287147}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LowerEyelid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,7 +300,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2966504388062296737}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UpperTeethCTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,7 +489,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2966504388625769354}
-  m_Layer: 0
+  - component: {fileID: 6542778005628995449}
+  - component: {fileID: 8169655845478771022}
+  - component: {fileID: 7024728990078209998}
+  m_Layer: 8
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,6 +516,47 @@ Transform:
   m_Father: {fileID: 2966504389105948771}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -0.9981526, y: 177.1708, z: -37.30017}
+--- !u!114 &6542778005628995449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2966504388625769355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c173cecca82d784db3642bdd22e59e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &8169655845478771022
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2966504388625769355}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &7024728990078209998
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2966504388625769355}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2966504388732448130
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,7 +566,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2966504388732448129}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UppderEyeLid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,7 +597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2966504388883961391}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EyeCTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -668,8 +712,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2966504389019915644}
-  - component: {fileID: 2966504389019915646}
-  - component: {fileID: 2966504389019915645}
   m_Layer: 0
   m_Name: Root
   m_TagString: Untagged
@@ -685,7 +727,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2966504389019915647}
   m_LocalRotation: {x: -0.144015, y: 0.69228584, z: -0.144015, w: 0.69228584}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.11, z: -0.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -693,31 +735,6 @@ Transform:
   m_Father: {fileID: 2966504389081029324}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 1.6201873, y: 90.07027, z: -21.019201}
---- !u!114 &2966504389019915646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966504389019915647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c173cecca82d784db3642bdd22e59e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &2966504389019915645
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966504389019915647}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0468847, y: 1.5231979, z: 1.204422}
-  m_Center: {x: -0.023442268, y: 0.26159906, z: -0.051948547}
 --- !u!1 &2966504389081029317
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +752,8 @@ GameObject:
   - component: {fileID: 2966504389081029322}
   - component: {fileID: 2966504389081029323}
   - component: {fileID: 2966504389081029316}
+  - component: {fileID: 3368980292634908414}
+  - component: {fileID: 6673695119927750216}
   m_Layer: 0
   m_Name: ChestMonster
   m_TagString: Untagged
@@ -760,7 +779,7 @@ Transform:
   - {fileID: 2966504389218270971}
   - {fileID: 5474939588140039465}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2966504389081029325
 MonoBehaviour:
@@ -881,7 +900,7 @@ MonoBehaviour:
   weaponList: []
   skillList: []
   MeleeList:
-  - {fileID: 2966504389019915646}
+  - {fileID: 6542778005628995449}
   AttackList:
   - Attack1
   - Attack2
@@ -910,6 +929,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &3368980292634908414
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2966504389081029317}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &6673695119927750216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2966504389081029317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160d4e1000bf43c4389cbeb360044f79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageMultiplier: 1
+  SensibilityToSelfdamage: 0.5
 --- !u!1 &2966504389104984675
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,7 +1235,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2966504389400676004}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EyeBallCTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,7 +10,9 @@ namespace OneCanRun.Game
         
         private Buff mbuff;
         bool isForever;
+        //剩余持续时间
         public float getTime;
+        public GameObject ImpactVfx;
         public BuffController(Buff buff)
         {
             mbuff = buff;
@@ -60,6 +62,16 @@ namespace OneCanRun.Game
                 properties.setMagicDefence(properties.getMagicDefence() * (1 + mbuff.getMagicDefenceBuff()));
                 properties.setMaxSpeed(properties.getMaxSpeed() * (1 + mbuff.getMaxSpeedBuff()));
                 properties.setMaxJump(properties.getMaxJump() * (1 + mbuff.getMaxJumpBuff()));
+            }
+
+            if (ImpactVfx)
+            {
+                /*GameObject impactVfxInstance = Instantiate(ImpactVfx, this.gameObject.transform.position,
+                    Quaternion.LookRotation(col.gameObject.transform.up));
+                if (ExistTime > 0)
+                {
+                    Destroy(impactVfxInstance.gameObject, ExistTime);
+                }*/
             }
         }
     }

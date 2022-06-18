@@ -16,7 +16,9 @@ namespace OneCanRun.Game
         public float lastTime = 0;
 
         public UnityAction buffChanged;
-
+        //用于通知UI发生了BUFF的获取和损失
+        public UnityAction<BuffController> buffGained;
+        public UnityAction<BuffController> buffLost;
         public Actor aim_Actor;
         void Start()
         {
@@ -36,7 +38,7 @@ namespace OneCanRun.Game
         public void buffGain(BuffController newBuff)
         {
             //newBuff.getTime = timeSpend;
-            Buff BuffContext = newBuff.getMBuff();
+                 Buff BuffContext = newBuff.getMBuff();
             if (newBuff.getBuffType() == Buff.BufferType.NumBuff)
             {
                 NumBuffList.Add(newBuff);
@@ -51,6 +53,7 @@ namespace OneCanRun.Game
             }
             else { }
             buffChanged?.Invoke();
+            buffGained?.Invoke(newBuff);
         }
         private bool checkActive(BuffController buff,float time)
         {
@@ -83,6 +86,7 @@ namespace OneCanRun.Game
                 for (int i = 0; i < listToDelete.Count; i++)
                 {
                     NumBuffList.Remove(listToDelete[i]);
+                    buffLost?.Invoke(listToDelete[i]);
                 }
             }
             //检查PercentBuff
@@ -99,6 +103,7 @@ namespace OneCanRun.Game
                 for (int i = 0; i < listToPercentDelete.Count; i++)
                 {
                     PercentBuffList.Remove(listToPercentDelete[i]);
+                    buffLost?.Invoke(listToDelete[i]);
                 }
             }
             if (WeaponBuffList.Count > 0)
@@ -128,7 +133,7 @@ namespace OneCanRun.Game
                     buffChanged?.Invoke();
                     break;
             }
-
+            buffLost?.Invoke(buff);
         }
     }
 }

@@ -625,7 +625,7 @@ namespace OneCanRun.Game.Share
 
 
             tempBullet.transform.forward = shootDirection;
-            Debug.Log(shootDirection);
+            // Debug.Log(shootDirection);
             tempBullet.GetComponent<BulletController>().Shoot(this);
             //tempBullet.GetComponent<BulletController>().OnShoot?.Invoke();
 

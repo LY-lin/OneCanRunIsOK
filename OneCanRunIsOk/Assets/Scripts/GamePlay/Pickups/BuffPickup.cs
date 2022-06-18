@@ -20,6 +20,7 @@ namespace OneCanRun.GamePlay
                 evt.Pickup = gameObject;
                 EventManager.broadcast(evt);
             }
+            Destroy(gameObject);
         }
     }
 }

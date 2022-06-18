@@ -76,7 +76,7 @@ namespace OneCanRun.Game.Share
                 //ret = dataStream[index];
                 ret.transform.position = position;
             }
-
+            
             return ret;
         }
 

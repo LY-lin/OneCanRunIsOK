@@ -134,6 +134,7 @@ namespace OneCanRun.GamePlay
         //cast
         void UseCastSkill()
         {
+            //m_SkillWeapon.damageType = Game.Share.DamageType.magic;
             m_SkillWeapon.HandleShootInputs(true, false, false);
             //Debug.Log("Cast!");
         }
@@ -208,8 +209,10 @@ namespace OneCanRun.GamePlay
             //PlayerCharacterController m_playerCharacterController = Owner.GetComponent<PlayerCharacterController>();
             //m_playerCharacterController.transform.position = aimingPoint;
             //Physics.autoSyncTransforms = true;
+            GameObject VfxInstance = Instantiate(UsingVfx, Owner.transform.position, Quaternion.AngleAxis(-90f, Vector3.right));
+            Destroy(VfxInstance.gameObject, ExistingTime);
             Owner.transform.position = aimingPoint;
-            Debug.Log(Owner.transform.position);
+            //Debug.Log(Owner.transform.position);
         }
 
         //get the property
