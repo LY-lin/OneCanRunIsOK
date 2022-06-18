@@ -159,7 +159,6 @@ namespace OneCanRun.Game
                     break;
                 case affiliationType.enemy:
                     fileName += ".enemy.xml";
-                    //this.gameObject.GetComponent<Renderer>().material.color = new Color(255, 0, 0);
                     renderers = this.gameObject.GetComponentsInChildren<Renderer>();
                     foreach(Renderer renderer in renderers)
                     {
@@ -169,7 +168,7 @@ namespace OneCanRun.Game
                             break;
                         }
                     }
-                    Debug.Log(fileName);    
+
                     break;
                 case affiliationType.neutral:
                     fileName += ".neutral.xml";

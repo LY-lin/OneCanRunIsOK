@@ -66,11 +66,11 @@
     <Compile Include="Assets\Scripts\Game\Share\DropList.cs" />
     <Compile Include="Assets\Scripts\Game\BuffController.cs" />
     <Compile Include="Assets\Scripts\Game\EventManager.cs" />
-    <Compile Include="Assets\Scripts\Game\Loading\LoadingContoller.cs" />
     <Compile Include="Assets\Scripts\Game\EventFactory.cs" />
     <Compile Include="Assets\Scripts\Game\Share\MeleeController.cs" />
     <Compile Include="Assets\Scripts\Game\Share\MonsterPoolManager.cs" />
     <Compile Include="Assets\Scripts\Game\Share\Buff.cs" />
+    <Compile Include="Assets\Scripts\Game\SetVolume.cs" />
     <Compile Include="Assets\Scripts\Game\ActorBuffManager.cs" />
     <Compile Include="Assets\Scripts\Game\DebugUtility.cs" />
     <Compile Include="Assets\Scripts\Game\Loading\SceneDataPasser.cs" />
@@ -85,9 +85,9 @@
     <Compile Include="Assets\Scripts\Game\Share\BulletPoolManager.cs" />
     <Compile Include="Assets\Scripts\Game\StaticEvents.cs" />
     <Compile Include="Assets\Scripts\Game\ActorsManager.cs" />
-    <Compile Include="Assets\Scripts\Game\Loading\LoadingHelper.cs" />
-    <Compile Include="Assets\Scripts\Game\ObjectiveManager.cs" />
     <Compile Include="Assets\Scripts\Game\Share\AoeCalculator.cs" />
+    <Compile Include="Assets\Scripts\Game\ObjectiveManager.cs" />
+    <Compile Include="Assets\Scripts\Game\Loading\MyLoadingScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Game\OneCanRun.Game.asmdef" />

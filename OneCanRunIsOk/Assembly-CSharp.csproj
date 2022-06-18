@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\UI\InteractTip.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
+    <Compile Include="Assets\Scripts\UI\MyStartScene.cs" />
     <Compile Include="Assets\Scripts\UI\SkillCoolDown.cs" />
     <Compile Include="Assets\Scripts\UI\InGamePackageManager.cs" />
     <Compile Include="Assets\Scripts\UI\WeaponHudManager.cs" />
@@ -95,7 +96,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Scripts\UI\EnemyHPBar.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
-    <Compile Include="Assets\Scripts\UI\StartScene.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerHPBar.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
