@@ -9,18 +9,22 @@ namespace OneCanRun.GamePlay
         CollisionBuffGiver buffGiver;
         void OnTriggerEnter(Collider other)
         {
+
             buffGiver = GetComponent<CollisionBuffGiver>();
             PlayerCharacterController pickingPlayer = other.GetComponent<PlayerCharacterController>();
-
-            if (pickingPlayer != null)
+            if(pickingPlayer.name == "Player1")
             {
-                OnPicked(pickingPlayer);
-                buffGiver.buffGive(other);
-                PickupEvent evt = Events.PickupEvent;
-                evt.Pickup = gameObject;
-                EventManager.broadcast(evt);
+                if (pickingPlayer != null)
+                {
+                    OnPicked(pickingPlayer);
+                    buffGiver.buffGive(other);
+                    PickupEvent evt = Events.PickupEvent;
+                    evt.Pickup = gameObject;
+                    EventManager.broadcast(evt);
+                }
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
+            
         }
     }
 }

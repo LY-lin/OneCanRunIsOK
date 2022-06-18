@@ -21,6 +21,7 @@ namespace OneCanRun.UI
         void Start()
         {
             m_health = GetComponentInParent<Health>();
+           
         }
 
         // Update is called once per frame
