@@ -43,6 +43,8 @@ namespace OneCanRun.AI.Enemies
         // 最新受伤时间，用于仇恨丢失
         float lastTimeDamaged = float.NegativeInfinity;
 
+        // buff管理器
+        ActorBuffManager actorBuffManager;
         // 引入敌人的检测模块
         public DetectionModule DetectionModule { get; private set; }
         // 引入自带的AI寻路模块
@@ -106,6 +108,10 @@ namespace OneCanRun.AI.Enemies
 
             animator = GetComponent<Animator>();
             DebugUtility.HandleErrorIfNullGetComponent<Animator, EnemyController>(animator, this, gameObject);
+            actorBuffManager = GetComponent<ActorBuffManager>();
+            DebugUtility.HandleErrorIfNullGetComponent<ActorBuffManager, EnemyController>(attackController, this, gameObject);
+
+            actorBuffManager.buffChanged += changeSpeed;
 
             health.OnDamaged += OnDamaged;
             health.OnDie += OnDie;
@@ -137,7 +143,10 @@ namespace OneCanRun.AI.Enemies
             // 注册敌人
             enemyManager.RegisterEnemy(this);
         }
-
+        void changeSpeed()
+        {
+            NavMeshAgent.speed = actor.GetActorProperties().getMaxSpeed();
+        }
         private void OnEnable()
         {
             NavMeshAgent.enabled = true;
@@ -241,8 +250,7 @@ namespace OneCanRun.AI.Enemies
         public void SetNavDestination(Vector3 destination)
         {
             if (NavMeshAgent && NavMeshAgent.isActiveAndEnabled)
-            {
-                animator.SetFloat("Speed", NavMeshAgent.speed);
+            { 
                 NavMeshAgent.SetDestination(destination);
             }
         }
