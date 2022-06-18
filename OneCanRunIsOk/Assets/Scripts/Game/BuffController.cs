@@ -65,6 +65,10 @@ namespace OneCanRun.Game
                 properties.setMaxSpeed(properties.getMaxSpeed() * (1 + mbuff.getMaxSpeedBuff()));
                 properties.setMaxJump(properties.getMaxJump() * (1 + mbuff.getMaxJumpBuff()));
             }
+            else if (getBuffType() == Buff.BufferType.PercentBuff)
+            {
+
+            }
         }
     }
 }
