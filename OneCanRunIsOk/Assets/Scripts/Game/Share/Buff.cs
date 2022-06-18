@@ -33,6 +33,9 @@ namespace OneCanRun.Game.Share
         //��Ծ��
         public float maxJumpBuff;
 
+        public string name;
+        public string description;
+
         public float getHealRateBuff() { return healRateBuff; }
         public float getPhysicalAttackBuff() { return physicalAttackBuff; }
         public float getMagicAttackBuff() { return magicAttackBuff; }

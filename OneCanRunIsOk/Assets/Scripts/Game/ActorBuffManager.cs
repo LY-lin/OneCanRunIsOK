@@ -20,7 +20,7 @@ namespace OneCanRun.Game
         public UnityAction<BuffController> buffGained;
         public UnityAction<BuffController> buffLost;
         public Actor aim_Actor;
-        void Start()
+        void Awake()
         {
             NumBuffList = new List<BuffController>();
             PercentBuffList = new List<BuffController>();
@@ -31,7 +31,7 @@ namespace OneCanRun.Game
         void Update()
         {
             timeSpend += Time.deltaTime;
-            buffLose(timeSpend-lastTime);
+            buffLose(timeSpend - lastTime);
             lastTime = timeSpend;
         }
 
@@ -55,7 +55,7 @@ namespace OneCanRun.Game
             buffChanged?.Invoke();
             buffGained?.Invoke(newBuff);
         }
-        private bool checkActive(BuffController buff,float time)
+        private bool checkActive(BuffController buff, float time)
         {
             //如果buff永久生效
             if (buff.getExistTime() < 0)
@@ -63,7 +63,7 @@ namespace OneCanRun.Game
             buff.getTime -= time;
             if (buff.getTime < 0)
             {
-                 return false;
+                return false;
             }
             return true;
         }
@@ -73,9 +73,9 @@ namespace OneCanRun.Game
             bool changed = false;
             List<BuffController> listToDelete = new List<BuffController>();
             List<BuffController> listToPercentDelete = new List<BuffController>();
-            for (int i = 0; i < NumBuffList.Count;i++)
+            for (int i = 0; i < NumBuffList.Count; i++)
             {
-                if (!checkActive(NumBuffList[i],time))
+                if (!checkActive(NumBuffList[i], time))
                 {
                     changed = true;
                     listToDelete.Add(NumBuffList[i]);
@@ -115,7 +115,7 @@ namespace OneCanRun.Game
                         WeaponBuffList.Remove(m);
                     }
                 }
-            if(changed)
+            if (changed)
                 buffChanged?.Invoke();
         }
         public void buffDelete(BuffController buff)

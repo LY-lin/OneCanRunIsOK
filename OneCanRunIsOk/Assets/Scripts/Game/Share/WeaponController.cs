@@ -46,8 +46,11 @@ namespace OneCanRun.Game.Share
         [Tooltip("The image that will be displayed in the UI for this weapon")]
         public Sprite WeaponIcon;   //武器显示在UI的小图标
 
-        [Tooltip("Description for Weapon")]
-        public String description;
+        [Tooltip("Image that show the weapon root")]
+        public Sprite WeaponImg;
+
+        [Tooltip("Weapon's Description")]
+        public string description;
 
 
         [Tooltip("Default data for the crosshair")]
