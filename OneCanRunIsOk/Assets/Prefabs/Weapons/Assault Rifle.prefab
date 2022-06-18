@@ -316,7 +316,6 @@ MonoBehaviour:
   RemoteWeapons: 1
   WeaponName: AR1
   WeaponIcon: {fileID: 21300000, guid: d977df5edeb809f41b362e4bc5d35645, type: 3}
-  description: 
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 0}
     CrosshairSize: 0
@@ -334,7 +333,7 @@ MonoBehaviour:
   RecoilForce: 1
   AutomaticReload: 0
   HasPhysicalBullets: 1
-  speed: 50
+  speed: 45
   ClipSize: 30
   ShellCasing: {fileID: 0}
   EjectionPort: {fileID: 0}

@@ -11,23 +11,13 @@ namespace OneCanRun.Game
         private Buff mbuff;
         bool isForever;
         public float getTime;
-        public Sprite BuffIcon;
-        public string BuffName;
-        public string Description;
-        public string Num { get; private set; }
         public BuffController(Buff buff)
         {
             mbuff = buff;
             getTime = buff.ExistTime;
             isForever = !buff.hasExistTime;
-            BuffName = buff.name;
-            Description = buff.description;
         }
 
-        public bool GetIsForever()
-        {
-            return isForever;
-        }
         public Buff.BufferType getBuffType()
         {
             return mbuff.type;

@@ -52,7 +52,5 @@ MonoBehaviour:
   magicDefenceBuff: 0
   maxSpeedBuff: 0
   maxJumpBuff: 0
-  name: Heal
-  description: Healing
   hasExistTime: 0
   ExistTime: 0
