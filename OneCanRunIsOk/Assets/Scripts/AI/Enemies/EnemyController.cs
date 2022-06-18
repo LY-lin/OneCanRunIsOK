@@ -240,7 +240,7 @@ namespace OneCanRun.AI.Enemies
         // 设置导航目的地
         public void SetNavDestination(Vector3 destination)
         {
-            if (NavMeshAgent)
+            if (NavMeshAgent && NavMeshAgent.isActiveAndEnabled)
             {
                 animator.SetFloat("Speed", NavMeshAgent.speed);
                 NavMeshAgent.SetDestination(destination);
@@ -303,6 +303,8 @@ namespace OneCanRun.AI.Enemies
 
         void OnDie()
         {
+            Debug.Log("Enemy Die");
+
             animator.SetTrigger("isDie");
 
             enemyManager.UnregisterEnemy(this);

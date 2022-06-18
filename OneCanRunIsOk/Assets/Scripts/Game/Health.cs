@@ -103,8 +103,8 @@ namespace OneCanRun.Game
                     Share.Modifier mod = new Share.Modifier(400, Share.Modifier.ModifierType.experience, this);
                     mPlayer.addModifier(mod);
                 }
-                Share.MonsterPoolManager monsterPoolManager = Game.Share.MonsterPoolManager.getInstance();
-                monsterPoolManager.release(this.gameObject);
+                // Share.MonsterPoolManager monsterPoolManager = Game.Share.MonsterPoolManager.getInstance();
+                // monsterPoolManager.release(this.gameObject);
                 //Destroy(this.gameObject);
             }
         }
