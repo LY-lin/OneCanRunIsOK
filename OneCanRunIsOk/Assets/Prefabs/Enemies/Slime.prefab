@@ -43,9 +43,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6104257002535640868}
-  - component: {fileID: 1642041083}
   - component: {fileID: 1642041082}
   - component: {fileID: 1642041084}
+  - component: {fileID: 8516842698917506692}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -69,22 +69,6 @@ Transform:
   m_Father: {fileID: 4256155222580521307}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -67.60852}
---- !u!54 &1642041083
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 382001285244889970}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &1642041082
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -96,8 +80,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8079801, y: 0.9872389, z: 1}
-  m_Center: {x: -0.3736489, y: 0.089307055, z: 0}
+  m_Size: {x: 1.2023547, y: 1.1236724, z: 1.0101852}
+  m_Center: {x: -0.42196906, y: 0.1158334, z: 0.015724182}
 --- !u!114 &1642041084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +94,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c173cecca82d784db3642bdd22e59e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &8516842698917506692
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382001285244889970}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &885586711317105753
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,9 +428,7 @@ GameObject:
   - component: {fileID: 4256155222580521297}
   - component: {fileID: 4256155222580521298}
   - component: {fileID: 4256155222580521299}
-  - component: {fileID: 4256155222580521300}
   - component: {fileID: 944723657}
-  - component: {fileID: 944723658}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -599,24 +597,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamageMultiplier: 1
   SensibilityToSelfdamage: 0.5
---- !u!143 &4256155222580521300
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4256155222580521301}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!95 &944723657
 Animator:
   serializedVersion: 4
@@ -628,7 +608,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 8bcdbb45da69a764cb15c0fcf62a1fed, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -637,21 +617,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &944723658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4256155222580521301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88c4f2ee06680e443b6a414558c2a58d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HealthImage: {fileID: 3688440144652062009}
-  HealthBarPivot: {fileID: 3688440144060660757}
-  HideFullHealthBar: 1
 --- !u!1 &5019289741016191720
 GameObject:
   m_ObjectHideFlags: 0

@@ -66,6 +66,7 @@ namespace OneCanRun.AI.Enemies
                 case AIState.Attack:
                     if (!controller.IsTargetInAttackRange)
                     {
+                        anim.SetBool("isRun", true);
                         state = AIState.Follow;
                     }
                     break;

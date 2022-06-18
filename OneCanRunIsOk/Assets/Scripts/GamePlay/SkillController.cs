@@ -57,7 +57,6 @@ namespace OneCanRun.GamePlay
 
         void Awake()
         {
-            Debug.Log(System.GC.GetTotalMemory(true));
             if (m_SkillType == SkillType.Cast)
             {
                 m_SkillWeapon = GetComponent<WeaponController>();

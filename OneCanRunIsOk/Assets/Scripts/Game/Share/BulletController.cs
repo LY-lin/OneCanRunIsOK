@@ -6,9 +6,9 @@ namespace OneCanRun.Game.Share
 {
     public class BulletController : MonoBehaviour
     {
-        [Tooltip("击中特效")]
+        [Tooltip("鍑讳腑鐗规晥")]
         public GameObject ImpactVfx;
-        [Tooltip("击中特效持续时间")]
+        [Tooltip("鍑讳腑鐗规晥鎸佺画鏃堕棿")]
         public float ImpactVfxLifetime = 5f;
 
 
@@ -77,7 +77,7 @@ namespace OneCanRun.Game.Share
                     return;
             }
 
-            //特效
+            //鐗规晥
             if (ImpactVfx)
             {
                 GameObject impactVfxInstance = Instantiate(ImpactVfx, this.gameObject.transform.position,
@@ -93,7 +93,7 @@ namespace OneCanRun.Game.Share
             if (damageable)
             {
                 //Debug.Log(col.collider);
-                Actor actor = col.gameObject.GetComponent<Actor>();
+                Actor actor = col.gameObject.GetComponentInParent<Actor>();
                 ActorProperties colliderProperty = actor.GetActorProperties();
                 float finalDamage = this.mDamage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
               /*  Debug.Log(this.mDamage);
