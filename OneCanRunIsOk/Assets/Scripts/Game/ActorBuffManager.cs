@@ -39,6 +39,7 @@ namespace OneCanRun.Game
         {
             //newBuff.getTime = timeSpend;
                  Buff BuffContext = newBuff.getMBuff();
+
             if (newBuff.getBuffType() == Buff.BufferType.NumBuff)
             {
                 NumBuffList.Add(newBuff);
@@ -54,6 +55,17 @@ namespace OneCanRun.Game
             else { }
             buffChanged?.Invoke();
             buffGained?.Invoke(newBuff);
+
+            if (BuffContext.ImpactVfx)
+            {
+                GameObject impactVfxInstance = Instantiate(BuffContext.ImpactVfx, aim_Actor.gameObject.transform.position,
+                    Quaternion.LookRotation(aim_Actor.gameObject.transform.up));
+                impactVfxInstance.transform.parent = aim_Actor.transform;
+                if (BuffContext.ExistTime > 0)
+                {
+                    Destroy(impactVfxInstance.gameObject, BuffContext.ExistTime);
+                }
+            }
         }
         private bool checkActive(BuffController buff,float time)
         {
@@ -115,7 +127,15 @@ namespace OneCanRun.Game
                         WeaponBuffList.Remove(m);
                     }
                 }
-            if(changed)
+            if (listToPercentDelete.Count > 0)
+            {
+                for (int i = 0; i < listToPercentDelete.Count; i++)
+                {
+                    WeaponBuffList.Remove(listToPercentDelete[i]);
+                    buffLost?.Invoke(listToDelete[i]);
+                }
+            }
+            if (changed)
                 buffChanged?.Invoke();
         }
         public void buffDelete(BuffController buff)

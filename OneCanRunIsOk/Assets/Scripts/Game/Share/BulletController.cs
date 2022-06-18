@@ -118,9 +118,9 @@ namespace OneCanRun.Game.Share
                     if(bulletType == BulletType.Ice)
                     {
                         Buff buff = GameObject.Find("IceBuff").GetComponent<Buff>();
-                        BuffController iceBuff= new BuffController(buff);
+                        //BuffController iceBuff = 
                         ActorBuffManager actorBuffManager = col.gameObject.GetComponentInParent<ActorBuffManager>();
-                        actorBuffManager.buffGain(iceBuff);
+                        actorBuffManager.buffGain(new BuffController(buff));
                     }
 
 

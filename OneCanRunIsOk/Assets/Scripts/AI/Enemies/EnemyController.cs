@@ -146,6 +146,7 @@ namespace OneCanRun.AI.Enemies
         void changeSpeed()
         {
             NavMeshAgent.speed = actor.GetActorProperties().getMaxSpeed();
+
         }
         private void OnEnable()
         {
