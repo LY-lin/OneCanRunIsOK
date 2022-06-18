@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 8951260053224152414}
   - component: {fileID: 13782027891626638}
   - component: {fileID: 7245217618860975562}
+  - component: {fileID: 3575567150273631200}
   m_Layer: 0
   m_Name: ChestV3
   m_TagString: Untagged
@@ -225,7 +226,7 @@ Transform:
   - {fileID: 2480954874216303046}
   - {fileID: 5386864675471651591}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6050956960389730926
 MeshFilter:
@@ -337,6 +338,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c83489deba1296840bb78a5fe4be25f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3575567150273631200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8006655158535210865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5006c84368fe0484ab5bbcb66241d091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &311634615391577542
