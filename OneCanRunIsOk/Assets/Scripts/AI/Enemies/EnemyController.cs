@@ -250,7 +250,7 @@ namespace OneCanRun.AI.Enemies
         public void SetNavDestination(Vector3 destination)
         {
             if (NavMeshAgent && NavMeshAgent.isActiveAndEnabled)
-            { 
+            {
                 NavMeshAgent.SetDestination(destination);
             }
         }
