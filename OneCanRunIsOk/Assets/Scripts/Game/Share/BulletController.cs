@@ -6,14 +6,22 @@ namespace OneCanRun.Game.Share
 {
     public class BulletController : MonoBehaviour
     {
-        [Tooltip("������Ч")]
+        public enum BulletType{
+            Common,
+            Ice,
+            Napalm,
+        }
+        [Tooltip("击中特效")]
         public GameObject ImpactVfx;
-        [Tooltip("������Ч����ʱ��")]
+        [Tooltip("击中特效持续时间")]
         public float ImpactVfxLifetime = 5f;
         public GameObject hurtNumber;
         public DamageType damageType;
         [Tooltip("if is Aoe")]
         public bool isAoe = false;
+
+        [Tooltip("if is Aoe")]
+        public BulletType bulletType = BulletType.Common;
 
 
         //[Tooltip("Speed")]
@@ -43,6 +51,7 @@ namespace OneCanRun.Game.Share
         // weapon should provide the speed, but...not implement
         public void Shoot(WeaponController controller)
         {
+            //此处可以加入根据人物身上的buff情况调整子弹类型。
 
             speed = (float)controller.speed;
             // calculate damage
@@ -81,7 +90,7 @@ namespace OneCanRun.Game.Share
                     return;
             }
 
-            //��Ч
+            //特效
             if (ImpactVfx)
             {
                 GameObject impactVfxInstance = Instantiate(ImpactVfx, this.gameObject.transform.position,
@@ -106,6 +115,15 @@ namespace OneCanRun.Game.Share
                 if (damageable)
                 {
                     Actor actor = col.gameObject.GetComponentInParent<Actor>();
+                    
+                    if(bulletType == BulletType.Ice)
+                    {
+                        Buff buff = GameObject.Find("IceBuff").GetComponent<Buff>();
+                        BuffController iceBuff= new BuffController(buff);
+                        ActorBuffManager actorBuffManager = col.gameObject.GetComponentInParent<ActorBuffManager>();
+                        actorBuffManager.buffGain(iceBuff);
+                    }
+
 
                     float finalDamage = calculateDamage(actor.GetActorProperties());
                     damageable.InflictDamage(finalDamage, false, Owner);

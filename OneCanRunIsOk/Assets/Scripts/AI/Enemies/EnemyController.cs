@@ -60,7 +60,8 @@ namespace OneCanRun.AI.Enemies
         public bool IsTargetInAttackRange => DetectionModule.IsTargetInAttackRange;
         public bool IsSeeingTarget => DetectionModule.IsSeeingTarget;
         public bool HadKnownTarget => DetectionModule.HadKnownTarget;
-
+        // buff管理器
+        ActorBuffManager actorBuffManager;
         // 敌人管理器
         EnemyManager enemyManager;
         // 角色管理器
@@ -99,7 +100,11 @@ namespace OneCanRun.AI.Enemies
 
             attackController = GetComponent<EnemyAttackController>();
             DebugUtility.HandleErrorIfNullGetComponent<EnemyAttackController, EnemyController>(attackController, this, gameObject);
+            
+            actorBuffManager = GetComponent<ActorBuffManager>();
+            DebugUtility.HandleErrorIfNullGetComponent<ActorBuffManager, EnemyController>(attackController, this, gameObject);
 
+            actorBuffManager.buffChanged += changeSpeed;
             health.OnDamaged += OnDamaged;
             health.OnDie += OnDie;
 
@@ -138,6 +143,12 @@ namespace OneCanRun.AI.Enemies
             EnsureIsWithinLevelBounds();
             // 每帧都要检测
             DetectionModule.HandleDetection(actor, colliders);
+            
+        }
+
+        void changeSpeed()
+        {
+            NavMeshAgent.speed = actor.GetActorProperties().getMaxSpeed();
         }
 
         // 确保在限制范围内部

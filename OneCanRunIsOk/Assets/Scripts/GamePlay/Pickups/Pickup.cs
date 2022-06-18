@@ -61,8 +61,8 @@ namespace OneCanRun.GamePlay
         //碰撞触发
         void OnTriggerEnter(Collider other)
         {
-            PlayerCharacterController pickingPlayer = other.GetComponent<PlayerCharacterController>();
-
+                PlayerCharacterController pickingPlayer = other.GetComponent<PlayerCharacterController>();
+            if(pickingPlayer==GameObject.Find("Player1").GetComponent<PlayerCharacterController>())
             if (pickingPlayer != null)
             {
                 OnPicked(pickingPlayer);
@@ -87,7 +87,7 @@ namespace OneCanRun.GamePlay
 
             if (PickupSfx)
             {
-                AudioUtility.CreateSFX(PickupSfx, transform.position, AudioUtility.AudioGroups.Pickup, 0f);
+                //AudioUtility.CreateSFX(PickupSfx, transform.position, AudioUtility.AudioGroups.Pickup, 0f);
             }
 
             if (PickupVfxPrefab)
