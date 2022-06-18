@@ -21,6 +21,8 @@ namespace OneCanRun.Game.Share
         [Tooltip("The image that will be used for this weapon's crosshair")]
         public Sprite CrosshairSprite;
 
+        
+
         [Tooltip("The size of the crosshair image")]
         public int CrosshairSize;
 
@@ -31,7 +33,7 @@ namespace OneCanRun.Game.Share
     // [RequireComponent(typeof(AudioSource))]  //加入声源
     public class WeaponController : MonoBehaviour
     {
-
+        public Share.DamageType damageType;
 
         [Header("Information")]
         [Tooltip("if it is RemoteWeapons")]
@@ -44,6 +46,8 @@ namespace OneCanRun.Game.Share
         [Tooltip("The image that will be displayed in the UI for this weapon")]
         public Sprite WeaponIcon;   //武器显示在UI的小图标
 
+        [Tooltip("Description for Weapon")]
+        public String description;
 
 
         [Tooltip("Default data for the crosshair")]
@@ -615,6 +619,7 @@ namespace OneCanRun.Game.Share
             // initialization
             GameObject tempBullet = bulletPoolManager.getObject(WeaponMuzzle.position, Quaternion.LookRotation(shootDirection));
             tempBullet.transform.position = WeaponMuzzle.position;
+            tempBullet.GetComponent<BulletController>().damageType = this.damageType;
             Vector3 testForRotation = new Vector3(0, 0, 0);
             tempBullet.transform.rotation = new Quaternion();
 

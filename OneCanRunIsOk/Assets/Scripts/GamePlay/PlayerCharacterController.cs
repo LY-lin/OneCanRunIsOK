@@ -214,6 +214,9 @@ namespace OneCanRun.GamePlay
             // force the crouch state to false when starting
             SetCrouchingState(false, true);
             UpdateCharacterHeight(true);
+
+            //allow flash
+            Physics.autoSyncTransforms = true;
         }
 
         void Update()
@@ -324,6 +327,7 @@ namespace OneCanRun.GamePlay
 
         void HandleCharacterMovement()
         {
+            MaxSpeedOnGround = GetComponent<Actor>().GetActorProperties().getMaxSpeed();
             // horizontal character rotation
             // 修改角色Rotate.y以修改左右朝向
             {

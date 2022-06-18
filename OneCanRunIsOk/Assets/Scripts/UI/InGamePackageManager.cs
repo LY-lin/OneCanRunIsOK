@@ -26,12 +26,15 @@ namespace OneCanRun.UI
         [Tooltip("Toggle component for framerate display")]
         public Toggle FramerateToggle;
 
+        [Tooltip("Prefab for backpack")]
+        public GameObject BackPack;
         /*
         [Tooltip("GameObject for the controls")]
         public GameObject ControlImage;
         */
         PlayerInputHandler m_PlayerInputsHandler;
         Health m_PlayerHealth;
+        
         //显示帧数
         //FramerateCounter m_FramerateCounter;
 

@@ -23,11 +23,17 @@ namespace OneCanRun
         {
         
         }
-
+        //public ForceMode
         public void drop(){
-            if(targetDrop != null){
-                GameObject.Instantiate(targetDrop, this.transform);
-
+            Rigidbody m_Rigidbody;
+            Transform burnPosition = this.gameObject.transform.GetChild(3).GetComponent<Transform>();
+            //popForce.set
+            if (targetDrop != null){
+                GameObject loot = GameObject.Instantiate(targetDrop, burnPosition);
+                m_Rigidbody = loot.GetComponent<Rigidbody>();
+                float m_ForceX= Random.Range(1f,2f), m_ForceY = 3f, m_ForceZ = Random.Range(1f, 2f);
+                Vector3 m_NewForce = new Vector3(m_ForceX, m_ForceY, m_ForceZ);
+                m_Rigidbody.AddForce(m_NewForce, ForceMode.Impulse);
             }
 
         }

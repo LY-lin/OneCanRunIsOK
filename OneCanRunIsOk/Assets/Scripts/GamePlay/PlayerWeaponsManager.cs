@@ -103,7 +103,7 @@ namespace OneCanRun.GamePlay
         public UnityAction<WeaponController, int> OnRemovedWeapon;
 
         //武器槽位-上限9
-        WeaponController[] m_WeaponSlots = new WeaponController[9]; // 9 available weapon slots
+        public WeaponController[] m_WeaponSlots { get; private set; } = new WeaponController[2] ; // 9 available weapon slots
         PlayerInputHandler m_InputHandler;
         PlayerCharacterController m_PlayerCharacterController;
         //抖动系数

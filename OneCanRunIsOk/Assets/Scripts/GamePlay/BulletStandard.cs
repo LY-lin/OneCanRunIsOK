@@ -30,7 +30,6 @@ namespace OneCanRun.GamePlay
         [Tooltip("Damage of the projectile")]
         public float Damage = 40f;
 
-
         BulletController m_ProjectileBase;
         Vector3 m_LastRootPosition;
         Vector3 m_Velocity;
@@ -38,7 +37,7 @@ namespace OneCanRun.GamePlay
         Vector3 m_TrajectoryCorrectionVector;
         Vector3 m_ConsumedTrajectoryCorrectionVector;
 
-        private void Start()
+        protected virtual void Start()
         {
             
             init();
@@ -118,8 +117,12 @@ namespace OneCanRun.GamePlay
             
         }
 
-      
+        public void SetOverride(bool signal)
+        {
+            m_HasTrajectoryOverride = signal;
+        }
 
-       
+
+
     }
 }

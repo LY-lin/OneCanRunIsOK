@@ -45,7 +45,9 @@ namespace OneCanRun.GamePlay
                 EventManager.broadcast(evt);
             }
         }
-        void OnTriggerEnter(Collider other) { }
+        void OnTriggerEnter(Collider other) { 
+            
+        }
         ////碰撞触发禁用
         //void OnTriggerEnter(Collider other)
         //{
