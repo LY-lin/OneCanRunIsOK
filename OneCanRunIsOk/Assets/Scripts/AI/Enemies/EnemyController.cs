@@ -242,7 +242,6 @@ namespace OneCanRun.AI.Enemies
         {
             if (NavMeshAgent && NavMeshAgent.isActiveAndEnabled)
             {
-                animator.SetFloat("Speed", NavMeshAgent.speed);
                 NavMeshAgent.SetDestination(destination);
             }
         }
