@@ -74,6 +74,8 @@ namespace OneCanRun.AI.Enemies
         NavigationModule navigationModule;
 
         Animator animator;
+
+        public int dropRate = 10;
         
         int pathDestinationNodeIndex;
 
@@ -326,7 +328,7 @@ namespace OneCanRun.AI.Enemies
 
         public void EnterDeathQueue()
         {
-            Debug.Log(this.gameObject.name);
+           // Debug.Log(this.gameObject.name);
             // loot an object
             if (TryDropItem())
             {
@@ -348,7 +350,8 @@ namespace OneCanRun.AI.Enemies
 
         public bool TryDropItem()
         {
-            if (DropRate == 0 || LootPrefab == null)
+            int result = Random.Range(0, 100);
+            if (DropRate == 0 || LootPrefab == null || result >= this.dropRate)
                 return false;
             else if (DropRate == 1)
                 return true;

@@ -147,8 +147,8 @@ namespace OneCanRun.UI
             QName.text = playerSkillsManager.CurrentSpSkillInstance.SkillName;
             Qtext.text = playerSkillsManager.CurrentSpSkillInstance.SkillDescription;
 
-            stamina.text =    "Stamina:     " + actorAttribute.stamina.ToString();
-            Strength.text =        "Strength:    " + actorAttribute.strength.ToString();
+            stamina.text =    "Stamina:      " + actorAttribute.stamina.ToString();
+            Strength.text =        "Strength:     " + actorAttribute.strength.ToString();
             intelligence.text = "Intellect:      " + actorAttribute.intelligence.ToString();
             technique.text =    "Technique:  " + actorAttribute.technique.ToString();
 
@@ -163,13 +163,12 @@ namespace OneCanRun.UI
             int maxhp = Mathf.RoundToInt(health.MaxHealth);
             int curhp = Mathf.RoundToInt(health.CurrentHealth);
             HpRatio.text = curhp.ToString() + " / " + maxhp.ToString();
-            HpBar.fillAmount = maxhp/curhp;
+            HpBar.fillAmount = health.CurrentHealth / health.MaxHealth;
 
             int curexp =Mathf.RoundToInt(actor.getExperience());
             int wexp = Mathf.RoundToInt( actor.getNextLevelCount());
             ExpRatio.text = curexp.ToString() + " / " + wexp.ToString();
-            ExpBar.fillAmount =curexp/wexp;
-
+            ExpBar.fillAmount = actor.getExperience() / actor.getNextLevelCount();
             BuffPrefab.gameObject.SetActive(true);
         }
 

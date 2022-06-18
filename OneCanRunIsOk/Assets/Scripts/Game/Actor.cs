@@ -124,7 +124,7 @@ namespace OneCanRun.Game
             baseProperty.setMagicAttack(baseProperty.getMagicAttack() + intelligenceEnhanced);
             // technique
             baseProperty.setPhysicalAttack(baseProperty.getPhysicalAttack() + techniqueEnhanced);
-            baseProperty.setMaxSpeed(baseProperty.getMaxSpeed() * (1 + 0.1f * techniqueEnhanced));
+            //baseProperty.setMaxSpeed(baseProperty.getMaxSpeed() * (1 + 0.1f * techniqueEnhanced));
 
 
             Debug.Log("level up");
