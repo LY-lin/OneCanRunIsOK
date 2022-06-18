@@ -66,12 +66,12 @@ namespace OneCanRun.Game
 
             if (ImpactVfx)
             {
-                GameObject impactVfxInstance = Instantiate(ImpactVfx, this.gameObject.transform.position,
+                /*GameObject impactVfxInstance = Instantiate(ImpactVfx, this.gameObject.transform.position,
                     Quaternion.LookRotation(col.gameObject.transform.up));
                 if (ExistTime > 0)
                 {
                     Destroy(impactVfxInstance.gameObject, ExistTime);
-                }
+                }*/
             }
         }
     }
