@@ -134,7 +134,7 @@ namespace OneCanRun.GamePlay
         //cast
         void UseCastSkill()
         {
-            m_SkillWeapon.damageType = Game.Share.DamageType.magic;
+            //m_SkillWeapon.damageType = Game.Share.DamageType.magic;
             m_SkillWeapon.HandleShootInputs(true, false, false);
             //Debug.Log("Cast!");
         }
