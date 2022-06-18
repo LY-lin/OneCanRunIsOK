@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mText: {fileID: 5834306547477451597}
-  lifeTime: 3
+  lifeTime: 1
 --- !u!1 &6355925834759665748
 GameObject:
   m_ObjectHideFlags: 0

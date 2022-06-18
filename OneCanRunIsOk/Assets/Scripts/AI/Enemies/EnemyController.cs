@@ -43,6 +43,8 @@ namespace OneCanRun.AI.Enemies
         // 最新受伤时间，用于仇恨丢失
         float lastTimeDamaged = float.NegativeInfinity;
 
+        // buff管理器
+        ActorBuffManager actorBuffManager;
         // 引入敌人的检测模块
         public DetectionModule DetectionModule { get; private set; }
         // 引入自带的AI寻路模块
@@ -72,8 +74,12 @@ namespace OneCanRun.AI.Enemies
         Collider[] colliders;
         // 导航数据模块
         NavigationModule navigationModule;
+
+        Animator animator;
         
         int pathDestinationNodeIndex;
+
+        float lastHitTime = Mathf.Infinity;
 
         // Start is called before the first frame update
         void Awake()
@@ -104,7 +110,13 @@ namespace OneCanRun.AI.Enemies
             actorBuffManager = GetComponent<ActorBuffManager>();
             DebugUtility.HandleErrorIfNullGetComponent<ActorBuffManager, EnemyController>(attackController, this, gameObject);
 
+            animator = GetComponent<Animator>();
+            DebugUtility.HandleErrorIfNullGetComponent<Animator, EnemyController>(animator, this, gameObject);
+            actorBuffManager = GetComponent<ActorBuffManager>();
+            DebugUtility.HandleErrorIfNullGetComponent<ActorBuffManager, EnemyController>(attackController, this, gameObject);
+
             actorBuffManager.buffChanged += changeSpeed;
+
             health.OnDamaged += OnDamaged;
             health.OnDie += OnDie;
 
@@ -134,6 +146,14 @@ namespace OneCanRun.AI.Enemies
         {
             // 注册敌人
             enemyManager.RegisterEnemy(this);
+        }
+        void changeSpeed()
+        {
+            NavMeshAgent.speed = actor.GetActorProperties().getMaxSpeed();
+        }
+        private void OnEnable()
+        {
+            NavMeshAgent.enabled = true;
         }
 
         // Update is called once per frame
@@ -239,7 +259,7 @@ namespace OneCanRun.AI.Enemies
         // 设置导航目的地
         public void SetNavDestination(Vector3 destination)
         {
-            if (NavMeshAgent)
+            if (NavMeshAgent && NavMeshAgent.isActiveAndEnabled)
             {
                 NavMeshAgent.SetDestination(destination);
             }
@@ -284,6 +304,11 @@ namespace OneCanRun.AI.Enemies
 
         void OnDamaged(float damage, GameObject damageSource)
         {
+            if(lastHitTime == Mathf.Infinity || lastHitTime + 2f < Time.time)
+            {
+                lastHitTime = Time.time;
+                animator.SetTrigger("isHit");
+            }
             // test if the damage source is the player
             if (damageSource && !damageSource.GetComponent<EnemyController>())
             {
@@ -296,8 +321,19 @@ namespace OneCanRun.AI.Enemies
 
         void OnDie()
         {
+            Debug.Log("Enemy Die");
+
+            animator.SetTrigger("isDie");
+
             enemyManager.UnregisterEnemy(this);
 
+            NavMeshAgent.enabled = false;
+
+        }
+
+        public void EnterDeathQueue()
+        {
+            Debug.Log(this.gameObject.name);
             // loot an object
             if (TryDropItem())
             {
@@ -307,7 +343,14 @@ namespace OneCanRun.AI.Enemies
             // this will call the OnDestroy function
             //Destroy(gameObject, DeathDuration);
             Game.Share.MonsterPoolManager temp = Game.Share.MonsterPoolManager.getInstance();
-            temp.release(this.gameObject);
+            if (temp == null)
+            {
+                Destroy(gameObject, DeathDuration);
+            }
+            else
+            {
+                temp.release(this.gameObject);
+            }
         }
 
         public bool TryDropItem()

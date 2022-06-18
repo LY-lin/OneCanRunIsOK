@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.Events;
 using OneCanRun.Game;
@@ -106,7 +105,7 @@ namespace OneCanRun.Game.Share
             {
                 AoeCalculator ac = GetComponent<AoeCalculator>();
                 Collider bulletCol = GetComponent<Collider>();
-                ac.AoeCalculating(bulletCol.transform.position, mDamage, Owner);
+                ac.AoeCalculating(bulletCol.transform.position, mDamage, damageType, Owner);
                 this.WeaponController.bulletPoolManager.release(this.gameObject);
             }
             else

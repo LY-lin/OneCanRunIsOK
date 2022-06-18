@@ -19,7 +19,9 @@ namespace OneCanRun.Game.Share
         [Tooltip("the force for displacement")]
         public float displacementForce = 1.0f;
 
-        public void AoeCalculating(Vector3 aimingPoint,float damage,GameObject Owner)
+        public GameObject hurtNumber;
+
+        public void AoeCalculating(Vector3 aimingPoint,float damage, DamageType damageType,GameObject Owner)
         {
             Collider[] affectedColliders = Physics.OverlapSphere(aimingPoint, AoeRadius);
             foreach(var col in affectedColliders)
@@ -29,9 +31,7 @@ namespace OneCanRun.Game.Share
                 {
                     Actor actor = col.gameObject.GetComponent<Actor>();
                     ActorProperties colliderProperty = actor.GetActorProperties();
-                    float finalDamage = damage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
-                    if (finalDamage < 0f)
-                        finalDamage = 0f;
+                    float finalDamage = calculateDamage(colliderProperty, damage, damageType);
                     damageable.InflictDamage(finalDamage, false, Owner);
 
                     if (canDisplace)
@@ -54,6 +54,35 @@ namespace OneCanRun.Game.Share
         //    Vector3 forceVector = forceDirection.normalized * displacementForce;
         //    curRigidbody.AddForce(forceVector, ForceMode.Impulse);
 
-        //}
+
+        private float calculateDamage(ActorProperties colliderProperty,float damage,DamageType damageType)
+        {
+            if (colliderProperty == null)
+                return 0;
+            float finalDamage = 0;
+            if (damageType == DamageType.magic)
+            {
+                finalDamage = damage - colliderProperty.getMagicDefence();
+            }
+            else
+            {
+                finalDamage = damage - colliderProperty.getPhysicalDefence();
+            }
+            if (finalDamage < 0f)
+                finalDamage = 0f;
+
+            GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
+            if (hurtNumber && hurtNumberParent)
+            {
+                Debug.Log("count!");
+                GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
+                hurt.transform.position = this.transform.position;
+                hurt.GetComponent<HurtNumber>().init(finalDamage, damageType);
+
+
+            }
+
+            return finalDamage;
+        }
     }
 }

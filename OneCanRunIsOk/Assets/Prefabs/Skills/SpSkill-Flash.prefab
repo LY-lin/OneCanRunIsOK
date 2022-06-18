@@ -53,4 +53,4 @@ MonoBehaviour:
   UsingRange: 10
   ExistingTime: 10
   AimingVfx: {fileID: 100000, guid: 880bc6becc440a047bba527f57da1a9c, type: 3}
-  UsingVfx: {fileID: 0}
+  UsingVfx: {fileID: 100012, guid: 75a4d59a510e3c245804dd166b77739f, type: 3}

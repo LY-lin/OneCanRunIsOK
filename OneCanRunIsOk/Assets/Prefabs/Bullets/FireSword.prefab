@@ -9758,6 +9758,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ImpactVfx: {fileID: 1444971686239000, guid: 68957ed9db5ece847b45df6c8b5e8cd1, type: 3}
   ImpactVfxLifetime: 5
+  hurtNumber: {fileID: 0}
+  damageType: 0
   isAoe: 1
   speed: 0
   WeaponController: {fileID: 0}
@@ -9794,7 +9796,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AoeRadius: 2
   canDisplace: 0
+  displacementDistance: 1
   displacementForce: 1
+  hurtNumber: {fileID: 5852126615502880303, guid: 545f182ccbdf99248b402347b988fe26, type: 3}
 --- !u!1 &448431352458240357
 GameObject:
   m_ObjectHideFlags: 0
