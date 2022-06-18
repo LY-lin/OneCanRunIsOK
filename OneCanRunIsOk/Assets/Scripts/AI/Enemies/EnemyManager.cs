@@ -36,13 +36,6 @@ namespace OneCanRun.AI.Enemies
         // 注销敌人控制器，并调用事件控制器进行广播？
         public void UnregisterEnemy(EnemyController enemyKilled)
         {
-            int enemiesRemainingNotification = NumberOfEnemiesRemaining - 1;
-
-            EnemyKillEvent evt = Events.EnemyKillEvent;
-            evt.Enemy = enemyKilled.gameObject;
-            evt.RemainingEnemyCount = enemiesRemainingNotification;
-            EventManager.broadcast(evt);
-
             // removes the enemy from the list, so that we can keep track of how many are left on the map
             Enemies.Remove(enemyKilled);
         }

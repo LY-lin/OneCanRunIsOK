@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.Events;
 using OneCanRun.Game;
@@ -6,9 +5,9 @@ namespace OneCanRun.Game.Share
 {
     public class BulletController : MonoBehaviour
     {
-        [Tooltip("击中特效")]
+        [Tooltip("鍑讳腑鐗规晥")]
         public GameObject ImpactVfx;
-        [Tooltip("击中特效持续时间")]
+        [Tooltip("鍑讳腑鐗规晥鎸佺画鏃堕棿")]
         public float ImpactVfxLifetime = 5f;
         public GameObject hurtNumber;
         public DamageType damageType;
@@ -81,7 +80,7 @@ namespace OneCanRun.Game.Share
                     return;
             }
 
-            //特效
+            //鐗规晥
             if (ImpactVfx)
             {
                 GameObject impactVfxInstance = Instantiate(ImpactVfx, this.gameObject.transform.position,
