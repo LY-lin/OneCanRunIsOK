@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\UI\InteractTip.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
+    <Compile Include="Assets\Scripts\UI\BuffUI.cs" />
     <Compile Include="Assets\Scripts\UI\SkillCoolDown.cs" />
     <Compile Include="Assets\Scripts\UI\InGamePackageManager.cs" />
     <Compile Include="Assets\Scripts\UI\WeaponHudManager.cs" />
