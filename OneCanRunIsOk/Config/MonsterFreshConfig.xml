@@ -1,9 +1,17 @@
 <MonsterConfig>
   <Wave id="0">
-    <Time time="">5</Time>
+    <Time time="">15</Time>
     <Position_x position_x="">64</Position_x>
     <Position_y position_y="">5</Position_y>
     <Position_z position_z="">60</Position_z>
     <TypeID typeID="">0</TypeID>
+  </Wave>
+
+  <Wave id="1">
+    <Time time="">20</Time>
+    <Position_x position_x="">64</Position_x>
+    <Position_y position_y="">5</Position_y>
+    <Position_z position_z="">60</Position_z>
+    <TypeID typeID="">1</TypeID>
   </Wave>
 </MonsterConfig>
