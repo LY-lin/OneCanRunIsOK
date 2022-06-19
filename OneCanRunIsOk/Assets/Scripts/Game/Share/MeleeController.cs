@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace OneCanRun.Game.Share
 {
@@ -14,6 +15,15 @@ namespace OneCanRun.Game.Share
 
         public GameObject hurtNumber;
         public DamageType damageType;
+        public GameObject attackVfx;
+        public Transform attackSocket;
+
+        [Header("Attack Range (center-attackSocket)")]
+        public float attackLength = 1.0f;
+        public float attackWidth = 1.0f;
+        public float attackHeight = 2.0f;
+
+        //UnityAction<Vector3> Dmg;
 
         public void Init(WeaponController wc)
         {
@@ -22,51 +32,52 @@ namespace OneCanRun.Game.Share
             this.attackerType = wc.Owner.GetComponent<Actor>().Affiliation;
             this.Owner = wc.Owner;
             damageType = wc.damageType;
+            attackSocket = GameObject.Find("SkillSocket").transform;
 
         }
-        public void ReleaseDic()
-        {
-            dic.Clear();
-        }
+        //public void ReleaseDic()
+        //{
+        //    dic.Clear();
+        //}
         // Update is called once per frame
-        void Update()
-        {
+        //void Update()
+        //{
             
-            /*
-            ActorProperties tmp = wc.Owner.GetComponent<Actor>().GetActorProperties();
-            float tmpDamage = tmp.getMagicAttack() + tmp.getPhysicalAttack();
-            Damage *= tmpDamage;
-            */
-        }
+        //    /*
+        //    ActorProperties tmp = wc.Owner.GetComponent<Actor>().GetActorProperties();
+        //    float tmpDamage = tmp.getMagicAttack() + tmp.getPhysicalAttack();
+        //    Damage *= tmpDamage;
+        //    */
+        //}
 
-        void OnCollisionEnter(Collision col)
-        {
-            /*
-            if (col.gameObject.layer == LayerMask.NameToLayer("weapon"))
-            {
-                return;
-            }*/
+        //void OnCollisionEnter(Collision col)
+        //{
+        //    /*
+        //    if (col.gameObject.layer == LayerMask.NameToLayer("weapon"))
+        //    {
+        //        return;
+        //    }*/
 
-            Actor target = col.gameObject.GetComponent<Actor>();
-            if (target)
-            {
-                if (target.Affiliation == this.attackerType)
-                    return;
-            }
+        //    Actor target = col.gameObject.GetComponent<Actor>();
+        //    if (target)
+        //    {
+        //        if (target.Affiliation == this.attackerType)
+        //            return;
+        //    }
 
-            Damageable damageable = col.collider.GetComponent<Damageable>();
-            if (damageable&&!dic.ContainsKey(damageable.gameObject))
-            {
+        //    Damageable damageable = col.collider.GetComponent<Damageable>();
+        //    if (damageable&&!dic.ContainsKey(damageable.gameObject))
+        //    {
                 
-                dic.Add(damageable.gameObject, 1);
+        //        dic.Add(damageable.gameObject, 1);
                 
-                Actor actor = col.gameObject.GetComponent<Actor>();
-                ActorProperties colliderProperty = actor.GetActorProperties();
-                float finalDamage = calculateDamage(colliderProperty, Damage, damageType, col.gameObject.transform.position + transform.up);
-                damageable.InflictDamage(finalDamage, false, Owner);
+        //        Actor actor = col.gameObject.GetComponent<Actor>();
+        //        ActorProperties colliderProperty = actor.GetActorProperties();
+        //        float finalDamage = calculateDamage(colliderProperty, Damage, damageType, col.gameObject.transform.position + transform.up);
+        //        damageable.InflictDamage(finalDamage, false, Owner);
 
-            }
-        }
+        //    }
+        //}
 
         private float calculateDamage(ActorProperties colliderProperty, float damage, DamageType damageType, Vector3 damagePoint)
         {
@@ -97,8 +108,31 @@ namespace OneCanRun.Game.Share
 
 
             }
+            //Dmg.Invoke(damagePoint, damageType, finalDamage);
 
             return finalDamage;
+        }
+
+        void Attack()
+        {
+            //vfx
+            GameObject VfxInstance = Instantiate(attackVfx, attackSocket);
+            //VfxInstance.transform.position -= GetComponentInParent<Camera>().transform.right;
+            Destroy(VfxInstance.gameObject, 1);
+
+            Collider[] affectedColliders = Physics.OverlapBox(attackSocket.position, new Vector3(attackLength, attackHeight, attackWidth), Quaternion.identity);
+            foreach (var col in affectedColliders)
+            {
+                //damage
+                Damageable damageable = col.GetComponent<Damageable>();
+                if (damageable)
+                {
+                    Actor actor = col.gameObject.GetComponent<Actor>();
+                    ActorProperties colliderProperty = actor.GetActorProperties();
+                    float finalDamage = calculateDamage(colliderProperty, Damage, damageType, col.gameObject.transform.position + transform.up);
+                    damageable.InflictDamage(finalDamage, false, Owner);
+                }
+            }
         }
     }
 }
