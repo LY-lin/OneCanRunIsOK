@@ -6,6 +6,6 @@
   <MAGICATTACK magicAttack="">1</MAGICATTACK>
   <PHYSICALDEFENCE physicalDefence="">1</PHYSICALDEFENCE>
   <MAGICDEFENCE magicDefence="">1</MAGICDEFENCE>
-  <MAXSPEED maxSpeed="">8</MAXSPEED>
+  <MAXSPEED maxSpeed="">5.5</MAXSPEED>
   <MAXJUMP maxJump="">5</MAXJUMP>
 </PropertyConfig>

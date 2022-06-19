@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using OneCanRun.Game.Share;
 
@@ -12,14 +10,29 @@ namespace OneCanRun.Game
         bool isForever;
         //剩余持续时间
         public float getTime;
+
+        public float ExistTime;
         public GameObject ImpactVfx;
+        public Sprite BuffIcon;
+        public string BuffName;
+        public string Description;
+        public string Num { get; private set; }
         public BuffController(Buff buff)
         {
             mbuff = buff;
             getTime = buff.ExistTime;
+            ExistTime = buff.ExistTime;
             isForever = !buff.hasExistTime;
+            GameObject ImpactVfx = buff.ImpactVfx;
+    
+            BuffName = buff.name;
+            Description = buff.description;
         }
 
+        public bool GetIsForever()
+        {
+            return isForever;
+        }
         public Buff.BufferType getBuffType()
         {
             return mbuff.type;
@@ -63,39 +76,10 @@ namespace OneCanRun.Game
                 properties.setMaxSpeed(properties.getMaxSpeed() * (1 + mbuff.getMaxSpeedBuff()));
                 properties.setMaxJump(properties.getMaxJump() * (1 + mbuff.getMaxJumpBuff()));
             }
-
-            if (ImpactVfx)
+            else if (getBuffType() == Buff.BufferType.PercentBuff)
             {
-                /*GameObject impactVfxInstance = Instantiate(ImpactVfx, this.gameObject.transform.position,
-                    Quaternion.LookRotation(col.gameObject.transform.up));
-                if (ExistTime > 0)
-                {
-                    Destroy(impactVfxInstance.gameObject, ExistTime);
-                }*/
+
             }
         }
     }
 }
-
-/*工作日志2022.6.8
-            if (buff.type == Buff.BufferType.NumBuff)
-            {
-                healModifier = new Modifier(mbuff.getHealRateBuff(), Modifier.ModifierType.healRateBuff, this);
-                PAttackModifier = new Modifier(mbuff.getPhysicalAttackBuff(), Modifier.ModifierType.physicalAttackBuff, this);
-                MAttackModifier = new Modifier(mbuff.getMagicAttackBuff(), Modifier.ModifierType.magicAttackBuff, this);
-                PDefenceModifier = new Modifier(mbuff.getPhysicalAttackBuff(), Modifier.ModifierType.physicalDefenceBuff, this);
-                MDefenceModifier = new Modifier(mbuff.getMagicAttackBuff(), Modifier.ModifierType.magicDefenceBuff, this);
-                SpeedModifier = new Modifier(mbuff.getMaxSpeedBuff(), Modifier.ModifierType.maxSpeedBuff, this);
-                JumpModifier = new Modifier(mbuff.getMaxJumpBuff(), Modifier.ModifierType.maxJumpBuff, this);
-            }
-            else if(buff.type == Buff.BufferType.PercentBuff)
-            {
-                healModifier = new Modifier(mbuff.getHealRateBuff(), Modifier.ModifierType.p_healRateBuff, this);
-                PAttackModifier = new Modifier(mbuff.getPhysicalAttackBuff(), Modifier.ModifierType.p_physicalAttackBuff, this);
-                MAttackModifier = new Modifier(mbuff.getMagicAttackBuff(), Modifier.ModifierType.p_magicAttackBuff, this);
-                PDefenceModifier = new Modifier(mbuff.getPhysicalAttackBuff(), Modifier.ModifierType.p_physicalDefenceBuff, this);
-                MDefenceModifier = new Modifier(mbuff.getMagicAttackBuff(), Modifier.ModifierType.p_magicDefenceBuff, this);
-                SpeedModifier = new Modifier(mbuff.getMaxSpeedBuff(), Modifier.ModifierType.p_maxSpeedBuff, this);
-                JumpModifier = new Modifier(mbuff.getMaxJumpBuff(), Modifier.ModifierType.p_maxJumpBuff, this);
-            }
- */

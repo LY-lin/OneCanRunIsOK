@@ -24,10 +24,10 @@ namespace OneCanRun
         {
         
         }
-        //public ForceMode
+        //public ForceMode  
         public void drop(){
             Rigidbody m_Rigidbody;
-            Transform burnPosition = this.gameObject.transform.GetChild(3).GetComponent<Transform>();
+            Transform burnPosition = this.gameObject.transform.Find("LootBurn").GetComponent<Transform>();
             //Debug.Log(this.gameObject.transform.GetChild(3).GetComponent<Transform>().position);
             //popForce.set
             if (targetDrop != null){

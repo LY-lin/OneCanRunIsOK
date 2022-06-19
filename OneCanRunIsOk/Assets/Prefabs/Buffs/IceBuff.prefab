@@ -52,5 +52,6 @@ MonoBehaviour:
   magicDefenceBuff: 0
   maxSpeedBuff: -0.5
   maxJumpBuff: 0
+  ImpactVfx: {fileID: 0}
   hasExistTime: 1
   ExistTime: 1

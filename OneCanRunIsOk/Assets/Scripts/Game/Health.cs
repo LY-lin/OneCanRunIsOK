@@ -62,7 +62,7 @@ namespace OneCanRun.Game
         {
             if (Invincible)
                 return;
-            Debug.Log(" 受伤，扣血："+damage);
+            //Debug.Log(" 受伤，扣血："+damage);
             float healthBefore = CurrentHealth;
             CurrentHealth -= damage;
             CurrentHealth = Mathf.Clamp(CurrentHealth, 0f, MaxHealth);

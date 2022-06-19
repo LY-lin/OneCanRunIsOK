@@ -63,7 +63,7 @@ namespace OneCanRun.Game
             {
                 //计算结束场景的画布透明度，实现渐变效果
                 float timeRatio = 1 - (m_TimeLoadEndGameScene - Time.time) / EndSceneLoadDelay;
-                EndGameFadeCanvasGroup.alpha = timeRatio;
+                //EndGameFadeCanvasGroup.alpha = timeRatio;
 
                 //音响控制系统
                 //AudioUtility.SetMasterVolume(1 - timeRatio);
@@ -75,6 +75,7 @@ namespace OneCanRun.Game
                     SceneManager.LoadScene(3);
                     GameIsEnding = false;
                 }
+                UnityEngine.SceneManagement.SceneManager.LoadScene("LoseScene");
             }
         }
         void OnAllObjectivesCompleted(AllObjectivesCompletedEvent evt) => EndGame(true);

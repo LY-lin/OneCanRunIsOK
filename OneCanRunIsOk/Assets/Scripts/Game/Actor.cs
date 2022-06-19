@@ -25,7 +25,7 @@ namespace OneCanRun.Game
         private OneCanRun.Game.Share.ActorProperties baseProperty;
         private OneCanRun.Game.Share.ActorProperties exposedProperty;
         private List<OneCanRun.Game.Share.Modifier> mModifier;
-        private ActorAttribute actorAttribute;
+        public ActorAttribute actorAttribute{get;private set;}
         public ActorBuffManager buffManager;
         private bool dirty = true;
         public bool isPlayer = false;
@@ -70,7 +70,7 @@ namespace OneCanRun.Game
             // left blank
             // @ to do
             ResetExposedProperty();
-            //if(buffManager.NumBuffList.Count>0)
+                //if(buffManager.NumBuffList.Count>0)
             foreach (BuffController b in buffManager.NumBuffList)
             {
                 //Debug.Log(this +" exposedProperty " + exposedProperty.getMagicAttack());
@@ -124,14 +124,14 @@ namespace OneCanRun.Game
             baseProperty.setMagicAttack(baseProperty.getMagicAttack() + intelligenceEnhanced);
             // technique
             baseProperty.setPhysicalAttack(baseProperty.getPhysicalAttack() + techniqueEnhanced);
-            baseProperty.setMaxSpeed(baseProperty.getMaxSpeed() * (1 + 0.1f * techniqueEnhanced));
+            //baseProperty.setMaxSpeed(baseProperty.getMaxSpeed() * (1 + 0.1f * techniqueEnhanced));
 
 
             Debug.Log("level up");
 
         }
 
-        private ulong getNextLevelCount(){
+        public ulong getNextLevelCount(){
             return 500;
         }
 
@@ -280,6 +280,10 @@ namespace OneCanRun.Game
             mModifier[0].baseValue += mod.baseValue;
         }
 
+        public float getExperience()
+        {
+            return this.mModifier[0].baseValue;
+        }
 
     }
 }

@@ -50,6 +50,8 @@ namespace OneCanRun.Game.Share
         // weapon should provide the speed, but...not implement
         public void Shoot(WeaponController controller)
         {
+
+            Owner = controller.Owner;
             //此处可以加入根据人物身上的buff情况调整子弹类型。
 
             speed = (float)controller.speed;
@@ -118,9 +120,9 @@ namespace OneCanRun.Game.Share
                     if(bulletType == BulletType.Ice)
                     {
                         Buff buff = GameObject.Find("IceBuff").GetComponent<Buff>();
-                        BuffController iceBuff= new BuffController(buff);
+                        //BuffController iceBuff = 
                         ActorBuffManager actorBuffManager = col.gameObject.GetComponentInParent<ActorBuffManager>();
-                        actorBuffManager.buffGain(iceBuff);
+                        actorBuffManager.buffGain(new BuffController(buff));
                     }
 
 
