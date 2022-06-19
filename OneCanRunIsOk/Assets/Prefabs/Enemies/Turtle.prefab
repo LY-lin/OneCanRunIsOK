@@ -667,7 +667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d969d81babd6c4cbfe5d3bb8cad7d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Affiliation: 1
+  Affiliation: 2
   AimPoint: {fileID: 2333055648381596556}
   buffManager: {fileID: 2333055648381596546}
   isPlayer: 0
@@ -729,6 +729,7 @@ MonoBehaviour:
   attackController: {fileID: 2333055648381596547}
   health: {fileID: 2333055648381596559}
   actor: {fileID: 2333055648381596557}
+  dropRate: 10
 --- !u!114 &2333055648381596545
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -48,6 +48,7 @@ MonoBehaviour:
   HealthImage: {fileID: 1696997188681276712}
   HealthBarPivot: {fileID: 1696997189262201771}
   HideFullHealthBar: 1
+  distance: 10
 --- !u!1 &1696997188681276117
 GameObject:
   m_ObjectHideFlags: 0
