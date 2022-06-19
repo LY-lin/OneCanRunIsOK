@@ -99,7 +99,7 @@ MonoBehaviour:
   RotatingSpeed: 360
   PickupSfx: {fileID: 0}
   PickupVfxPrefab: {fileID: 0}
-  WeaponPrefab: {fileID: 963746503092480719, guid: a35b9285b89ccef4686aa56df0f2a3d8, type: 3}
+  WeaponPrefab: {fileID: -8736037925254248466, guid: 96a0164465d19a24d970235cb172fd17, type: 3}
 --- !u!1001 &1668356571019705151
 PrefabInstance:
   m_ObjectHideFlags: 0

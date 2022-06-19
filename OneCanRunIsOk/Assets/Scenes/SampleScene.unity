@@ -235,7 +235,6 @@ GameObject:
   m_Component:
   - component: {fileID: 47318869}
   - component: {fileID: 47318871}
-  - component: {fileID: 47318870}
   m_Layer: 0
   m_Name: MiniMapCamera
   m_TagString: Untagged
@@ -258,14 +257,6 @@ Transform:
   m_Father: {fileID: 2147054328}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!81 &47318870
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 47318868}
-  m_Enabled: 1
 --- !u!20 &47318871
 Camera:
   m_ObjectHideFlags: 0
@@ -1367,7 +1358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7299049692546593474, guid: 057787decebe6da47bdab813c023f908, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7299049692546593474, guid: 057787decebe6da47bdab813c023f908, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1929,7 +1920,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1268918168
 GameObject:
@@ -2107,7 +2098,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 927281462185983436, guid: df7519524482c9d4882e9b41a3f6642d, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 927281462185983436, guid: df7519524482c9d4882e9b41a3f6642d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3859,7 +3850,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2136025594
 GameObject:
@@ -3944,6 +3935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingWeapons:
+  - {fileID: 3054882029934424460, guid: 323b0a1ab4221574192df6b2358791b7, type: 3}
   - {fileID: 1111756528895451107, guid: 2fa235b84a44e534b9f87bfc7492f491, type: 3}
   WeaponCamera: {fileID: 1300745943}
   WeaponParentSocket: {fileID: 995022589}

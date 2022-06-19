@@ -65,8 +65,8 @@ namespace OneCanRun.Game.Share
         public GameObject WeaponRoot;   //武器使用的模型
 
         [Header("Melee Weapons' Internal Reference(Only active when RemoteWeapons is false)")]
-        [Tooltip("Damagable Box")]
-        public GameObject DamagableBox;
+        //[Tooltip("Damagable Box")]
+        //public GameObject DamagableBox;
 
         [Tooltip("Delay between two attacks")]
         public float DelayBetweenAttacks;
@@ -223,6 +223,8 @@ namespace OneCanRun.Game.Share
 
         public bool IsReloading { get; private set; }
 
+        public bool IsAttacking { get; private set; }
+
         const string k_AnimAttackParameter = "Attack";
 
 
@@ -261,8 +263,9 @@ namespace OneCanRun.Game.Share
         }
         public void InitMelee()
         {
-            DamagableBox.GetComponent<MeleeController>().Init(this);
-            DamagableBox.gameObject.SetActive(false);
+            //DamagableBox.GetComponent<MeleeController>().Init(this);
+            //DamagableBox.gameObject.SetActive(false);
+            GetComponent<MeleeController>().Init(this);
         }
         //PickUp????????
         //public void AddCarriablePhysicalBullets(int count) => m_CarriedPhysicalBullets = Mathf.Max(m_CarriedPhysicalBullets + count, MaxAmmo);
@@ -428,7 +431,11 @@ namespace OneCanRun.Game.Share
 
         public bool HandleAttackInputs(bool inputDown, bool inputHeld)
         {
-            if ((inputDown || inputHeld)&&!DamagableBox.gameObject.activeSelf)
+            //if ((inputDown || inputHeld)&&!DamagableBox.gameObject.activeSelf)
+            //{
+            //    return TryAttack();
+            //}
+            if ((inputDown || inputHeld) && !IsAttacking)
             {
                 return TryAttack();
             }
@@ -535,16 +542,18 @@ namespace OneCanRun.Game.Share
         void EndAttack()
         {
             
-            DamagableBox.GetComponent<MeleeController>().ReleaseDic();
-            DamagableBox.gameObject.SetActive(false);
+            //DamagableBox.GetComponent<MeleeController>().ReleaseDic();
+            //DamagableBox.gameObject.SetActive(false);
             m_LastTimeAttack = Time.time;
+            IsAttacking = false;
 
         }
         void HandleAttack()
         {
-            DamagableBox.gameObject.SetActive(true);
+            //DamagableBox.gameObject.SetActive(true);
             //DamagableBox.GetComponent<MeleeController>().Init(this);
             GetComponent<Animator>().SetTrigger("Attack");
+            IsAttacking = true;
 
 
         }

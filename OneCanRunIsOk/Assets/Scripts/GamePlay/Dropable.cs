@@ -16,7 +16,7 @@ namespace OneCanRun
                 return;
             int target = Random.Range(0, tempList.Count);
             targetDrop = tempList[target];
-            Debug.Log(target);
+            //Debug.Log(target);
         }
 
         // Update is called once per frame
