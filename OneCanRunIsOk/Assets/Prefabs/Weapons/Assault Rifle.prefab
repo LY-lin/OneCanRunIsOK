@@ -262,6 +262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400791e0df9c010468f440ea7dab1a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtNumber: {fileID: 0}
+  damageType: 0
 --- !u!1 &100006
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,6 +319,7 @@ MonoBehaviour:
   RemoteWeapons: 1
   WeaponName: AR1
   WeaponIcon: {fileID: 21300000, guid: d977df5edeb809f41b362e4bc5d35645, type: 3}
+  WeaponImg: {fileID: 0}
   description: 
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 0}
@@ -328,7 +331,7 @@ MonoBehaviour:
   damage: 20
   WeaponMuzzle: {fileID: 4978071067295733055}
   ShootType: 1
-  bullet: {fileID: 1734307153417951284, guid: bd0f0e8585f3d1440ae91a23c533d5e5, type: 3}
+  bullet: {fileID: 1734307153417951284, guid: a98546528b163484ba67c160f647d0d0, type: 3}
   DelayBetweenShots: 0.1
   BulletSpreadAngle: 0
   BulletsPerShot: 1
@@ -353,6 +356,7 @@ MonoBehaviour:
   UnparentMuzzleFlash: 0
   ShootSfx: {fileID: 8300000, guid: 38b8b4ab5aeedc8488227cfcdeac6977, type: 3}
   ChangeWeaponSfx: {fileID: 0}
+  MuzzleChargePrefab: {fileID: 0}
   UseContinuousShootSound: 0
 --- !u!82 &5534321149048483853
 AudioSource:

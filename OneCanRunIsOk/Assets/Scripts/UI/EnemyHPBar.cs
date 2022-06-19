@@ -40,7 +40,8 @@ namespace OneCanRun.UI
             Vector3 position = player.transform.position;
             //bool ifnear = Vector3.Distance(position, this.gameObject.transform.position) < distance;
             bool ifnear = (position - this.gameObject.transform.position).magnitude<distance;
-                if (HideFullHealthBar)
+            
+            if (HideFullHealthBar)
                     HealthBarPivot.gameObject.SetActive(ifnear&&HealthImage.fillAmount < (1 - 0.1f / m_health.MaxHealth));
        }
     }

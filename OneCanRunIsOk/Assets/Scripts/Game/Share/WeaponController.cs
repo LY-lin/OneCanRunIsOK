@@ -71,8 +71,11 @@ namespace OneCanRun.Game.Share
         [Tooltip("Delay between two attacks")]
         public float DelayBetweenAttacks;
 
+        [Header("武器伤害，参与最终的伤害计算")]
         [Tooltip("damage")]
         public float damage;
+
+        float OrginDamage;
 
         [Header("Remote Weapons' Internal References")]
         [Tooltip("Tip of the weapon, where the projectiles are shot")]
@@ -113,7 +116,7 @@ namespace OneCanRun.Game.Share
         [Tooltip("Has physical clip on the weapon and ammo shells are ejected when firing")]
         public bool HasPhysicalBullets = false;//武器上有物理弹夹吗?发射时弹壳会弹出吗
 
-        
+        GameObject muzzleChargeInstance;
 
         public float speed = 100f;
 
@@ -175,6 +178,9 @@ namespace OneCanRun.Game.Share
         [Tooltip("Sound played when changing to this weapon")]
         public AudioClip ChangeWeaponSfx;//充能武器时的音频片段
 
+        [Tooltip("Prefab of the charge flash")]
+        public GameObject MuzzleChargePrefab;//预制的枪口闪光，枪口的焰火
+
         [Tooltip("Continuous Shooting Sound")]
         public bool UseContinuousShootSound = false;//是否时许产生持续的音效
 
@@ -229,6 +235,7 @@ namespace OneCanRun.Game.Share
 
         void Awake()
         {
+            Owner = this.transform.gameObject;
             if (RemoteWeapons)
             {
                 this.bulletPoolManager = new BulletPoolManager(this.bullet);
@@ -243,6 +250,8 @@ namespace OneCanRun.Game.Share
                 DebugUtility.HandleErrorIfNullGetComponent<AudioSource, WeaponController>(m_ShootAudioSource, this,
                     gameObject);
                 CurrentAmmoRatio = m_CurrentAmmo / MaxAmmo;
+
+                OrginDamage = damage;
             }
 
 
@@ -465,6 +474,9 @@ namespace OneCanRun.Game.Share
                     // Check if we released charge or if the weapon shoot autmatically when it's fully charged
                     if (inputUp || (AutomaticReleaseOnCharged && CurrentCharge >= 1f))
                     {
+                        damage = (int)(damage * CurrentCharge);
+                        Debug.Log("CurrentCharge:" + CurrentCharge);
+                        Debug.Log("weapon damage:" + damage);
                         return TryReleaseCharge();
                     }
 
@@ -502,6 +514,7 @@ namespace OneCanRun.Game.Share
 
         bool TryBeginCharge()
         {
+            damage = OrginDamage;
             if (!IsCharging
                 && m_CurrentAmmo >= AmmoUsedOnStartCharge
                 && Mathf.FloorToInt((m_CurrentAmmo - AmmoUsedOnStartCharge) * BulletsPerShot) > 0
@@ -512,6 +525,13 @@ namespace OneCanRun.Game.Share
                 LastChargeTriggerTimestamp = Time.time;
                 IsCharging = true;
 
+                muzzleChargeInstance = Instantiate(MuzzleChargePrefab, WeaponMuzzle.position,
+                    WeaponMuzzle.rotation, WeaponMuzzle.transform);
+                // Unparent the muzzleFlashInstance
+                if (UnparentMuzzleFlash)
+                {
+                    muzzleChargeInstance.transform.SetParent(null);
+                }
                 return true;
             }
 
@@ -526,7 +546,8 @@ namespace OneCanRun.Game.Share
 
                 CurrentCharge = 0f;
                 IsCharging = false;
-
+                
+                Destroy(muzzleChargeInstance);
                 return true;
             }
 

@@ -336,7 +336,7 @@ MonoBehaviour:
   damage: 15
   WeaponMuzzle: {fileID: 4847095528099380}
   ShootType: 1
-  bullet: {fileID: 1734307153417951284, guid: a98546528b163484ba67c160f647d0d0, type: 3}
+  bullet: {fileID: 1734307153417951284, guid: f9fa3d1a4152f894c97bddfecee65329, type: 3}
   DelayBetweenShots: 0.3
   BulletSpreadAngle: 0
   BulletsPerShot: 1

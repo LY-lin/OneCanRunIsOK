@@ -12,7 +12,10 @@ namespace OneCanRun.Game.Share
         }
         [Tooltip("击中特效")]
         public GameObject ImpactVfx;
-        [Tooltip("击中特效持续时间")]
+        [Tooltip("飞行特效")]
+        public GameObject FlyVfxPrefab;
+        GameObject FlyVfx;
+       [Tooltip("击中特效持续时间")]
         public float ImpactVfxLifetime = 5f;
         public GameObject hurtNumber;
         public DamageType damageType;
@@ -70,6 +73,9 @@ namespace OneCanRun.Game.Share
             InitialCharge = controller.CurrentCharge;
             //Debug.Log("shoot"+ this.mDamage);
             //OnShoot?.Invoke();
+            if(FlyVfxPrefab)
+                FlyVfx = Instantiate(FlyVfxPrefab,transform);
+
         }
 
         // if collision happens, it will be called
@@ -100,8 +106,12 @@ namespace OneCanRun.Game.Share
                 {
                     Destroy(impactVfxInstance.gameObject, ImpactVfxLifetime);
                 }
+                    
             }
-
+            if (FlyVfx)
+            {
+                Destroy(FlyVfx.gameObject);
+            }
 
             if (isAoe)
             {

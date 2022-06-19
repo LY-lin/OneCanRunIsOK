@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillName: Tonado
   SkillDescription: 
-  SkillIcon: {fileID: 0}
+  SkillIcon: {fileID: 21300000, guid: d05403c960853a84dade5166c5de5f11, type: 3}
   m_SkillType: 3
   m_SpSkillType: 0
   CoolingTime: 10
