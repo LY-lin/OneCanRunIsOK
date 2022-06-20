@@ -162,6 +162,7 @@ namespace OneCanRun.AI.Enemies
         {
             if (NavMeshAgent && NavMeshAgent.isActiveAndEnabled)
             {
+                animator.SetBool("Run", true);
                 NavMeshAgent.SetDestination(destination);
             }
         }
@@ -211,6 +212,10 @@ namespace OneCanRun.AI.Enemies
 
         public bool TryFollow()
         {
+            if(detectionModule.KnownDetectedTarget == null)
+            {
+                return true;
+            }
             SetNavDestination(detectionModule.KnownDetectedTarget.transform.position);
             if (detectionModule.IsSeeingTarget && detectionModule.IsTargetInAttackRange)
             {

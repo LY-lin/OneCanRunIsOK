@@ -33,7 +33,11 @@ namespace OneCanRun.AI.Enemies
                 flag = true;
                 return Status.Running;
             }
-            return Status.Success;
+            else
+            {
+                boss.SetAnimationBool(animation, false);
+                return Status.Success;
+            }
         }
     }
 }

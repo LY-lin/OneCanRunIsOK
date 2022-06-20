@@ -1,5 +1,85 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &413295465
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 413295466}
+  m_Layer: 0
+  m_Name: WeaponRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &413295466
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413295465}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3920919027543811108}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &778311617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 778311618}
+  - component: {fileID: 778311619}
+  m_Layer: 0
+  m_Name: DetectionModule
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &778311618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778311617}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3920919027543811108}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &778311619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778311617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1fa59f10c2452e4eb6892e1a2b8f788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DetectionSourcePoint: {fileID: 778311618}
+  DetectionRange: 20
+  AttackRange: 10
+  KnownTargetTimeout: 4
+  DetectionAngle: 60
 --- !u!1 &3920919025842050244
 GameObject:
   m_ObjectHideFlags: 0
@@ -3358,6 +3438,7 @@ GameObject:
   - component: {fileID: 3920919027543811130}
   - component: {fileID: 3920919027543811131}
   - component: {fileID: 3036777438095118379}
+  - component: {fileID: 2019056498}
   m_Layer: 0
   m_Name: Dragon
   m_TagString: Untagged
@@ -3379,6 +3460,8 @@ Transform:
   m_Children:
   - {fileID: 3920919026407239561}
   - {fileID: 3920919025890978881}
+  - {fileID: 778311618}
+  - {fileID: 413295466}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3409,7 +3492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d969d81babd6c4cbfe5d3bb8cad7d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Affiliation: 0
+  Affiliation: 2
   AimPoint: {fileID: 0}
   buffManager: {fileID: 3920919027543811111}
   isPlayer: 0
@@ -3516,12 +3599,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   root:
-    rid: 4899728832226394119
+    rid: 4899728834407170048
   updateType: 0
   references:
     version: 2
     RefIds:
-    - rid: 4899728832226394119
+    - rid: 4899728834407170048
       type: {class: Root, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
@@ -3532,21 +3615,21 @@ MonoBehaviour:
           height: 76.80002
         description: 
         child:
-          rid: 4899728832226394120
-    - rid: 4899728832226394120
+          rid: 4899728834407170049
+    - rid: 4899728834407170049
       type: {class: Selector, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
           serializedVersion: 2
           x: 376
           y: 289.6
-          width: 173.59998
-          height: 112
+          width: 174.40002
+          height: 112.79999
         description: 
         children:
-        - rid: 4899728832226394121
+        - rid: 4899728834407170050
         abortOnConditionChanged: 1
-    - rid: 4899728832226394121
+    - rid: 4899728834407170050
       type: {class: Sequence, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
@@ -3554,29 +3637,15 @@ MonoBehaviour:
           x: 588
           y: 212.79999
           width: 174.40002
-          height: 232
+          height: 184.80002
         description: 
         children:
-        - rid: 4899728832226394122
-        - rid: 4899728832226394123
-        - rid: 4899728832226394124
-        - rid: 4899728832226394125
-        - rid: 4899728832226394126
-        - rid: 4899728832226394127
+        - rid: 4899728834407170051
+        - rid: 4899728834407170052
+        - rid: 4899728834407170053
+        - rid: 4899728834407170054
         abortOnConditionChanged: 1
-    - rid: 4899728832226394122
-      type: {class: AnimationAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
-      data:
-        graphPosition:
-          serializedVersion: 2
-          x: 806.4
-          y: 64.8
-          width: 214.39996
-          height: 129.6
-        description: 
-        animation: Scream
-        duration: 2
-    - rid: 4899728832226394123
+    - rid: 4899728834407170051
       type: {class: AnimationAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3587,44 +3656,32 @@ MonoBehaviour:
           height: 129.6
         description: 
         animation: TakeOff
+        duration: 8
+    - rid: 4899728834407170052
+      type: {class: AnimationAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 806.4
+          y: 402.4
+          width: 214.39996
+          height: 129.59998
+        description: 
+        animation: Fly
         duration: 3
-    - rid: 4899728832226394124
+    - rid: 4899728834407170053
       type: {class: AnimationAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
           serializedVersion: 2
           x: 806.4
-          y: 377.6
-          width: 214.39996
-          height: 129.59998
-        description: 
-        animation: FlyIdle
-        duration: 1
-    - rid: 4899728832226394125
-      type: {class: AnimationAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
-      data:
-        graphPosition:
-          serializedVersion: 2
-          x: 806.4
-          y: 538.4
-          width: 214.39996
-          height: 129.59998
-        description: 
-        animation: FlyForward
-        duration: 10
-    - rid: 4899728832226394126
-      type: {class: AnimationAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
-      data:
-        graphPosition:
-          serializedVersion: 2
-          x: 806.4
-          y: 693.60004
+          y: 576.80005
           width: 214.39996
           height: 129.59998
         description: 
         animation: Land
         duration: 3
-    - rid: 4899728832226394127
+    - rid: 4899728834407170054
       type: {class: Sequence, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
@@ -3632,14 +3689,14 @@ MonoBehaviour:
           x: 806.4
           y: 872
           width: 174.39996
-          height: 160
+          height: 160.80005
         description: 
         children:
-        - rid: 4899728832226394128
-        - rid: 4899728832226394129
-        - rid: 4899728832226394130
+        - rid: 4899728834407170055
+        - rid: 4899728834407170056
+        - rid: 4899728834407170057
         abortOnConditionChanged: 1
-    - rid: 4899728832226394128
+    - rid: 4899728834407170055
       type: {class: FollowAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3650,7 +3707,7 @@ MonoBehaviour:
           height: 112
         description: 
         animation: 
-    - rid: 4899728832226394129
+    - rid: 4899728834407170056
       type: {class: AttackCondition, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3658,13 +3715,13 @@ MonoBehaviour:
           x: 1057.6
           y: 943.2
           width: 173.59998
-          height: 129.60004
+          height: 130.39996
         description: 
         dontReEvaluateOnRunning: 0
         child:
-          rid: 4899728832226394131
+          rid: 4899728834407170058
         threshold: 10
-    - rid: 4899728832226394130
+    - rid: 4899728834407170057
       type: {class: AttackCondition, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3676,9 +3733,9 @@ MonoBehaviour:
         description: 
         dontReEvaluateOnRunning: 0
         child:
-          rid: 4899728832226394132
+          rid: 4899728834407170059
         threshold: 10
-    - rid: 4899728832226394131
+    - rid: 4899728834407170058
       type: {class: AttackAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3690,7 +3747,7 @@ MonoBehaviour:
         description: 
         animation: AttackMouse
         duration: 3
-    - rid: 4899728832226394132
+    - rid: 4899728834407170059
       type: {class: Random, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
@@ -3701,9 +3758,9 @@ MonoBehaviour:
           height: 118.400024
         description: 
         children:
-        - rid: 4899728832226394133
-        - rid: 4899728832226394134
-    - rid: 4899728832226394133
+        - rid: 4899728834407170060
+        - rid: 4899728834407170061
+    - rid: 4899728834407170060
       type: {class: AttackAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3715,7 +3772,7 @@ MonoBehaviour:
         description: 
         animation: AttackHead
         duration: 3
-    - rid: 4899728832226394134
+    - rid: 4899728834407170061
       type: {class: AttackAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3727,6 +3784,24 @@ MonoBehaviour:
         description: 
         animation: AttackFlame
         duration: 3
+--- !u!143 &2019056498
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3920919027543811132}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 5
+  m_Radius: 3
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!1 &3920919027546932654
 GameObject:
   m_ObjectHideFlags: 0
