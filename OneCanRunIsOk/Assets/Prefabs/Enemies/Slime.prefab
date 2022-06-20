@@ -43,8 +43,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6104257002535640868}
-  - component: {fileID: 1642041082}
   - component: {fileID: 1642041084}
+  - component: {fileID: 1597894687418838307}
   - component: {fileID: 4268522952273343576}
   m_Layer: 0
   m_Name: Body
@@ -69,19 +69,6 @@ Transform:
   m_Father: {fileID: 4256155222580521307}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -67.60852}
---- !u!65 &1642041082
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 382001285244889970}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.2023547, y: 1.1236724, z: 1.0101852}
-  m_Center: {x: -0.42196906, y: 0.1158334, z: 0.015724182}
 --- !u!114 &1642041084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,6 +417,7 @@ GameObject:
   - component: {fileID: 4256155222580521299}
   - component: {fileID: 944723657}
   - component: {fileID: 2263138276376709999}
+  - component: {fileID: 6201211561966678761}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -455,6 +443,7 @@ Transform:
   - {fileID: 6104257002535640868}
   - {fileID: 5541430046149722296}
   - {fileID: 557928283594036319}
+  - {fileID: 4006499709928535522}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -632,6 +621,52 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &6201211561966678761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4256155222580521301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc5fbecf1c56df547bec31f37ad1165e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeed: 3.5
+  AngularSpeed: 120
+  Acceleration: 8
+--- !u!1 &4829273511531430695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4006499709928535522}
+  m_Layer: 0
+  m_Name: LootBurn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4006499709928535522
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4829273511531430695}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.301, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4256155222580521307}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5019289741016191720
 GameObject:
   m_ObjectHideFlags: 0

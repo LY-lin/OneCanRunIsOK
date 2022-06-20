@@ -62,7 +62,7 @@ namespace OneCanRun.Game
         {
             if (Invincible)
                 return;
-            Debug.Log(" 受伤，扣血："+damage);
+            //Debug.Log(" 受伤，扣血："+damage);
             float healthBefore = CurrentHealth;
             CurrentHealth -= damage;
             CurrentHealth = Mathf.Clamp(CurrentHealth, 0f, MaxHealth);
@@ -103,8 +103,8 @@ namespace OneCanRun.Game
                     Share.Modifier mod = new Share.Modifier(400, Share.Modifier.ModifierType.experience, this);
                     mPlayer.addModifier(mod);
                 }
-                Share.MonsterPoolManager monsterPoolManager = Game.Share.MonsterPoolManager.getInstance();
-                monsterPoolManager.release(this.gameObject);
+                // Share.MonsterPoolManager monsterPoolManager = Game.Share.MonsterPoolManager.getInstance();
+                // monsterPoolManager.release(this.gameObject);
                 //Destroy(this.gameObject);
             }
         }

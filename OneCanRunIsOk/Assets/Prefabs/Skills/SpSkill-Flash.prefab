@@ -46,11 +46,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillName: Flash
   SkillDescription: 
-  SkillIcon: {fileID: 0}
+  SkillIcon: {fileID: 21300000, guid: 22e429bebac345949be5ab0eba7d71a3, type: 3}
   m_SkillType: 3
   m_SpSkillType: 2
   CoolingTime: 0
   UsingRange: 10
   ExistingTime: 10
   AimingVfx: {fileID: 100000, guid: 880bc6becc440a047bba527f57da1a9c, type: 3}
-  UsingVfx: {fileID: 0}
+  UsingVfx: {fileID: 100012, guid: 75a4d59a510e3c245804dd166b77739f, type: 3}

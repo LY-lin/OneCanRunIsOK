@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillName: FireRain
   SkillDescription: 
-  SkillIcon: {fileID: 0}
+  SkillIcon: {fileID: 21300000, guid: 74d19c76ea526e345a8e2fd937be054e, type: 3}
   m_SkillType: 3
   m_SpSkillType: 1
   CoolingTime: 10

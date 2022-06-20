@@ -5,14 +5,25 @@ namespace OneCanRun.Game.Share
 {
     public class BulletController : MonoBehaviour
     {
+        public enum BulletType{
+            Common,
+            Ice,
+            Napalm,
+        }
         [Tooltip("击中特效")]
         public GameObject ImpactVfx;
-        [Tooltip("击中特效持续时间")]
+        [Tooltip("飞行特效")]
+        public GameObject FlyVfxPrefab;
+        GameObject FlyVfx;
+       [Tooltip("击中特效持续时间")]
         public float ImpactVfxLifetime = 5f;
-        public GameObject hurtNumber;
+        //public GameObject hurtNumber;
         public DamageType damageType;
         [Tooltip("if is Aoe")]
         public bool isAoe = false;
+
+        [Tooltip("if is Aoe")]
+        public BulletType bulletType = BulletType.Common;
 
 
         //[Tooltip("Speed")]
@@ -43,6 +54,9 @@ namespace OneCanRun.Game.Share
         public void Shoot(WeaponController controller)
         {
 
+            Owner = controller.Owner;
+            //此处可以加入根据人物身上的buff情况调整子弹类型。
+
             speed = (float)controller.speed;
             // calculate damage
 
@@ -59,6 +73,9 @@ namespace OneCanRun.Game.Share
             InitialCharge = controller.CurrentCharge;
             //Debug.Log("shoot"+ this.mDamage);
             //OnShoot?.Invoke();
+            if(FlyVfxPrefab)
+                FlyVfx = Instantiate(FlyVfxPrefab,transform);
+
         }
 
         // if collision happens, it will be called
@@ -89,36 +106,48 @@ namespace OneCanRun.Game.Share
                 {
                     Destroy(impactVfxInstance.gameObject, ImpactVfxLifetime);
                 }
+                    
             }
-
+            if (FlyVfx)
+            {
+                Destroy(FlyVfx.gameObject);
+            }
 
             if (isAoe)
             {
                 AoeCalculator ac = GetComponent<AoeCalculator>();
                 Collider bulletCol = GetComponent<Collider>();
-                ac.AoeCalculating(bulletCol.transform.position, mDamage, Owner);
+                ac.AoeCalculating(bulletCol.transform.position, mDamage, damageType, Owner);
                 this.WeaponController.bulletPoolManager.release(this.gameObject);
             }
             else
             {
-                Damageable damageable = col.collider.GetComponentInParent<Damageable>();
+                Damageable damageable = col.collider.GetComponent<Damageable>();
                 if (damageable)
                 {
                     Actor actor = col.gameObject.GetComponentInParent<Actor>();
+                    
+                    if(bulletType == BulletType.Ice)
+                    {
+                        Buff buff = GameObject.Find("IceBuff").GetComponent<Buff>();
+                        //BuffController iceBuff = 
+                        ActorBuffManager actorBuffManager = col.gameObject.GetComponentInParent<ActorBuffManager>();
+                        actorBuffManager.buffGain(new BuffController(buff));
+                    }
+
 
                     float finalDamage = calculateDamage(actor.GetActorProperties());
-                    damageable.InflictDamage(finalDamage, false, Owner);
+                    damageable.InflictDamage(finalDamage, false, Owner,col.gameObject,damageType);
 
                     this.WeaponController.bulletPoolManager.release(this.gameObject);
-                    GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
-                    if (hurtNumber && hurtNumberParent)
-                    {
-                        GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
-                        hurt.transform.position = this.transform.position;
-                        hurt.GetComponent<HurtNumber>().init(finalDamage, this.damageType);
+                    //GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
+                    //if (hurtNumber && hurtNumberParent)
+                    //{
+                    //    GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
+                    //    hurt.transform.position = this.transform.position;
+                    //    hurt.GetComponent<HurtNumber>().init(finalDamage, this.damageType);
 
-
-                    }
+                    //}
 
                 }
                 this.WeaponController.bulletPoolManager.release(this.gameObject);

@@ -56,6 +56,10 @@ namespace OneCanRun.GamePlay
         public GameObject AimingVfx;
         public GameObject UsingVfx;
 
+        [Header("Skill SFX")]
+        public AudioClip UsingSfx;
+        AudioSource m_ShootAudioSource;
+
         //last time of using skill
         public float m_LastTimeUse { get; private set; }
         //cast use
@@ -69,7 +73,7 @@ namespace OneCanRun.GamePlay
 
         void Awake()
         {
-            //Debug.Log(System.GC.GetTotalMemory(true));
+            
             if (m_SkillType == SkillType.Cast)
             {
                 m_SkillWeapon = GetComponent<WeaponController>();
@@ -77,6 +81,7 @@ namespace OneCanRun.GamePlay
                     this, gameObject);
             }
             m_LastTimeUse = Mathf.NegativeInfinity;
+            m_ShootAudioSource = GetComponent<AudioSource>();
         }
 
         //void Update()
@@ -127,14 +132,15 @@ namespace OneCanRun.GamePlay
                 default:
                     break;
             }
-            
+            if(UsingSfx)
+            m_ShootAudioSource.PlayOneShot(UsingSfx);
             return true;
         }
         
         //cast
         void UseCastSkill()
         {
-            m_SkillWeapon.damageType = Game.Share.DamageType.magic;
+            //m_SkillWeapon.damageType = Game.Share.DamageType.magic;
             m_SkillWeapon.HandleShootInputs(true, false, false);
             //Debug.Log("Cast!");
         }
@@ -146,8 +152,11 @@ namespace OneCanRun.GamePlay
             DebugUtility.HandleErrorIfNullGetComponent<SkillBuffGiver, SkillController>(m_SkillBuffGiver,
                 this, gameObject);
             m_SkillBuffGiver.buffGive();
-        
-        //Debug.Log("Buff!");
+
+            GameObject VfxInstance = Instantiate(UsingVfx,Owner.transform);
+
+            Destroy(VfxInstance.gameObject, 2f);
+            //Debug.Log("Buff!");
 
         }
 
@@ -209,8 +218,10 @@ namespace OneCanRun.GamePlay
             //PlayerCharacterController m_playerCharacterController = Owner.GetComponent<PlayerCharacterController>();
             //m_playerCharacterController.transform.position = aimingPoint;
             //Physics.autoSyncTransforms = true;
+            GameObject VfxInstance = Instantiate(UsingVfx, Owner.transform.position, Quaternion.AngleAxis(-90f, Vector3.right));
+            Destroy(VfxInstance.gameObject, ExistingTime);
             Owner.transform.position = aimingPoint;
-            Debug.Log(Owner.transform.position);
+            //Debug.Log(Owner.transform.position);
         }
 
         //get the property

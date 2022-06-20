@@ -16,8 +16,17 @@ namespace OneCanRun.GamePlay
         public float damage = 1f;
         [Tooltip("speed of the displacement")]
         public float displacementSpeed = 1f;
+        [Tooltip("how many frames to calculate per attack")]
+        public int deltaCount = 50;
 
         public GameObject Owner;
+
+        //public GameObject hurtNumber;
+
+        public DamageType damageType;
+
+        float totalDeltaTime = 0;
+        int curDeltaCount = 0;
 
         // Start is called before the first frame update
 
@@ -28,22 +37,61 @@ namespace OneCanRun.GamePlay
             foreach (var col in affectedColliders)
             {
                 //damage
-                //InParent?
                 Damageable damageable = col.GetComponent<Damageable>();
                 if (damageable)
                 {
-                    Actor actor = col.gameObject.GetComponent<Actor>();
-                    ActorProperties colliderProperty = actor.GetActorProperties();
-                    float finalDamage = damage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
-                    if (finalDamage < 0f)
-                        finalDamage = 0f;
-                    damageable.InflictDamage(finalDamage * Time.deltaTime, false, Owner);
-
                     //displacement of affectedColliders
                     col.gameObject.transform.position = Vector3.MoveTowards(col.gameObject.transform.position, this.gameObject.transform.position, displacementSpeed * Time.deltaTime);
-                }
 
+                    if (curDeltaCount == deltaCount)
+                    {
+                        Actor actor = col.gameObject.GetComponent<Actor>();
+                        ActorProperties colliderProperty = actor.GetActorProperties();
+                        float finalDamage = calculateDamage(colliderProperty, damage * totalDeltaTime, damageType);
+                        damageable.InflictDamage(finalDamage, false, Owner, col.gameObject, damageType);
+                    }
+                }
             }
+            if (curDeltaCount == deltaCount)
+            {
+                curDeltaCount = 0;
+                totalDeltaTime = 0;
+            }
+            curDeltaCount++;
+            totalDeltaTime += Time.deltaTime;
+
+        }
+        private float calculateDamage(ActorProperties colliderProperty, float damage, DamageType damageType)
+        {
+            if (colliderProperty == null)
+                return 0;
+            float finalDamage = 0;
+            if (damageType == DamageType.magic)
+            {
+                finalDamage = damage - colliderProperty.getMagicDefence();
+            }
+            else
+            {
+                finalDamage = damage - colliderProperty.getPhysicalDefence();
+            }
+            if (finalDamage < 0f)
+                finalDamage = 0f;
+
+            //ÏÂÈ¡Õû
+            finalDamage = Mathf.Floor(finalDamage);
+
+            //GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
+            //if (hurtNumber && hurtNumberParent)
+            //{
+            //    //Debug.Log("count!");
+            //    GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
+            //    hurt.transform.position = damagePoint;
+            //    hurt.GetComponent<HurtNumber>().init(finalDamage, damageType);
+
+
+            //}
+
+            return finalDamage;
         }
     }
 }

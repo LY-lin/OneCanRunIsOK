@@ -11,7 +11,7 @@ namespace OneCanRun.GamePlay
         private static int counter = 0;
         private List<GameObject> monsterSample;
         private int waveNumber = 4;
-        public int timeInterval = 20;
+        public int timeInterval = 30;
         private int timeCounter = 0;
         private int frameInterval = 0;
         private Game.Share.MonsterPoolManager monsterPoolManager;
@@ -84,7 +84,7 @@ namespace OneCanRun.GamePlay
 
         void Start()
         {
-            counter = mMonsterList.Count;
+            //counter = mMonsterList.Count;
             Game.Share.MonsterPoolManager.initialization(this.gameObject, monsterSample[0]);
             monsterPoolManager = Game.Share.MonsterPoolManager.getInstance();
         }

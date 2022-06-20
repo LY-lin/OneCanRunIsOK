@@ -43,6 +43,8 @@ namespace OneCanRun.AI.Enemies
         // 最新受伤时间，用于仇恨丢失
         float lastTimeDamaged = float.NegativeInfinity;
 
+        // buff管理器
+        ActorBuffManager actorBuffManager;
         // 引入敌人的检测模块
         public DetectionModule DetectionModule { get; private set; }
         // 引入自带的AI寻路模块
@@ -60,7 +62,6 @@ namespace OneCanRun.AI.Enemies
         public bool IsTargetInAttackRange => DetectionModule.IsTargetInAttackRange;
         public bool IsSeeingTarget => DetectionModule.IsSeeingTarget;
         public bool HadKnownTarget => DetectionModule.HadKnownTarget;
-
         // 敌人管理器
         EnemyManager enemyManager;
         // 角色管理器
@@ -73,6 +74,8 @@ namespace OneCanRun.AI.Enemies
         NavigationModule navigationModule;
 
         Animator animator;
+
+        public int dropRate = 10;
         
         int pathDestinationNodeIndex;
 
@@ -103,9 +106,14 @@ namespace OneCanRun.AI.Enemies
 
             attackController = GetComponent<EnemyAttackController>();
             DebugUtility.HandleErrorIfNullGetComponent<EnemyAttackController, EnemyController>(attackController, this, gameObject);
+           
 
             animator = GetComponent<Animator>();
             DebugUtility.HandleErrorIfNullGetComponent<Animator, EnemyController>(animator, this, gameObject);
+            actorBuffManager = GetComponent<ActorBuffManager>();
+            DebugUtility.HandleErrorIfNullGetComponent<ActorBuffManager, EnemyController>(attackController, this, gameObject);
+
+            actorBuffManager.buffChanged += changeSpeed;
 
             health.OnDamaged += OnDamaged;
             health.OnDie += OnDie;
@@ -137,7 +145,11 @@ namespace OneCanRun.AI.Enemies
             // 注册敌人
             enemyManager.RegisterEnemy(this);
         }
+        void changeSpeed()
+        {
+            NavMeshAgent.speed = actor.GetActorProperties().getMaxSpeed();
 
+        }
         private void OnEnable()
         {
             NavMeshAgent.enabled = true;
@@ -150,7 +162,9 @@ namespace OneCanRun.AI.Enemies
             EnsureIsWithinLevelBounds();
             // 每帧都要检测
             DetectionModule.HandleDetection(actor, colliders);
+            
         }
+
 
         // 确保在限制范围内部
         void EnsureIsWithinLevelBounds()
@@ -240,9 +254,8 @@ namespace OneCanRun.AI.Enemies
         // 设置导航目的地
         public void SetNavDestination(Vector3 destination)
         {
-            if (NavMeshAgent)
+            if (NavMeshAgent && NavMeshAgent.isActiveAndEnabled)
             {
-                animator.SetFloat("Speed", NavMeshAgent.speed);
                 NavMeshAgent.SetDestination(destination);
             }
         }
@@ -303,6 +316,8 @@ namespace OneCanRun.AI.Enemies
 
         void OnDie()
         {
+            Debug.Log("Enemy Die");
+
             animator.SetTrigger("isDie");
 
             enemyManager.UnregisterEnemy(this);
@@ -313,7 +328,7 @@ namespace OneCanRun.AI.Enemies
 
         public void EnterDeathQueue()
         {
-            Debug.Log(this.gameObject.name);
+           // Debug.Log(this.gameObject.name);
             // loot an object
             if (TryDropItem())
             {
@@ -335,7 +350,8 @@ namespace OneCanRun.AI.Enemies
 
         public bool TryDropItem()
         {
-            if (DropRate == 0 || LootPrefab == null)
+            int result = Random.Range(0, 100);
+            if (DropRate == 0 || LootPrefab == null || result >= this.dropRate)
                 return false;
             else if (DropRate == 1)
                 return true;

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &603241130009800383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4865040569090210070}
+  m_Layer: 0
+  m_Name: LootBurn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4865040569090210070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603241130009800383}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2333055648381596556}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2333055647284250216
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,7 +624,6 @@ GameObject:
   - component: {fileID: 2333055648381596546}
   - component: {fileID: 2333055648381596547}
   - component: {fileID: 2333055648381596555}
-  - component: {fileID: 6310577042643197128}
   - component: {fileID: 2817332843408663665}
   - component: {fileID: 4642866303671975968}
   m_Layer: 0
@@ -621,6 +651,7 @@ Transform:
   - {fileID: 2333055648328249401}
   - {fileID: 3254070418794303882}
   - {fileID: 2745995846864096788}
+  - {fileID: 4865040569090210070}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -636,7 +667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d969d81babd6c4cbfe5d3bb8cad7d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Affiliation: 1
+  Affiliation: 2
   AimPoint: {fileID: 2333055648381596556}
   buffManager: {fileID: 2333055648381596546}
   isPlayer: 0
@@ -698,6 +729,7 @@ MonoBehaviour:
   attackController: {fileID: 2333055648381596547}
   health: {fileID: 2333055648381596559}
   actor: {fileID: 2333055648381596557}
+  dropRate: 10
 --- !u!114 &2333055648381596545
 MonoBehaviour:
   m_ObjectHideFlags: 0

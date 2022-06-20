@@ -156,8 +156,8 @@ namespace OneCanRun.GamePlay
             if (activeWeapon != null &&activeWeapon.RemoteWeapons&&activeWeapon.IsReloading)
                 return;
 
-            if (activeWeapon != null && !activeWeapon.RemoteWeapons && activeWeapon.DamagableBox.gameObject.activeSelf)
-                return;
+            //if (activeWeapon != null && !activeWeapon.RemoteWeapons && activeWeapon.DamagableBox.gameObject.activeSelf)
+            //    return;
 
 
             if (activeWeapon != null && m_WeaponSwitchState == WeaponSwitchState.Up)
