@@ -56,6 +56,10 @@ namespace OneCanRun.GamePlay
         public GameObject AimingVfx;
         public GameObject UsingVfx;
 
+        [Header("Skill SFX")]
+        public AudioClip UsingSfx;
+        AudioSource m_ShootAudioSource;
+
         //last time of using skill
         public float m_LastTimeUse { get; private set; }
         //cast use
@@ -77,6 +81,7 @@ namespace OneCanRun.GamePlay
                     this, gameObject);
             }
             m_LastTimeUse = Mathf.NegativeInfinity;
+            m_ShootAudioSource = GetComponent<AudioSource>();
         }
 
         //void Update()
@@ -127,7 +132,8 @@ namespace OneCanRun.GamePlay
                 default:
                     break;
             }
-            
+            if(UsingSfx)
+            m_ShootAudioSource.PlayOneShot(UsingSfx);
             return true;
         }
         
@@ -146,8 +152,11 @@ namespace OneCanRun.GamePlay
             DebugUtility.HandleErrorIfNullGetComponent<SkillBuffGiver, SkillController>(m_SkillBuffGiver,
                 this, gameObject);
             m_SkillBuffGiver.buffGive();
-        
-        //Debug.Log("Buff!");
+
+            GameObject VfxInstance = Instantiate(UsingVfx,Owner.transform);
+
+            Destroy(VfxInstance.gameObject, 2f);
+            //Debug.Log("Buff!");
 
         }
 

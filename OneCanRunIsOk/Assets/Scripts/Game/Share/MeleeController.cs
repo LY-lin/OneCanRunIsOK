@@ -16,6 +16,7 @@ namespace OneCanRun.Game.Share
         public GameObject hurtNumber;
         public DamageType damageType;
         public GameObject attackVfx;
+        public float attackVfxDelay;
         public Transform attackSocket;
 
         [Header("Attack Range (center-attackSocket)")]
@@ -95,7 +96,7 @@ namespace OneCanRun.Game.Share
             if (finalDamage < 0f)
                 finalDamage = 0f;
 
-            //ÏÂÈ¡Õû
+            //ä¸‹å–æ•´
             finalDamage = Mathf.Floor(finalDamage);
 
             GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
@@ -113,13 +114,21 @@ namespace OneCanRun.Game.Share
             return finalDamage;
         }
 
+        void PlayAttackVfx()
+        {
+            //float time = 0;
+            //time += Time.deltaTime;
+            //if (time > attackVfxDelay)
+            //{
+                //vfx
+                GameObject VfxInstance = Instantiate(attackVfx, attackSocket);
+                //VfxInstance.transform.position -= GetComponentInParent<Camera>().transform.right;
+                Destroy(VfxInstance.gameObject, 1);
+            //}
+        }
+
         void Attack()
         {
-            //vfx
-            GameObject VfxInstance = Instantiate(attackVfx, attackSocket);
-            //VfxInstance.transform.position -= GetComponentInParent<Camera>().transform.right;
-            Destroy(VfxInstance.gameObject, 1);
-
             Collider[] affectedColliders = Physics.OverlapBox(attackSocket.position, new Vector3(attackLength, attackHeight, attackWidth), Quaternion.identity);
             foreach (var col in affectedColliders)
             {

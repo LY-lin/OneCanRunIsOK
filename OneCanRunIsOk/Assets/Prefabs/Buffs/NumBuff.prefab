@@ -45,12 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  healRateBuff: 0
-  physicalAttackBuff: 10
-  magicAttackBuff: 10
-  physicalDefenceBuff: 0
-  magicDefenceBuff: 0
+  healRateBuff: 5
+  physicalAttackBuff: 20
+  magicAttackBuff: 20
+  physicalDefenceBuff: 20
+  magicDefenceBuff: 20
   maxSpeedBuff: 0
   maxJumpBuff: 0
+  ImpactVfx: {fileID: 0}
+  name: 
+  description: 
   hasExistTime: 1
-  ExistTime: 1
+  ExistTime: 10
