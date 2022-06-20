@@ -28,6 +28,11 @@ namespace OneCanRun.Game.Share
 
         public void InflictDamage(float damage, bool isExplosionDamage, GameObject damageSource)
         {
+            if (damageSource == gameObject)
+            {
+                return;
+            }
+
             if (Health)
             {
                 var totalDamage = damage;
@@ -50,8 +55,13 @@ namespace OneCanRun.Game.Share
             }
         }
 
-        public void InflictDamage(float damage, bool isExplosionDamage, GameObject damageSource,GameObject Damaged)
+        public void InflictDamage(float damage, bool isExplosionDamage, GameObject damageSource,GameObject Damaged,DamageType damageType)
         {
+            if (damageSource == gameObject)
+            {
+                return;
+            }
+
             if (Health)
             {
                 var totalDamage = damage;
@@ -71,7 +81,7 @@ namespace OneCanRun.Game.Share
                 // apply the damages
                 //Debug.Log(totalDamage);
                 Health.TakeDamage(totalDamage, damageSource);
-                collect.produce(Damaged, 0, damage);
+                collect.produce(Damaged, damageType, damage);
 
             }
         }

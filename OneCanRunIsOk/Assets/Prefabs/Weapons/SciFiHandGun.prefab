@@ -331,7 +331,6 @@ MonoBehaviour:
     CrosshairSize: 0
     CrosshairColor: {r: 0, g: 0, b: 0, a: 0}
   WeaponRoot: {fileID: 1244390726855398}
-  DamagableBox: {fileID: 0}
   DelayBetweenAttacks: 0
   damage: 15
   WeaponMuzzle: {fileID: 4847095528099380}
@@ -361,6 +360,7 @@ MonoBehaviour:
   UnparentMuzzleFlash: 0
   ShootSfx: {fileID: 0}
   ChangeWeaponSfx: {fileID: 0}
+  MuzzleChargePrefab: {fileID: 0}
   UseContinuousShootSound: 0
 --- !u!82 &-1519153054976952232
 AudioSource:

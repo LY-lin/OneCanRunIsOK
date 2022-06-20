@@ -27,7 +27,7 @@ namespace OneCanRun.Game.Share
         private int curDeltaCount = 0;
 
         public GameObject Owner;
-        public GameObject hurtNumber;
+        //public GameObject hurtNumber;
 
         private Vector4 Length = new Vector4(1, 1, 1, 1);
         //private Vector4 LaserSpeed = new Vector4(0, 0, 0, 0); {DISABLED AFTER UPDATE}
@@ -97,8 +97,8 @@ namespace OneCanRun.Game.Share
                             {
                                 Actor actor = col.gameObject.GetComponent<Actor>();
                                 ActorProperties colliderProperty = actor.GetActorProperties();
-                                float finalDamage = calculateDamage(colliderProperty, damage * totalDeltaTime, damageType, hit.point);
-                                damageable.InflictDamage(finalDamage, false, Owner);
+                                float finalDamage = calculateDamage(colliderProperty, damage * totalDeltaTime, damageType);
+                                damageable.InflictDamage(finalDamage, false, Owner, col.gameObject, damageType);
                             }
                         }
                     }
@@ -155,7 +155,7 @@ namespace OneCanRun.Game.Share
             }
         }
 
-        private float calculateDamage(ActorProperties colliderProperty, float damage, DamageType damageType, Vector3 damagePoint)
+        private float calculateDamage(ActorProperties colliderProperty, float damage, DamageType damageType)
         {
             if (colliderProperty == null)
                 return 0;
@@ -174,16 +174,16 @@ namespace OneCanRun.Game.Share
             //ÏÂÈ¡Õû
             finalDamage = Mathf.Floor(finalDamage);
 
-            GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
-            if (hurtNumber && hurtNumberParent)
-            {
-                //Debug.Log("count!");
-                GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
-                hurt.transform.position = damagePoint;
-                hurt.GetComponent<HurtNumber>().init(finalDamage, damageType);
+            //GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
+            //if (hurtNumber && hurtNumberParent)
+            //{
+            //    //Debug.Log("count!");
+            //    GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
+            //    hurt.transform.position = damagePoint;
+            //    hurt.GetComponent<HurtNumber>().init(finalDamage, damageType);
 
 
-            }
+            //}
 
             return finalDamage;
         }
