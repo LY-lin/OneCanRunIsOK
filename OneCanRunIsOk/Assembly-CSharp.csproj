@@ -120,6 +120,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\RFX_Scripts\HowtoPlay.txt" />
     <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\MultiScaleVOUpsample.compute" />
+    <None Include="Assets\ErbGameArt\3D Lasers Pack\Prefabs\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\Distortion.hlsl" />
     <None Include="Assets\SineVFX\PostProcessingV2\Shaders\Builtins\ExposureHistogram.hlsl" />

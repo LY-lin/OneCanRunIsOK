@@ -28,6 +28,10 @@ namespace OneCanRun.GamePlay
 
         GameObject activeAimingVfx;
 
+        //test Laser
+        //public GameObject Laser;
+        //LaserController lc;
+
         void Start()
         {
             m_InputHandler = GetComponent<PlayerInputHandler>();
@@ -36,17 +40,33 @@ namespace OneCanRun.GamePlay
 
             ChangeCurrentSkill(StartSkill);
             ChangeCurrentSpSkill(StartSpSkill);
+
+            //test Laser
+            //lc = Laser.GetComponent<LaserController>();
+            //lc.Owner = gameObject;
+            //lc.LaserSocket = SkillSocket;
+
         }
 
 
         void Update()
         {
+            //test Laser
+            //if (m_InputHandler.GetUseSPSkillButtonDown())
+            //{
+            //    lc.StartLaser();  
+            //}
+            //else if (m_InputHandler.GetUseSkillButtonDown())
+            //{
+            //    lc.StopLaser();
+            //}
+
             //aiming
             if (!isAiming && m_InputHandler.GetUseSPSkillButtonDown() && !CurrentSpSkillInstance.isCooling())
             {
                 isAiming = true;
             }
-            else if(isAiming)
+            else if (isAiming)
             {
                 //aiming ray
                 if (Physics.Raycast(SkillSocket.position, SkillSocket.forward, out RaycastHit hit,
