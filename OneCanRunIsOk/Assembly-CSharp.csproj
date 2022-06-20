@@ -92,6 +92,7 @@
     <Compile Include="Assets\Scripts\UI\FillBarColorChange.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
+    <Compile Include="Assets\Scripts\UI\HurtNum.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Hit &amp; Slashes Vol.3\SelfDestruct.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\Scripts\UI\AmmoCounter.cs" />
     <Compile Include="Assets\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Scripts\UniqueProjectiles\ProjectileMoveScript.cs" />
+    <Compile Include="Assets\Scripts\UI\HurtNumberHudManage.cs" />
     <Compile Include="Assets\GabrielAguiarProductions\Unique_Projectiles_Volume_1\Scripts\CameraShakeSimpleScript.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\MobilityArts\SciFiHandGun\Scripts\OrbitAroundTarget.cs" />

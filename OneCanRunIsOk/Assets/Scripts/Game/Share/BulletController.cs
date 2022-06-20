@@ -17,7 +17,7 @@ namespace OneCanRun.Game.Share
         GameObject FlyVfx;
        [Tooltip("击中特效持续时间")]
         public float ImpactVfxLifetime = 5f;
-        public GameObject hurtNumber;
+        //public GameObject hurtNumber;
         public DamageType damageType;
         [Tooltip("if is Aoe")]
         public bool isAoe = false;
@@ -137,18 +137,17 @@ namespace OneCanRun.Game.Share
 
 
                     float finalDamage = calculateDamage(actor.GetActorProperties());
-                    damageable.InflictDamage(finalDamage, false, Owner,col.gameObject);
+                    damageable.InflictDamage(finalDamage, false, Owner,col.gameObject,damageType);
 
                     this.WeaponController.bulletPoolManager.release(this.gameObject);
-                    GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
-                    if (hurtNumber && hurtNumberParent)
-                    {
-                        GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
-                        hurt.transform.position = this.transform.position;
-                        hurt.GetComponent<HurtNumber>().init(finalDamage, this.damageType);
+                    //GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
+                    //if (hurtNumber && hurtNumberParent)
+                    //{
+                    //    GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
+                    //    hurt.transform.position = this.transform.position;
+                    //    hurt.GetComponent<HurtNumber>().init(finalDamage, this.damageType);
 
-
-                    }
+                    //}
 
                 }
                 this.WeaponController.bulletPoolManager.release(this.gameObject);
