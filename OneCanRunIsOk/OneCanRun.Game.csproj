@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,9 +53,10 @@
     <UnityVersion>2022.1.1f1c1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\MyPrograms\Program Files (x86)\Visual Studio 2019\IDE\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Game\Share\LaserController.cs" />
     <Compile Include="Assets\Scripts\Game\Event.cs" />
     <Compile Include="Assets\Scripts\Game\Share\ActorProperties.cs" />
     <Compile Include="Assets\Scripts\Game\TimedSelfDestruct.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Assets\Scripts\Game\Share\DropList.cs" />
     <Compile Include="Assets\Scripts\Game\BuffController.cs" />
     <Compile Include="Assets\Scripts\Game\EventManager.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\CollectDamageNumber.cs" />
     <Compile Include="Assets\Scripts\Game\EventFactory.cs" />
     <Compile Include="Assets\Scripts\Game\Share\MeleeController.cs" />
     <Compile Include="Assets\Scripts\Game\Share\MonsterPoolManager.cs" />
@@ -89,6 +91,8 @@
     <Compile Include="Assets\Scripts\Game\StaticEvents.cs" />
     <Compile Include="Assets\Scripts\Game\ActorsManager.cs" />
     <Compile Include="Assets\Scripts\Game\Share\AoeCalculator.cs" />
+    <Compile Include="Assets\Scripts\Game\DisplaceActionsManager.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\DisplaceAction.cs" />
     <Compile Include="Assets\Scripts\Game\ObjectiveManager.cs" />
   </ItemGroup>
   <ItemGroup>

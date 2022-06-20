@@ -11,9 +11,9 @@ namespace OneCanRun.Game.Share
         private float Damage;
         private affiliationType attackerType;
         public GameObject Owner { get; private set; }
-        private Dictionary<GameObject, int> dic = new Dictionary<GameObject, int>();
+        //private Dictionary<GameObject, int> dic = new Dictionary<GameObject, int>();
 
-        public GameObject hurtNumber;
+        //public GameObject hurtNumber;
         public DamageType damageType;
         public GameObject attackVfx;
         public float attackVfxDelay;
@@ -80,7 +80,7 @@ namespace OneCanRun.Game.Share
         //    }
         //}
 
-        private float calculateDamage(ActorProperties colliderProperty, float damage, DamageType damageType, Vector3 damagePoint)
+        private float calculateDamage(ActorProperties colliderProperty, float damage, DamageType damageType)
         {
             if (colliderProperty == null)
                 return 0;
@@ -99,16 +99,16 @@ namespace OneCanRun.Game.Share
             //下取整
             finalDamage = Mathf.Floor(finalDamage);
 
-            GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
-            if (hurtNumber && hurtNumberParent)
-            {
-                Debug.Log("count!");
-                GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
-                hurt.transform.position = damagePoint;
-                hurt.GetComponent<HurtNumber>().init(finalDamage, damageType);
+            //GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
+            //if (hurtNumber && hurtNumberParent)
+            //{
+            //    Debug.Log("count!");
+            //    GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
+            //    hurt.transform.position = damagePoint;
+            //    hurt.GetComponent<HurtNumber>().init(finalDamage, damageType);
 
 
-            }
+            //}
             //Dmg.Invoke(damagePoint, damageType, finalDamage);
 
             return finalDamage;
@@ -138,8 +138,8 @@ namespace OneCanRun.Game.Share
                 {
                     Actor actor = col.gameObject.GetComponent<Actor>();
                     ActorProperties colliderProperty = actor.GetActorProperties();
-                    float finalDamage = calculateDamage(colliderProperty, Damage, damageType, col.gameObject.transform.position + transform.up);
-                    damageable.InflictDamage(finalDamage, false, Owner);
+                    float finalDamage = calculateDamage(colliderProperty, Damage, damageType);
+                    damageable.InflictDamage(finalDamage, false, Owner, col.gameObject, damageType);
                 }
             }
         }
