@@ -110,7 +110,7 @@ namespace OneCanRun.AI.Enemies
         void Fly(Vector3 destination)
         {
             Vector3 direction = (destination - transform.position).normalized;
-            Vector3 fly = direction * 2f;
+            Vector3 fly = direction * 10f;
             controller.OrientTowards(destination);
             // characterController.Move(fly * Time.deltaTime);
             rb.AddForce(fly*Time.deltaTime);

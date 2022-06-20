@@ -1053,7 +1053,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4632168799392808800, guid: 3c320a767bde73348917c935b2f76a01, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -2.5
+      value: -2.499939
       objectReference: {fileID: 0}
     - target: {fileID: 5504914839696814931, guid: 3c320a767bde73348917c935b2f76a01, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2046,6 +2046,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1066076555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066076536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26f469276d6944a44bcbf30eed951a44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1156959998
 Transform:
   m_ObjectHideFlags: 0
@@ -4284,7 +4296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartSkill: {fileID: 4654144126487180559, guid: 5e9d6336e11a594418faeccf7ba898b8, type: 3}
-  StartSpSkill: {fileID: 2480305087403844136, guid: a81161b5a39e29c4aa8b5521c76ef14b, type: 3}
+  StartSpSkill: {fileID: 2480305087403844136, guid: 34efc063be227974f8eb96d22eb1129f, type: 3}
   SkillSocket: {fileID: 752986709}
 --- !u!114 &2136025597
 MonoBehaviour:
@@ -4313,8 +4325,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingWeapons:
-  - {fileID: 1111756528895451107, guid: 2fa235b84a44e534b9f87bfc7492f491, type: 3}
-  - {fileID: -8736037925254248466, guid: 96a0164465d19a24d970235cb172fd17, type: 3}
+  - {fileID: 2611912730512937136, guid: 44506c685e405224fa319b94d98a0421, type: 3}
+  - {fileID: 3054882029934424460, guid: 323b0a1ab4221574192df6b2358791b7, type: 3}
   WeaponCamera: {fileID: 1300745943}
   WeaponParentSocket: {fileID: 995022589}
   DefaultWeaponPosition: {fileID: 1212960848}
@@ -4537,7 +4549,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.05
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2147054327
 GameObject:
   m_ObjectHideFlags: 0

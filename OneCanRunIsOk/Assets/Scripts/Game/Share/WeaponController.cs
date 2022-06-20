@@ -482,8 +482,8 @@ namespace OneCanRun.Game.Share
                     if (inputUp || (AutomaticReleaseOnCharged && CurrentCharge >= 1f))
                     {
                         damage = (int)(damage * CurrentCharge);
-                        Debug.Log("CurrentCharge:" + CurrentCharge);
-                        Debug.Log("weapon damage:" + damage);
+                        //Debug.Log("CurrentCharge:" + CurrentCharge);
+                        //Debug.Log("weapon damage:" + damage);
                         return TryReleaseCharge();
                     }
 

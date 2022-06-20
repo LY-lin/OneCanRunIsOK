@@ -11,11 +11,12 @@ namespace OneCanRun.Game.Share
         private float Damage;
         private affiliationType attackerType;
         public GameObject Owner { get; private set; }
-        private Dictionary<GameObject, int> dic = new Dictionary<GameObject, int>();
+        //private Dictionary<GameObject, int> dic = new Dictionary<GameObject, int>();
 
-        public GameObject hurtNumber;
+        //public GameObject hurtNumber;
         public DamageType damageType;
         public GameObject attackVfx;
+        public float attackVfxDelay;
         public Transform attackSocket;
 
         [Header("Attack Range (center-attackSocket)")]
@@ -79,7 +80,7 @@ namespace OneCanRun.Game.Share
         //    }
         //}
 
-        private float calculateDamage(ActorProperties colliderProperty, float damage, DamageType damageType, Vector3 damagePoint)
+        private float calculateDamage(ActorProperties colliderProperty, float damage, DamageType damageType)
         {
             if (colliderProperty == null)
                 return 0;
@@ -95,31 +96,39 @@ namespace OneCanRun.Game.Share
             if (finalDamage < 0f)
                 finalDamage = 0f;
 
-            //ÏÂÈ¡Õû
+            //ä¸‹å–æ•´
             finalDamage = Mathf.Floor(finalDamage);
 
-            GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
-            if (hurtNumber && hurtNumberParent)
-            {
-                Debug.Log("count!");
-                GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
-                hurt.transform.position = damagePoint;
-                hurt.GetComponent<HurtNumber>().init(finalDamage, damageType);
+            //GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
+            //if (hurtNumber && hurtNumberParent)
+            //{
+            //    Debug.Log("count!");
+            //    GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
+            //    hurt.transform.position = damagePoint;
+            //    hurt.GetComponent<HurtNumber>().init(finalDamage, damageType);
 
 
-            }
+            //}
             //Dmg.Invoke(damagePoint, damageType, finalDamage);
 
             return finalDamage;
         }
 
+        void PlayAttackVfx()
+        {
+            //float time = 0;
+            //time += Time.deltaTime;
+            //if (time > attackVfxDelay)
+            //{
+                //vfx
+                GameObject VfxInstance = Instantiate(attackVfx, attackSocket);
+                //VfxInstance.transform.position -= GetComponentInParent<Camera>().transform.right;
+                Destroy(VfxInstance.gameObject, 1);
+            //}
+        }
+
         void Attack()
         {
-            //vfx
-            GameObject VfxInstance = Instantiate(attackVfx, attackSocket);
-            //VfxInstance.transform.position -= GetComponentInParent<Camera>().transform.right;
-            Destroy(VfxInstance.gameObject, 1);
-
             Collider[] affectedColliders = Physics.OverlapBox(attackSocket.position, new Vector3(attackLength, attackHeight, attackWidth), Quaternion.identity);
             foreach (var col in affectedColliders)
             {
@@ -129,8 +138,8 @@ namespace OneCanRun.Game.Share
                 {
                     Actor actor = col.gameObject.GetComponent<Actor>();
                     ActorProperties colliderProperty = actor.GetActorProperties();
-                    float finalDamage = calculateDamage(colliderProperty, Damage, damageType, col.gameObject.transform.position + transform.up);
-                    damageable.InflictDamage(finalDamage, false, Owner);
+                    float finalDamage = calculateDamage(colliderProperty, Damage, damageType);
+                    damageable.InflictDamage(finalDamage, false, Owner, col.gameObject, damageType);
                 }
             }
         }
