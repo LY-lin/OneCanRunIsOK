@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 namespace OneCanRun.AI.Enemies
 {
+    [RequireComponent(typeof(Health), typeof(Actor), typeof(ActorBuffManager))]
     public class Boss : MonoBehaviour
     {
         [Tooltip("The speed at which the enemy rotates")]
@@ -202,7 +203,7 @@ namespace OneCanRun.AI.Enemies
             }
             else
             {
-                animator.SetTrigger(Animation);
+                animator.SetBool(Animation, true);
                 lastPlayTime = Time.time;
                 return true;
             }
