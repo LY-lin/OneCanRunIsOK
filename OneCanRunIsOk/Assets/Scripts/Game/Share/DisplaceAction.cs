@@ -11,9 +11,12 @@ namespace OneCanRun.Game.Share
         public float endTime;
         public float displaceSpeed;
 
-        DisplaceAction(GameObject _displaceObject, Vector3 _destination, float _startTime, float _endTime, float _displaceSpeed)
+        public DisplaceAction(GameObject _displaceObject, Vector3 _destination, float _startTime, float _existTime, float _displaceSpeed)
         {
-
+            displaceObject = _displaceObject;
+            destination = _destination;
+            endTime = _startTime + _existTime;
+            displaceSpeed = _displaceSpeed;
         }
     }
 }
