@@ -6,37 +6,31 @@ using OneCanRun.Game;
 
 namespace OneCanRun.AI.Enemies
 {
-    public class FollowAction : Action
+    public class PatrolAction : Action
     {
         [SerializeField]
         private string animation;
 
-        private Boss boss;
+        [SerializeField]
+        private Transform end;
 
-        private bool flag;
+        private Boss boss;
 
         public override void Awake()
         {
             boss = gameObject.GetComponent<Boss>();
             DebugUtility.HandleErrorIfNullGetComponent<Boss, AnimationAction>(boss, gameObject.GetComponent<BehaviorTree>(), gameObject);
-
-            flag = true;
         }
 
-        // Start is called before the first frame update
         protected override Status OnUpdate()
         {
-            if (flag)
+            if (!boss.Arrive(end.position))
             {
-                boss.SetAnimationBool("Idle", true);
-                boss.SetAnimationBool(animation, flag);
-                flag = false;
+                boss.Fly(end.position);
+                boss.SetAnimationBool("Fly", true);
                 return Status.Running;
             }
-            if (boss.TryFollow())
-            {
-                return Status.Running;
-            }
+            boss.SetAnimationBool("Fly", false);
             return Status.Success;
         }
     }

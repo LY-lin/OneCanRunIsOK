@@ -13,7 +13,7 @@ namespace OneCanRun.AI.Enemies
         public float OrientationSpeed = 10f;
 
         [Tooltip("The distance at which the enemy considers that it has reached its current path destination point")]
-        public float PathReachingRadius = 2f;
+        public float PathReachingRadius = 50f;
 
         public enum AIState
         {
@@ -42,6 +42,7 @@ namespace OneCanRun.AI.Enemies
         public List<GameObject> LootPrefabList;
 
         Animator animator;
+        CharacterController characterController;
         int pathDestinationNodeIndex;
         float lastHitTime = Mathf.Infinity;
         float lastPlayTime = Mathf.Infinity;
@@ -62,6 +63,9 @@ namespace OneCanRun.AI.Enemies
             DebugUtility.HandleErrorIfNullGetComponent<DetectionModule, Boss>(detectionModule, this, gameObject);
             detectionModule.onDetectedTarget = OnDetectTarget;
             detectionModule.onLostTarget = OnLostTarget;
+
+            characterController = GetComponent<CharacterController>();
+            DebugUtility.HandleErrorIfNullGetComponent<CharacterController, Boss>(characterController, this, gameObject);
 
             // enemyAttackController = GetComponent<EnemyAttackController>();
             // DebugUtility.HandleErrorIfNullGetComponent<EnemyAttackController, Boss>(enemyAttackController, this, gameObject);
@@ -121,7 +125,7 @@ namespace OneCanRun.AI.Enemies
         }
 
         // 设置目的地最近的导航路径
-        public void SetPathDestinationToClosestNode()
+        public int SetPathDestinationToClosestNode()
         {
             // 路径有效
             if (IsPathValid())
@@ -142,6 +146,7 @@ namespace OneCanRun.AI.Enemies
             {
                 pathDestinationNodeIndex = 0;
             }
+            return pathDestinationNodeIndex;
         }
 
         // 获取路径的目的地
@@ -167,8 +172,17 @@ namespace OneCanRun.AI.Enemies
             }
         }
 
+        public void Fly(Vector3 destination)
+        {
+            NavMeshAgent.enabled = false;
+            Vector3 direction = (destination - transform.position).normalized;
+            Vector3 fly = direction * 10f;
+            OrientTowards(destination);
+            characterController.Move(fly * Time.deltaTime);
+        }
+
         // 更新巡检节点
-        public void UpdatePathDestination(bool inverseOrder = false)
+        public int UpdatePathDestination(bool inverseOrder = false)
         {
             if (IsPathValid())
             {
@@ -189,6 +203,12 @@ namespace OneCanRun.AI.Enemies
                     }
                 }
             }
+            return pathDestinationNodeIndex;
+        }
+
+        public bool Arrive(Vector3 position)
+        {
+            return (transform.position - position).magnitude <= PathReachingRadius;
         }
 
         public void SetAnimationBool(string Animation, bool flag)
@@ -212,6 +232,7 @@ namespace OneCanRun.AI.Enemies
 
         public bool TryFollow()
         {
+            NavMeshAgent.enabled = true;
             if(detectionModule.KnownDetectedTarget == null)
             {
                 return true;
