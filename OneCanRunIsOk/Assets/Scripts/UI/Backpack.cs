@@ -134,12 +134,22 @@ namespace OneCanRun.UI
         {
             Debug.Log("Open Backpack");
             Weapon1Name.text = playerWeaponsManager.m_WeaponSlots[0].WeaponName;
-            Weapon2Name.text = playerWeaponsManager.m_WeaponSlots[1].WeaponName;
             txtWeapon1.text = playerWeaponsManager.m_WeaponSlots[0].description;
-            txtWeapon2.text = playerWeaponsManager.m_WeaponSlots[1].description;
             Weapon1Img.sprite = playerWeaponsManager.m_WeaponSlots[0].WeaponImg;
-            Weapon2Img.sprite = playerWeaponsManager.m_WeaponSlots[1].WeaponImg;
 
+            if (playerWeaponsManager.m_WeaponSlots[1] != null)
+            {
+                Weapon2Name.text = playerWeaponsManager.m_WeaponSlots[1].WeaponName;
+                txtWeapon2.text = playerWeaponsManager.m_WeaponSlots[1].description;
+                Weapon2Img.sprite = playerWeaponsManager.m_WeaponSlots[1].WeaponImg;
+                Weapon2Img.gameObject.SetActive(true);
+            }
+            else
+            {
+                Weapon2Name.text = "";
+                txtWeapon2.text = "";
+                Weapon2Img.gameObject.SetActive(false);
+            }
             fSkill.sprite = playerSkillsManager.CurrentSkillInstance.SkillIcon;
             FName.text = playerSkillsManager.CurrentSkillInstance.SkillName;
             Ftext.text = playerSkillsManager.CurrentSkillInstance.SkillDescription;
