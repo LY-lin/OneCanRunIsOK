@@ -110,11 +110,15 @@ namespace OneCanRun.UI
         ActorBuffManager actorBuffManager;
         List<BuffUI> m_Buffs = new List<BuffUI>();
    
+
+
+
+
+
         int counter = 0;
         // Start is called before the first frame update
-        public void initialize()
-        {
-            Debug.Log("123");
+        public void initialize(){
+
             GameObject player = GameObject.Find("Player1");
             DebugUtility.HandleErrorIfNullFindObject<GameObject, Backpack>(player, this);
             actor = player.GetComponent<Actor>();

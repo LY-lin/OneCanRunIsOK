@@ -29,7 +29,11 @@ namespace OneCanRun.Game
         public ActorBuffManager buffManager;
         private bool dirty = true;
         public bool isPlayer = false;
+        private uint level = 0;
 
+        public uint getLevel(){
+            return level;
+        }
 
         public void Awake()
         {
