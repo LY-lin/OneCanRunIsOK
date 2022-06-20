@@ -56,6 +56,7 @@ MonoBehaviour:
   ExistingTime: 10
   AimingVfx: {fileID: 0}
   UsingVfx: {fileID: 0}
+  UsingSfx: {fileID: 0}
 --- !u!114 &4654144126487180544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,7 +81,7 @@ MonoBehaviour:
     CrosshairColor: {r: 0, g: 0, b: 0, a: 0}
   WeaponRoot: {fileID: 4654144126487180557}
   DelayBetweenAttacks: 0
-  damage: 0
+  damage: 30
   WeaponMuzzle: {fileID: 4654144126487180558}
   ShootType: 0
   bullet: {fileID: 1823173409967616, guid: ef48ff28d9f1dc04d9acc396a9381b2f, type: 3}
