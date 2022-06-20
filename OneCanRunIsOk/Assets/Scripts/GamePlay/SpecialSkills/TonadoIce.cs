@@ -83,7 +83,7 @@ namespace OneCanRun.GamePlay
             GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
             if (hurtNumber && hurtNumberParent)
             {
-                Debug.Log("count!");
+                //Debug.Log("count!");
                 GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
                 hurt.transform.position = damagePoint;
                 hurt.GetComponent<HurtNumber>().init(finalDamage, damageType);
