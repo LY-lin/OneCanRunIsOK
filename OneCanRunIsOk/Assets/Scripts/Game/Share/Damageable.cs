@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace OneCanRun.Game.Share
 {
+    
     public class Damageable : MonoBehaviour
     {
         [Tooltip("Multiplier to apply to the received damage")]
@@ -13,7 +14,7 @@ namespace OneCanRun.Game.Share
         public float SensibilityToSelfdamage = 0.5f;
 
         public Health Health { get; private set; }
-
+        CollectDamageNumber collect;
         void Awake()
         {
             // find the health component either at the same level, or higher in the hierarchy
@@ -22,6 +23,7 @@ namespace OneCanRun.Game.Share
             {
                 Health = GetComponentInParent<Health>();
             }
+            collect = FindObjectOfType<CollectDamageNumber>();
         }
 
         public void InflictDamage(float damage, bool isExplosionDamage, GameObject damageSource)
@@ -47,7 +49,32 @@ namespace OneCanRun.Game.Share
                 Health.TakeDamage(totalDamage, damageSource);
             }
         }
-        
+
+        public void InflictDamage(float damage, bool isExplosionDamage, GameObject damageSource,GameObject Damaged)
+        {
+            if (Health)
+            {
+                var totalDamage = damage;
+
+                // skip the crit multiplier if it's from an explosion
+                if (!isExplosionDamage)
+                {
+                    totalDamage *= DamageMultiplier;
+                }
+
+                // potentially reduce damages if inflicted by self
+                if (Health.gameObject == damageSource)
+                {
+                    totalDamage *= SensibilityToSelfdamage;
+                }
+
+                // apply the damages
+                //Debug.Log(totalDamage);
+                Health.TakeDamage(totalDamage, damageSource);
+                collect.produce(Damaged, 0, damage);
+
+            }
+        }
     }
 
 }

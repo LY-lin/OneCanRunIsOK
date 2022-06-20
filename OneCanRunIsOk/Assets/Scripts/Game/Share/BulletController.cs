@@ -122,7 +122,7 @@ namespace OneCanRun.Game.Share
             }
             else
             {
-                Damageable damageable = col.collider.GetComponentInParent<Damageable>();
+                Damageable damageable = col.collider.GetComponent<Damageable>();
                 if (damageable)
                 {
                     Actor actor = col.gameObject.GetComponentInParent<Actor>();
@@ -137,7 +137,7 @@ namespace OneCanRun.Game.Share
 
 
                     float finalDamage = calculateDamage(actor.GetActorProperties());
-                    damageable.InflictDamage(finalDamage, false, Owner);
+                    damageable.InflictDamage(finalDamage, false, Owner,col.gameObject);
 
                     this.WeaponController.bulletPoolManager.release(this.gameObject);
                     GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
