@@ -111,7 +111,6 @@ namespace OneCanRun.Game
             }
             // update level up data, including level up seriesly
             // reset experice
-            this.actorAttribute.point2allocate += 5;
             int strenthEnhanced = 1;
             int techniqueEnhanced = 1;
             int intelligenceEnhanced = 1;
