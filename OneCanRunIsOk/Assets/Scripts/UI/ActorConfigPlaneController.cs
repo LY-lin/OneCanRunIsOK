@@ -22,7 +22,17 @@ namespace OneCanRun.UI{
         TMPro.TextMeshProUGUI phyDefenceValue;
         TMPro.TextMeshProUGUI magicDamageValue;
         TMPro.TextMeshProUGUI phyDamageValue;
+        TMPro.TextMeshProUGUI campLabel;
+        UnityEngine.UI.Image weaponImage;
+        TMPro.TextMeshProUGUI weaponDescription;
+        TMPro.TextMeshProUGUI weaponName;
 
+        TMPro.TextMeshProUGUI QName;
+        TMPro.TextMeshProUGUI QDescription;
+        UnityEngine.UI.Image QImage;
+        TMPro.TextMeshProUGUI FName;
+        TMPro.TextMeshProUGUI FDescription;
+        UnityEngine.UI.Image FImage;
 
         // for decreasing update 
         private bool dirty = true;
@@ -43,6 +53,22 @@ namespace OneCanRun.UI{
             phyDefenceValue = GameObject.Find("phyDefenceValue").GetComponent<TMPro.TextMeshProUGUI>();
             magicDamageValue = GameObject.Find("magicDamageValue").GetComponent<TMPro.TextMeshProUGUI>();
             phyDamageValue = GameObject.Find("phyDamageValue").GetComponent<TMPro.TextMeshProUGUI>();
+
+
+            // camp info are as follows
+            campLabel = GameObject.Find("campLabel").GetComponent<TMPro.TextMeshProUGUI>();
+            weaponDescription = GameObject.Find("weaponDescription").GetComponent<TMPro.TextMeshProUGUI>();
+            weaponName = GameObject.Find("weaponName").GetComponent<TMPro.TextMeshProUGUI>();
+            weaponImage = GameObject.Find("weaponImage").GetComponent<UnityEngine.UI.Image>();
+
+            QImage = GameObject.Find("QImage").GetComponent<UnityEngine.UI.Image>();
+            QName = GameObject.Find("QName").GetComponent<TMPro.TextMeshProUGUI>();
+            QDescription = GameObject.Find("QDescription").GetComponent<TMPro.TextMeshProUGUI>();
+
+            FImage = GameObject.Find("FImage").GetComponent<UnityEngine.UI.Image>();
+            FName = GameObject.Find("FName").GetComponent<TMPro.TextMeshProUGUI>();
+            FDescription = GameObject.Find("FDescription").GetComponent<TMPro.TextMeshProUGUI>();
+            
             config = new Game.Share.ActorConfig();
         }
 
@@ -76,7 +102,40 @@ namespace OneCanRun.UI{
         }
 
 
+        // just fill the following 3 function if the camp changes
+        private void useAzeymaCampInfo(){
+             
 
+        }
+
+        private void useHaloneCampInfo(){
+
+
+        }
+
+        private void useByregotCampInfo(){
+
+
+        }
+
+        private void updateCampInfo(){
+            // change weapon and skill info
+            switch (this.config.getCampType()){
+                case Game.Share.ActorConfig.CampType.Azeyma:
+                    useAzeymaCampInfo();
+                    break;
+                case Game.Share.ActorConfig.CampType.Byregot:
+                    useByregotCampInfo();
+                    break;
+                case Game.Share.ActorConfig.CampType.Halone:
+                    useHaloneCampInfo();
+                    break;
+                default:
+                    break;
+
+            }
+
+        }
 
         // click event
         public void addStamina(){
@@ -118,6 +177,36 @@ namespace OneCanRun.UI{
         public void decreaseTechnique(){
             if (config.decreaseTechnique())
                 dirty = true;
+        }
+
+        public void confirm(){
+            // save the config
+            Game.Share.ActorConfig.saveAsFile("test", this.config);
+
+            // change the scene
+
+        }
+
+
+        public void changeCamp(){
+
+            switch (this.campLabel.text){
+
+                case "Azeyma":
+                    config.setCampType(Game.Share.ActorConfig.CampType.Azeyma);
+                    break;
+                case "Halone":
+                    config.setCampType(Game.Share.ActorConfig.CampType.Halone);
+                    break;
+                case "Byregot":
+                    config.setCampType(Game.Share.ActorConfig.CampType.Byregot);
+                    break;
+                default:
+                    break;
+            }
+
+            this.updateCampInfo();
+
         }
 
 

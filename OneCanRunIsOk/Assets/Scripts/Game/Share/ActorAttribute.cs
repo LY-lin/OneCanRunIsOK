@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OneCanRun
-{
+namespace OneCanRun{
+
+    [System.Serializable]
     public class ActorAttribute{
         public int strength;
         public int intelligence;

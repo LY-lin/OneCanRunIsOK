@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace OneCanRun.Game.Share{
-   
+   [System.Serializable]
     public class ActorConfig{
         // for search index
+        [System.Serializable]
         static class ActorConfigConstant
         {
             public const int stamina = 0;
@@ -13,6 +14,12 @@ namespace OneCanRun.Game.Share{
             public const int technique = 3;
         }
 
+        public enum CampType{
+            Azeyma = 0,
+            Halone = 1,
+            Byregot = 2
+        }
+        private CampType campType;
         private ActorAttribute defaultAttribute;
         private ActorProperties defaultProperties;
         private ulong point2Allocate = 10;
@@ -25,9 +32,11 @@ namespace OneCanRun.Game.Share{
         private int[] pointAllocated;
 
         public ActorConfig(){
+            // initialization
             pointAllocated = new int[4];
             defaultAttribute = new ActorAttribute();
             defaultProperties = new ActorProperties();
+            this.campType = CampType.Azeyma;
             // just for programming convenience
             pointAllocated[ActorConfigConstant.stamina] = 0;
             pointAllocated[ActorConfigConstant.intelligence] = 0;
@@ -147,6 +156,16 @@ namespace OneCanRun.Game.Share{
 
         }
 
+        public void setCampType(CampType _campType){
+            this.campType = _campType;
+
+        }
+
+        public CampType getCampType(){
+            return this.campType;
+
+        }
+
 
         // judge the action is feasible
         private bool sentence(bool add){
@@ -213,6 +232,21 @@ namespace OneCanRun.Game.Share{
         public int getAllocatedTechnique(){
 
             return this.pointAllocated[ActorConfigConstant.technique];
+        }
+
+        // for next scene to create actor
+        public static void saveAsFile(string name, ActorConfig actorConfig){
+            string path;
+            path = System.IO.Directory.GetCurrentDirectory();
+            path += "\\Config\\";
+            path += name;
+            System.IO.FileStream fileStream = new System.IO.FileStream(path, System.IO.FileMode.Create);
+            System.Runtime.Serialization.Formatters.Binary.BinaryFormatter binaryFormatter = 
+                new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+
+            binaryFormatter.Serialize(fileStream, actorConfig);
+            fileStream.Close();
+
         }
 
     }
