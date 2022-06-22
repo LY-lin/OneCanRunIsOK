@@ -20,11 +20,18 @@ namespace OneCanRun.Game.Share{
             Byregot = 2
         }
         private CampType campType;
+
+        // base value for different camp
+        private ActorAttribute baseAttribute;
         private ActorAttribute defaultAttribute;
+
+        // basevalue for different camp
+        private ActorProperties baseProperties;
         private ActorProperties defaultProperties;
         private ulong point2Allocate = 10;
         private bool dirty = true;
-        /*  0 -> stamina
+        /*  
+            0 -> stamina
             1 -> strength
             2 -> intelligence
             3 -> technique
@@ -35,8 +42,14 @@ namespace OneCanRun.Game.Share{
             // initialization
             pointAllocated = new int[4];
             defaultAttribute = new ActorAttribute();
+            baseAttribute = new ActorAttribute();
+            baseProperties = new ActorProperties();
             defaultProperties = new ActorProperties();
             this.campType = CampType.Azeyma;
+
+
+            //@ to do read base value
+
             // just for programming convenience
             pointAllocated[ActorConfigConstant.stamina] = 0;
             pointAllocated[ActorConfigConstant.intelligence] = 0;
@@ -192,7 +205,20 @@ namespace OneCanRun.Game.Share{
         // calculate core function
         private void calculate(){
 
+            // calculate attribute
+            defaultAttribute.intelligence = baseAttribute.intelligence + pointAllocated[ActorConfigConstant.intelligence];
+            defaultAttribute.stamina = baseAttribute.stamina + pointAllocated[ActorConfigConstant.stamina];
+            defaultAttribute.strength = baseAttribute.strength + pointAllocated[ActorConfigConstant.strength];
+            defaultAttribute.technique = baseAttribute.technique + pointAllocated[ActorConfigConstant.technique];
 
+            // calculate property via function
+            this.defaultProperties.setMaxHealth(this.baseProperties.getMaxHealth() + (this.baseAttribute.stamina + getAllocatedStamina()) * 10);
+            this.defaultProperties.setPhysicalAttack(this.baseProperties.getPhysicalAttack() + (this.baseAttribute.strength +  getAllocatedStrength()) * 3);
+            this.defaultProperties.setMagicAttack(this.baseProperties.getMagicAttack() + (this.baseAttribute.intelligence + getAllocatedIntelligence()) * 10);
+            this.defaultProperties.setPhysicalDefence(this.baseProperties.getPhysicalDefence() + (this.baseAttribute.stamina + getAllocatedStamina()) * 1);
+            this.defaultProperties.setMagicDefence(this.baseProperties.getMagicDefence() + (this.baseAttribute.stamina + getAllocatedStamina()) * 1);
+            this.defaultProperties.setMaxSpeed((float)(this.baseProperties.getMaxSpeed() + (this.baseAttribute.technique +  getAllocatedTechnique()) * 0.5));
+            
             dirty = false;
         }
 
@@ -247,6 +273,21 @@ namespace OneCanRun.Game.Share{
             binaryFormatter.Serialize(fileStream, actorConfig);
             fileStream.Close();
 
+        }
+
+        // read file to config actor attribute
+        public static ActorConfig readFile(string name){
+            string path;
+            path = System.IO.Directory.GetCurrentDirectory();
+            path += "\\Config\\";
+            path += name;
+            System.IO.FileStream fileStream = new System.IO.FileStream(path, System.IO.FileMode.Open);
+            System.Runtime.Serialization.Formatters.Binary.BinaryFormatter binaryFormatter = 
+                new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+
+            ActorConfig config = binaryFormatter.Deserialize(fileStream) as ActorConfig;
+
+            return config;
         }
 
     }

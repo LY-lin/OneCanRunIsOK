@@ -11,7 +11,7 @@ public class MyStartScene : MonoBehaviour
     }
 
     public void startGame(){
-        UnityEngine.SceneManagement.SceneManager.LoadScene("LoadingScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("ActorSelectScene");
         
     }
 

@@ -78,10 +78,10 @@ namespace OneCanRun.UI{
 
         private void mValueUpdate(){
             ActorAttribute actorAttribute = config.getActorAttribute();
-            staminaValue.text = (config.getAllocatedStamina() + actorAttribute.stamina).ToString();
-            strengthValue.text = (config.getAllocatedStrength() + actorAttribute.strength).ToString();
-            intelligeValue.text = (config.getAllocatedIntelligence() + actorAttribute.intelligence).ToString();
-            techniqueValue.text = (config.getAllocatedTechnique() + actorAttribute.technique).ToString();
+            staminaValue.text = (actorAttribute.stamina).ToString();
+            strengthValue.text = (actorAttribute.strength).ToString();
+            intelligeValue.text = (actorAttribute.intelligence).ToString();
+            techniqueValue.text = (actorAttribute.technique).ToString();
             staminaAllocatedValue.text = config.getAllocatedStamina().ToString();
             strengthAllocatedValue.text = config.getAllocatedStrength().ToString();
             intelligeAllocatedValue.text = config.getAllocatedIntelligence().ToString();
@@ -200,10 +200,9 @@ namespace OneCanRun.UI{
 
         public void confirm(){
             // save the config
-            Game.Share.ActorConfig.saveAsFile("test", this.config);
-
+            Game.Share.ActorConfig.saveAsFile("ActorConfig.cfg", this.config);
             // change the scene
-
+            UnityEngine.SceneManagement.SceneManager.LoadScene("LoadingScene");
         }
 
 
@@ -225,6 +224,11 @@ namespace OneCanRun.UI{
             }
 
             this.updateCampInfo();
+
+        }
+
+        public void backButton(){
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MyStartScene");
 
         }
 
