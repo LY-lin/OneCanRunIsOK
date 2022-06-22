@@ -18,6 +18,12 @@ namespace OneCanRun.UI
         Health m_PlayerHealth;
         Backpack m_backpack;
 
+        public Backpack getBackpack(){
+            return m_backpack;
+
+        }
+
+
         void Start()
         {
 
@@ -34,12 +40,7 @@ namespace OneCanRun.UI
 
         void Update()
         {
-            // 当背包没有开启时，点击菜单外时锁定光标
-            if (!m_backpack.gameObject.activeSelf && Input.GetMouseButtonDown(0))
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
+            
 
             //输入esc，退出背包
             if (Input.GetKeyDown(KeyCode.Escape))
