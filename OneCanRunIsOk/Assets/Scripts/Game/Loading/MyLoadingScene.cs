@@ -21,7 +21,7 @@ namespace OneCanRun
 
         IEnumerator loadScene(){
 
-            AsyncOperation operation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("SampleScene");
+            AsyncOperation operation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("SampleScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
             slider.value = 0.2f;
             operation.allowSceneActivation = false;
 
