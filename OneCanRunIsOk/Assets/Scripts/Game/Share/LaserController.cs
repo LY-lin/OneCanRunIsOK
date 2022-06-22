@@ -8,6 +8,9 @@ namespace OneCanRun.Game.Share
 {
     public class LaserController : MonoBehaviour
     {
+        //是否当武器使用（进行激光弹道修正）
+        public bool usedAsWeapon = false;
+
         public GameObject HitEffect;
         public float HitOffset = 0;
 
@@ -19,10 +22,10 @@ namespace OneCanRun.Game.Share
 
         public Transform LaserSocket;
         public DamageType damageType;
-        public float damage = 10f;
+        public float damage = 20f;
 
         [Tooltip("how many frames to calculate per attack")]
-        public int deltaCount = 50;
+        public int deltaCount = 25;
         private float totalDeltaTime = 0;
         private int curDeltaCount = 0;
 
@@ -40,6 +43,7 @@ namespace OneCanRun.Game.Share
         private ParticleSystem[] Hit;
 
         private GameObject LaserInstance;
+        public Transform PlayerSocket;
         //private Vector3 hitPoint;
 
         void Start()
@@ -60,13 +64,15 @@ namespace OneCanRun.Game.Share
             //SetVector("_TilingMainTexUVNoiseZW", Length); - old code, _TilingMainTexUVNoiseZW no more exist
             Laser.material.SetTextureScale("_MainTex", new Vector2(Length[0], Length[1]));
             Laser.material.SetTextureScale("_Noise", new Vector2(Length[2], Length[3]));
+
             //To set LineRender position
             if (Laser != null && UpdateSaver == false)
             {
                 Laser.SetPosition(0, transform.position);
+                Transform raySocket = (usedAsWeapon) ? PlayerSocket : this.transform;
                 RaycastHit hit; //DELATE THIS IF YOU WANT USE LASERS IN 2D
                                 //ADD THIS IF YOU WANNT TO USE LASERS IN 2D: RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.forward, MaxLength);       
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, MaxLength))//CHANGE THIS IF YOU WANT TO USE LASERRS IN 2D: if (hit.collider != null)
+                if (Physics.Raycast(raySocket.position, raySocket.TransformDirection(Vector3.forward), out hit, MaxLength))//CHANGE THIS IF YOU WANT TO USE LASERRS IN 2D: if (hit.collider != null)
                 {
                     //End laser position if collides with object
                     //hitPoint = hit.point;
@@ -106,7 +112,7 @@ namespace OneCanRun.Game.Share
                 else
                 {
                     //End laser position if doesn't collide with object
-                    var EndPos = transform.position + transform.forward * MaxLength;
+                    var EndPos = raySocket.position + raySocket.forward * MaxLength;
                     //hitPoint = EndPos;
                     Laser.SetPosition(1, EndPos);
                     HitEffect.transform.position = EndPos;
@@ -193,10 +199,16 @@ namespace OneCanRun.Game.Share
             LaserInstance = Instantiate(gameObject, LaserSocket);
         }
 
+        public void StartLaser(Transform socket)
+        {
+            PlayerSocket = socket;
+            LaserInstance = Instantiate(gameObject, LaserSocket);
+        }
+
         public void StopLaser()
         {
             DisablePrepare();
-            Destroy(LaserInstance, 1);
+            Destroy(LaserInstance, 0.1f);
         }
     }
 }
