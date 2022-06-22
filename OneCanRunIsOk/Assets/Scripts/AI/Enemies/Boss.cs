@@ -48,6 +48,7 @@ namespace OneCanRun.AI.Enemies
         float lastAttackTime = Mathf.Infinity;
         float lastPlayTime = Mathf.Infinity;
         float Duration = 0;
+        bool CG = true;
 
         // Start is called before the first frame update
         void Start()
@@ -100,6 +101,16 @@ namespace OneCanRun.AI.Enemies
         void OnDetectTarget()
         {
             
+        }
+
+        public bool GetCG()
+        {
+            return CG;
+        }
+
+        public void SetCG(bool cg)
+        {
+            CG = cg;
         }
 
         // 处理视角，追踪玩家
