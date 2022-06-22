@@ -193,7 +193,16 @@ namespace OneCanRun.UI
         }
 
         void AddBuff(BuffController buffController)
-      {
+        {
+            if(buffController.isForever)
+            for(int i = 0; i < m_Buffs.Count; i++)
+            {
+                    if (buffController.buffID == m_Buffs[i].m_buff.buffID)
+                    {
+                        int newNum = int.Parse(m_Buffs[i].m_buff.Num)+1;
+                        m_Buffs[i].m_buff.Num = newNum.ToString();
+                    }
+            }
             GameObject buffUIInstance = Instantiate(BuffPrefab, BuffPlane);
             BuffUI newBuffUI = buffUIInstance.GetComponent<BuffUI>();
             DebugUtility.HandleErrorIfNullGetComponent<BuffUI, Backpack>(newBuffUI, 

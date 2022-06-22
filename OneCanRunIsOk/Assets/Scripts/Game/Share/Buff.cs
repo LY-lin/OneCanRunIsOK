@@ -34,8 +34,11 @@ namespace OneCanRun.Game.Share
         public float maxJumpBuff;
 
         public GameObject ImpactVfx;
+        [Header("Buff Description")]
         public string name;
         public string description;
+        public Sprite buffImg;
+        public int buffID;
 
         public float getHealRateBuff() { return healRateBuff; }
         public float getPhysicalAttackBuff() { return physicalAttackBuff; }
