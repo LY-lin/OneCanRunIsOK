@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af01779345aa664c85a6bc91204c961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: testSkill
-  SkillDescription: test test
+  SkillName: BlitzBall
+  SkillDescription: Deals a small area of magic damage
   SkillIcon: {fileID: 21300000, guid: e801518f4fc11234e9887f62a845f839, type: 3}
   m_SkillType: 0
   m_SpSkillType: 0

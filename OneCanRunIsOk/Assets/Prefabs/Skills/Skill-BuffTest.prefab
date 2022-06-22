@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SkillName: Holy Help
-  SkillDescription: 
+  SkillDescription: Pray for strength and healing.
   SkillIcon: {fileID: 21300000, guid: abb1e2a3a1dce31419f613a40c89bebb, type: 3}
   m_SkillType: 1
   m_SpSkillType: 0
