@@ -35,13 +35,36 @@ namespace OneCanRun.UI{
         TMPro.TextMeshProUGUI FDescription;
         UnityEngine.UI.Image FImage;
 
+
+        // record the scene for fast switching next scene
+        UnityEngine.SceneManagement.Scene thisScene;
+        AsyncOperation nextSceneOperation;
+
+        // prepare next Scene
+        private System.Collections.IEnumerator prepareNextScene(){
+            nextSceneOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("LoadingScene");
+            nextSceneOperation.allowSceneActivation = false;
+            while (!nextSceneOperation.isDone){
+                yield return null;
+
+            }
+        }
+
         // for decreasing update 
         private bool dirty = true;
-        private void Start()
-        {
+
+        private void Start(){
+            thisScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+
+            // initialize next scene but not to active
+            //StartCoroutine(prepareNextScene());
+            
+
+            // calculate initial value
             updateCampInfo();
             config.calculateImmediately();
             mValueUpdate();
+            
         }
         private void OnEnable(){
             staminaValue = GameObject.Find("staminaValue").GetComponent<TMPro.TextMeshProUGUI>();
@@ -231,7 +254,16 @@ namespace OneCanRun.UI{
             Game.Share.ActorConfig.saveAsFile("ActorConfig.cfg", this.config);
             // change the scene
             UnityEngine.SceneManagement.SceneManager.LoadScene("LoadingScene");
-        }
+            //UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("ActorSelectScene");
+            //GameObject[] a = thisScene.GetRootGameObjects();
+            //for (int i = 0; i < a.Length; i++)
+            //    a[i].SetActive(false);
+
+            //nextSceneOperation.allowSceneActivation = true;
+            
+
+            
+            }
 
 
         public void changeCamp(){
