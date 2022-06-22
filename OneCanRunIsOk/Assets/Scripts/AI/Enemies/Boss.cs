@@ -45,6 +45,7 @@ namespace OneCanRun.AI.Enemies
         CharacterController characterController;
         int pathDestinationNodeIndex;
         float lastHitTime = Mathf.Infinity;
+        float lastAttackTime = Mathf.Infinity;
         float lastPlayTime = Mathf.Infinity;
         float Duration = 0;
 
@@ -79,6 +80,8 @@ namespace OneCanRun.AI.Enemies
             
             colliders = GetComponentsInChildren<Collider>();
             DebugUtility.HandleErrorIfNoComponentFound<Collider, Boss>(colliders.Length, this, gameObject);
+
+            lastAttackTime = Time.time;
         }
 
         // Update is called once per frame
@@ -248,7 +251,21 @@ namespace OneCanRun.AI.Enemies
 
         public bool TryAttack(string Attack, float duration)
         {
-            return true;
+            if(lastAttackTime <= Time.time)
+            {
+                lastAttackTime = Time.time;
+                animator.SetTrigger(Attack);
+                return true;
+            }
+            else if(lastAttackTime + duration > Time.time)
+            {
+                return true;
+            }
+            else
+            {
+                lastAttackTime += duration;
+                return false;
+            }
         }
 
         void OnDamaged(float damage, GameObject damageSource)
