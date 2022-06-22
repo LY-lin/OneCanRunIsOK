@@ -5,6 +5,7 @@ using UnityEngine;
 namespace OneCanRun.Game.Share
 {
     //���ඨ����һ����ɫ�����л�����ֵ��This class defines all the base values for a role
+    [System.Serializable]
     public class ActorProperties
     {
 

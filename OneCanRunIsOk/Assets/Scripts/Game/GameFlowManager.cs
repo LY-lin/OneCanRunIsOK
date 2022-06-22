@@ -53,7 +53,7 @@ namespace OneCanRun.Game
 
             //
             
-            EndGameFadeCanvasGroup.gameObject.SetActive(false);
+            //EndGameFadeCanvasGroup.gameObject.SetActive(false);
         }
 
         void Update()

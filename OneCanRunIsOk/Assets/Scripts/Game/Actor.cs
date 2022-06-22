@@ -29,7 +29,11 @@ namespace OneCanRun.Game
         public ActorBuffManager buffManager;
         private bool dirty = true;
         public bool isPlayer = false;
+        private uint level = 0;
 
+        public uint getLevel(){
+            return level;
+        }
 
         public void Awake()
         {
@@ -107,7 +111,6 @@ namespace OneCanRun.Game
             }
             // update level up data, including level up seriesly
             // reset experice
-            this.actorAttribute.point2allocate += 5;
             int strenthEnhanced = 1;
             int techniqueEnhanced = 1;
             int intelligenceEnhanced = 1;

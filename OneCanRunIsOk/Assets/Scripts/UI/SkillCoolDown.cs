@@ -22,10 +22,25 @@ namespace OneCanRun.UI
         [Tooltip("Text for noting cooling")]
         public TextMeshProUGUI Cooling;
 
+        [Tooltip("spSkill Image component displaying current last Cool down time")]
+        public Image spCoolDownTimeImage;
+        [Tooltip("spSkill Warning cooling image")]
+        public Image spWarning;
+
+        [Tooltip("spSkill Skill Image")]
+        public Image spSkillIcon;
+
+        [Tooltip("spSkill Text for noting cooling")]
+        public TextMeshProUGUI spCooling;
+
         PlayerInputHandler playerInputHandler;
         SkillController m_skillController;
+        SkillController m_SpSkillController;
         float LastTimeButton = Mathf.NegativeInfinity;    //上次冷却中按下技能键的时间
+        float spLastTimeButton = Mathf.NegativeInfinity;
+
         bool ifTip;
+        bool spIfTip;
         // Start is called before the first frame update
         void Start()
         {
@@ -37,17 +52,23 @@ namespace OneCanRun.UI
             DebugUtility.HandleErrorIfNullFindObject<PlayerInputHandler, PlayerWeaponsManager>(playerInputHandler, this);
 
             m_skillController = playerSkillsManager.CurrentSkillInstance;
+
             SkillIcon.sprite = m_skillController.SkillIcon;
             Cooling.gameObject.SetActive(false);
             Warning.gameObject.SetActive(false);
             ifTip = false;
 
+            m_SpSkillController = playerSkillsManager.CurrentSpSkillInstance;
+            spSkillIcon.sprite = m_SpSkillController.SkillIcon;
+            spCooling.gameObject.SetActive(false);
+            spWarning.gameObject.SetActive(false);
+            spIfTip = false;
         }
 
         // Update is called once per frame
         void Update()
         {
-             
+             //普通技能
             if (CoolDownTimeImage.fillAmount >0 && playerInputHandler.GetUseSkillButtonDown())
             {
                 LastTimeButton = Time.time;
@@ -55,8 +76,6 @@ namespace OneCanRun.UI
                 ifTip = true;
                 Warning.gameObject.SetActive(true);
             }
-
-            
             float lastTimeRatio = 1 - (Time.time - m_skillController.m_LastTimeUse )/ m_skillController.CoolingTime;
 
             CoolDownTimeImage.fillAmount = (lastTimeRatio) > 0 ? lastTimeRatio : 0;
@@ -68,6 +87,27 @@ namespace OneCanRun.UI
                 Cooling.gameObject.SetActive(false);
                 Warning.gameObject.SetActive(false);
                 ifTip = false;
+            }
+
+            //sp技能
+            if (spCoolDownTimeImage.fillAmount > 0 && playerInputHandler.GetUseSPSkillButtonDown())
+            {
+                spLastTimeButton = Time.time;
+                spCooling.gameObject.SetActive(true);
+                spIfTip = true;
+                spWarning.gameObject.SetActive(true);
+            }
+            float splastTimeRatio = 1 - (Time.time - m_SpSkillController.m_LastTimeUse) / m_SpSkillController.CoolingTime;
+
+            spCoolDownTimeImage.fillAmount = (splastTimeRatio) > 0 ? splastTimeRatio : 0;
+            spCoolDownTimeImage.gameObject.SetActive(splastTimeRatio <= 1 && splastTimeRatio > 0);
+
+
+            if (spCoolDownTimeImage.fillAmount == 0 || (spIfTip && Time.time - spLastTimeButton > 1f))
+            {
+                spCooling.gameObject.SetActive(false);
+                spWarning.gameObject.SetActive(false);
+                spIfTip = false;
             }
 
         }
