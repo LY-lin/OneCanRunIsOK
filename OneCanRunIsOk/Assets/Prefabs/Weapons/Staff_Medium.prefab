@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 2883961462237347486}
   - component: {fileID: 2611912730512937136}
   - component: {fileID: 8448753591561090651}
+  - component: {fileID: 6104069238416480775}
   m_Layer: 7
   m_Name: Staff_Medium
   m_TagString: Untagged
@@ -140,7 +141,6 @@ MonoBehaviour:
     CrosshairSize: 0
     CrosshairColor: {r: 0, g: 0, b: 0, a: 0}
   WeaponRoot: {fileID: 3676379699232972619}
-  DamagableBox: {fileID: 0}
   DelayBetweenAttacks: 0
   damage: 40
   WeaponMuzzle: {fileID: 4117581731978730580}
@@ -149,7 +149,7 @@ MonoBehaviour:
   DelayBetweenShots: 0.5
   BulletSpreadAngle: 0
   BulletsPerShot: 1
-  RecoilForce: 1
+  RecoilForce: 0.1
   AutomaticReload: 1
   HasPhysicalBullets: 0
   speed: 25
@@ -268,3 +268,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &6104069238416480775
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3676379699232972619}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2bc2282ba553dce4bb1387bd1f1cd7c8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

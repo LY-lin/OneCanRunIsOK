@@ -531,7 +531,7 @@ namespace OneCanRun.Game.Share
 
                 LastChargeTriggerTimestamp = Time.time;
                 IsCharging = true;
-
+                GetComponent<Animator>().SetTrigger("Attack");
                 muzzleChargeInstance = Instantiate(MuzzleChargePrefab, WeaponMuzzle.position,
                     WeaponMuzzle.rotation, WeaponMuzzle.transform);
                 // Unparent the muzzleFlashInstance
@@ -553,7 +553,7 @@ namespace OneCanRun.Game.Share
 
                 CurrentCharge = 0f;
                 IsCharging = false;
-                
+                GetComponent<Animator>().SetTrigger("EndAttack");
                 Destroy(muzzleChargeInstance);
                 return true;
             }
