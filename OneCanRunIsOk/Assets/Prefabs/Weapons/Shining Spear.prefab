@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1526746557833610345
+--- !u!1 &1611169281684996860
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,83 +8,52 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4117581731978730580}
-  m_Layer: 7
-  m_Name: Muzzle
+  - component: {fileID: 2096378624455956550}
+  - component: {fileID: 3078226654362097635}
+  - component: {fileID: 962918872341848873}
+  - component: {fileID: 5701276930331171990}
+  - component: {fileID: 5297497335661206287}
+  - component: {fileID: -4451620863494239889}
+  - component: {fileID: 4223053836125604463}
+  m_Layer: 0
+  m_Name: Shining Spear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4117581731978730580
+--- !u!4 &2096378624455956550
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1526746557833610345}
-  m_LocalRotation: {x: -0.24039742, y: 0, z: 0, w: 0.9706745}
-  m_LocalPosition: {x: 0, y: 0.691, z: 0}
+  m_GameObject: {fileID: 1611169281684996860}
+  m_LocalRotation: {x: 0.6427876, y: 0, z: 0, w: 0.7660445}
+  m_LocalPosition: {x: -0.2, y: -0.1, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4057408425029354993}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -27.82, y: 0, z: 0}
---- !u!1 &3676379699232972619
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4057408425029354993}
-  - component: {fileID: 1144218743044459092}
-  - component: {fileID: 2883961462237347486}
-  - component: {fileID: 2611912730512937136}
-  - component: {fileID: 8448753591561090651}
-  - component: {fileID: 6104069238416480775}
-  m_Layer: 7
-  m_Name: Staff_Medium
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4057408425029354993
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3676379699232972619}
-  m_LocalRotation: {x: 0.24039747, y: -0, z: -0, w: 0.9706746}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 4117581731978730580}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 27.82, y: 0, z: 0}
---- !u!33 &1144218743044459092
+  m_LocalEulerAnglesHint: {x: 80, y: 0, z: 0}
+--- !u!33 &3078226654362097635
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3676379699232972619}
-  m_Mesh: {fileID: 1781805468462327908, guid: acd76795deeadd846a39bed2115bcc9b, type: 3}
---- !u!23 &2883961462237347486
+  m_GameObject: {fileID: 1611169281684996860}
+  m_Mesh: {fileID: -679773820921150111, guid: df3f07283842c864abb844da441c0bf8, type: 3}
+--- !u!23 &962918872341848873
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3676379699232972619}
+  m_GameObject: {fileID: 1611169281684996860}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -96,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d2bf295b931260844ae49c916d7fc5e9, type: 2}
+  - {fileID: 2100000, guid: d2221f262d55c97498791aa43e28da99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -118,67 +87,109 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2611912730512937136
+--- !u!114 &5701276930331171990
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3676379699232972619}
+  m_GameObject: {fileID: 1611169281684996860}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6a552d5b5b943243964dce88b4fd9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 1
-  RemoteWeapons: 1
-  WeaponName: Ice Wand
-  WeaponIcon: {fileID: 21300000, guid: d977df5edeb809f41b362e4bc5d35645, type: 3}
+  isPlayer: 1
+  damageType: 0
+  RemoteWeapons: 0
+  WeaponName: Shining Spear
+  WeaponIcon: {fileID: 0}
   WeaponImg: {fileID: 0}
-  description: A staff filled with the power of ice that slows down attacked monsters
+  description: A spear that glows, but has no special magic
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 0}
     CrosshairSize: 0
     CrosshairColor: {r: 0, g: 0, b: 0, a: 0}
-  WeaponRoot: {fileID: 3676379699232972619}
+  WeaponRoot: {fileID: 1611169281684996860}
   DelayBetweenAttacks: 0
-  damage: 40
-  WeaponMuzzle: {fileID: 4117581731978730580}
-  ShootType: 2
-  bullet: {fileID: 1920325297268671343, guid: 0c5a438115d9a67419b5311aad34ea6b, type: 3}
-  DelayBetweenShots: 0.5
+  damage: 30
+  WeaponMuzzle: {fileID: 2096378624455956550}
+  ShootType: 0
+  bullet: {fileID: 1254343392523665438, guid: 28ca67a84a75e9642a8da4bee674efbc, type: 3}
+  DelayBetweenShots: 1
   BulletSpreadAngle: 0
   BulletsPerShot: 1
-  RecoilForce: 0.1
-  AutomaticReload: 1
+  RecoilForce: 1
+  AutomaticReload: 0
   HasPhysicalBullets: 0
-  speed: 25
-  ClipSize: 1
+  speed: 100
+  ClipSize: 30
   ShellCasing: {fileID: 0}
   EjectionPort: {fileID: 0}
   ShellCasingEjectionForce: 2
   ShellPoolSize: 1
-  AmmoReloadRate: 200
-  AmmoReloadDelay: 0
-  MaxAmmo: 1
-  AutomaticReleaseOnCharged: 1
-  MaxChargeDuration: 3
-  AmmoUsedOnStartCharge: 0
+  AmmoReloadRate: 1
+  AmmoReloadDelay: 2
+  MaxAmmo: 8
+  AutomaticReleaseOnCharged: 0
+  MaxChargeDuration: 2
+  AmmoUsedOnStartCharge: 1
   AmmoUsageRateWhileCharging: 1
+  LaseringCost: 2
   WeaponAnimator: {fileID: 0}
   MuzzleFlashPrefab: {fileID: 0}
   UnparentMuzzleFlash: 0
   ShootSfx: {fileID: 0}
   ChangeWeaponSfx: {fileID: 0}
-  MuzzleChargePrefab: {fileID: 1920325297268671343, guid: 889dd67908ff48640a817f0b0074814e, type: 3}
+  MuzzleChargePrefab: {fileID: 0}
   UseContinuousShootSound: 0
---- !u!82 &8448753591561090651
+--- !u!114 &5297497335661206287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611169281684996860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 400791e0df9c010468f440ea7dab1a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 0
+  attackVfx: {fileID: 1812881953744270, guid: ed0c022a338d3384d9ee622d354a94e2, type: 3}
+  attackVfxDelay: 0
+  attackSocket: {fileID: 0}
+  attackLength: 1.5
+  attackWidth: 0.5
+  attackHeight: 2
+  WeaponAttackSfx: {fileID: 8300000, guid: 3b08cea61279d6649bb94928b43213c5, type: 3}
+--- !u!95 &-4451620863494239889
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611169281684996860}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6b6ff64b3d466284fb222410a1cccc43, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!82 &4223053836125604463
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3676379699232972619}
+  m_GameObject: {fileID: 1611169281684996860}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -268,23 +279,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &6104069238416480775
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3676379699232972619}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2bc2282ba553dce4bb1387bd1f1cd7c8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

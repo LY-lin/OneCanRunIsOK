@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4654144126487180557
+--- !u!1 &230908398740711128
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4654144126487180558}
-  - component: {fileID: 4654144126487180559}
-  m_Layer: 7
-  m_Name: AzeymaSkill
+  - component: {fileID: 927281462185983436}
+  - component: {fileID: -2395946979236021228}
+  m_Layer: 0
+  m_Name: HolyHelp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4654144126487180558
+--- !u!4 &927281462185983436
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4654144126487180557}
+  m_GameObject: {fileID: 230908398740711128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,26 +32,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4654144126487180559
+--- !u!114 &-2395946979236021228
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4654144126487180557}
+  m_GameObject: {fileID: 230908398740711128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6af01779345aa664c85a6bc91204c961, type: 3}
+  m_Script: {fileID: 11500000, guid: 7cc3d8018dffa7f47a6439043c09539e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: BlitzBall
-  SkillDescription: Deals a small area of magic damage
-  SkillIcon: {fileID: 21300000, guid: e801518f4fc11234e9887f62a845f839, type: 3}
-  m_SkillType: 0
-  m_SpSkillType: 0
-  CoolingTime: 2
-  UsingRange: 10
-  ExistingTime: 10
-  AimingVfx: {fileID: 0}
-  UsingVfx: {fileID: 0}
-  UsingSfx: {fileID: 0}
+  type: 0
+  healRateBuff: 5
+  physicalAttackBuff: 20
+  magicAttackBuff: 20
+  physicalDefenceBuff: 20
+  magicDefenceBuff: 20
+  maxSpeedBuff: 0
+  maxJumpBuff: 0
+  ImpactVfx: {fileID: 0}
+  name: 
+  description: 
+  hasExistTime: 1
+  ExistTime: 10

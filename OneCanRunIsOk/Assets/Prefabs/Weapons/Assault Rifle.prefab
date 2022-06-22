@@ -320,12 +320,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a552d5b5b943243964dce88b4fd9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 1
   damageType: 0
   RemoteWeapons: 1
   WeaponName: AR1
   WeaponIcon: {fileID: 21300000, guid: d977df5edeb809f41b362e4bc5d35645, type: 3}
   WeaponImg: {fileID: 21300000, guid: 28f7e7cfb846b53419768569dbcd7404, type: 3}
-  description: 
+  description: Cheap, leathery, old and capable of firing
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 0}
     CrosshairSize: 0
@@ -355,6 +356,7 @@ MonoBehaviour:
   MaxChargeDuration: 2
   AmmoUsedOnStartCharge: 1
   AmmoUsageRateWhileCharging: 1
+  LaseringCost: 2
   WeaponAnimator: {fileID: 0}
   MuzzleFlashPrefab: {fileID: 1232470965182556, guid: bf1c78c73aa81bd429fde70450a2c768, type: 3}
   UnparentMuzzleFlash: 0

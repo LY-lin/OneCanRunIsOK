@@ -40,6 +40,8 @@ namespace OneCanRun.UI{
         private void Start()
         {
             updateCampInfo();
+            config.calculateImmediately();
+            mValueUpdate();
         }
         private void OnEnable(){
             staminaValue = GameObject.Find("staminaValue").GetComponent<TMPro.TextMeshProUGUI>();
@@ -101,44 +103,66 @@ namespace OneCanRun.UI{
 
         private void Update(){
 
-            if (dirty)
+            if (dirty){
+                config.calculateImmediately();
                 mValueUpdate();
+            }
         }
 
 
         // just fill the following 3 function if the camp changes
         private void useAzeymaCampInfo(){
-            useCampInfo("Azeyma");
             config.setBaseAttribute(5, 7, 2, 6);
+            weaponDescription.text = "A staff carved out of rotten wood.";
+            weaponName.text = "Stuffy Wand";
+            //weaponImage.sprite = gameObject.GetComponentInChildren<WeaponController>().WeaponImg;
+
+            QImage.sprite = Resources.Load<Sprite>("Skills/FireRain");
+            QName.text = "FireRain";
+            QDescription.text = "A massive rain of fire from the sky.";
+
+            
+            FImage.sprite = Resources.Load<Sprite>("Skills/Cast"); ;
+            FName.text = "BlitzBall";
+            FDescription.text = "Deals a small area of magic damage";
+
+
+
+
         }
 
         private void useHaloneCampInfo(){
-            useCampInfo("Halone");
+            weaponDescription.text = "A spear that glows, but has no special magic";
+            weaponName.text = "Shining Spear";
+            //weaponImage.sprite = gameObject.GetComponentInChildren<WeaponController>().WeaponImg;
+
+            QImage.sprite = Resources.Load<Sprite>("Skills/tornado");
+            QName.text = "Tonado";
+            QDescription.text = "Create a tornado that attracts monsters";
+
+
+            FImage.sprite = Resources.Load<Sprite>("Skills/Buff");
+            FName.text = "Holy Help";
+            FDescription.text = "Pray for strength and healing";
             config.setBaseAttribute(1, 10, 5, 8);
         }
 
         private void useByregotCampInfo(){
-            useCampInfo("Byregot");
+            weaponDescription.text = "Cheap, leathery, old and capable of firing";
+            weaponName.text = "AR1";
+            //weaponImage.sprite = gameObject.GetComponentInChildren<WeaponController>().WeaponImg;
+
+            QImage.sprite = Resources.Load<Sprite>("Skills/Flash");
+            QName.text = "Flash";
+            QDescription.text = "Stop nearby enemies at time and teleport to the target location";
+
+
+            //FImage.sprite = gameObject.GetComponent<SkillController>().SkillIcon;
+            FName.text = "Unfinish";
+            FDescription.text = "Unfinish";
             config.setBaseAttribute(2, 6, 2, 6);
         }
 
-        private void useCampInfo(string CampName)
-        {
-            GameObject gameObject = GameObject.Find(CampName + "Weapon");
-            weaponDescription.text = gameObject.GetComponentInChildren<WeaponController>().description;
-            weaponName.text = gameObject.GetComponentInChildren<WeaponController>().WeaponName;
-            weaponImage.sprite = gameObject.GetComponentInChildren<WeaponController>().WeaponImg;
-
-            gameObject = GameObject.Find(CampName + "SpSkill");
-            QImage.sprite = gameObject.GetComponent<SkillController>().SkillIcon;
-            QName.text = gameObject.GetComponent<SkillController>().SkillName;
-            QDescription.text = gameObject.GetComponent<SkillController>().SkillDescription;
-
-            gameObject = GameObject.Find(CampName + "Skill");
-            FImage.sprite = gameObject.GetComponent<SkillController>().SkillIcon;
-            FName.text = gameObject.GetComponent<SkillController>().SkillName;
-            FDescription.text = gameObject.GetComponent<SkillController>().SkillDescription;
-        }
 
         private void updateCampInfo(){
             // change weapon and skill info
@@ -228,8 +252,8 @@ namespace OneCanRun.UI{
             }
 
             this.updateCampInfo();
+            config.calculateImmediately();
             mValueUpdate();
-
         }
 
         public void backButton(){

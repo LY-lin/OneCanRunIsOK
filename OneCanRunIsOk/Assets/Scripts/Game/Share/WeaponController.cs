@@ -184,6 +184,7 @@ namespace OneCanRun.Game.Share
         [Tooltip("Sound played when changing to this weapon")]
         public AudioClip ChangeWeaponSfx;//充能武器时的音频片段
 
+
         [Tooltip("Prefab of the charge flash")]
         public GameObject MuzzleChargePrefab;//预制的枪口闪光，枪口的焰火
 
@@ -207,6 +208,9 @@ namespace OneCanRun.Game.Share
         float m_LastTimeShot = Mathf.NegativeInfinity;  //上次射击的实现 = 负无穷大
         public float LastChargeTriggerTimestamp { get; private set; }   //上次触发充能的时间戳
         Vector3 m_LastMuzzlePosition;   //上次枪口的位置
+
+
+        private CachePool cachePool;
         public BulletPoolManager bulletPoolManager;
         // Update is called once per frame
 
@@ -631,7 +635,7 @@ namespace OneCanRun.Game.Share
             //DamagableBox.GetComponent<MeleeController>().Init(this);
             GetComponent<Animator>().SetTrigger("Attack");
             IsAttacking = true;
-
+            //m_ShootAudioSource.PlayOneShot(WeaponAttackSfx);
 
         }
         void HandleShoot()

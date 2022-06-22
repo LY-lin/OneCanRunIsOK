@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2548421307829038991
+--- !u!1 &6013990982369288243
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,52 +8,52 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2888530304415298869}
-  - component: {fileID: 2286074428948282000}
-  - component: {fileID: 4061459464606191194}
-  - component: {fileID: 7175739040986870085}
-  - component: {fileID: 6019947675716088154}
-  - component: {fileID: 4208782828080431284}
+  - component: {fileID: 6358568393392945801}
+  - component: {fileID: 8039479310580020524}
+  - component: {fileID: 5221080027720417766}
+  - component: {fileID: 3054882029934424460}
+  - component: {fileID: 1096628243053953}
+  - component: {fileID: 6141312034165458156}
+  - component: {fileID: 2703726986948080268}
   m_Layer: 0
-  m_Name: Wand_Medium
+  m_Name: Magic Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2888530304415298869
+--- !u!4 &6358568393392945801
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2548421307829038991}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 6013990982369288243}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
-  m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 925978594670471485}
+  m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2286074428948282000
+--- !u!33 &8039479310580020524
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2548421307829038991}
-  m_Mesh: {fileID: -4006300823370068072, guid: 67be24e8ee52ec04497cfee5403c5fa3, type: 3}
---- !u!23 &4061459464606191194
+  m_GameObject: {fileID: 6013990982369288243}
+  m_Mesh: {fileID: -1195938968934217610, guid: 98318b7fbb6008a488a87d8f130a5b45, type: 3}
+--- !u!23 &5221080027720417766
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2548421307829038991}
+  m_GameObject: {fileID: 6013990982369288243}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 01adec13b5bee0a4fa62209d4664b7eb, type: 2}
+  - {fileID: 2100000, guid: 0f6ed5b953c1cc644943552d45f09db0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -87,67 +87,109 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7175739040986870085
+--- !u!114 &3054882029934424460
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2548421307829038991}
+  m_GameObject: {fileID: 6013990982369288243}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6a552d5b5b943243964dce88b4fd9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 1
-  RemoteWeapons: 1
-  WeaponName: Stuffy Wand
-  WeaponIcon: {fileID: 21300000, guid: d977df5edeb809f41b362e4bc5d35645, type: 3}
-  WeaponImg: {fileID: 0}
-  description: A staff carved out of rotten wood.
+  isPlayer: 1
+  damageType: 0
+  RemoteWeapons: 0
+  WeaponName: Magic Sword
+  WeaponIcon: {fileID: 21300000, guid: b2b27197ef0b5c6408552a73872a5ecd, type: 3}
+  WeaponImg: {fileID: 21300000, guid: 28cf3b0dcbc7a2448b0b587d8dbd0cbe, type: 3}
+  description: A magical sword inlaid with runes
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 0}
     CrosshairSize: 0
     CrosshairColor: {r: 0, g: 0, b: 0, a: 0}
-  WeaponRoot: {fileID: 2548421307829038991}
+  WeaponRoot: {fileID: 6013990982369288243}
   DelayBetweenAttacks: 0
-  damage: 30
-  WeaponMuzzle: {fileID: 925978594670471485}
-  ShootType: 2
-  bullet: {fileID: 100004, guid: 65d27b78de1adb646b611408750c2775, type: 3}
+  damage: 50
+  WeaponMuzzle: {fileID: 6358568393392945801}
+  ShootType: 0
+  bullet: {fileID: 1254343392523665438, guid: 28ca67a84a75e9642a8da4bee674efbc, type: 3}
   DelayBetweenShots: 0.5
   BulletSpreadAngle: 0
   BulletsPerShot: 1
-  RecoilForce: 0.1
-  AutomaticReload: 1
+  RecoilForce: 1
+  AutomaticReload: 0
   HasPhysicalBullets: 0
-  speed: 25
-  ClipSize: 1
+  speed: 100
+  ClipSize: 30
   ShellCasing: {fileID: 0}
   EjectionPort: {fileID: 0}
   ShellCasingEjectionForce: 2
   ShellPoolSize: 1
-  AmmoReloadRate: 200
-  AmmoReloadDelay: 0.1
-  MaxAmmo: 1
-  AutomaticReleaseOnCharged: 1
+  AmmoReloadRate: 1
+  AmmoReloadDelay: 2
+  MaxAmmo: 8
+  AutomaticReleaseOnCharged: 0
   MaxChargeDuration: 2
-  AmmoUsedOnStartCharge: 0
+  AmmoUsedOnStartCharge: 1
   AmmoUsageRateWhileCharging: 1
+  LaseringCost: 2
   WeaponAnimator: {fileID: 0}
   MuzzleFlashPrefab: {fileID: 0}
   UnparentMuzzleFlash: 0
   ShootSfx: {fileID: 0}
   ChangeWeaponSfx: {fileID: 0}
-  MuzzleChargePrefab: {fileID: 100000, guid: c2d0c350b6d6a3746809567a8f9d4796, type: 3}
+  MuzzleChargePrefab: {fileID: 0}
   UseContinuousShootSound: 0
---- !u!82 &6019947675716088154
+--- !u!114 &1096628243053953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6013990982369288243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 400791e0df9c010468f440ea7dab1a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 0
+  attackVfx: {fileID: 1942681157837952, guid: 7aba4abef3828b340b1d9c0c9aa01cb0, type: 3}
+  attackVfxDelay: 0
+  attackSocket: {fileID: 0}
+  attackLength: 1
+  attackWidth: 1
+  attackHeight: 2
+  WeaponAttackSfx: {fileID: 8300000, guid: 5211c5d0c2ff7114ebf43e6fa2d65610, type: 3}
+--- !u!95 &6141312034165458156
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6013990982369288243}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f80a4fa40cb8d2e41ba2051ec5dbbb79, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!82 &2703726986948080268
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2548421307829038991}
+  m_GameObject: {fileID: 6013990982369288243}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -237,54 +279,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &4208782828080431284
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2548421307829038991}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2456fdec54f062942ae0b5144fb8eb91, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1 &8950976661267896718
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 925978594670471485}
-  m_Layer: 0
-  m_Name: Muzzle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &925978594670471485
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8950976661267896718}
-  m_LocalRotation: {x: -0.2419218, y: 0, z: 0, w: 0.9702958}
-  m_LocalPosition: {x: 0.05251246, y: 0.551, z: -0.0019264668}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2888530304415298869}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -28, y: 0, z: 0}
