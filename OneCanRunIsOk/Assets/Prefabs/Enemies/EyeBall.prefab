@@ -2051,7 +2051,7 @@ Transform:
   - {fileID: 8429299602387209710}
   - {fileID: 5159907406101669240}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8429299602487222384
 MonoBehaviour:
@@ -2150,13 +2150,13 @@ MonoBehaviour:
   - Attack1
   - Attack3
   IntervalList:
-  - 2
-  - 2
-  - 2
+  - 5
+  - 0.5
+  - 0.5
   MeleeRange: 3
   WeaponRange: 9
   SkillRange: 12
-  MeleeInterval: 2
+  MeleeInterval: 1.1
   attackState: 0
 --- !u!114 &8429299602487222399
 MonoBehaviour:
