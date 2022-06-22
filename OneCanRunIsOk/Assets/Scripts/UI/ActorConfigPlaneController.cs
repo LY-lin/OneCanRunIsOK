@@ -40,6 +40,8 @@ namespace OneCanRun.UI{
         private void Start()
         {
             updateCampInfo();
+            config.calculateImmediately();
+            mValueUpdate();
         }
         private void OnEnable(){
             staminaValue = GameObject.Find("staminaValue").GetComponent<TMPro.TextMeshProUGUI>();
@@ -101,8 +103,10 @@ namespace OneCanRun.UI{
 
         private void Update(){
 
-            if (dirty)
+            if (dirty){
+                config.calculateImmediately();
                 mValueUpdate();
+            }
         }
 
 
@@ -121,6 +125,10 @@ namespace OneCanRun.UI{
             FImage.sprite = Resources.Load<Sprite>("Skills/Cast"); ;
             FName.text = "BlitzBall";
             FDescription.text = "Deals a small area of magic damage";
+
+
+
+
         }
 
         private void useHaloneCampInfo(){
@@ -244,8 +252,8 @@ namespace OneCanRun.UI{
             }
 
             this.updateCampInfo();
+            config.calculateImmediately();
             mValueUpdate();
-
         }
 
         public void backButton(){

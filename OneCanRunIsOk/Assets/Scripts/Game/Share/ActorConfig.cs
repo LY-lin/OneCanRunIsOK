@@ -58,6 +58,18 @@ namespace OneCanRun.Game.Share{
 
         }
 
+        // interface exposed to outside
+        public void calculateImmediately(){
+            if(this.baseAttribute.technique + pointAllocated[ActorConfigConstant.technique] > 10){
+                int leftValue = baseAttribute.technique + pointAllocated[ActorConfigConstant.technique] - 10;
+                pointAllocated[ActorConfigConstant.technique] -= leftValue;
+                point2Allocate = (ulong)((int)point2Allocate + leftValue);
+
+            }
+
+            calculate();
+
+        }
 
         public bool addStamina(){
 
@@ -145,6 +157,8 @@ namespace OneCanRun.Game.Share{
         public bool addTechnique(){
 
             if (!sentence(true))
+                return false;
+            if (this.defaultAttribute.technique >= 10)
                 return false;
             pointAllocated[ActorConfigConstant.technique]++;
             point2Allocate--;

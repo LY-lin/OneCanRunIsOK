@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6013990982369288243
+--- !u!1 &1611169281684996860
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6358568393392945801}
-  - component: {fileID: 8039479310580020524}
-  - component: {fileID: 5221080027720417766}
-  - component: {fileID: 3054882029934424460}
-  - component: {fileID: 1096628243053953}
-  - component: {fileID: 6141312034165458156}
-  - component: {fileID: 2703726986948080268}
+  - component: {fileID: 2096378624455956550}
+  - component: {fileID: 3078226654362097635}
+  - component: {fileID: 962918872341848873}
+  - component: {fileID: 5701276930331171990}
+  - component: {fileID: 5297497335661206287}
+  - component: {fileID: -4451620863494239889}
+  - component: {fileID: 4223053836125604463}
   m_Layer: 0
-  m_Name: MagicSword
+  m_Name: Shining Spear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6358568393392945801
+--- !u!4 &2096378624455956550
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6013990982369288243}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
+  m_GameObject: {fileID: 1611169281684996860}
+  m_LocalRotation: {x: 0.6427876, y: 0, z: 0, w: 0.7660445}
+  m_LocalPosition: {x: -0.2, y: -0.1, z: -0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8039479310580020524
+  m_LocalEulerAnglesHint: {x: 80, y: 0, z: 0}
+--- !u!33 &3078226654362097635
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6013990982369288243}
-  m_Mesh: {fileID: -1195938968934217610, guid: 98318b7fbb6008a488a87d8f130a5b45, type: 3}
---- !u!23 &5221080027720417766
+  m_GameObject: {fileID: 1611169281684996860}
+  m_Mesh: {fileID: -679773820921150111, guid: df3f07283842c864abb844da441c0bf8, type: 3}
+--- !u!23 &962918872341848873
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6013990982369288243}
+  m_GameObject: {fileID: 1611169281684996860}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0f6ed5b953c1cc644943552d45f09db0, type: 2}
+  - {fileID: 2100000, guid: d2221f262d55c97498791aa43e28da99, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -87,13 +87,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3054882029934424460
+--- !u!114 &5701276930331171990
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6013990982369288243}
+  m_GameObject: {fileID: 1611169281684996860}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6a552d5b5b943243964dce88b4fd9f2, type: 3}
@@ -102,21 +102,21 @@ MonoBehaviour:
   isPlayer: 1
   damageType: 0
   RemoteWeapons: 0
-  WeaponName: MagicSword
-  WeaponIcon: {fileID: 21300000, guid: b2b27197ef0b5c6408552a73872a5ecd, type: 3}
-  WeaponImg: {fileID: 21300000, guid: 28cf3b0dcbc7a2448b0b587d8dbd0cbe, type: 3}
-  description: 
+  WeaponName: Shining Spear
+  WeaponIcon: {fileID: 0}
+  WeaponImg: {fileID: 0}
+  description: A spear that glows, but has no special magic
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 0}
     CrosshairSize: 0
     CrosshairColor: {r: 0, g: 0, b: 0, a: 0}
-  WeaponRoot: {fileID: 6013990982369288243}
+  WeaponRoot: {fileID: 1611169281684996860}
   DelayBetweenAttacks: 0
-  damage: 50
-  WeaponMuzzle: {fileID: 6358568393392945801}
+  damage: 30
+  WeaponMuzzle: {fileID: 2096378624455956550}
   ShootType: 0
   bullet: {fileID: 1254343392523665438, guid: 28ca67a84a75e9642a8da4bee674efbc, type: 3}
-  DelayBetweenShots: 0.5
+  DelayBetweenShots: 1
   BulletSpreadAngle: 0
   BulletsPerShot: 1
   RecoilForce: 1
@@ -143,37 +143,37 @@ MonoBehaviour:
   ChangeWeaponSfx: {fileID: 0}
   MuzzleChargePrefab: {fileID: 0}
   UseContinuousShootSound: 0
---- !u!114 &1096628243053953
+--- !u!114 &5297497335661206287
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6013990982369288243}
+  m_GameObject: {fileID: 1611169281684996860}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 400791e0df9c010468f440ea7dab1a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 0
-  attackVfx: {fileID: 1942681157837952, guid: 7aba4abef3828b340b1d9c0c9aa01cb0, type: 3}
+  attackVfx: {fileID: 1812881953744270, guid: ed0c022a338d3384d9ee622d354a94e2, type: 3}
   attackVfxDelay: 0
   attackSocket: {fileID: 0}
-  attackLength: 1
-  attackWidth: 1
+  attackLength: 1.5
+  attackWidth: 0.5
   attackHeight: 2
-  WeaponAttackSfx: {fileID: 8300000, guid: 5211c5d0c2ff7114ebf43e6fa2d65610, type: 3}
---- !u!95 &6141312034165458156
+  WeaponAttackSfx: {fileID: 8300000, guid: 3b08cea61279d6649bb94928b43213c5, type: 3}
+--- !u!95 &-4451620863494239889
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6013990982369288243}
+  m_GameObject: {fileID: 1611169281684996860}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f80a4fa40cb8d2e41ba2051ec5dbbb79, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6b6ff64b3d466284fb222410a1cccc43, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -183,13 +183,13 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!82 &2703726986948080268
+--- !u!82 &4223053836125604463
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6013990982369288243}
+  m_GameObject: {fileID: 1611169281684996860}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}

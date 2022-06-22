@@ -208,6 +208,9 @@ namespace OneCanRun.Game.Share
         float m_LastTimeShot = Mathf.NegativeInfinity;  //上次射击的实现 = 负无穷大
         public float LastChargeTriggerTimestamp { get; private set; }   //上次触发充能的时间戳
         Vector3 m_LastMuzzlePosition;   //上次枪口的位置
+
+
+        private CachePool cachePool;
         public BulletPoolManager bulletPoolManager;
         // Update is called once per frame
 
