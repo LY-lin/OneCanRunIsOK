@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace OneCanRun.Game.Share{
 
-    public class CacheItem : MonoBehaviour{
+    public class CacheItem : UnityEngine.Object{
 
         // you should overwrite the function
         // initialize the parameter you need
