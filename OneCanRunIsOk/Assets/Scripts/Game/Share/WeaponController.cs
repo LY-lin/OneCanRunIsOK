@@ -13,6 +13,7 @@ namespace OneCanRun.Game.Share
         Manual,
         Automatic,
         Charge,
+        Laser,
     }
 
     [System.Serializable]
@@ -160,6 +161,10 @@ namespace OneCanRun.Game.Share
         [Tooltip("Additional ammo used when charge reaches its maximum")]
         public float AmmoUsageRateWhileCharging = 1f;//到达最大充能使用的子弹
 
+        [Header("Laser parameters (laser weapons only)")]
+        [Tooltip("Lasering cost per second")]
+        public float LaseringCost = 2f;
+
 
 
         [Header("Audio & Visual")]
@@ -233,6 +238,9 @@ namespace OneCanRun.Game.Share
 
         const string k_AnimAttackParameter = "Attack";
 
+        private bool isLasering = false;
+        private LaserController lc;
+
 
 
         void Awake()
@@ -240,7 +248,17 @@ namespace OneCanRun.Game.Share
             Owner = this.transform.gameObject;
             if (RemoteWeapons)
             {
-                this.bulletPoolManager = new BulletPoolManager(this.bullet);
+                if (ShootType!=WeaponShootType.Laser)
+                {
+                    this.bulletPoolManager = new BulletPoolManager(this.bullet);
+                }
+                else
+                {
+                    lc = bullet.GetComponent<LaserController>();
+                    lc.Owner = this.Owner;
+                    lc.LaserSocket = WeaponMuzzle;
+                }
+
                 m_CurrentAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
                 MaxAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
                 m_CarriedPhysicalBullets = Mathf.RoundToInt(m_CurrentAmmo);
@@ -321,6 +339,7 @@ namespace OneCanRun.Game.Share
             {
                 UpdateAmmo();
                 UpdateCharge();
+                UpdateLaser();
                 UpdateContinuousShootSound();
 
                 if (Time.deltaTime > 0)
@@ -394,6 +413,19 @@ namespace OneCanRun.Game.Share
                         CurrentCharge = Mathf.Clamp01(CurrentCharge + chargeAdded);
                     }
                 }
+            }
+        }
+
+        void UpdateLaser()
+        {
+            if (isLasering)
+            {
+                if (m_CurrentAmmo <= 0)
+                {
+                    isLasering = false;
+                    lc.StopLaser();
+                }
+                UseAmmo(LaseringCost*Time.deltaTime);
             }
         }
 
@@ -489,6 +521,22 @@ namespace OneCanRun.Game.Share
 
                     return false;
 
+                case WeaponShootType.Laser:
+                    if (inputDown && !isLasering)
+                    {
+                        //获取玩家的摄像头
+                        lc.StartLaser(this.Owner.GetComponentInChildren<AudioListener>().transform);
+                        isLasering = true;
+                        return true;
+                    }
+                    else if(inputUp && isLasering)
+                    {
+                        lc.StopLaser();
+                        isLasering = false;
+                        return true;
+                    }
+                    return false;
+
                 default:
                     return false;
             }
@@ -531,7 +579,7 @@ namespace OneCanRun.Game.Share
 
                 LastChargeTriggerTimestamp = Time.time;
                 IsCharging = true;
-
+                GetComponent<Animator>().SetTrigger("Attack");
                 muzzleChargeInstance = Instantiate(MuzzleChargePrefab, WeaponMuzzle.position,
                     WeaponMuzzle.rotation, WeaponMuzzle.transform);
                 // Unparent the muzzleFlashInstance
@@ -553,7 +601,7 @@ namespace OneCanRun.Game.Share
 
                 CurrentCharge = 0f;
                 IsCharging = false;
-                
+                GetComponent<Animator>().SetTrigger("EndAttack");
                 Destroy(muzzleChargeInstance);
                 return true;
             }

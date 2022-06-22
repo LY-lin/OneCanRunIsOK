@@ -137,7 +137,17 @@ namespace OneCanRun.GamePlay
             CurrentSpSkillInstance.Owner = gameObject;
             CurrentSpSkillInstance.UpdateOwner();
 
-           }
-        
+        }
+
+        public SkillController GetCurrentSkill()
+        {
+            return CurrentSkillInstance;
+        }
+
+        public SkillController GetCurrentSpSkill()
+        {
+            return CurrentSpSkillInstance;
+        }
+
     }
 }

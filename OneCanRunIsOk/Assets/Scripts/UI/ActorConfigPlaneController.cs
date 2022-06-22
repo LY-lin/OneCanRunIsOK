@@ -1,6 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using OneCanRun.Game.Share;
 using UnityEngine;
+using OneCanRun.GamePlay;
+using OneCanRun.Game;
 namespace OneCanRun.UI{
 
     public class ActorConfigPlaneController : MonoBehaviour{
@@ -36,7 +37,10 @@ namespace OneCanRun.UI{
 
         // for decreasing update 
         private bool dirty = true;
-
+        private void Start()
+        {
+            updateCampInfo();
+        }
         private void OnEnable(){
             staminaValue = GameObject.Find("staminaValue").GetComponent<TMPro.TextMeshProUGUI>();
             strengthValue = GameObject.Find("strengthValue").GetComponent<TMPro.TextMeshProUGUI>();
@@ -104,18 +108,33 @@ namespace OneCanRun.UI{
 
         // just fill the following 3 function if the camp changes
         private void useAzeymaCampInfo(){
-             
-
+            useCampInfo("Azeyma");
         }
 
         private void useHaloneCampInfo(){
-
-
+            useCampInfo("Halone");
         }
 
         private void useByregotCampInfo(){
+            useCampInfo("Byregot");
+        }
 
+        private void useCampInfo(string CampName)
+        {
+            GameObject gameObject = GameObject.Find(CampName + "Weapon");
+            weaponDescription.text = gameObject.GetComponentInChildren<WeaponController>().description;
+            weaponName.text = gameObject.GetComponentInChildren<WeaponController>().WeaponName;
+            weaponImage.sprite = gameObject.GetComponentInChildren<WeaponController>().WeaponImg;
 
+            gameObject = GameObject.Find(CampName + "SpSkill");
+            QImage.sprite = gameObject.GetComponent<SkillController>().SkillIcon;
+            QName.text = gameObject.GetComponent<SkillController>().SkillName;
+            QDescription.text = gameObject.GetComponent<SkillController>().SkillDescription;
+
+            gameObject = GameObject.Find(CampName + "Skill");
+            FImage.sprite = gameObject.GetComponent<SkillController>().SkillIcon;
+            FName.text = gameObject.GetComponent<SkillController>().SkillName;
+            FDescription.text = gameObject.GetComponent<SkillController>().SkillDescription;
         }
 
         private void updateCampInfo(){

@@ -26,6 +26,7 @@ namespace OneCanRun.AI.Enemies
         // Start is called before the first frame update
         protected override Status OnUpdate()
         {
+            Debug.Log(flag);
             if (flag)
             {
                 boss.SetAnimationBool("Idle", true);

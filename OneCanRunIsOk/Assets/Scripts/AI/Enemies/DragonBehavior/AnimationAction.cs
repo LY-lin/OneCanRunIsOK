@@ -14,6 +14,9 @@ namespace OneCanRun.AI.Enemies
         [SerializeField]
         private float duration;
 
+        [SerializeField]
+        private bool endCG;
+
         private Boss boss;
 
         private bool flag;
@@ -36,6 +39,7 @@ namespace OneCanRun.AI.Enemies
             else
             {
                 boss.SetAnimationBool(animation, false);
+                boss.SetCG(!endCG);
                 return Status.Success;
             }
         }

@@ -24,6 +24,10 @@ namespace OneCanRun.AI.Enemies
 
         protected override Status OnUpdate()
         {
+            if (boss.TryAttack(animation, duration))
+            {
+                return Status.Running;
+            }
             return Status.Success;
         }
     }
