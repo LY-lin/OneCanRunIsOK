@@ -421,6 +421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuffIMG: {fileID: 2901342067333994719}
+  NumPlane: {fileID: 977237093584241743}
   Num: {fileID: 263687448805629789}
   LastTime: {fileID: 5134809911471661118}
   Description: {fileID: 4651029170478815668}

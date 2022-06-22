@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3950655675628955919}
   - component: {fileID: 3854009463018091719}
   m_Layer: 0
-  m_Name: Panel
+  m_Name: HurtNumPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,6 +76,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3950655675628955919}
+  - {fileID: 2462198723865910963}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -97,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BackpackPrefab: {fileID: 5187821973154823173, guid: d534549393cdcbd49b8b58859c80e05c, type: 3}
-  BackPlane: {fileID: 3950655675628955919}
+  BackPlane: {fileID: 2462198723865910963}
 --- !u!114 &4410804597890214250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,3 +113,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HurtNumberPrefab: {fileID: 1488680292504854091, guid: 23b846cc2b4e7224f8d698676c392db0, type: 3}
   plane: {fileID: 3950655675628955919}
+--- !u!1 &5992391127374163059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2462198723865910963}
+  - component: {fileID: 3764651267348692449}
+  m_Layer: 0
+  m_Name: BackPlane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2462198723865910963
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5992391127374163059}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3661779529394462563}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3764651267348692449
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5992391127374163059}
+  m_CullTransparentMesh: 1
