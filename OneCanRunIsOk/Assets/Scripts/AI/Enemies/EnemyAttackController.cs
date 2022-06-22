@@ -60,6 +60,7 @@ namespace OneCanRun.AI.Enemies
         int currentMeleeIndex = 0;
         int currentAttackIndex = 0;
         float latestMeleeAttackTime = float.NegativeInfinity;
+        float latestWeaponAttackTime = float.NegativeInfinity;
 
         // Start is called before the first frame update
         void Start()
@@ -124,7 +125,7 @@ namespace OneCanRun.AI.Enemies
                     }
                     break;
                 case AttackState.Weapon:
-                    if(weapons.Length !=0)
+                    if(weapons.Length !=0 && latestWeaponAttackTime + 1f <= Time.time)
                     {
                         AttackByWeapon(target);
                     }
@@ -143,11 +144,20 @@ namespace OneCanRun.AI.Enemies
 
         public void AttackByWeapon(Vector3 target)
         {
+            latestWeaponAttackTime = Time.time;
             WeaponController weapon = weapons[currentWeaponIndex];
             Vector3 weaponForward = (target - weapon.WeaponRoot.transform.position).normalized;
             weapon.transform.forward = weaponForward;
 
-            weapon.HandleShootInputs(false, true, false);
+            if (weapon.ShootType == WeaponShootType.Laser)
+            {
+                // start Laser
+                weapon.HandleShootInputs(true, true, false);
+            }
+            else
+            {
+                weapon.HandleShootInputs(false, true, false);
+            }
         }
 
         public void AttackBySkill()

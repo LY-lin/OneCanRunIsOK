@@ -34,6 +34,7 @@ namespace OneCanRun.Game.Share
     // [RequireComponent(typeof(AudioSource))]  //加入声源
     public class WeaponController : MonoBehaviour
     {
+        public bool isPlayer = true;
         public Share.DamageType damageType;
 
         [Header("Information")]
@@ -525,7 +526,14 @@ namespace OneCanRun.Game.Share
                     if (inputDown && !isLasering)
                     {
                         //获取玩家的摄像头
-                        lc.StartLaser(this.Owner.GetComponentInChildren<AudioListener>().transform);
+                        if (isPlayer)
+                        {
+                            lc.StartLaser(this.Owner.GetComponentInChildren<AudioListener>().transform);
+                        }
+                        else
+                        {
+                            lc.StartLaser();
+                        }
                         isLasering = true;
                         return true;
                     }

@@ -23,7 +23,7 @@ namespace OneCanRun.UI
         [Tooltip("Description's Canvas Group")]
         public CanvasGroup itsDes;
 
-        BuffController m_buff;
+        public BuffController m_buff;
         public string BuffName { get; private set; }
 
         private void OnEnable()
