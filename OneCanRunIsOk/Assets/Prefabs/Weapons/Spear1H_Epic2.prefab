@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a552d5b5b943243964dce88b4fd9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 1
   damageType: 0
   RemoteWeapons: 0
   WeaponName: Shining Spear
@@ -134,6 +135,7 @@ MonoBehaviour:
   MaxChargeDuration: 2
   AmmoUsedOnStartCharge: 1
   AmmoUsageRateWhileCharging: 1
+  LaseringCost: 2
   WeaponAnimator: {fileID: 0}
   MuzzleFlashPrefab: {fileID: 0}
   UnparentMuzzleFlash: 0
@@ -157,9 +159,10 @@ MonoBehaviour:
   attackVfx: {fileID: 1812881953744270, guid: ed0c022a338d3384d9ee622d354a94e2, type: 3}
   attackVfxDelay: 0
   attackSocket: {fileID: 0}
-  attackLength: 1
-  attackWidth: 1
+  attackLength: 1.5
+  attackWidth: 0.5
   attackHeight: 2
+  WeaponAttackSfx: {fileID: 8300000, guid: 3b08cea61279d6649bb94928b43213c5, type: 3}
 --- !u!95 &-4451620863494239889
 Animator:
   serializedVersion: 4

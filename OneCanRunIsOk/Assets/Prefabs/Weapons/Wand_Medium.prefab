@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a552d5b5b943243964dce88b4fd9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 1
   damageType: 1
   RemoteWeapons: 1
   WeaponName: Stuffy Wand
@@ -134,10 +135,11 @@ MonoBehaviour:
   MaxChargeDuration: 2
   AmmoUsedOnStartCharge: 0
   AmmoUsageRateWhileCharging: 1
+  LaseringCost: 2
   WeaponAnimator: {fileID: 0}
   MuzzleFlashPrefab: {fileID: 0}
   UnparentMuzzleFlash: 0
-  ShootSfx: {fileID: 0}
+  ShootSfx: {fileID: 8300000, guid: 1e57f70e7d3d29944875af211edae7ab, type: 3}
   ChangeWeaponSfx: {fileID: 0}
   MuzzleChargePrefab: {fileID: 100000, guid: c2d0c350b6d6a3746809567a8f9d4796, type: 3}
   UseContinuousShootSound: 0
@@ -153,7 +155,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a552d5b5b943243964dce88b4fd9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 1
   damageType: 0
   RemoteWeapons: 0
   WeaponName: MagicSword
@@ -134,10 +135,11 @@ MonoBehaviour:
   MaxChargeDuration: 2
   AmmoUsedOnStartCharge: 1
   AmmoUsageRateWhileCharging: 1
+  LaseringCost: 2
   WeaponAnimator: {fileID: 0}
   MuzzleFlashPrefab: {fileID: 0}
   UnparentMuzzleFlash: 0
-  ShootSfx: {fileID: 8300000, guid: c3c4ad7a9b08b834a8525807a7082e99, type: 3}
+  ShootSfx: {fileID: 0}
   ChangeWeaponSfx: {fileID: 0}
   MuzzleChargePrefab: {fileID: 0}
   UseContinuousShootSound: 0
@@ -160,6 +162,7 @@ MonoBehaviour:
   attackLength: 1
   attackWidth: 1
   attackHeight: 2
+  WeaponAttackSfx: {fileID: 8300000, guid: 5211c5d0c2ff7114ebf43e6fa2d65610, type: 3}
 --- !u!95 &6141312034165458156
 Animator:
   serializedVersion: 4
@@ -189,7 +192,7 @@ AudioSource:
   m_GameObject: {fileID: 6013990982369288243}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -911362531408344068, guid: 1d9998ab1cd80c947b8d20f0107159c3, type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

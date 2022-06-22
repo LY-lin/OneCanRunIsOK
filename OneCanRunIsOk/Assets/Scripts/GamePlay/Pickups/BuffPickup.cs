@@ -9,8 +9,7 @@ namespace OneCanRun.GamePlay
         CollisionBuffGiver buffGiver;
         void OnTriggerEnter(Collider other)
         {
-
-            buffGiver = GetComponent<CollisionBuffGiver>();
+            buffGiver = GetComponent<CollisionBuffGiver>();     
             PlayerCharacterController pickingPlayer = other.GetComponent<PlayerCharacterController>();
             if(pickingPlayer.name == "Player1")
             {
