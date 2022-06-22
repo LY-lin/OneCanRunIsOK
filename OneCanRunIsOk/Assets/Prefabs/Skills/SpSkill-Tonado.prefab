@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SkillName: Tonado
-  SkillDescription: 
+  SkillDescription: Create a tornado that attracts monsters
   SkillIcon: {fileID: 21300000, guid: d05403c960853a84dade5166c5de5f11, type: 3}
   m_SkillType: 3
   m_SpSkillType: 0
@@ -54,3 +54,4 @@ MonoBehaviour:
   ExistingTime: 10
   AimingVfx: {fileID: 100000, guid: 880bc6becc440a047bba527f57da1a9c, type: 3}
   UsingVfx: {fileID: 100008, guid: 5b30d84272f7f8f4fa4cae7f0ed2b286, type: 3}
+  UsingSfx: {fileID: 0}

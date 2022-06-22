@@ -1,6 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using OneCanRun.Game.Share;
 using UnityEngine;
+using OneCanRun.GamePlay;
+using OneCanRun.Game;
 namespace OneCanRun.UI{
 
     public class ActorConfigPlaneController : MonoBehaviour{
@@ -36,7 +37,10 @@ namespace OneCanRun.UI{
 
         // for decreasing update 
         private bool dirty = true;
-
+        private void Start()
+        {
+            updateCampInfo();
+        }
         private void OnEnable(){
             staminaValue = GameObject.Find("staminaValue").GetComponent<TMPro.TextMeshProUGUI>();
             strengthValue = GameObject.Find("strengthValue").GetComponent<TMPro.TextMeshProUGUI>();
@@ -74,10 +78,10 @@ namespace OneCanRun.UI{
 
         private void mValueUpdate(){
             ActorAttribute actorAttribute = config.getActorAttribute();
-            staminaValue.text = (config.getAllocatedStamina() + actorAttribute.stamina).ToString();
-            strengthValue.text = (config.getAllocatedStrength() + actorAttribute.strength).ToString();
-            intelligeValue.text = (config.getAllocatedIntelligence() + actorAttribute.intelligence).ToString();
-            techniqueValue.text = (config.getAllocatedTechnique() + actorAttribute.technique).ToString();
+            staminaValue.text = (actorAttribute.stamina).ToString();
+            strengthValue.text = (actorAttribute.strength).ToString();
+            intelligeValue.text = (actorAttribute.intelligence).ToString();
+            techniqueValue.text = (actorAttribute.technique).ToString();
             staminaAllocatedValue.text = config.getAllocatedStamina().ToString();
             strengthAllocatedValue.text = config.getAllocatedStrength().ToString();
             intelligeAllocatedValue.text = config.getAllocatedIntelligence().ToString();
@@ -104,18 +108,33 @@ namespace OneCanRun.UI{
 
         // just fill the following 3 function if the camp changes
         private void useAzeymaCampInfo(){
-             
-
+            useCampInfo("Azeyma");
         }
 
         private void useHaloneCampInfo(){
-
-
+            useCampInfo("Halone");
         }
 
         private void useByregotCampInfo(){
+            useCampInfo("Byregot");
+        }
 
+        private void useCampInfo(string CampName)
+        {
+            GameObject gameObject = GameObject.Find(CampName + "Weapon");
+            weaponDescription.text = gameObject.GetComponentInChildren<WeaponController>().description;
+            weaponName.text = gameObject.GetComponentInChildren<WeaponController>().WeaponName;
+            weaponImage.sprite = gameObject.GetComponentInChildren<WeaponController>().WeaponImg;
 
+            gameObject = GameObject.Find(CampName + "SpSkill");
+            QImage.sprite = gameObject.GetComponent<SkillController>().SkillIcon;
+            QName.text = gameObject.GetComponent<SkillController>().SkillName;
+            QDescription.text = gameObject.GetComponent<SkillController>().SkillDescription;
+
+            gameObject = GameObject.Find(CampName + "Skill");
+            FImage.sprite = gameObject.GetComponent<SkillController>().SkillIcon;
+            FName.text = gameObject.GetComponent<SkillController>().SkillName;
+            FDescription.text = gameObject.GetComponent<SkillController>().SkillDescription;
         }
 
         private void updateCampInfo(){
@@ -181,10 +200,9 @@ namespace OneCanRun.UI{
 
         public void confirm(){
             // save the config
-            Game.Share.ActorConfig.saveAsFile("test", this.config);
-
+            Game.Share.ActorConfig.saveAsFile("ActorConfig.cfg", this.config);
             // change the scene
-
+            UnityEngine.SceneManagement.SceneManager.LoadScene("LoadingScene");
         }
 
 
@@ -206,6 +224,11 @@ namespace OneCanRun.UI{
             }
 
             this.updateCampInfo();
+
+        }
+
+        public void backButton(){
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MyStartScene");
 
         }
 

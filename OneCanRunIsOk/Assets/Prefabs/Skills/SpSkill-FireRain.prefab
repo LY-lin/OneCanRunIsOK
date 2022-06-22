@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SkillName: FireRain
-  SkillDescription: 
+  SkillDescription: A massive rain of fire from the sky.
   SkillIcon: {fileID: 21300000, guid: 74d19c76ea526e345a8e2fd937be054e, type: 3}
   m_SkillType: 3
   m_SpSkillType: 1
@@ -54,3 +54,4 @@ MonoBehaviour:
   ExistingTime: 10
   AimingVfx: {fileID: 100000, guid: e1313340a4d1675459b33417fbd07579, type: 3}
   UsingVfx: {fileID: 100008, guid: 7c04409f4564f3b4686fd0e0541c464b, type: 3}
+  UsingSfx: {fileID: 0}

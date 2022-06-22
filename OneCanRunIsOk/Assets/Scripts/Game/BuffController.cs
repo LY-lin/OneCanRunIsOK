@@ -7,7 +7,7 @@ namespace OneCanRun.Game
     {
         
         private Buff mbuff;
-        bool isForever;
+        public bool isForever;
         //剩余持续时间
         public float getTime;
 
@@ -16,7 +16,11 @@ namespace OneCanRun.Game
         public Sprite BuffIcon;
         public string BuffName;
         public string Description;
-        public string Num { get; private set; }
+
+        //Buff层数
+        public string Num{ get;  set; }
+        //Buff编号
+        public int buffID = -1;
         public BuffController(Buff buff)
         {
             mbuff = buff;
@@ -27,6 +31,9 @@ namespace OneCanRun.Game
     
             BuffName = buff.name;
             Description = buff.description;
+            BuffIcon = buff.buffImg;
+
+            buffID = mbuff.buffID;
         }
 
         public bool GetIsForever()

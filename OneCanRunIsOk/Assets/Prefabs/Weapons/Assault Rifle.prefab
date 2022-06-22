@@ -262,8 +262,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400791e0df9c010468f440ea7dab1a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hurtNumber: {fileID: 0}
   damageType: 0
+  attackVfx: {fileID: 0}
+  attackVfxDelay: 0
+  attackSocket: {fileID: 0}
+  attackLength: 1
+  attackWidth: 1
+  attackHeight: 2
 --- !u!1 &100006
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,13 +325,12 @@ MonoBehaviour:
   WeaponName: AR1
   WeaponIcon: {fileID: 21300000, guid: d977df5edeb809f41b362e4bc5d35645, type: 3}
   WeaponImg: {fileID: 0}
-  description: 
+  description: Cheap, solid and reliable. It's old but still firing
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 0}
     CrosshairSize: 0
     CrosshairColor: {r: 0, g: 0, b: 0, a: 0}
   WeaponRoot: {fileID: 100006}
-  DamagableBox: {fileID: 0}
   DelayBetweenAttacks: 0
   damage: 20
   WeaponMuzzle: {fileID: 4978071067295733055}
