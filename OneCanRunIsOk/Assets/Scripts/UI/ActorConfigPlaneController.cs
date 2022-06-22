@@ -78,10 +78,10 @@ namespace OneCanRun.UI{
 
         private void mValueUpdate(){
             ActorAttribute actorAttribute = config.getActorAttribute();
-            staminaValue.text = (config.getAllocatedStamina() + actorAttribute.stamina).ToString();
-            strengthValue.text = (config.getAllocatedStrength() + actorAttribute.strength).ToString();
-            intelligeValue.text = (config.getAllocatedIntelligence() + actorAttribute.intelligence).ToString();
-            techniqueValue.text = (config.getAllocatedTechnique() + actorAttribute.technique).ToString();
+            staminaValue.text = (actorAttribute.stamina).ToString();
+            strengthValue.text = (actorAttribute.strength).ToString();
+            intelligeValue.text = (actorAttribute.intelligence).ToString();
+            techniqueValue.text = (actorAttribute.technique).ToString();
             staminaAllocatedValue.text = config.getAllocatedStamina().ToString();
             strengthAllocatedValue.text = config.getAllocatedStrength().ToString();
             intelligeAllocatedValue.text = config.getAllocatedIntelligence().ToString();
