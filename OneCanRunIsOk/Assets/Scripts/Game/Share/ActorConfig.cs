@@ -260,6 +260,14 @@ namespace OneCanRun.Game.Share{
             return this.pointAllocated[ActorConfigConstant.technique];
         }
 
+        public void setBaseAttribute(int _intelligence, int _stamina, int  _strength, int _technique){
+            baseAttribute.intelligence = _intelligence;
+            baseAttribute.stamina = _stamina;
+            baseAttribute.strength = _strength;
+            baseAttribute.technique = _technique;
+
+        }
+
         // for next scene to create actor
         public static void saveAsFile(string name, ActorConfig actorConfig){
             string path;

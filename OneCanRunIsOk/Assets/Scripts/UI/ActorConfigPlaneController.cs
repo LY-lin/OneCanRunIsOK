@@ -109,14 +109,17 @@ namespace OneCanRun.UI{
         // just fill the following 3 function if the camp changes
         private void useAzeymaCampInfo(){
             useCampInfo("Azeyma");
+            config.setBaseAttribute(5, 7, 2, 6);
         }
 
         private void useHaloneCampInfo(){
             useCampInfo("Halone");
+            config.setBaseAttribute(1, 10, 5, 8);
         }
 
         private void useByregotCampInfo(){
             useCampInfo("Byregot");
+            config.setBaseAttribute(2, 6, 2, 6);
         }
 
         private void useCampInfo(string CampName)
@@ -153,6 +156,7 @@ namespace OneCanRun.UI{
                     break;
 
             }
+            
 
         }
 
@@ -224,6 +228,7 @@ namespace OneCanRun.UI{
             }
 
             this.updateCampInfo();
+            mValueUpdate();
 
         }
 
