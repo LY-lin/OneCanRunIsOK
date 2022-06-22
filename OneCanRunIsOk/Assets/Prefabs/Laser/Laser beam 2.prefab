@@ -9885,16 +9885,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc635153a6e19c248b7004d7d58d0128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usedAsWeapon: 1
   HitEffect: {fileID: 1348276961250486}
   HitOffset: 0
   MaxLength: 10
   MainTextureLength: 1
   NoiseTextureLength: 1
   LaserSocket: {fileID: 0}
-  damageType: 0
-  damage: 10
+  damageType: 1
+  damage: 20
+  deltaCount: 25
   Owner: {fileID: 0}
-  hurtNumber: {fileID: 5852126615502880303, guid: 545f182ccbdf99248b402347b988fe26, type: 3}
+  PlayerSocket: {fileID: 0}
 --- !u!1 &1436039344504592
 GameObject:
   m_ObjectHideFlags: 0
