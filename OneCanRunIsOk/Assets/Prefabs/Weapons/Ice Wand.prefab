@@ -167,6 +167,7 @@ MonoBehaviour:
   AmmoUsedOnStartCharge: 0
   AmmoUsageRateWhileCharging: 1
   LaseringCost: 2
+  DiscardPrefab: {fileID: 4372435434597878142, guid: dc64b6bd287be4046a63187e07fcda1a, type: 3}
   WeaponAnimator: {fileID: 0}
   MuzzleFlashPrefab: {fileID: 0}
   UnparentMuzzleFlash: 0
