@@ -181,10 +181,9 @@ namespace OneCanRun.UI{
 
         public void confirm(){
             // save the config
-            Game.Share.ActorConfig.saveAsFile("test", this.config);
-
+            Game.Share.ActorConfig.saveAsFile("ActorConfig.cfg", this.config);
             // change the scene
-
+            UnityEngine.SceneManagement.SceneManager.LoadScene("LoadingScene");
         }
 
 
@@ -206,6 +205,11 @@ namespace OneCanRun.UI{
             }
 
             this.updateCampInfo();
+
+        }
+
+        public void backButton(){
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MyStartScene");
 
         }
 

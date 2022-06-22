@@ -244,6 +244,16 @@ namespace OneCanRun.Game
                 }
                 
             }    
+
+            if(gameObject.name == "Player1"){
+                // read player actor config
+                Share.ActorConfig actorConfig = Share.ActorConfig.readFile("ActorConfig.cfg");
+
+                this.actorAttribute = actorConfig.getActorAttribute();
+                this.baseProperty = actorConfig.GetActorProperties();
+
+            }
+
         }
 
 

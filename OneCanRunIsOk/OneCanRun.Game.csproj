@@ -95,6 +95,8 @@
     <Compile Include="Assets\Scripts\Game\DisplaceActionsManager.cs" />
     <Compile Include="Assets\Scripts\Game\Share\DisplaceAction.cs" />
     <Compile Include="Assets\Scripts\Game\ObjectiveManager.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\CachePool.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\CacheItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Game\OneCanRun.Game.asmdef" />
