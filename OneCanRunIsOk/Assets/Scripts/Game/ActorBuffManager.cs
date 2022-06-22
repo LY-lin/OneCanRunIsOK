@@ -42,10 +42,28 @@ namespace OneCanRun.Game
 
             if (newBuff.getBuffType() == Buff.BufferType.NumBuff)
             {
+                if (!newBuff.isForever)
+                for (int i = 0; i < NumBuffList.Count; i++)
+                { 
+                    if(newBuff.BuffName == NumBuffList[i].BuffName)
+                    {
+                        NumBuffList[i].getTime = newBuff.getExistTime();
+                        return;
+                    }
+                }
                 NumBuffList.Add(newBuff);
             }
             else if (newBuff.getBuffType() == Buff.BufferType.PercentBuff)
             {
+                if(!newBuff.isForever)
+                for (int i = 0; i < PercentBuffList.Count; i++)
+                {
+                    if (newBuff.BuffName == PercentBuffList[i].BuffName)
+                    {
+                        PercentBuffList[i].getTime = newBuff.getExistTime();
+                        return;
+                    }
+                }
                 PercentBuffList.Add(newBuff);
             }
             else if (newBuff.getBuffType() == Buff.BufferType.WeaponBuff)

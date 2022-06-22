@@ -39,7 +39,7 @@ namespace OneCanRun.UI
             }
             else
             {
-                Num.text = m_buff.Num;
+                //Num.text = m_buff.Num;
             }
         }
 

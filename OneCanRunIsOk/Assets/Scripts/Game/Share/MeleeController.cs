@@ -24,6 +24,9 @@ namespace OneCanRun.Game.Share
         public float attackWidth = 1.0f;
         public float attackHeight = 2.0f;
 
+        [Header("Attack Sfx")]
+        AudioSource m_ShootAudioSource;
+        public AudioClip WeaponAttackSfx;
         //UnityAction<Vector3> Dmg;
 
         public void Init(WeaponController wc)
@@ -31,6 +34,7 @@ namespace OneCanRun.Game.Share
             this.wc = wc;
             Damage = wc.damage;
             this.attackerType = wc.Owner.GetComponent<Actor>().Affiliation;
+            m_ShootAudioSource = GetComponent<AudioSource>();
             this.Owner = wc.Owner;
             damageType = wc.damageType;
             attackSocket = GameObject.Find("SkillSocket").transform;
@@ -129,7 +133,9 @@ namespace OneCanRun.Game.Share
 
         void Attack()
         {
+            m_ShootAudioSource.PlayOneShot(WeaponAttackSfx);
             Collider[] affectedColliders = Physics.OverlapBox(attackSocket.position, new Vector3(attackLength, attackHeight, attackWidth), Quaternion.identity);
+            
             foreach (var col in affectedColliders)
             {
                 //damage

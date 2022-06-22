@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1394403916279408702}
   - component: {fileID: 9017146573189267799}
   m_Layer: 7
-  m_Name: GermOBlaster
+  m_Name: Laser Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,12 +99,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a552d5b5b943243964dce88b4fd9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 1
   damageType: 0
   RemoteWeapons: 1
-  WeaponName: 
+  WeaponName: Laser Gun
   WeaponIcon: {fileID: 21300000, guid: d977df5edeb809f41b362e4bc5d35645, type: 3}
   WeaponImg: {fileID: 0}
-  description: 
+  description: A gun that emits a powerful laser
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 0}
     CrosshairSize: 0
@@ -135,6 +136,7 @@ MonoBehaviour:
   AmmoUsedOnStartCharge: 1
   AmmoUsageRateWhileCharging: 1
   LaseringCost: 1
+  DiscardPrefab: {fileID: 4372435434597878142, guid: e04681845572ad4438d4234a2edf8b02, type: 3}
   WeaponAnimator: {fileID: 0}
   MuzzleFlashPrefab: {fileID: 0}
   UnparentMuzzleFlash: 0

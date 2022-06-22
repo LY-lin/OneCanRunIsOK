@@ -237,6 +237,17 @@ namespace OneCanRun.GamePlay
             return false;
         }
 
+        //丢弃按下输入
+        public bool GetDiscardButtonDown()
+        {
+            if (CanProcessInput())
+            {
+                return Input.GetButtonDown(GameConstants.k_ButtonDiscard);
+            }
+
+            return false;
+        }
+
         //切换武器输入-滚轴
         public int GetSwitchWeaponInput()
         {

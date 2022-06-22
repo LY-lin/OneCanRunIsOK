@@ -51,7 +51,7 @@ MonoBehaviour:
   SkillIcon: {fileID: 21300000, guid: abb1e2a3a1dce31419f613a40c89bebb, type: 3}
   m_SkillType: 1
   m_SpSkillType: 0
-  CoolingTime: 20
+  CoolingTime: 1
   UsingRange: 10
   ExistingTime: 10
   AimingVfx: {fileID: 0}

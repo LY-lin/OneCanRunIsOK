@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ccbedb9d21e6dd4fb91586840e708fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: "\u6253\u5F00\u5B9D\u7BB1"
+  description: Open the chest
   showInteractiveUI: 0
   hasInteracted: 0
   m_PlayerCharacterController: {fileID: 0}
@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5006c84368fe0484ab5bbcb66241d091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DropList: {fileID: 4278575754204634294, guid: 1f6df1019f86a3c47b851e69a32ac7eb, type: 3}
 --- !u!1 &1134943117355519077
 GameObject:
   m_ObjectHideFlags: 0

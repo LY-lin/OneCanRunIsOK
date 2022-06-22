@@ -166,7 +166,9 @@ namespace OneCanRun.Game.Share
         [Tooltip("Lasering cost per second")]
         public float LaseringCost = 2f;
 
-
+        [Header("About Discard")]
+        [Tooltip("Discard prefab")]
+        public GameObject DiscardPrefab;
 
         [Header("Audio & Visual")]
         [Tooltip("Optional weapon animator for OnShoot animations")]
@@ -183,6 +185,7 @@ namespace OneCanRun.Game.Share
 
         [Tooltip("Sound played when changing to this weapon")]
         public AudioClip ChangeWeaponSfx;//充能武器时的音频片段
+
 
         [Tooltip("Prefab of the charge flash")]
         public GameObject MuzzleChargePrefab;//预制的枪口闪光，枪口的焰火
@@ -634,7 +637,7 @@ namespace OneCanRun.Game.Share
             //DamagableBox.GetComponent<MeleeController>().Init(this);
             GetComponent<Animator>().SetTrigger("Attack");
             IsAttacking = true;
-
+            //m_ShootAudioSource.PlayOneShot(WeaponAttackSfx);
 
         }
         void HandleShoot()
