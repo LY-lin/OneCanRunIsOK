@@ -20,17 +20,23 @@ namespace OneCanRun.UI
         private DamageType type;
         private RectTransform plane;
         private GameObject obj;
+        private Vector2 RandomPos;
+        private float radis;
+        private float BaseDis = 10;
         public void init(GameObject obj,float damage, DamageType _type)
         {
             hurt = damage.ToString();
             type = _type;
             if (type == DamageType.magic)
-                mText.color = new Color(0, 0, 255);
+                mText.color = new Color(0,127, 255);
             else
                 mText.color = new Color(255, 255, 0);
             plane = this.transform.parent.GetComponent<RectTransform>();
                 this.obj = obj;
-            
+            radis = Screen.width / 20;
+            float x = Random.Range(0 - radis, radis);
+            float y = Mathf.Sqrt(radis * radis - x * x);
+            RandomPos = new Vector2(x, y);
         }
 
 
@@ -68,6 +74,9 @@ namespace OneCanRun.UI
         private Vector3 GetUIPosition(Vector3 point)
         {
             Vector2 position = RectTransformUtility.WorldToScreenPoint(Camera.main,point);
+            float distance = Vector3.Distance(Camera.main.transform.position, point);
+            float Base = BaseDis / distance;
+            position += (RandomPos * Base);
             if (position.x < -100 || position.y < -100 || position.x > Screen.width+100 || position.y > Screen.height+100)
                 Destroy(this);
             Vector2 uiPosition;

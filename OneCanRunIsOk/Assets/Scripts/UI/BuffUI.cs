@@ -11,6 +11,9 @@ namespace OneCanRun.UI
         [Tooltip("Image for Buff icon")]
         public Image BuffIMG;
 
+        [Tooltip("Plane to Manage Num")]
+        public RectTransform NumPlane;
+
         [Tooltip("Number of the Buff")]
         public TextMeshProUGUI Num;
 
@@ -26,13 +29,17 @@ namespace OneCanRun.UI
         BuffController m_buff;
         public string BuffName { get; private set; }
 
-        private void OnEnable()
+        private void Update()
         {
-            Num.text = m_buff.Num;
+            
             if(!m_buff.GetIsForever())
             {
-                LastTime.gameObject.SetActive(true);
-                LastTime.text = m_buff.getExistTime().ToString();
+
+                LastTime.text = m_buff.getTime.ToString("0.0");
+            }
+            else
+            {
+                Num.text = m_buff.Num;
             }
         }
 
@@ -45,6 +52,12 @@ namespace OneCanRun.UI
             if(buff.GetIsForever())
             {
                 LastTime.gameObject.SetActive(false);
+                NumPlane.gameObject.SetActive(true);
+            }
+            else
+            {
+                LastTime.gameObject.SetActive(true);
+                NumPlane.gameObject.SetActive(false);
             }
 
             Description.gameObject.SetActive(false);
