@@ -166,7 +166,9 @@ namespace OneCanRun.Game.Share
         [Tooltip("Lasering cost per second")]
         public float LaseringCost = 2f;
 
-
+        [Header("About Discard")]
+        [Tooltip("Discard prefab")]
+        public GameObject DiscardPrefab;
 
         [Header("Audio & Visual")]
         [Tooltip("Optional weapon animator for OnShoot animations")]

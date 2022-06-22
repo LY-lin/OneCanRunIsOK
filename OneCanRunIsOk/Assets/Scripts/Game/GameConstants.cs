@@ -31,5 +31,6 @@ namespace OneCanRun.Game
         public const string k_ButtonUseSkill = "Use Skill";
         public const string k_ButtonUseSPSkill = "Use SP Skill";
         public const string k_ButtonInteract = "Interact";
+        public const string k_ButtonDiscard = "Discard";
     }
 }

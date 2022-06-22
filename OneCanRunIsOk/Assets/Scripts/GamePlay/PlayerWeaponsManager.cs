@@ -102,8 +102,8 @@ namespace OneCanRun.GamePlay
         public UnityAction<WeaponController, int> OnAddedWeapon;
         public UnityAction<WeaponController, int> OnRemovedWeapon;
 
-        //武器槽位-上限9
-        public WeaponController[] m_WeaponSlots { get; private set; } = new WeaponController[2] ; // 9 available weapon slots
+        //武器槽位-上限2
+        public WeaponController[] m_WeaponSlots { get; private set; } = new WeaponController[2] ; // 2 available weapon slots
         PlayerInputHandler m_InputHandler;
         PlayerCharacterController m_PlayerCharacterController;
         //抖动系数
@@ -151,6 +151,17 @@ namespace OneCanRun.GamePlay
         {
             // shoot handling
             WeaponController activeWeapon = GetActiveWeapon();
+
+            if(m_InputHandler.GetDiscardButtonDown() && activeWeapon)
+            {
+                //create pickup
+                CreatePickup(activeWeapon);
+
+                //remove
+                RemoveWeapon(activeWeapon);
+
+                return;
+            }
 
             //换弹中
             if (activeWeapon != null &&activeWeapon.RemoteWeapons&&activeWeapon.IsReloading)
@@ -630,6 +641,19 @@ namespace OneCanRun.GamePlay
             if (newWeapon != null)
             {
                 newWeapon.ShowWeapon(true);
+            }
+        }
+
+        //创建掉落物
+        void CreatePickup(WeaponController activeWeapon)
+        {
+            if (activeWeapon.DiscardPrefab)
+            {
+                GameObject loot = GameObject.Instantiate(activeWeapon.DiscardPrefab, WeaponCamera.transform.position, Quaternion.identity);
+                Debug.Log(loot.GetComponent<Transform>().position);
+                Rigidbody m_Rigidbody = loot.GetComponent<Rigidbody>();
+                Vector3 m_NewForce = WeaponCamera.transform.forward.normalized * 7;
+                m_Rigidbody.AddForce(m_NewForce, ForceMode.Impulse);
             }
         }
     }

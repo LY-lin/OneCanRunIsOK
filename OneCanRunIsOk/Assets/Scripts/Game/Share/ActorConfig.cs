@@ -228,7 +228,7 @@ namespace OneCanRun.Game.Share{
             // calculate property via function
             this.defaultProperties.setMaxHealth(this.baseProperties.getMaxHealth() + (this.baseAttribute.stamina + getAllocatedStamina()) * 10);
             this.defaultProperties.setPhysicalAttack(this.baseProperties.getPhysicalAttack() + (this.baseAttribute.strength +  getAllocatedStrength()) * 3);
-            this.defaultProperties.setMagicAttack(this.baseProperties.getMagicAttack() + (this.baseAttribute.intelligence + getAllocatedIntelligence()) * 10);
+            this.defaultProperties.setMagicAttack(this.baseProperties.getMagicAttack() + (this.baseAttribute.intelligence + getAllocatedIntelligence()) * 3);
             this.defaultProperties.setPhysicalDefence(this.baseProperties.getPhysicalDefence() + (this.baseAttribute.stamina + getAllocatedStamina()) * 1);
             this.defaultProperties.setMagicDefence(this.baseProperties.getMagicDefence() + (this.baseAttribute.stamina + getAllocatedStamina()) * 1);
             this.defaultProperties.setMaxSpeed((float)(this.baseProperties.getMaxSpeed() + (this.baseAttribute.technique +  getAllocatedTechnique()) * 0.5));
