@@ -249,8 +249,8 @@ namespace OneCanRun.Game
                 // read player actor config
                 Share.ActorConfig actorConfig = Share.ActorConfig.readFile("ActorConfig.cfg");
 
-                //this.actorAttribute = actorConfig.getActorAttribute();
-                //this.baseProperty = actorConfig.GetActorProperties();
+                this.actorAttribute = actorConfig.getActorAttribute();
+                this.baseProperty = actorConfig.GetActorProperties();
 
             }
 
