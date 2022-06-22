@@ -7,7 +7,7 @@ namespace OneCanRun.Game.Share
     public class DropList : MonoBehaviour{
 
         public List<GameObject> dropList;
-
+        public List<int> weight;
 
     }
 }

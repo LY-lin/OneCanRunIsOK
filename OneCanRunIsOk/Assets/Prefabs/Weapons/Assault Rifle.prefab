@@ -323,10 +323,14 @@ MonoBehaviour:
   isPlayer: 1
   damageType: 0
   RemoteWeapons: 1
-  WeaponName: AR1
+  WeaponName: Assault Rifle
   WeaponIcon: {fileID: 21300000, guid: d977df5edeb809f41b362e4bc5d35645, type: 3}
   WeaponImg: {fileID: 21300000, guid: 28f7e7cfb846b53419768569dbcd7404, type: 3}
+<<<<<<< Updated upstream
   description: Cheap, leathery, old and capable of firing
+=======
+  description: An ordinary rifle
+>>>>>>> Stashed changes
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 0}
     CrosshairSize: 0
