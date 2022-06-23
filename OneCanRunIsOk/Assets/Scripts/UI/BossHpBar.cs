@@ -69,7 +69,7 @@ namespace OneCanRun.UI
         // Update is called once per frame
         void Update()
         {
-            if(boss.GetCG())
+            if(boss && boss.GetCG())
             {
                 Plane.gameObject.SetActive(true);
                 float ratio = boss_health.CurrentHealth / boss_health.MaxHealth;

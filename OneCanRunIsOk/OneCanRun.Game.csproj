@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Game\AudioUtility.cs" />
     <Compile Include="Assets\Scripts\Game\Share\CachePool.cs" />
     <Compile Include="Assets\Scripts\Game\Share\Modifier.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\CacheBullet.cs" />
     <Compile Include="Assets\Scripts\Game\GameConstants.cs" />
     <Compile Include="Assets\Scripts\Game\Share\DropList.cs" />
     <Compile Include="Assets\Scripts\Game\BuffController.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Assets\Scripts\Game\Share\ActorAttribute.cs" />
     <Compile Include="Assets\Scripts\Game\Share\MonsterFreshInfo.cs" />
     <Compile Include="Assets\Scripts\Game\Share\Objective.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\HurtNumberPoolManager.cs" />
     <Compile Include="Assets\Scripts\Game\Actor.cs" />
     <Compile Include="Assets\Scripts\Game\Share\Damageable.cs" />
     <Compile Include="Assets\Scripts\Game\Share\BulletController.cs" />
@@ -97,8 +99,6 @@
     <Compile Include="Assets\Scripts\Game\DisplaceActionsManager.cs" />
     <Compile Include="Assets\Scripts\Game\Share\DisplaceAction.cs" />
     <Compile Include="Assets\Scripts\Game\ObjectiveManager.cs" />
-    <Compile Include="Assets\Scripts\Game\Share\CacheBullet.cs" />
-    <Compile Include="Assets\Scripts\Game\Share\HurtNumberPoolManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Game\OneCanRun.Game.asmdef" />
