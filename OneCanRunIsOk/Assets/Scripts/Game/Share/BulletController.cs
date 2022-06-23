@@ -130,7 +130,6 @@ namespace OneCanRun.Game.Share
                     if(bulletType == BulletType.Ice)
                     {
                         Buff buff = GameObject.Find("IceBuff").GetComponent<Buff>();
-                        //BuffController iceBuff = 
                         ActorBuffManager actorBuffManager = col.gameObject.GetComponentInParent<ActorBuffManager>();
                         actorBuffManager.buffGain(new BuffController(buff));
                     }
@@ -140,17 +139,15 @@ namespace OneCanRun.Game.Share
                     damageable.InflictDamage(finalDamage, false, Owner,col.gameObject,damageType);
 
                     this.WeaponController.bulletPoolManager.release(this.gameObject);
-                    //GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
-                    //if (hurtNumber && hurtNumberParent)
-                    //{
-                    //    GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
-                    //    hurt.transform.position = this.transform.position;
-                    //    hurt.GetComponent<HurtNumber>().init(finalDamage, this.damageType);
+                    //this.WeaponController.cachePool.release(this.gameObject);
+                    
 
-                    //}
+                }else{
+
+                    this.WeaponController.bulletPoolManager.release(this.gameObject);
+                    //this.WeaponController.cachePool.release(this.gameObject);
 
                 }
-                this.WeaponController.bulletPoolManager.release(this.gameObject);
             }
         }
 

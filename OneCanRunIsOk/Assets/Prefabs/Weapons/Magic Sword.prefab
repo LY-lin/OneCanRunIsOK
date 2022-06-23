@@ -164,6 +164,7 @@ MonoBehaviour:
   attackWidth: 1
   attackHeight: 2
   WeaponAttackSfx: {fileID: 8300000, guid: 5211c5d0c2ff7114ebf43e6fa2d65610, type: 3}
+  hitSfx: {fileID: 8300000, guid: c3c4ad7a9b08b834a8525807a7082e99, type: 3}
 --- !u!95 &6141312034165458156
 Animator:
   serializedVersion: 4

@@ -212,7 +212,7 @@ namespace OneCanRun.Game.Share
         Vector3 m_LastMuzzlePosition;   //上次枪口的位置
 
 
-        private CachePool cachePool;
+        public CachePool cachePool;
         public BulletPoolManager bulletPoolManager;
         // Update is called once per frame
 
@@ -258,6 +258,8 @@ namespace OneCanRun.Game.Share
                 if (ShootType!=WeaponShootType.Laser)
                 {
                     this.bulletPoolManager = new BulletPoolManager(this.bullet);
+                    //CacheItem cacheBullet = new CacheBullet(bullet);
+                    //this.cachePool = new CachePool(128, cacheBullet);
                 }
                 else
                 {
@@ -713,6 +715,9 @@ namespace OneCanRun.Game.Share
 
             // initialization
             GameObject tempBullet = bulletPoolManager.getObject(WeaponMuzzle.position, Quaternion.LookRotation(shootDirection));
+            //GameObject tempBullet = cachePool.getObject().cacheObject;
+            tempBullet.transform.position = WeaponMuzzle.position;
+            tempBullet.transform.rotation = Quaternion.LookRotation(shootDirection);
             tempBullet.transform.position = WeaponMuzzle.position;
             tempBullet.GetComponent<BulletController>().damageType = this.damageType;
             Vector3 testForRotation = new Vector3(0, 0, 0);

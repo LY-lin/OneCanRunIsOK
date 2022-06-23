@@ -15,10 +15,14 @@ namespace OneCanRun.UI
         public RectTransform plane;
         // Start is called before the first frame update
 
+        public static Game.Share.HurtNumberPoolManager poolManager;
+
         CollectDamageNumber collect;
         static private int num = 0;
         void Start()
         {
+            if (poolManager == null)
+                poolManager = new HurtNumberPoolManager(HurtNumberPrefab, plane);
             collect = GetComponentInParent<CollectDamageNumber>();
             collect.Dmg += AddHN;
             
@@ -27,7 +31,7 @@ namespace OneCanRun.UI
         // Update is called once per frame
          void AddHN(GameObject position, DamageType type, float damage)
         {
-            GameObject HNInstance = Instantiate(HurtNumberPrefab, plane);
+            GameObject HNInstance = poolManager.getObject();
 
             HurtNum newHn = HNInstance.GetComponent<HurtNum>();
             DebugUtility.HandleErrorIfNullGetComponent<HurtNum, HurtNumberHudManage>(newHn, this, HNInstance.gameObject);

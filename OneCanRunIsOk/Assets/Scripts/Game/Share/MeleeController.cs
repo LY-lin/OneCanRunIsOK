@@ -27,6 +27,7 @@ namespace OneCanRun.Game.Share
         [Header("Attack Sfx")]
         AudioSource m_ShootAudioSource;
         public AudioClip WeaponAttackSfx;
+        public AudioClip hitSfx;
         //UnityAction<Vector3> Dmg;
 
         public void Init(WeaponController wc)
@@ -142,6 +143,7 @@ namespace OneCanRun.Game.Share
                 Damageable damageable = col.GetComponent<Damageable>();
                 if (damageable)
                 {
+                    m_ShootAudioSource.PlayOneShot(hitSfx);
                     Actor actor = col.gameObject.GetComponent<Actor>();
                     ActorProperties colliderProperty = actor.GetActorProperties();
                     float finalDamage = calculateDamage(colliderProperty, Damage, damageType);

@@ -4,10 +4,29 @@ using UnityEngine;
 
 namespace OneCanRun.Game.Share{
 
-    public class CacheItem : UnityEngine.Object{
+    public class CacheItem{
+        public GameObject cacheObject;
+
+        // for clone
+        public CacheItem(){
+
+        }
+
+        public CacheItem(GameObject gameObject){
+            cacheObject = gameObject;
+            GameObject.Instantiate(cacheObject);
+            cacheObject.SetActive(false);
+        }
+
+        public CacheItem(GameObject gameObject, GameObject parent){
+            cacheObject = gameObject;
+            GameObject.Instantiate(cacheObject, parent.transform);
+            cacheObject.SetActive(false);
+
+        }
 
         // you should overwrite the function
-        // initialize the parameter you need
+        // initialize the parameter you need, you must pass the object you wanna cache
         public virtual void init(){
             throw new System.Exception("init function not implement in " + this.ToString());
         }
