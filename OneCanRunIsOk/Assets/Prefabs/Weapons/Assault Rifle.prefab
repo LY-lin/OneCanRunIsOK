@@ -269,6 +269,8 @@ MonoBehaviour:
   attackLength: 1
   attackWidth: 1
   attackHeight: 2
+  WeaponAttackSfx: {fileID: 0}
+  hitSfx: {fileID: 0}
 --- !u!1 &100006
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +376,7 @@ AudioSource:
   m_GameObject: {fileID: 100006}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -911362531408344068, guid: 1d9998ab1cd80c947b8d20f0107159c3, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
