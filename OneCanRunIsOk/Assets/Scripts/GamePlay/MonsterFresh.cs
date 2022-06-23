@@ -140,7 +140,7 @@ namespace OneCanRun.GamePlay
         void refreshAllFreeMonster(){
             while (monsterPoolManager.activeNumber < monsterPoolManager.getCacheSize()){
                 //monsterPoolManager.getObject(new Vector3(64, 5, 60));
-                GameObject temp = monsterPoolManager.getObject(new Vector3(42, 0.7f, 22));
+                //GameObject temp = monsterPoolManager.getObject(new Vector3(42, 0.7f, 22));
                 
             }
 
@@ -148,7 +148,7 @@ namespace OneCanRun.GamePlay
 
         void refreshOneWave(){
             for(int i = 0;i < waveNumber; i++){
-                GameObject temp = monsterPoolManager.getObject(new Vector3(42, 0.7f, 22));
+                //GameObject temp = monsterPoolManager.getObject(new Vector3(42, 0.7f, 22));
             }
 
         }
