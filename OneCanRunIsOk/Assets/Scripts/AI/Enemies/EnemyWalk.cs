@@ -12,6 +12,11 @@ namespace OneCanRun.AI.Enemies
         [Range(0f, 1f)]
         public float AttackStopDistanceRatio = 0.5f;
 
+
+        AudioSource audioSource;
+        [Header("怪物移动时发出的吼声")]
+        public AudioClip moveClip;
+
         public enum AIState
         {
             Patrol,
@@ -33,6 +38,8 @@ namespace OneCanRun.AI.Enemies
             
             anim = GetComponent<Animator>();
             DebugUtility.HandleErrorIfNullGetComponent<Animator, EnemyWalk>(anim, this, gameObject);
+
+            audioSource = GetComponent<AudioSource>();
 
             state = AIState.Patrol;
 
@@ -61,6 +68,9 @@ namespace OneCanRun.AI.Enemies
                     {
                         state = AIState.Attack;
                         controller.SetNavDestination(transform.position);
+                        int a = Random.Range(1, 100);
+                        if (a < 20)
+                            audioSource.PlayOneShot(moveClip);
                     }
                     break;
                 case AIState.Attack:
