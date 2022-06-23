@@ -104,17 +104,12 @@ namespace OneCanRun.Game
 
         }
 
-        private void levelUpdate(){
-            if (!this.isPlayer){
-
-                return;
-            }
-            // update level up data, including level up seriesly
-            // reset experice
+        // in case up more than one level
+        private void levelOneUp(){
             int strenthEnhanced = 1;
             int techniqueEnhanced = 1;
             int intelligenceEnhanced = 1;
-            this.mModifier[0].baseValue = 0;
+            
 
             //update base
 
@@ -129,13 +124,29 @@ namespace OneCanRun.Game
             baseProperty.setPhysicalAttack(baseProperty.getPhysicalAttack() + techniqueEnhanced);
             //baseProperty.setMaxSpeed(baseProperty.getMaxSpeed() * (1 + 0.1f * techniqueEnhanced));
 
+        }
 
-            Debug.Log("level up");
+        private void levelUpdate(){
+            if (!this.isPlayer){
+                return;
+            }
+            int counter = 0;
+            while(this.mModifier[0].baseValue >= getNextLevelCount()){
+                this.mModifier[0].baseValue -= getNextLevelCount();
+                level++;
+                counter++;
+            }
+
+            for (int i = 0; i < counter; i++)
+                levelOneUp();
+            
 
         }
 
         public ulong getNextLevelCount(){
-            return 500;
+
+            
+            return 500 + (ulong)(level * (ulong)Mathf.Log(level)) + (ulong)Mathf.Exp(level);
         }
 
 

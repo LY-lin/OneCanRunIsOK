@@ -45,14 +45,14 @@ namespace OneCanRun.UI
             
             if (obj)
             {
-                
+
                 if (obj.activeSelf)
                     transform.localPosition = GetUIPosition(obj.transform.position);
                 else
-                    Destroy(this);
+                    HurtNumberHudManage.poolManager.release(this.gameObject);
             }
             else
-                Destroy(this);
+                HurtNumberHudManage.poolManager.release(this.gameObject);
         }
 
         private void Start()
