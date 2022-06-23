@@ -9,6 +9,9 @@ namespace OneCanRun.AI.Enemies
     [RequireComponent(typeof(Health), typeof(Actor), typeof(ActorBuffManager))]
     public class Boss : MonoBehaviour
     {
+        [Tooltip("Boss Name")]
+        public string name;
+
         [Tooltip("The speed at which the enemy rotates")]
         public float OrientationSpeed = 10f;
 
