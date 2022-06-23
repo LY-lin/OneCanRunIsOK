@@ -21,6 +21,9 @@ namespace OneCanRun.AI.Enemies
         [Tooltip("attack animation which are carried by the enemy")]
         public List<string> AttackList = new List<string>();
 
+        [Tooltip("attack animation duration which are carried by the enemy")]
+        public List<float> IntervalList = new List<float>();
+
         [Tooltip("Melee limit attack range")]
         public float MeleeRange;
 
@@ -49,6 +52,8 @@ namespace OneCanRun.AI.Enemies
 
         BodyMeleeController[] melees;
 
+        float[] intervals;
+
         string[] attacks;
 
         Actor actor;
@@ -59,8 +64,12 @@ namespace OneCanRun.AI.Enemies
         int currentSkillIndex = 0;
         int currentMeleeIndex = 0;
         int currentAttackIndex = 0;
+        float duration = 0f;
+        AttackState preAttackState;
         float latestMeleeAttackTime = float.NegativeInfinity;
         float latestWeaponAttackTime = float.NegativeInfinity;
+        float latestSkillAttackTime = float.NegativeInfinity;
+        bool Attacking = false;
 
         // Start is called before the first frame update
         void Start()
@@ -90,6 +99,8 @@ namespace OneCanRun.AI.Enemies
                 melee.init(actor);
             }
 
+            intervals = IntervalList.ToArray();
+
             anim = GetComponent<Animator>();
             DebugUtility.HandleErrorIfNullGetComponent<Animator, EnemyAttackController>(anim, this, gameObject);
 
@@ -99,6 +110,7 @@ namespace OneCanRun.AI.Enemies
         public void UpdateAttackState(Vector3 targetPostion)
         {
             float distance = (transform.position - targetPostion).magnitude;
+            Debug.Log(distance);
             if (distance <= MeleeRange)
             {
                 attackState = AttackState.Melee;
@@ -120,19 +132,22 @@ namespace OneCanRun.AI.Enemies
                 case AttackState.Melee:
                     if(melees.Length != 0 && latestMeleeAttackTime + MeleeInterval <= Time.time)
                     {
+                        Attacking = true;
                         melees[currentMeleeIndex].preOneAttack();
                         AttackByMelee();
                     }
                     break;
                 case AttackState.Weapon:
-                    if(weapons.Length !=0 && latestWeaponAttackTime + 1f <= Time.time)
+                    if(weapons.Length !=0 && latestWeaponAttackTime + MeleeInterval <= Time.time)
                     {
+                        Attacking = true;
                         AttackByWeapon(target);
                     }
                     break;
                 case AttackState.Skill:
-                    if(skills.Length != 0)
+                    if(skills.Length != 0 && latestSkillAttackTime + MeleeInterval <= Time.time)
                     {
+                        Attacking = true;
                         AttackBySkill();
                     }
                     break;
@@ -144,33 +159,89 @@ namespace OneCanRun.AI.Enemies
 
         public void AttackByWeapon(Vector3 target)
         {
-            latestWeaponAttackTime = Time.time;
             WeaponController weapon = weapons[currentWeaponIndex];
             Vector3 weaponForward = (target - weapon.WeaponRoot.transform.position).normalized;
             weapon.transform.forward = weaponForward;
 
             if (weapon.ShootType == WeaponShootType.Laser)
             {
-                // start Laser
+                currentAttackIndex = currentWeaponIndex;
+                duration = intervals[currentAttackIndex];
+                preAttackState = AttackState.Weapon;
+                latestWeaponAttackTime = Time.time;
+                anim.SetBool(attacks[currentAttackIndex], true);
                 weapon.HandleShootInputs(true, true, false);
             }
             else
             {
+                currentAttackIndex = currentWeaponIndex;
+                duration = intervals[currentAttackIndex];
+                preAttackState = AttackState.Weapon;
+                latestWeaponAttackTime = Time.time;
+                anim.SetTrigger(attacks[currentAttackIndex]);
                 weapon.HandleShootInputs(false, true, false);
             }
         }
 
         public void AttackBySkill()
         {
+            preAttackState = AttackState.Skill;
+            currentAttackIndex = weapons.Length + currentSkillIndex;
             SkillController skillController = skills[currentSkillIndex];
+            duration = intervals[currentAttackIndex];
             skillController.UseSkill();
         }
 
         public void AttackByMelee()
         {
+            preAttackState = AttackState.Melee;
             latestMeleeAttackTime = Time.time;
+            currentAttackIndex = Random.Range(weapons.Length + skills.Length, attacks.Length);
+            Debug.Log(currentAttackIndex);
+            duration = intervals[currentAttackIndex];
             anim.SetTrigger(attacks[currentAttackIndex]);
-            currentAttackIndex = (currentAttackIndex + 1)%attacks.Length;
+        }
+
+        public bool TryFinishAttack()
+        {
+            if (!Attacking)
+            {
+                return true;
+            }
+            bool flag = false;
+            switch (preAttackState)
+            {
+                case AttackState.Melee:
+                    if(latestMeleeAttackTime + duration <= Time.time)
+                    {
+                        flag = true;
+                        Attacking = false;
+                    }
+                    break;
+                case AttackState.Weapon:
+                    if(latestWeaponAttackTime + duration <= Time.time)
+                    {
+                        if (weapons[currentWeaponIndex].ShootType == WeaponShootType.Laser)
+                        {
+                            latestWeaponAttackTime = Time.time;
+                            weapons[currentWeaponIndex].HandleShootInputs(false, true, true);
+                            anim.SetBool(attacks[currentAttackIndex], false);
+                        }
+                        Attacking = false;
+                        flag = true;
+                    }
+                    break;
+                case AttackState.Skill:
+                    if (latestSkillAttackTime + duration <= Time.time)
+                    {
+                        Attacking = false;
+                        flag = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return flag;
         }
     }
 }

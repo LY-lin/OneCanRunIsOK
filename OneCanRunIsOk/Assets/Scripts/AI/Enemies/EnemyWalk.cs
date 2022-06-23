@@ -12,6 +12,11 @@ namespace OneCanRun.AI.Enemies
         [Range(0f, 1f)]
         public float AttackStopDistanceRatio = 0.5f;
 
+
+        AudioSource audioSource;
+        [Header("怪物移动时发出的吼声")]
+        public AudioClip moveClip;
+
         public enum AIState
         {
             Patrol,
@@ -33,6 +38,8 @@ namespace OneCanRun.AI.Enemies
             
             anim = GetComponent<Animator>();
             DebugUtility.HandleErrorIfNullGetComponent<Animator, EnemyWalk>(anim, this, gameObject);
+
+            audioSource = GetComponent<AudioSource>();
 
             state = AIState.Patrol;
 
@@ -61,6 +68,9 @@ namespace OneCanRun.AI.Enemies
                     {
                         state = AIState.Attack;
                         controller.SetNavDestination(transform.position);
+                        int a = Random.Range(1, 100);
+                        if (a < 20)
+                            audioSource.PlayOneShot(moveClip);
                     }
                     break;
                 case AIState.Attack:
@@ -78,17 +88,33 @@ namespace OneCanRun.AI.Enemies
             switch (state)
             {
                 case AIState.Patrol:
-                    controller.UpdatePathDestination();
-                    controller.SetNavDestination(controller.GetDestinationOnPath());
+                    if (controller.attackController.TryFinishAttack())
+                    {
+                        controller.UpdatePathDestination();
+                        controller.SetNavDestination(controller.GetDestinationOnPath());
+                    }
+                    else
+                    {
+                        controller.SetNavDestination(transform.position);
+                        controller.OrientTowards(controller.KnownDetectedTarget.transform.position);
+                    }
                     break;
                 case AIState.Follow:
-                    controller.SetNavDestination(controller.KnownDetectedTarget.transform.position);
-                    controller.OrientTowards(controller.KnownDetectedTarget.transform.position);
+                    if (controller.attackController.TryFinishAttack())
+                    {
+                        controller.SetNavDestination(controller.KnownDetectedTarget.transform.position);
+                        controller.OrientTowards(controller.KnownDetectedTarget.transform.position);
+                    }
+                    else
+                    {
+                        controller.SetNavDestination(transform.position);
+                        controller.OrientTowards(controller.KnownDetectedTarget.transform.position);
+                    }
                     break;
                 case AIState.Attack:
                     if (Vector3.Distance(controller.KnownDetectedTarget.transform.position,
                             controller.DetectionModule.DetectionSourcePoint.position)
-                        >= (AttackStopDistanceRatio * controller.DetectionModule.AttackRange))
+                        >= (AttackStopDistanceRatio * controller.DetectionModule.AttackRange) && controller.attackController.TryFinishAttack())
                     {
                         controller.SetNavDestination(controller.KnownDetectedTarget.transform.position);
                     }
