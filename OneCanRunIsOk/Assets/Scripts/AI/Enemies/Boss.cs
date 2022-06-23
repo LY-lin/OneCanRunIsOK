@@ -15,6 +15,10 @@ namespace OneCanRun.AI.Enemies
         [Tooltip("The distance at which the enemy considers that it has reached its current path destination point")]
         public float PathReachingRadius = 50f;
 
+        [Tooltip("Fraction of the enemy's attack range at which it will stop moving towards target while attacking")]
+        [Range(0f, 1f)]
+        public float AttackStopDistanceRatio = 0.5f;
+
         public enum AIState
         {
             Idle,
@@ -82,6 +86,8 @@ namespace OneCanRun.AI.Enemies
             colliders = GetComponentsInChildren<Collider>();
             DebugUtility.HandleErrorIfNoComponentFound<Collider, Boss>(colliders.Length, this, gameObject);
 
+            
+
             lastAttackTime = Time.time;
         }
 
@@ -95,12 +101,13 @@ namespace OneCanRun.AI.Enemies
         {
             // 调用绑定的敌人丢失事件
             state = AIState.Follow;
+            Debug.Log("Lost");
         }
 
         // 处理检测到目标
         void OnDetectTarget()
         {
-            
+            Debug.Log("Detect");
         }
 
         public bool GetCG()
@@ -190,7 +197,7 @@ namespace OneCanRun.AI.Enemies
         {
             NavMeshAgent.enabled = false;
             Vector3 direction = (destination - transform.position).normalized;
-            Vector3 fly = direction * 10f;
+            Vector3 fly = direction * 20f;
             OrientTowards(destination);
             characterController.Move(fly * Time.deltaTime);
         }
@@ -251,7 +258,17 @@ namespace OneCanRun.AI.Enemies
             {
                 return true;
             }
-            SetNavDestination(detectionModule.KnownDetectedTarget.transform.position);
+            OrientTowards(detectionModule.KnownDetectedTarget.transform.position);
+            if (Vector3.Distance(detectionModule.KnownDetectedTarget.transform.position,
+                detectionModule.DetectionSourcePoint.position) >= (AttackStopDistanceRatio * detectionModule.AttackRange))
+            {
+                SetNavDestination(detectionModule.KnownDetectedTarget.transform.position);
+            }
+            else
+            {
+                SetNavDestination(transform.position);
+            }
+            
             if (detectionModule.IsSeeingTarget && detectionModule.IsTargetInAttackRange)
             {
                 state = AIState.Attack;
@@ -262,6 +279,11 @@ namespace OneCanRun.AI.Enemies
 
         public bool TryAttack(string Attack, float duration)
         {
+            if (Vector3.Distance(detectionModule.KnownDetectedTarget.transform.position,
+                detectionModule.DetectionSourcePoint.position) > detectionModule.AttackRange)
+            {
+                return false;
+            }
             if(lastAttackTime <= Time.time)
             {
                 lastAttackTime = Time.time;
