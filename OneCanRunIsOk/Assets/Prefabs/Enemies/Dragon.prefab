@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 413295465}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 1, z: 6.99}
+  m_LocalPosition: {x: 0, y: 0.9, z: 7.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76,8 +76,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DetectionSourcePoint: {fileID: 413295466}
-  DetectionRange: 50
-  AttackRange: 20
+  DetectionRange: 200
+  AttackRange: 80
   KnownTargetTimeout: 12
   DetectionAngle: 120
 --- !u!1 &3920919025842050244
@@ -89,6 +89,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3920919025842050243}
+  - component: {fileID: 983408566486283618}
   m_Layer: 8
   m_Name: Hand_R
   m_TagString: Untagged
@@ -169,8 +170,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3920919025890978881}
-  - component: {fileID: 879303981}
-  - component: {fileID: 879303980}
   m_Layer: 8
   m_Name: Root
   m_TagString: Untagged
@@ -197,22 +196,6 @@ Transform:
   m_Father: {fileID: 3920919027543811108}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -29.869291}
---- !u!54 &879303981
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3920919025890978882}
-  serializedVersion: 2
-  m_Mass: 0.0000001
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &3920919025919953234
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3920919025933784313}
+  - component: {fileID: 581816435368806937}
   m_Layer: 8
   m_Name: Hand_L
   m_TagString: Untagged
@@ -875,6 +859,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3920919026220962552}
+  - component: {fileID: 7497055535842630298}
   m_Layer: 8
   m_Name: Head
   m_TagString: Untagged
@@ -1641,6 +1626,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3920919026616289133}
+  - component: {fileID: 7042087016234980403}
   m_Layer: 8
   m_Name: Wing01_R
   m_TagString: Untagged
@@ -2003,6 +1989,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3920919026768984760}
+  - component: {fileID: 6904375619944735678}
   m_Layer: 8
   m_Name: Wing01_L
   m_TagString: Untagged
@@ -2462,6 +2449,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3920919026920228986}
+  - component: {fileID: 7810057797912036393}
   m_Layer: 8
   m_Name: joint23
   m_TagString: Untagged
@@ -2634,6 +2622,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3920919027022075127}
+  - component: {fileID: 5960369483285324502}
   m_Layer: 8
   m_Name: Feet_L
   m_TagString: Untagged
@@ -2872,6 +2861,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3920919027093933039}
+  - component: {fileID: 4980228867663258566}
   m_Layer: 8
   m_Name: Feet_R
   m_TagString: Untagged
@@ -3577,7 +3567,7 @@ Transform:
   m_GameObject: {fileID: 3920919027543811132}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 89.1, y: 15.8, z: 95}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3920919026407239561}
@@ -3585,7 +3575,7 @@ Transform:
   - {fileID: 778311618}
   - {fileID: 413295466}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3920919027543811109
 MonoBehaviour:
@@ -3645,6 +3635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5202c7b496cc440458af9a3e04e02013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: 
   OrientationSpeed: 10
   PathReachingRadius: 2
   AttackStopDistanceRatio: 0.5
@@ -3722,12 +3713,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   root:
-    rid: 4899728877495779607
+    rid: 4899728907552161839
   updateType: 0
   references:
     version: 2
     RefIds:
-    - rid: 4899728877495779607
+    - rid: 4899728907552161839
       type: {class: Root, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
@@ -3738,8 +3729,8 @@ MonoBehaviour:
           height: 76.80002
         description: 
         child:
-          rid: 4899728877495779608
-    - rid: 4899728877495779608
+          rid: 4899728907552161840
+    - rid: 4899728907552161840
       type: {class: Selector, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
@@ -3750,10 +3741,10 @@ MonoBehaviour:
           height: 136
         description: 
         children:
-        - rid: 4899728877495779609
-        - rid: 4899728877495779610
+        - rid: 4899728907552161841
+        - rid: 4899728907552161842
         abortOnConditionChanged: 1
-    - rid: 4899728877495779609
+    - rid: 4899728907552161841
       type: {class: OnlyOneCondition, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3765,23 +3756,21 @@ MonoBehaviour:
         description: 
         dontReEvaluateOnRunning: 0
         child:
-          rid: 4899728877495779611
-    - rid: 4899728877495779610
-      type: {class: Sequence, ns: UniBT, asm: UniBT}
+          rid: 4899728907552161843
+    - rid: 4899728907552161842
+      type: {class: All, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
           serializedVersion: 2
-          x: 806.4
-          y: 872
-          width: 174.39996
-          height: 160
+          x: 112.799995
+          y: 803.2
+          width: 134.4
+          height: 118.39996
         description: 
         children:
-        - rid: 4899728877495779612
-        - rid: 4899728877495779613
-        - rid: 4899728877495779614
-        abortOnConditionChanged: 1
-    - rid: 4899728877495779611
+        - rid: 4899728907552161844
+        - rid: 4899728907552161845
+    - rid: 4899728907552161843
       type: {class: Sequence, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
@@ -3792,11 +3781,11 @@ MonoBehaviour:
           height: 160
         description: 
         children:
-        - rid: 4899728877495779615
-        - rid: 4899728877495779616
-        - rid: 4899728877495779617
+        - rid: 4899728907552161846
+        - rid: 4899728907552161847
+        - rid: 4899728907552161848
         abortOnConditionChanged: 1
-    - rid: 4899728877495779612
+    - rid: 4899728907552161844
       type: {class: FollowAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3807,35 +3796,21 @@ MonoBehaviour:
           height: 112
         description: 
         animation: Run
-    - rid: 4899728877495779613
-      type: {class: AttackCondition, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
+    - rid: 4899728907552161845
+      type: {class: Rotator, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
           serializedVersion: 2
-          x: 1057.6
-          y: 943.2
-          width: 173.59998
-          height: 129.60004
+          x: 685.60004
+          y: 936.8
+          width: 151.19995
+          height: 136.00006
         description: 
-        dontReEvaluateOnRunning: 0
-        child:
-          rid: 4899728877495779618
-        threshold: 6
-    - rid: 4899728877495779614
-      type: {class: AttackCondition, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
-      data:
-        graphPosition:
-          serializedVersion: 2
-          x: 1056.7999
-          y: 1105.6
-          width: 173.59998
-          height: 129.59998
-        description: 
-        dontReEvaluateOnRunning: 0
-        child:
-          rid: 4899728877495779619
-        threshold: 9
-    - rid: 4899728877495779615
+        children:
+        - rid: 4899728907552161849
+        - rid: 4899728907552161850
+        resetOnAbort: 0
+    - rid: 4899728907552161846
       type: {class: AnimationAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3848,7 +3823,7 @@ MonoBehaviour:
         animation: TakeOff
         duration: 8
         endCG: 0
-    - rid: 4899728877495779616
+    - rid: 4899728907552161847
       type: {class: Sequence, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
@@ -3859,13 +3834,13 @@ MonoBehaviour:
           height: 207.99997
         description: 
         children:
-        - rid: 4899728877495779620
-        - rid: 4899728877495779621
-        - rid: 4899728877495779622
-        - rid: 4899728877495779623
-        - rid: 4899728877495779624
+        - rid: 4899728907552161851
+        - rid: 4899728907552161852
+        - rid: 4899728907552161853
+        - rid: 4899728907552161854
+        - rid: 4899728907552161855
         abortOnConditionChanged: 1
-    - rid: 4899728877495779617
+    - rid: 4899728907552161848
       type: {class: AnimationAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3878,7 +3853,7 @@ MonoBehaviour:
         animation: Land
         duration: 3
         endCG: 1
-    - rid: 4899728877495779618
+    - rid: 4899728907552161849
       type: {class: AttackAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3890,7 +3865,7 @@ MonoBehaviour:
         description: 
         animation: AttackMouse
         duration: 3
-    - rid: 4899728877495779619
+    - rid: 4899728907552161850
       type: {class: Random, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
@@ -3901,9 +3876,9 @@ MonoBehaviour:
           height: 118.400024
         description: 
         children:
-        - rid: 4899728877495779625
-        - rid: 4899728877495779626
-    - rid: 4899728877495779620
+        - rid: 4899728907552161856
+        - rid: 4899728907552161857
+    - rid: 4899728907552161851
       type: {class: PatrolAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3915,7 +3890,7 @@ MonoBehaviour:
         description: 
         animation: Fly
         end: {fileID: 0}
-    - rid: 4899728877495779621
+    - rid: 4899728907552161852
       type: {class: PatrolAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3927,7 +3902,7 @@ MonoBehaviour:
         description: 
         animation: Fly
         end: {fileID: 0}
-    - rid: 4899728877495779622
+    - rid: 4899728907552161853
       type: {class: PatrolAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3939,7 +3914,7 @@ MonoBehaviour:
         description: 
         animation: Fly
         end: {fileID: 0}
-    - rid: 4899728877495779623
+    - rid: 4899728907552161854
       type: {class: PatrolAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3951,7 +3926,7 @@ MonoBehaviour:
         description: 
         animation: Fly
         end: {fileID: 0}
-    - rid: 4899728877495779624
+    - rid: 4899728907552161855
       type: {class: PatrolAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3963,7 +3938,7 @@ MonoBehaviour:
         description: 
         animation: Fly
         end: {fileID: 0}
-    - rid: 4899728877495779625
+    - rid: 4899728907552161856
       type: {class: AttackAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3975,7 +3950,7 @@ MonoBehaviour:
         description: 
         animation: AttackHead
         duration: 3
-    - rid: 4899728877495779626
+    - rid: 4899728907552161857
       type: {class: AttackAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
