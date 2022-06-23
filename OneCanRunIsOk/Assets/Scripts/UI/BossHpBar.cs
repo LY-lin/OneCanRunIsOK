@@ -30,6 +30,7 @@ namespace OneCanRun.UI
         List<Image> listHp = new List<Image>();
         Boss boss;
         Health boss_health;
+        float lastHp;
         void Start()
         {
             boss = FindObjectOfType<Boss>();
@@ -42,9 +43,10 @@ namespace OneCanRun.UI
                 Image newHpBar = hpInstance.GetComponent<Image>();
                 DebugUtility.HandleErrorIfNullGetComponent<BuffUI, Backpack>(newHpBar,
                     this, hpInstance.gameObject);
-                
+                lastHp = boss_health.MaxHealth;
                 listHp.Add(newHpBar);
                 int index = i % 4;
+                //ËÄÖÖÑÕÉ«ÂÖ»»
                 switch(index)
                 {
                     case 0:
@@ -54,10 +56,10 @@ namespace OneCanRun.UI
                         newHpBar.color = Color.blue;
                         break;
                     case 2:
-                        newHpBar.color = new Color(127, 0, 255, 1);
+                        newHpBar.color = new Color(255, 128, 0, 1);
                         break;
                     case 3:
-                        newHpBar.color = new Color(0, 127, 0, 1);
+                        newHpBar.color = new Color(0, 80, 0, 1);
                         break;
                 }
             }
@@ -71,18 +73,40 @@ namespace OneCanRun.UI
             {
                 Plane.gameObject.SetActive(true);
                 float ratio = boss_health.CurrentHealth / boss_health.MaxHealth;
-                Debug.Log(ratio / (1f / Num));
+                
                 int index = Mathf.FloorToInt(ratio / (1f / Num));
-                if (index == Num)
-                    index = Num - 1;
-                listHp[index].fillAmount = (ratio - (index * (1f / Num)) )* Num;
-                Debug.Log(index + "   " + (1f/Num)+"  " + (ratio - (index * (1f / Num))));
-                for(int i= Num-1;i>index;i--)
+                Debug.Log(index);
+                if (ratio%(1f/Num)==0)
+                    index = index - 1;
+                if (ratio == 0)
                 {
-                    listHp[i].fillAmount = 0;
+                    index = 0;
+                    /*
+                    Plane.gameObject.SetActive(false);
+                    return;
+                    */
+                }
+                Debug.Log(boss_health.CurrentHealth + "  " +index);
+
+                listHp[index].fillAmount = (ratio - (index * (1f / Num)) )* Num;
+
+                if(lastHp<boss_health.CurrentHealth)
+                {
+                    for (int i = Num - 1; i > index; i--)
+                    {
+                        listHp[i].fillAmount = 0;
+                    }
+                }
+                else if(lastHp>boss_health.CurrentHealth)
+                {
+                    for (int i = 0; i < index; i++)
+                    {
+                        listHp[i].fillAmount = 1;
+                    }
                 }
                 HpRat.text = boss_health.CurrentHealth.ToString() + "/" + boss_health.MaxHealth.ToString();
             }
+
         }
     }
 }
