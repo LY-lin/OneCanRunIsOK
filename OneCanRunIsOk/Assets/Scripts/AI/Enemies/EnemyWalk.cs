@@ -78,17 +78,33 @@ namespace OneCanRun.AI.Enemies
             switch (state)
             {
                 case AIState.Patrol:
-                    controller.UpdatePathDestination();
-                    controller.SetNavDestination(controller.GetDestinationOnPath());
+                    if (controller.attackController.TryFinishAttack())
+                    {
+                        controller.UpdatePathDestination();
+                        controller.SetNavDestination(controller.GetDestinationOnPath());
+                    }
+                    else
+                    {
+                        controller.SetNavDestination(transform.position);
+                        controller.OrientTowards(controller.KnownDetectedTarget.transform.position);
+                    }
                     break;
                 case AIState.Follow:
-                    controller.SetNavDestination(controller.KnownDetectedTarget.transform.position);
-                    controller.OrientTowards(controller.KnownDetectedTarget.transform.position);
+                    if (controller.attackController.TryFinishAttack())
+                    {
+                        controller.SetNavDestination(controller.KnownDetectedTarget.transform.position);
+                        controller.OrientTowards(controller.KnownDetectedTarget.transform.position);
+                    }
+                    else
+                    {
+                        controller.SetNavDestination(transform.position);
+                        controller.OrientTowards(controller.KnownDetectedTarget.transform.position);
+                    }
                     break;
                 case AIState.Attack:
                     if (Vector3.Distance(controller.KnownDetectedTarget.transform.position,
                             controller.DetectionModule.DetectionSourcePoint.position)
-                        >= (AttackStopDistanceRatio * controller.DetectionModule.AttackRange))
+                        >= (AttackStopDistanceRatio * controller.DetectionModule.AttackRange) && controller.attackController.TryFinishAttack())
                     {
                         controller.SetNavDestination(controller.KnownDetectedTarget.transform.position);
                     }

@@ -69,6 +69,7 @@ namespace OneCanRun.AI.Enemies
         float latestMeleeAttackTime = float.NegativeInfinity;
         float latestWeaponAttackTime = float.NegativeInfinity;
         float latestSkillAttackTime = float.NegativeInfinity;
+        bool Attacking = false;
 
         // Start is called before the first frame update
         void Start()
@@ -131,6 +132,7 @@ namespace OneCanRun.AI.Enemies
                 case AttackState.Melee:
                     if(melees.Length != 0 && latestMeleeAttackTime + MeleeInterval <= Time.time)
                     {
+                        Attacking = true;
                         melees[currentMeleeIndex].preOneAttack();
                         AttackByMelee();
                     }
@@ -138,12 +140,14 @@ namespace OneCanRun.AI.Enemies
                 case AttackState.Weapon:
                     if(weapons.Length !=0 && latestWeaponAttackTime + MeleeInterval <= Time.time)
                     {
+                        Attacking = true;
                         AttackByWeapon(target);
                     }
                     break;
                 case AttackState.Skill:
                     if(skills.Length != 0 && latestSkillAttackTime + MeleeInterval <= Time.time)
                     {
+                        Attacking = true;
                         AttackBySkill();
                     }
                     break;
@@ -200,6 +204,10 @@ namespace OneCanRun.AI.Enemies
 
         public bool TryFinishAttack()
         {
+            if (!Attacking)
+            {
+                return true;
+            }
             bool flag = false;
             switch (preAttackState)
             {
@@ -207,6 +215,7 @@ namespace OneCanRun.AI.Enemies
                     if(latestMeleeAttackTime + duration <= Time.time)
                     {
                         flag = true;
+                        Attacking = false;
                     }
                     break;
                 case AttackState.Weapon:
@@ -216,15 +225,16 @@ namespace OneCanRun.AI.Enemies
                         {
                             latestWeaponAttackTime = Time.time;
                             weapons[currentWeaponIndex].HandleShootInputs(false, true, true);
-                            Debug.Log("Laser");
                             anim.SetBool(attacks[currentAttackIndex], false);
                         }
+                        Attacking = false;
                         flag = true;
                     }
                     break;
                 case AttackState.Skill:
                     if (latestSkillAttackTime + duration <= Time.time)
                     {
+                        Attacking = false;
                         flag = true;
                     }
                     break;
