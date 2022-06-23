@@ -300,7 +300,7 @@ namespace OneCanRun.GamePlay
             }
 
             // Handle switching to the new weapon index
-            SwitchToWeaponIndex(newWeaponIndex);
+            SwitchToWeaponIndex(newWeaponIndex, true);
         }
 
         // Switches to the given weapon index in weapon slots if the new index is a valid weapon that is different from our current one
@@ -549,17 +549,56 @@ namespace OneCanRun.GamePlay
                         OnAddedWeapon.Invoke(weaponInstance, i);
                     }
 
+                    // Handle auto-switching to weapon if no weapons currently
+                    if (GetActiveWeapon() == null)
+                    {
+                        SwitchWeapon(true);
+                    }
+
                     return true;
                 }
             }
 
-            // Handle auto-switching to weapon if no weapons currently
-            if (GetActiveWeapon() == null)
+            AddWeaponAtSlotIndex(weaponPrefab, ActiveWeaponIndex);
+
+            return true;
+        }
+
+        void AddWeaponAtSlotIndex(WeaponController weaponPrefab, int targetIndex)
+        {
+            WeaponController oldWeapon = GetWeaponAtSlotIndex(targetIndex);
+            CreatePickup(oldWeapon);
+            RemoveWeapon(oldWeapon);
+
+            // spawn the weapon prefab as child of the weapon socket
+            WeaponController weaponInstance = Instantiate(weaponPrefab, WeaponParentSocket);
+            weaponInstance.transform.localPosition = Vector3.zero;
+            //weaponInstance.transform.localRotation = Quaternion.identity;
+            // Set owner to this gameObject so the weapon can alter projectile/damage logic accordingly
+            weaponInstance.Owner = gameObject;
+            weaponInstance.SourcePrefab = weaponPrefab.gameObject;
+            weaponInstance.ShowWeapon(false);
+
+            if (!weaponInstance.RemoteWeapons)
             {
-                SwitchWeapon(true);
+                weaponInstance.InitMelee();
+            }
+            // Assign the first person layer to the weapon
+            int layerIndex =
+                Mathf.RoundToInt(Mathf.Log(FpsWeaponLayer.value,
+                    2)); // This function converts a layermask to a layer index
+
+            foreach (Transform t in weaponInstance.gameObject.GetComponentsInChildren<Transform>(true))
+            {
+                t.gameObject.layer = layerIndex;
             }
 
-            return false;
+            m_WeaponSlots[targetIndex] = weaponInstance;
+
+            if (OnAddedWeapon != null)
+            {
+                OnAddedWeapon.Invoke(weaponInstance, targetIndex);
+            }
         }
 
         //移除武器
