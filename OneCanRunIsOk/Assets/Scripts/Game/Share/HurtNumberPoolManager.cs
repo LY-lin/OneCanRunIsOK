@@ -5,7 +5,7 @@ using UnityEngine;
 namespace OneCanRun.Game.Share{
 
     public class HurtNumberPoolManager{
-        private const int poolSize = 32;
+        private const int poolSize = 256;
         private List<GameObject> pool;
         private List<bool> used;
         private GameObject sample;

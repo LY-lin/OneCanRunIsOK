@@ -6,12 +6,14 @@ namespace OneCanRun.Game.Share
     public class MonsterPoolManager : MonoBehaviour
     {
         private static MonsterPoolManager monsterPoolManagerPtr = null;
-        private const int cacheSize = 200;
-        private static GameObject monster;
-        private static GameObject[] dataStream = new GameObject[cacheSize];
+        private const int cacheSize = 20;
+        private static List<GameObject> sampleList;
+        public List<GameObject> sampleList_exposed;
+        //private static GameObject[] dataStream = new GameObject[cacheSize];
         private static GameObject parent;
         private static bool init = false;
-        private static bool[] used = new bool[cacheSize];
+        private static List<List<GameObject>> pool;
+        private static List<List<bool>> used;
         public int activeNumber = 0;
 
         private void OnEnable(){
@@ -28,81 +30,101 @@ namespace OneCanRun.Game.Share
 
 
         // initialization
-        public static void initialization(GameObject _parent, GameObject _monster)
-        {
+        public static void initialization(GameObject _parent){
             parent = _parent;
-            if (init)
-                return;
-            init = true;
-            monster = _monster;
+            pool = new List<List<GameObject>>();
+            used = new List<List<bool>>();
+            for(int i = 0;i < sampleList.Count; i++){
+                pool.Add(new List<GameObject>(cacheSize));
+                used.Add(new List<bool>(cacheSize));
+                GameObject current = sampleList[i];
+                for(int j = 0;j < cacheSize; j++){
+                    GameObject temp = GameObject.Instantiate(current, _parent.transform);
+                    temp.SetActive(false);
+                    pool[i].Add(temp);
+                    used[i].Add(false);
 
-            for (int i = 0; i < cacheSize; i++)
-            {
-                GameObject temp = UnityEngine.Object.Instantiate(monster, _parent.transform);
-                temp.SetActive(false);
-                dataStream[i] = temp;
-                used[i] = false;
+                }
             }
+
+            
+
+
 
         }
 
         // get a free object, if there is not a free one, a null will turn up.
         // you have to consider the rate in case there is not free object to get
-        public GameObject getObject(Vector3 position)
+        public GameObject getObject(int typeID,Vector3 position)
         {
+            // illegal
+            if (typeID < 0 || typeID >= pool.Count){
+                Debug.LogError("Type " + typeID + " does not exit in pool");
+                return null;
+            }
+
             GameObject ret = null;
             int index = -1;
             for (int i = 0; i < cacheSize; i++)
             {
-                if (!used[i])
-                {
-                    used[i] = true;
+                if (!used[typeID][i]){
+
+                    used[typeID][i] = true;
                     index = i;
-                    activeNumber++;
-                    break;
+                    ret = pool[typeID][i];
+                    return ret;
                 }
             }
 
-            if (index != -1)
-            {
-                ret = dataStream[index];
-                ret.transform.position = position;
-                
-                ret.SetActive(true);
-
-            }
-            else{
-                ret = UnityEngine.Object.Instantiate(monster, parent.transform);
-                //ret = dataStream[index];
-                ret.transform.position = position;
-            }
+            
+            ret = UnityEngine.Object.Instantiate(sampleList[typeID], parent.transform);
+            pool[typeID].Add(ret);
+            used[typeID].Add(true);
+            ret.transform.position = position;
+            
             
             return ret;
         }
 
         // remove the object from scene 
-        public void release(GameObject objcect)
-        {
-            bool toDestory = true;
-            for (int i = 0; i < cacheSize; i++)
-            {
-                if (dataStream[i] == objcect)
-                    toDestory = false;
+        public void release(int typeID, GameObject objcect){
+            objcect.SetActive(false);
 
-                if (dataStream[i] == objcect && used[i])
-                {
-                    objcect.GetComponent<Health>().CurrentHealth = objcect.GetComponent<Health>().MaxHealth;
-                    objcect.GetComponent<Health>().m_IsDead = false;
-                    objcect.SetActive(false);
-                    activeNumber--;
-                    used[i] = false;
+            // illegal
+            if (typeID < 0 || typeID >= pool.Count){
+                Destroy(objcect);
+                return;
+            }
+
+            for(int i = 0;i < pool[typeID].Count; i++){
+                if(pool[typeID][i] == objcect){
+                    used[typeID][i] = false;
                     return;
                 }
+
             }
-            if(toDestory)
-                Destroy(objcect);
+            Destroy(objcect);
+
 
         }
+
+        public void release(GameObject objcect){
+            objcect.SetActive(false);
+
+
+
+            for(int i = 0;i < pool.Count; i++){
+                for(int j = 0;j < pool[i].Count; j++){
+                    if(pool[i][j] == objcect){
+                    used[i][j] = false;
+                    return;
+                }
+                }
+            }
+            Destroy(objcect);
+
+        }
+
 
         public int getCacheSize(){
             return cacheSize;
