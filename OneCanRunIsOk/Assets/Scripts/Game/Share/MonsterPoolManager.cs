@@ -6,22 +6,17 @@ namespace OneCanRun.Game.Share
     public class MonsterPoolManager : MonoBehaviour
     {
         private static MonsterPoolManager monsterPoolManagerPtr = null;
-        private const int cacheSize = 50;
+        private const int cacheSize = 200;
         private static GameObject monster;
-        private static List<GameObject> sampleList;
-        public List<GameObject> sampleList_exposed;
         private static GameObject[] dataStream = new GameObject[cacheSize];
-        private static List<List<GameObject>> pool;
         private static GameObject parent;
         private static bool init = false;
         private static bool[] used = new bool[cacheSize];
         public int activeNumber = 0;
 
         private void OnEnable(){
-            if (monsterPoolManagerPtr == null){
+            if (monsterPoolManagerPtr == null)
                 monsterPoolManagerPtr = this;
-                sampleList = sampleList_exposed;
-            }
 
         }
 
@@ -33,13 +28,20 @@ namespace OneCanRun.Game.Share
 
 
         // initialization
-        public static void initialization(GameObject _parent){
-            pool = new List<List<GameObject>>(cacheSize);
+        public static void initialization(GameObject _parent, GameObject _monster)
+        {
+            parent = _parent;
+            if (init)
+                return;
+            init = true;
+            monster = _monster;
 
-           for(int i = 0;i < sampleList.Count; i++){
-                GameObject current = sampleList[i];
-
-
+            for (int i = 0; i < cacheSize; i++)
+            {
+                GameObject temp = UnityEngine.Object.Instantiate(monster, _parent.transform);
+                temp.SetActive(false);
+                dataStream[i] = temp;
+                used[i] = false;
             }
 
         }

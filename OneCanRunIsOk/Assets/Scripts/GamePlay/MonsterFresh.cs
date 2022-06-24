@@ -55,7 +55,6 @@ namespace OneCanRun.GamePlay
                 float position_y = 0;
                 float position_z = 0;
                 int typeID = 0;
-                int number = 0;
                 foreach(XmlElement x12 in xl1.ChildNodes){
                     if(x12.Name == "Time"){
                         time = int.Parse(x12.InnerText);
@@ -72,13 +71,9 @@ namespace OneCanRun.GamePlay
                     if (x12.Name == "TypeID"){
                         typeID = int.Parse(x12.InnerText);
                     }
-                    if(x12.Name == "Number"){
-                        number = int.Parse(x12.InnerText);
-
-                    }
                 }
 
-                Game.Share.MonsterFreshInfo tmp = new Game.Share.MonsterFreshInfo(time, position_x, position_y, position_z, typeID, number);
+                Game.Share.MonsterFreshInfo tmp = new Game.Share.MonsterFreshInfo(time, position_x, position_y, position_z, typeID);
                 mMonsterList.Add(tmp);
             }
 
@@ -90,7 +85,7 @@ namespace OneCanRun.GamePlay
         void Start()
         {
             //counter = mMonsterList.Count;
-            Game.Share.MonsterPoolManager.initialization(this.gameObject);
+            Game.Share.MonsterPoolManager.initialization(this.gameObject, monsterSample[0]);
             monsterPoolManager = Game.Share.MonsterPoolManager.getInstance();
         }
 
@@ -121,17 +116,9 @@ namespace OneCanRun.GamePlay
             if((int)Time.time >= mMonsterList[counter].time){
                 //Debug.Log("Fresh!");
                 Game.Share.MonsterFreshInfo current = mMonsterList[counter];
-
-                for(int i = 0;i < current.number; i++){
-                    //monsterPoolManager.getObject(new Vector3(current.position_x, current.position_y, current.position_z));
-                    GameObject.Instantiate(monsterSample[current.typeID], new Vector3(current.position_x, current.position_y, current.position_z),
-                    new Quaternion(0, 0, 0, 0), this.transform);
-                }
-
-                /*
                 GameObject.Instantiate(monsterSample[current.typeID], new Vector3(current.position_x, current.position_y, current.position_z),
                     new Quaternion(0, 0, 0, 0), this.transform);
-                */
+
                 counter++;
             }
 
@@ -140,7 +127,7 @@ namespace OneCanRun.GamePlay
         void refreshAllFreeMonster(){
             while (monsterPoolManager.activeNumber < monsterPoolManager.getCacheSize()){
                 //monsterPoolManager.getObject(new Vector3(64, 5, 60));
-                //GameObject temp = monsterPoolManager.getObject(new Vector3(42, 0.7f, 22));
+                GameObject temp = monsterPoolManager.getObject(new Vector3(42, 0.7f, 22));
                 
             }
 
@@ -148,7 +135,7 @@ namespace OneCanRun.GamePlay
 
         void refreshOneWave(){
             for(int i = 0;i < waveNumber; i++){
-                //GameObject temp = monsterPoolManager.getObject(new Vector3(42, 0.7f, 22));
+                GameObject temp = monsterPoolManager.getObject(new Vector3(42, 0.7f, 22));
             }
 
         }
