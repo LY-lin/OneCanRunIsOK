@@ -1,66 +1,17 @@
 <MonsterConfig>
   <Wave id="0">
-    <Time time="">5</Time>
-    <Position_x position_x="">41</Position_x>
-    <Position_y position_y="">2.8</Position_y>
-    <Position_z position_z="">22</Position_z>
+    <Time time="">15</Time>
+    <Position_x position_x="">64</Position_x>
+    <Position_y position_y="">5</Position_y>
+    <Position_z position_z="">60</Position_z>
     <TypeID typeID="">0</TypeID>
-    <Number number="">5</Number>
   </Wave>
+
   <Wave id="1">
-    <Time time="">5</Time>
-    <Position_x position_x="">30</Position_x>
-    <Position_y position_y="">3</Position_y>
-    <Position_z position_z="">100</Position_z>
+    <Time time="">20</Time>
+    <Position_x position_x="">64</Position_x>
+    <Position_y position_y="">5</Position_y>
+    <Position_z position_z="">60</Position_z>
     <TypeID typeID="">1</TypeID>
-    <Number number="">1</Number>
-  </Wave>
-  <Wave id="2">
-    <Time time="">15</Time>
-    <Position_x position_x="">30</Position_x>
-    <Position_y position_y="">3</Position_y>
-    <Position_z position_z="">100</Position_z>
-    <TypeID typeID="">1</TypeID>
-    <Number number="">5</Number>
-  </Wave>
-  <Wave id="3">
-    <Time time="">15</Time>
-    <Position_x position_x="">41</Position_x>
-    <Position_y position_y="">2.8</Position_y>
-    <Position_z position_z="">22</Position_z>
-    <TypeID typeID="">0</TypeID>
-    <Number number="">3</Number>
-  </Wave>
-  <Wave id="4">
-    <Time time="">35</Time>
-    <Position_x position_x="">30</Position_x>
-    <Position_y position_y="">3</Position_y>
-    <Position_z position_z="">100</Position_z>
-    <TypeID typeID="">2</TypeID>
-    <Number number="">5</Number>
-  </Wave>
-  <Wave id="5">
-    <Time time="">35</Time>
-    <Position_x position_x="">41</Position_x>
-    <Position_y position_y="">2.8</Position_y>
-    <Position_z position_z="">22</Position_z>
-    <TypeID typeID="">1</TypeID>
-    <Number number="">3</Number>
-  </Wave>
-  <Wave id="6">
-    <Time time="">50</Time>
-    <Position_x position_x="">30</Position_x>
-    <Position_y position_y="">3</Position_y>
-    <Position_z position_z="">100</Position_z>
-    <TypeID typeID="">2</TypeID>
-    <Number number="">5</Number>
-  </Wave>
-  <Wave id="7">
-    <Time time="">50</Time>
-    <Position_x position_x="">41</Position_x>
-    <Position_y position_y="">2.8</Position_y>
-    <Position_z position_z="">22</Position_z>
-    <TypeID typeID="">3</TypeID>
-    <Number number="">3</Number>
   </Wave>
 </MonsterConfig>
