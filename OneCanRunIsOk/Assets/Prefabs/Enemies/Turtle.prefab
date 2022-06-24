@@ -743,7 +743,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackStopDistanceRatio: 0.08
-  moveClip: {fileID: 0}
   state: 0
   controller: {fileID: 2333055648381596544}
 --- !u!114 &2333055648381596546
@@ -780,9 +779,6 @@ MonoBehaviour:
   AttackList:
   - Attack1
   - Attack2
-  IntervalList:
-  - 0.5
-  - 0.5
   MeleeRange: 3
   WeaponRange: 6
   SkillRange: 9

@@ -293,6 +293,7 @@ namespace OneCanRun.AI.Enemies
 
             if (attackController.TryFinishAttack())
             {
+                Debug.Log("Attack");
                 attackController.UpdateAttackState(KnownDetectedTarget.transform.position);
                 attackController.Attack(KnownDetectedTarget.transform.position);
             }

@@ -75,6 +75,7 @@ namespace OneCanRun.UI
                 float ratio = boss_health.CurrentHealth / boss_health.MaxHealth;
                 
                 int index = Mathf.FloorToInt(ratio / (1f / Num));
+                Debug.Log(index);
                 if (ratio%(1f/Num)==0)
                     index = index - 1;
                 if (ratio == 0)
@@ -85,6 +86,7 @@ namespace OneCanRun.UI
                     return;
                     */
                 }
+                Debug.Log(boss_health.CurrentHealth + "  " +index);
 
                 listHp[index].fillAmount = (ratio - (index * (1f / Num)) )* Num;
 
