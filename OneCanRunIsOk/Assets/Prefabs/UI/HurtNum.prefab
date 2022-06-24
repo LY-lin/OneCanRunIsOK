@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mText: {fileID: 4452002088357911921}
-  lifeTime: 1.5
+  lifeTime: 3
 --- !u!1 &9051482474600270742
 GameObject:
   m_ObjectHideFlags: 0

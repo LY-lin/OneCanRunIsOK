@@ -100,9 +100,6 @@ namespace OneCanRun.UI
         [Tooltip("Image for Exp Bar")]
         public Image ExpBar;
 
-        [Tooltip("level text")]
-        public TextMeshProUGUI level;
-        
         PlayerWeaponsManager playerWeaponsManager;
         PlayerSkillsManager playerSkillsManager;
         ActorProperties actorProperties;
@@ -187,8 +184,7 @@ namespace OneCanRun.UI
             ExpRatio.text = curexp.ToString() + " / " + wexp.ToString();
             ExpBar.fillAmount = actor.getExperience() / actor.getNextLevelCount();
             BuffPrefab.gameObject.SetActive(true);
-
-            level.text = "Level:           "+actor.getLevel().ToString(); 
+            Debug.Log(HpBar.fillAmount);
         }
 
         public void closeBuff()

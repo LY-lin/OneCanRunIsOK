@@ -97,6 +97,7 @@ namespace OneCanRun.GamePlay
         {
             if (m_LastTimeUse + CoolingTime > Time.time)
             {
+                Debug.Log("this skill is Cooling!");
                 return true;
             }
             return false;

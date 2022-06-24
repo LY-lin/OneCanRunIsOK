@@ -43,7 +43,7 @@ namespace OneCanRun.UI
             
 
             //输入esc，退出背包
-            if (m_backpack.gameObject.activeSelf&&Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
