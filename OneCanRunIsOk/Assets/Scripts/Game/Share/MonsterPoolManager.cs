@@ -10,17 +10,14 @@ namespace OneCanRun.Game.Share
         private static List<GameObject> sampleList;
         public List<GameObject> sampleList_exposed;
         private static GameObject[] dataStream = new GameObject[cacheSize];
-        private static List<List<GameObject>> pool;
         private static GameObject parent;
         private static bool init = false;
         private static List<List<bool>> used;
         public int activeNumber = 0;
 
         private void OnEnable(){
-            if (monsterPoolManagerPtr == null){
+            if (monsterPoolManagerPtr == null)
                 monsterPoolManagerPtr = this;
-                sampleList = sampleList_exposed;
-            }
 
         }
 

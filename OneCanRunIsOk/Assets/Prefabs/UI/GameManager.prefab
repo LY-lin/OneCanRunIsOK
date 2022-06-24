@@ -211,14 +211,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72034d2eec19bc242a3d64e268ef2621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoolDownTimeImage: {fileID: 8771231294358326661}
-  Warning: {fileID: 2116407399257728426}
-  SkillIcon: {fileID: 8771231292890307803}
-  Cooling: {fileID: 8771231293813727896}
-  spCoolDownTimeImage: {fileID: 8198423249666989492}
-  spWarning: {fileID: 6176368453622715387}
-  spSkillIcon: {fileID: 4038047591599845714}
-  spCooling: {fileID: 1160050505219204422}
+  CoolDownTimeImage: {fileID: 0}
+  Warning: {fileID: 0}
+  SkillIcon: {fileID: 0}
+  Cooling: {fileID: 0}
+  spCoolDownTimeImage: {fileID: 0}
+  spWarning: {fileID: 0}
+  spSkillIcon: {fileID: 0}
+  spCooling: {fileID: 0}
 --- !u!114 &5309752414958560138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,7 +336,7 @@ RectTransform:
   m_Children:
   - {fileID: 4632168799392808800}
   - {fileID: 5504914839791086631}
-  - {fileID: 8771231293354076513}
+  - {fileID: 6008676011690947619}
   - {fileID: 3110557025811451353}
   - {fileID: 1867217411355127361}
   - {fileID: 5517085476438393059}
