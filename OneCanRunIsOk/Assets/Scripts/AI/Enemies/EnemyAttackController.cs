@@ -110,7 +110,6 @@ namespace OneCanRun.AI.Enemies
         public void UpdateAttackState(Vector3 targetPostion)
         {
             float distance = (transform.position - targetPostion).magnitude;
-            Debug.Log(distance);
             if (distance <= MeleeRange)
             {
                 attackState = AttackState.Melee;
