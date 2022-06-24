@@ -6,10 +6,19 @@ namespace OneCanRun.Game.Share
     public class MonsterPoolManager : MonoBehaviour
     {
         private static MonsterPoolManager monsterPoolManagerPtr = null;
+<<<<<<< HEAD
         private const int cacheSize = 20;
         private static List<GameObject> sampleList;
         public List<GameObject> sampleList_exposed;
         //private static GameObject[] dataStream = new GameObject[cacheSize];
+=======
+        private const int cacheSize = 50;
+        private static GameObject monster;
+        private static List<GameObject> sampleList;
+        public List<GameObject> sampleList_exposed;
+        private static GameObject[] dataStream = new GameObject[cacheSize];
+        private static List<List<GameObject>> pool;
+>>>>>>> parent of 34ed919 (Revert "Merge branch 'new-new-new-branch' of https://github.com/LY-lin/OneCanRunIsOK into new-new-new-branch")
         private static GameObject parent;
         private static bool init = false;
         private static List<List<GameObject>> pool;
@@ -17,8 +26,10 @@ namespace OneCanRun.Game.Share
         public int activeNumber = 0;
 
         private void OnEnable(){
-            if (monsterPoolManagerPtr == null)
+            if (monsterPoolManagerPtr == null){
                 monsterPoolManagerPtr = this;
+                sampleList = sampleList_exposed;
+            }
 
         }
 
@@ -31,6 +42,7 @@ namespace OneCanRun.Game.Share
 
         // initialization
         public static void initialization(GameObject _parent){
+<<<<<<< HEAD
             parent = _parent;
             pool = new List<List<GameObject>>();
             used = new List<List<bool>>();
@@ -45,6 +57,14 @@ namespace OneCanRun.Game.Share
                     used[i].Add(false);
 
                 }
+=======
+            pool = new List<List<GameObject>>(cacheSize);
+
+           for(int i = 0;i < sampleList.Count; i++){
+                GameObject current = sampleList[i];
+
+
+>>>>>>> parent of 34ed919 (Revert "Merge branch 'new-new-new-branch' of https://github.com/LY-lin/OneCanRunIsOK into new-new-new-branch")
             }
 
             

@@ -64,8 +64,14 @@ namespace OneCanRun.GamePlay
                     if (x12.Name == "TypeID"){
                         typeID = int.Parse(x12.InnerText);
                     }
+<<<<<<< HEAD
                     if (x12.Name == "Number"){
                         number = int.Parse(x12.InnerText);
+=======
+                    if(x12.Name == "Number"){
+                        number = int.Parse(x12.InnerText);
+
+>>>>>>> parent of 34ed919 (Revert "Merge branch 'new-new-new-branch' of https://github.com/LY-lin/OneCanRunIsOK into new-new-new-branch")
                     }
                 }
 
@@ -80,6 +86,10 @@ namespace OneCanRun.GamePlay
 
         void Start()
         {
+<<<<<<< HEAD
+=======
+            //counter = mMonsterList.Count;
+>>>>>>> parent of 34ed919 (Revert "Merge branch 'new-new-new-branch' of https://github.com/LY-lin/OneCanRunIsOK into new-new-new-branch")
             Game.Share.MonsterPoolManager.initialization(this.gameObject);
             monsterPoolManager = Game.Share.MonsterPoolManager.getInstance();
         }
@@ -102,11 +112,25 @@ namespace OneCanRun.GamePlay
 
             if((int)Time.time - startTime >= mMonsterList[counter].time){
                 Game.Share.MonsterFreshInfo current = mMonsterList[counter];
+<<<<<<< HEAD
                 for(int i = 0;i < current.number; i++){
                    GameObject gameObject = monsterPoolManager.getObject(current.typeID, new Vector3(current.position_x, current.position_y, current.position_z));
                     if (gameObject)
                         gameObject.SetActive(true);
                 }
+=======
+
+                for(int i = 0;i < current.number; i++){
+                    //monsterPoolManager.getObject(new Vector3(current.position_x, current.position_y, current.position_z));
+                    GameObject.Instantiate(monsterSample[current.typeID], new Vector3(current.position_x, current.position_y, current.position_z),
+                    new Quaternion(0, 0, 0, 0), this.transform);
+                }
+
+                /*
+                GameObject.Instantiate(monsterSample[current.typeID], new Vector3(current.position_x, current.position_y, current.position_z),
+                    new Quaternion(0, 0, 0, 0), this.transform);
+                */
+>>>>>>> parent of 34ed919 (Revert "Merge branch 'new-new-new-branch' of https://github.com/LY-lin/OneCanRunIsOK into new-new-new-branch")
                 counter++;
             }
 

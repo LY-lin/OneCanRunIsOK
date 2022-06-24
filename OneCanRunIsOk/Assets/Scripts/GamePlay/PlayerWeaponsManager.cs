@@ -22,6 +22,12 @@ namespace OneCanRun.GamePlay
         //武器列表
         public List<WeaponController> StartingWeapons = new List<WeaponController>();
 
+
+        // different camp different weapon
+        public WeaponController waepon_A;
+        public WeaponController waepon_B;
+        public WeaponController waepon_H;
+
         [Header("References")]
         [Tooltip("Secondary camera used to avoid seeing weapon go throw geometries")]
         //武器镜头
@@ -103,7 +109,7 @@ namespace OneCanRun.GamePlay
         public UnityAction<WeaponController, int> OnRemovedWeapon;
 
         //武器槽位-上限2
-        public WeaponController[] m_WeaponSlots { get; private set; } = new WeaponController[2] ; // 2 available weapon slots
+        public WeaponController[] m_WeaponSlots = new WeaponController[2] ; // 2 available weapon slots
         PlayerInputHandler m_InputHandler;
         PlayerCharacterController m_PlayerCharacterController;
         //抖动系数
@@ -139,10 +145,34 @@ namespace OneCanRun.GamePlay
 
             // Add starting weapons
             //武器列表初始化
-            foreach (var weapon in StartingWeapons)
-            {
-                AddWeapon(weapon);
+            
+            
+            if(gameObject.name == "Player1"){
+                
+                switch (GetComponent<Actor>().campType){
+                    case ActorConfig.CampType.Azeyma:
+                        AddWeapon(waepon_A);
+                        break;
+                    case ActorConfig.CampType.Byregot:
+                        AddWeapon(waepon_B);
+                        break;
+                    case ActorConfig.CampType.Halone:
+                        AddWeapon(waepon_H);
+                        break;
+                    default:
+                        break;
+                }
+                SwitchWeapon(false);
+
             }
+            else{
+
+                foreach (var weapon in StartingWeapons){
+                    AddWeapon(weapon);
+                }
+
+            }
+            
 
             SwitchWeapon(true);
         }
@@ -507,7 +537,7 @@ namespace OneCanRun.GamePlay
         //添加武器至管理器武器列表
         public bool AddWeapon(WeaponController weaponPrefab)
         {
-            // if we already hold this weapon type (a weapon coming from the same source prefab), don't add the weapon
+             // if we already hold this weapon type (a weapon coming from the same source prefab), don't add the weapon
             if (HasWeapon(weaponPrefab) != null)
             {
                 return false;
