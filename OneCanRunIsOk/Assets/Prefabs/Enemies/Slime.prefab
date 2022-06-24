@@ -571,7 +571,8 @@ MonoBehaviour:
   - {fileID: 1642041084}
   AttackList:
   - isAttack
-  IntervalList: []
+  IntervalList:
+  - 0.5
   MeleeRange: 3
   WeaponRange: 6
   SkillRange: 9
