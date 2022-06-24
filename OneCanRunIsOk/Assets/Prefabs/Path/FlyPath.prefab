@@ -258,6 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 157643376536554766}
+  - component: {fileID: 157643376536554755}
   - component: {fileID: 157643376536554752}
   m_Layer: 0
   m_Name: p4
@@ -281,6 +282,14 @@ Transform:
   m_Father: {fileID: 157643376636279086}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &157643376536554755
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157643376536554767}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &157643376536554752
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -357,7 +366,7 @@ Transform:
   - {fileID: 157643376026496044}
   - {fileID: 157643376508453305}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &407220936761286757
 MonoBehaviour:
