@@ -184,7 +184,6 @@ namespace OneCanRun.UI
             ExpRatio.text = curexp.ToString() + " / " + wexp.ToString();
             ExpBar.fillAmount = actor.getExperience() / actor.getNextLevelCount();
             BuffPrefab.gameObject.SetActive(true);
-            Debug.Log(HpBar.fillAmount);
         }
 
         public void closeBuff()
