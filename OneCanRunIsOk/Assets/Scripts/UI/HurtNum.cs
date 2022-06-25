@@ -73,7 +73,7 @@ namespace OneCanRun.UI
                 mText.text = hurt.ToString();
             else
             {
-                Destroy(this.gameObject);
+                HurtNumberHudManage.poolManager.release(this.gameObject);
                 return;
             }
         }
