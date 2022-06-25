@@ -76,8 +76,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DetectionSourcePoint: {fileID: 413295466}
-  DetectionRange: 50
-  AttackRange: 20
+  DetectionRange: 200
+  AttackRange: 80
   KnownTargetTimeout: 12
   DetectionAngle: 120
 --- !u!1 &3920919025842050244
@@ -115,19 +115,6 @@ Transform:
   m_Father: {fileID: 3920919026042391284}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -59.756214, y: 47.133198, z: -39.743324}
---- !u!65 &983408566486283618
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3920919025842050244}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 213.50023, y: 41.171486, z: 95.41898}
-  m_Center: {x: -41.10205, y: -1.2466193, z: 0.018472308}
 --- !u!1 &3920919025890303571
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,7 +157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3920919025890978881}
   - component: {fileID: 879303981}
-  - component: {fileID: 879303980}
+  - component: {fileID: 5127081452776040506}
   m_Layer: 8
   m_Name: Root
   m_TagString: Untagged
@@ -213,6 +200,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &5127081452776040506
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3920919025890978882}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 582.5224, y: 257.1122, z: 493.21677}
+  m_Center: {x: -175.49113, y: 7.6421747, z: -14.326503}
 --- !u!1 &3920919025919953234
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,19 +282,6 @@ Transform:
   m_Father: {fileID: 3920919026719434847}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 47.966236, y: -41.06213, z: -40.250973}
---- !u!65 &581816435368806937
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3920919025933784314}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 203.72845, y: 47.752415, z: 89.40301}
-  m_Center: {x: -31.623892, y: 5.689751, z: -0.44539267}
 --- !u!1 &3920919025937521345
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,6 +862,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3920919026220962552}
+  - component: {fileID: 7497055535842630298}
   m_Layer: 8
   m_Name: Head
   m_TagString: Untagged
@@ -1664,19 +1652,6 @@ Transform:
   m_Father: {fileID: 3920919025919953233}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -69.57974, y: -27.774384, z: -101.310776}
---- !u!65 &7042087016234980403
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3920919026616289134}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 229.28513, y: 157.40114, z: 55.30536}
-  m_Center: {x: -169.7653, y: 35.5514, z: -27.151995}
 --- !u!1 &3920919026638357904
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,19 +2001,6 @@ Transform:
   m_Father: {fileID: 3920919025919953233}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -69.767654, y: -141.81984, z: -87.05057}
---- !u!65 &6904375619944735678
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3920919026768984761}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 321.06738, y: 151.51332, z: 75.40489}
-  m_Center: {x: -207.3724, y: -16.106382, z: -1.171027}
 --- !u!1 &3920919026776812564
 GameObject:
   m_ObjectHideFlags: 0
@@ -2484,19 +2446,6 @@ Transform:
   m_Father: {fileID: 3920919027102215425}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -9.776117, y: 93.35349, z: 1.3660724}
---- !u!65 &7810057797912036393
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3920919026920228987}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 68.99269, y: 87.40238, z: 670.22284}
-  m_Center: {x: -0.40016004, y: -2.6983988, z: 224.5874}
 --- !u!1 &3920919026959104454
 GameObject:
   m_ObjectHideFlags: 0
@@ -2660,19 +2609,6 @@ Transform:
   m_Father: {fileID: 3920919027154995556}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -7.284726, y: -14.6907425, z: 14.216618}
---- !u!65 &5960369483285324502
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3920919027022075016}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 191.77504, y: 41.686295, z: 109.14475}
-  m_Center: {x: -14.168699, y: 0.79131, z: 2.2422967}
 --- !u!1 &3920919027043247114
 GameObject:
   m_ObjectHideFlags: 0
@@ -2898,19 +2834,6 @@ Transform:
   m_Father: {fileID: 3920919027761738892}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -3.4320803, y: 15.246176, z: 8.575451}
---- !u!65 &4980228867663258566
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3920919027093933024}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 184.98993, y: 39.21971, z: 93.965965}
-  m_Center: {x: -16.784992, y: -0.30222985, z: 0.16822852}
 --- !u!1 &3920919027102215426
 GameObject:
   m_ObjectHideFlags: 0
@@ -3577,7 +3500,7 @@ Transform:
   m_GameObject: {fileID: 3920919027543811132}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 89.1, y: 15.8, z: 95}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3920919026407239561}
@@ -3599,7 +3522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcaf624f9a2508d46952961928631c1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 10
+  MaxHealth: 10000
   CriticalHealthRatio: 0.3
   m_IsDead: 0
 --- !u!114 &3920919027543811110
@@ -3617,6 +3540,7 @@ MonoBehaviour:
   Affiliation: 2
   AimPoint: {fileID: 3920919027543811108}
   buffManager: {fileID: 3920919027543811111}
+  campType: 0
   isPlayer: 0
 --- !u!114 &3920919027543811111
 MonoBehaviour:
@@ -3645,6 +3569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5202c7b496cc440458af9a3e04e02013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BossName: 
   OrientationSpeed: 10
   PathReachingRadius: 2
   AttackStopDistanceRatio: 0.5
@@ -3722,24 +3647,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   root:
-    rid: 4899728877495779607
+    rid: 4899728945600004174
   updateType: 0
   references:
     version: 2
     RefIds:
-    - rid: 4899728877495779607
+    - rid: 4899728945600004174
       type: {class: Root, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
           serializedVersion: 2
-          x: -353.59998
+          x: -353.6
           y: 290.4
-          width: 73.599976
-          height: 76.80002
+          width: 73.600006
+          height: 76.79999
         description: 
         child:
-          rid: 4899728877495779608
-    - rid: 4899728877495779608
+          rid: 4899728945600004175
+    - rid: 4899728945600004175
       type: {class: Selector, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
@@ -3747,41 +3672,39 @@ MonoBehaviour:
           x: -247.2
           y: 290.4
           width: 174.4
-          height: 136
+          height: 136.79999
         description: 
         children:
-        - rid: 4899728877495779609
-        - rid: 4899728877495779610
+        - rid: 4899728945600004176
+        - rid: 4899728945600004177
         abortOnConditionChanged: 1
-    - rid: 4899728877495779609
+    - rid: 4899728945600004176
       type: {class: OnlyOneCondition, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
           serializedVersion: 2
-          x: 18.400002
-          y: 263.2
+          x: 18.4
+          y: 263.19998
           width: 173.6
-          height: 112
+          height: 112.80002
         description: 
         dontReEvaluateOnRunning: 0
         child:
-          rid: 4899728877495779611
-    - rid: 4899728877495779610
-      type: {class: Sequence, ns: UniBT, asm: UniBT}
+          rid: 4899728945600004178
+    - rid: 4899728945600004177
+      type: {class: All, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
           serializedVersion: 2
-          x: 806.4
-          y: 872
-          width: 174.39996
-          height: 160
+          x: 405.6
+          y: 848.80005
+          width: 134.4
+          height: 118.39996
         description: 
         children:
-        - rid: 4899728877495779612
-        - rid: 4899728877495779613
-        - rid: 4899728877495779614
-        abortOnConditionChanged: 1
-    - rid: 4899728877495779611
+        - rid: 4899728945600004179
+        - rid: 4899728945600004180
+    - rid: 4899728945600004178
       type: {class: Sequence, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
@@ -3789,53 +3712,39 @@ MonoBehaviour:
           x: 405.6
           y: 266.4
           width: 174.4
-          height: 160
+          height: 160.79999
         description: 
         children:
-        - rid: 4899728877495779615
-        - rid: 4899728877495779616
-        - rid: 4899728877495779617
+        - rid: 4899728945600004181
+        - rid: 4899728945600004182
+        - rid: 4899728945600004183
         abortOnConditionChanged: 1
-    - rid: 4899728877495779612
+    - rid: 4899728945600004179
       type: {class: FollowAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
           serializedVersion: 2
-          x: 1056.7999
+          x: 1056.8
           y: 802.4
-          width: 214.40002
+          width: 214.3999
           height: 112
         description: 
         animation: Run
-    - rid: 4899728877495779613
-      type: {class: AttackCondition, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
+    - rid: 4899728945600004180
+      type: {class: Rotator, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
           serializedVersion: 2
-          x: 1057.6
-          y: 943.2
-          width: 173.59998
-          height: 129.60004
+          x: 752
+          y: 1049.6
+          width: 151.20001
+          height: 136.80005
         description: 
-        dontReEvaluateOnRunning: 0
-        child:
-          rid: 4899728877495779618
-        threshold: 6
-    - rid: 4899728877495779614
-      type: {class: AttackCondition, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
-      data:
-        graphPosition:
-          serializedVersion: 2
-          x: 1056.7999
-          y: 1105.6
-          width: 173.59998
-          height: 129.59998
-        description: 
-        dontReEvaluateOnRunning: 0
-        child:
-          rid: 4899728877495779619
-        threshold: 9
-    - rid: 4899728877495779615
+        children:
+        - rid: 4899728945600004184
+        - rid: 4899728945600004185
+        resetOnAbort: 0
+    - rid: 4899728945600004181
       type: {class: AnimationAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3843,12 +3752,12 @@ MonoBehaviour:
           x: 806.4
           y: 224.79999
           width: 214.39996
-          height: 147.20001
+          height: 148
         description: 
         animation: TakeOff
         duration: 8
         endCG: 0
-    - rid: 4899728877495779616
+    - rid: 4899728945600004182
       type: {class: Sequence, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
@@ -3856,41 +3765,42 @@ MonoBehaviour:
           x: 818.4
           y: 385.6
           width: 174.39996
-          height: 207.99997
+          height: 208.79999
         description: 
         children:
-        - rid: 4899728877495779620
-        - rid: 4899728877495779621
-        - rid: 4899728877495779622
-        - rid: 4899728877495779623
-        - rid: 4899728877495779624
+        - rid: 4899728945600004186
+        - rid: 4899728945600004187
+        - rid: 4899728945600004188
+        - rid: 4899728945600004189
+        - rid: 4899728945600004190
         abortOnConditionChanged: 1
-    - rid: 4899728877495779617
+    - rid: 4899728945600004183
       type: {class: AnimationAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
           serializedVersion: 2
           x: 806.4
-          y: 576.8
+          y: 576.80005
           width: 214.39996
-          height: 147.20001
+          height: 148
         description: 
         animation: Land
         duration: 3
         endCG: 1
-    - rid: 4899728877495779618
+    - rid: 4899728945600004184
       type: {class: AttackAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
           serializedVersion: 2
-          x: 1288.7999
+          x: 1288.8
           y: 943.2
-          width: 214.40002
-          height: 129.60004
+          width: 214.3999
+          height: 147.20001
         description: 
         animation: AttackMouse
         duration: 3
-    - rid: 4899728877495779619
+        colliderName: Root
+    - rid: 4899728945600004185
       type: {class: Random, ns: UniBT, asm: UniBT}
       data:
         graphPosition:
@@ -3901,57 +3811,57 @@ MonoBehaviour:
           height: 118.400024
         description: 
         children:
-        - rid: 4899728877495779625
-        - rid: 4899728877495779626
-    - rid: 4899728877495779620
+        - rid: 4899728945600004191
+        - rid: 4899728945600004192
+    - rid: 4899728945600004186
       type: {class: PatrolAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
           serializedVersion: 2
           x: 1069.6
-          y: -35.2
+          y: -35.199997
           width: 254.40002
           height: 132
         description: 
         animation: Fly
         end: {fileID: 0}
-    - rid: 4899728877495779621
+    - rid: 4899728945600004187
       type: {class: PatrolAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
           serializedVersion: 2
-          x: 1070.3999
+          x: 1070.4
           y: 158.4
-          width: 253.6001
+          width: 253.59998
           height: 132
         description: 
         animation: Fly
         end: {fileID: 0}
-    - rid: 4899728877495779622
+    - rid: 4899728945600004188
       type: {class: PatrolAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
           serializedVersion: 2
           x: 1069.6
-          y: 319.2
+          y: 319.19998
           width: 253.59998
           height: 132
         description: 
         animation: Fly
         end: {fileID: 0}
-    - rid: 4899728877495779623
+    - rid: 4899728945600004189
       type: {class: PatrolAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
           serializedVersion: 2
           x: 1084
-          y: 488
+          y: 487.99997
           width: 253.59998
           height: 132
         description: 
         animation: Fly
         end: {fileID: 0}
-    - rid: 4899728877495779624
+    - rid: 4899728945600004190
       type: {class: PatrolAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3963,7 +3873,7 @@ MonoBehaviour:
         description: 
         animation: Fly
         end: {fileID: 0}
-    - rid: 4899728877495779625
+    - rid: 4899728945600004191
       type: {class: AttackAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3971,11 +3881,12 @@ MonoBehaviour:
           x: 1447.2
           y: 1093.6
           width: 214.40002
-          height: 129.59998
+          height: 147.20007
         description: 
         animation: AttackHead
         duration: 3
-    - rid: 4899728877495779626
+        colliderName: Head
+    - rid: 4899728945600004192
       type: {class: AttackAction, ns: OneCanRun.AI.Enemies, asm: OneCanRun.AI}
       data:
         graphPosition:
@@ -3983,10 +3894,11 @@ MonoBehaviour:
           x: 1447.2
           y: 1236
           width: 214.40002
-          height: 129.59998
+          height: 147.20007
         description: 
         animation: AttackFlame
         duration: 3
+        colliderName: 
 --- !u!143 &2019056498
 CharacterController:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ namespace OneCanRun.AI.Enemies
     public class Boss : MonoBehaviour
     {
         [Tooltip("Boss Name")]
-        public string name;
+        public string BossName;
 
         [Tooltip("The speed at which the enemy rotates")]
         public float OrientationSpeed = 10f;
@@ -56,6 +56,8 @@ namespace OneCanRun.AI.Enemies
         float lastPlayTime = Mathf.Infinity;
         float Duration = 0;
         bool CG = true;
+        bool Attacking = false;
+        Dictionary<string, Collider> map;
 
         // Start is called before the first frame update
         void Start()
@@ -89,7 +91,12 @@ namespace OneCanRun.AI.Enemies
             colliders = GetComponentsInChildren<Collider>();
             DebugUtility.HandleErrorIfNoComponentFound<Collider, Boss>(colliders.Length, this, gameObject);
 
-            
+            map = new Dictionary<string, Collider>();
+
+            foreach(Collider collider in colliders)
+            {
+                map.Add(collider.gameObject.name, collider);
+            }
 
             lastAttackTime = Time.time;
         }
@@ -120,6 +127,7 @@ namespace OneCanRun.AI.Enemies
 
         public void SetCG(bool cg)
         {
+            characterController.detectCollisions = !cg;
             CG = cg;
         }
 
@@ -280,7 +288,7 @@ namespace OneCanRun.AI.Enemies
             return true;
         }
 
-        public bool TryAttack(string Attack, float duration)
+        public bool TryAttack(string Attack, float duration, string colliderName)
         {
             if (Vector3.Distance(detectionModule.KnownDetectedTarget.transform.position,
                 detectionModule.DetectionSourcePoint.position) > detectionModule.AttackRange)
@@ -289,18 +297,38 @@ namespace OneCanRun.AI.Enemies
             }
             if(lastAttackTime <= Time.time)
             {
-                lastAttackTime = Time.time;
-                animator.SetTrigger(Attack);
-                return true;
-            }
-            else if(lastAttackTime + duration > Time.time)
-            {
-                return true;
+                if (Attacking)
+                {
+                    Attacking = false;
+                    /*
+                    if (colliderName.Length != 0)
+                    {
+                        Collider collider;
+                        map.TryGetValue(colliderName, out collider);
+                        collider.enabled = false;
+                    }
+                    */
+                    return false;
+                }
+                else
+                {
+                    lastAttackTime = Time.time + duration;
+                    Attacking = true;
+                    /*
+                    if (colliderName.Length != 0)
+                    {
+                        Collider collider;
+                        map.TryGetValue(colliderName, out collider);
+                        collider.enabled = true;
+                    }
+                    */
+                    animator.SetTrigger(Attack);
+                    return true;
+                }
             }
             else
             {
-                lastAttackTime += duration;
-                return false;
+                return true;
             }
         }
 
@@ -326,7 +354,11 @@ namespace OneCanRun.AI.Enemies
             animator.SetTrigger("isDie");
 
             NavMeshAgent.enabled = false;
-
+            characterController.enabled = false;
+            foreach(Collider collider in colliders)
+            {
+                collider.enabled = false;
+            }
         }
 
         public void EnterDeathQueue()
@@ -343,15 +375,7 @@ namespace OneCanRun.AI.Enemies
 
             // this will call the OnDestroy function
             //Destroy(gameObject, DeathDuration);
-            Game.Share.MonsterPoolManager temp = Game.Share.MonsterPoolManager.getInstance();
-            if (temp == null)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                temp.release(this.gameObject);
-            }
+            Destroy(gameObject);
         }
 
         public bool TryDropItem()
