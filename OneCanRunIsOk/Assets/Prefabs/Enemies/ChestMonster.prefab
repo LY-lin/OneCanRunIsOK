@@ -48,6 +48,7 @@ MonoBehaviour:
   HealthImage: {fileID: 6405875936576947315}
   HealthBarPivot: {fileID: 6841172699938627327}
   HideFullHealthBar: 1
+  distance: 50
 --- !u!1 &1953199338402560012
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,6 +856,7 @@ MonoBehaviour:
   attackController: {fileID: 2966504389081029323}
   health: {fileID: 2966504389081029327}
   actor: {fileID: 2966504389081029325}
+  dropRate: 10
 --- !u!114 &2966504389081029321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -868,6 +870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackStopDistanceRatio: 0.5
+  moveClip: {fileID: 0}
   state: 0
   controller: {fileID: 2966504389081029320}
 --- !u!114 &2966504389081029322
@@ -904,6 +907,9 @@ MonoBehaviour:
   AttackList:
   - Attack1
   - Attack2
+  IntervalList:
+  - 0.5
+  - 0.5
   MeleeRange: 3
   WeaponRange: 9
   SkillRange: 12
