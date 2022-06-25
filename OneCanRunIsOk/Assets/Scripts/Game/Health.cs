@@ -30,8 +30,15 @@ namespace OneCanRun.Game
         void Start()
         {
             properties = GetComponent<Actor>().GetActorProperties();
-            MaxHealth = properties.getMaxHealth();
-            CurrentHealth = properties.getMaxHealth();
+
+            if (this.gameObject.name != "Dragon")
+            {
+                MaxHealth = properties.getMaxHealth();
+                CurrentHealth = properties.getMaxHealth();
+
+            }
+            CurrentHealth = MaxHealth;
+            
         }
         void Update()
         {

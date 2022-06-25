@@ -43,6 +43,7 @@ namespace OneCanRun.AI.Enemies
         public Actor actor;
 
         Collider[] colliders;
+        BodyMeleeController[] bodyMeleeControllers;
 
         public PatrolPath PatrolPath;
 
@@ -54,10 +55,10 @@ namespace OneCanRun.AI.Enemies
         float lastHitTime = Mathf.Infinity;
         float lastAttackTime = Mathf.Infinity;
         float lastPlayTime = Mathf.Infinity;
-        float Duration = 0;
+        float Duration = 2.5f;
         bool CG = true;
         bool Attacking = false;
-        Dictionary<string, Collider> map;
+        Dictionary<string, BodyMeleeController> map;
 
         // Start is called before the first frame update
         void Start()
@@ -91,11 +92,23 @@ namespace OneCanRun.AI.Enemies
             colliders = GetComponentsInChildren<Collider>();
             DebugUtility.HandleErrorIfNoComponentFound<Collider, Boss>(colliders.Length, this, gameObject);
 
-            map = new Dictionary<string, Collider>();
+            bodyMeleeControllers = GetComponentsInChildren<BodyMeleeController>();
+            DebugUtility.HandleErrorIfNoComponentFound<Collider, Boss>(bodyMeleeControllers.Length, this, gameObject);
 
+            map = new Dictionary<string, BodyMeleeController>();
+
+            /*
             foreach(Collider collider in colliders)
             {
                 map.Add(collider.gameObject.name, collider);
+            }
+            */
+
+            foreach(BodyMeleeController bodyMeleeController in bodyMeleeControllers)
+            {
+                bodyMeleeController.init(actor);
+                Debug.Log(bodyMeleeController.gameObject.name);
+                map.Add(bodyMeleeController.gameObject.name, bodyMeleeController);
             }
 
             lastAttackTime = Time.time;
@@ -314,14 +327,12 @@ namespace OneCanRun.AI.Enemies
                 {
                     lastAttackTime = Time.time + duration;
                     Attacking = true;
-                    /*
                     if (colliderName.Length != 0)
                     {
-                        Collider collider;
-                        map.TryGetValue(colliderName, out collider);
-                        collider.enabled = true;
+                        BodyMeleeController bodyMeleeController;
+                        map.TryGetValue(colliderName, out bodyMeleeController);
+                        bodyMeleeController.preOneAttack();
                     }
-                    */
                     animator.SetTrigger(Attack);
                     return true;
                 }
