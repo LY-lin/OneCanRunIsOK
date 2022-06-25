@@ -55,7 +55,7 @@ namespace OneCanRun.Game.Share{
 
             }
             // ?
-            ret.GetComponent<HurtNumber>().time = Time.time;
+            //ret.GetComponent<>
 
             return ret;
 
