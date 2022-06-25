@@ -36,7 +36,7 @@ namespace OneCanRun.UI
             boss = FindObjectOfType<Boss>();
             DebugUtility.HandleErrorIfNullFindObject<Boss,BossHpBar>(boss, this);
             boss_health = boss.health;
-            Name.text = boss.name;
+            Name.text = boss.BossName;
             for(int i=0;i<Num;i++)
             {
                 GameObject hpInstance = Instantiate(HpBar.gameObject, HpPlane);
@@ -46,7 +46,7 @@ namespace OneCanRun.UI
                 lastHp = boss_health.MaxHealth;
                 listHp.Add(newHpBar);
                 int index = i % 4;
-                //ËÄÖÖÑÕÉ«ÂÖ»»
+                //å››ç§é¢œè‰²è½®æ¢
                 switch(index)
                 {
                     case 0:
@@ -75,7 +75,6 @@ namespace OneCanRun.UI
                 float ratio = boss_health.CurrentHealth / boss_health.MaxHealth;
                 
                 int index = Mathf.FloorToInt(ratio / (1f / Num));
-                Debug.Log(index);
                 if (ratio%(1f/Num)==0)
                     index = index - 1;
                 if (ratio == 0)
@@ -86,7 +85,6 @@ namespace OneCanRun.UI
                     return;
                     */
                 }
-                Debug.Log(boss_health.CurrentHealth + "  " +index);
 
                 listHp[index].fillAmount = (ratio - (index * (1f / Num)) )* Num;
 
