@@ -36,6 +36,7 @@ namespace OneCanRun.UI
             HurtNum newHn = HNInstance.GetComponent<HurtNum>();
             DebugUtility.HandleErrorIfNullGetComponent<HurtNum, HurtNumberHudManage>(newHn, this, HNInstance.gameObject);
             newHn.init(position,damage, type);
+            HNInstance.SetActive(true);
             
         }
     }

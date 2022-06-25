@@ -11,10 +11,21 @@ namespace OneCanRun.GamePlay
     public class PlayerSkillsManager : MonoBehaviour
     {
         [Tooltip("the initial skill")]
-        public SkillController StartSkill;
+        // B
+        public SkillController StartSkill_B;
 
         [Tooltip("the initial Special skill")]
-        public SkillController StartSpSkill;
+        public SkillController StartSpSkill_B;
+
+        // H
+        public SkillController StartSkill_H;
+        public SkillController StartSpSkill_H;
+
+
+        // A
+        public SkillController StartSkill_A;
+        public SkillController StartSpSkill_A;
+
 
         [Tooltip("where the skill use")]
         public Transform SkillSocket;
@@ -38,8 +49,23 @@ namespace OneCanRun.GamePlay
             DebugUtility.HandleErrorIfNullGetComponent<PlayerInputHandler, PlayerSkillsManager>(m_InputHandler, this,
                 gameObject);
 
-            ChangeCurrentSkill(StartSkill);
-            ChangeCurrentSpSkill(StartSpSkill);
+            switch (this.gameObject.GetComponent<Actor>().campType){
+                case ActorConfig.CampType.Azeyma:
+                    ChangeCurrentSkill(StartSkill_A);
+                    ChangeCurrentSpSkill(StartSpSkill_A);
+                    break;
+                case ActorConfig.CampType.Byregot:
+                    ChangeCurrentSkill(StartSkill_B);
+                    ChangeCurrentSpSkill(StartSpSkill_B);
+                    break;
+                case ActorConfig.CampType.Halone:
+                    ChangeCurrentSkill(StartSkill_H);
+                    ChangeCurrentSpSkill(StartSpSkill_H);
+                    break;
+                default:
+                    break;
+
+            }
 
             //test Laser
             //lc = Laser.GetComponent<LaserController>();

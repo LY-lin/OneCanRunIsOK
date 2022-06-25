@@ -17,6 +17,9 @@ namespace OneCanRun.Game.Share
         public float lifeTime = 3f;
         private string hurt;
         private DamageType type;
+
+        // create Time 
+        public float time;
         
 
         public void init(float damage, DamageType _type){
@@ -30,7 +33,10 @@ namespace OneCanRun.Game.Share
 
 
         private void Update(){
-
+            if(Time.time - time >= lifeTime){
+                // release the object into pool
+                //HurtNumberPoolManager.instance.release(this.gameObject);
+            }
             transform.LookAt(Camera.main.transform);
             transform.forward = -transform.forward;
         }
@@ -42,10 +48,11 @@ namespace OneCanRun.Game.Share
             if (mText)
                 mText.text = hurt;
             else{
-                Destroy(this.gameObject);
+
+                //Destroy(this.gameObject);
                 return;
             }
-            Destroy(this.gameObject, lifeTime);
+            //Destroy(this.gameObject, lifeTime);
         }
 
 

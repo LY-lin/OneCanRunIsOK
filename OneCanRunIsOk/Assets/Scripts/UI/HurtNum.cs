@@ -65,10 +65,10 @@ namespace OneCanRun.UI
                 mText.text = hurt.ToString();
             else
             {
-                Destroy(this.gameObject);
+                HurtNumberPoolManager.instance.release(this.gameObject);
                 return;
             }
-            Destroy(this.gameObject, lifeTime);
+            HurtNumberPoolManager.instance.release(this.gameObject);
         }
 
         private Vector3 GetUIPosition(Vector3 point)

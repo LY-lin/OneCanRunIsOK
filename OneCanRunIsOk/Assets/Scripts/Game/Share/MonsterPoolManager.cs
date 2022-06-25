@@ -33,6 +33,7 @@ namespace OneCanRun.Game.Share
         public static void initialization(GameObject _parent){
             parent = _parent;
             pool = new List<List<GameObject>>();
+            sampleList = monsterPoolManagerPtr.sampleList_exposed;
             used = new List<List<bool>>();
             for(int i = 0;i < sampleList.Count; i++){
                 pool.Add(new List<GameObject>(cacheSize));
