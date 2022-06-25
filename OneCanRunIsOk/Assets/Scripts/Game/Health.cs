@@ -25,7 +25,7 @@ namespace OneCanRun.Game
 
         public bool m_IsDead;
 
-        Share.ActorProperties properties;
+        public Share.ActorProperties properties;
         float totalTime = 1f;
         void Start()
         {

@@ -49,9 +49,6 @@ namespace OneCanRun.GamePlay
             DebugUtility.HandleErrorIfNullGetComponent<PlayerInputHandler, PlayerSkillsManager>(m_InputHandler, this,
                 gameObject);
 
-            //ChangeCurrentSkill(StartSkill);
-            //ChangeCurrentSpSkill(StartSpSkill);
-            
             switch (this.gameObject.GetComponent<Actor>().campType){
                 case ActorConfig.CampType.Azeyma:
                     ChangeCurrentSkill(StartSkill_A);
