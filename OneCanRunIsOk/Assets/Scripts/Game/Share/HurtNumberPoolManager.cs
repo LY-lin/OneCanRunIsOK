@@ -6,20 +6,21 @@ namespace OneCanRun.Game.Share{
 
     public class HurtNumberPoolManager{
         private const int poolSize = 32;
-        private List<GameObject> pool;
-        private List<bool> used;
-        private GameObject sample;
-        private Transform plane;
+        private static List<GameObject> pool;
+        private static List<bool> used;
+        private static GameObject sample;
+        private static Transform plane;
 
         // for hurt Number to release
         public static HurtNumberPoolManager instance;
         public HurtNumberPoolManager(GameObject hurtNumberObject, Transform _plane){
             instance = this;
+
+            
             sample = hurtNumberObject;
             plane = _plane;
             pool = new List<GameObject>(poolSize);
             used = new List<bool>(poolSize);    
-
             for(int i = 0;i < poolSize; i++){
                 GameObject temp = GameObject.Instantiate(sample, plane);
                 temp.SetActive(false);
@@ -28,7 +29,16 @@ namespace OneCanRun.Game.Share{
             }
         }
        
-
+        public void reset(){
+            pool = new List<GameObject>(poolSize);
+            used = new List<bool>(poolSize);    
+            for(int i = 0;i < poolSize; i++){
+                GameObject temp = GameObject.Instantiate(sample, plane);
+                temp.SetActive(false);
+                pool.Add(temp);
+                used.Add(false);
+            }
+        }
 
         public GameObject getObject(){
             GameObject ret = null;
