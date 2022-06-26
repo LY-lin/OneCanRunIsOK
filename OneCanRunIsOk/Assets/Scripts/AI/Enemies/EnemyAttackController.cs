@@ -110,6 +110,7 @@ namespace OneCanRun.AI.Enemies
         public void UpdateAttackState(Vector3 targetPostion)
         {
             float distance = (transform.position - targetPostion).magnitude;
+            
             if (distance <= MeleeRange)
             {
                 attackState = AttackState.Melee;
@@ -196,7 +197,6 @@ namespace OneCanRun.AI.Enemies
             preAttackState = AttackState.Melee;
             latestMeleeAttackTime = Time.time;
             currentAttackIndex = Random.Range(weapons.Length + skills.Length, attacks.Length);
-            Debug.Log(currentAttackIndex);
             duration = intervals[currentAttackIndex];
             anim.SetTrigger(attacks[currentAttackIndex]);
         }

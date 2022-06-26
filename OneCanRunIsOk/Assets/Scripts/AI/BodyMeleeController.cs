@@ -17,9 +17,7 @@ namespace OneCanRun.AI
         public void init(Actor actor)
         {
             this.Owner = actor.gameObject;
-            // this.Damage = actor.GetActorProperties().getMagicAttack() + actor.GetActorProperties().getPhysicalAttack();
-            this.Damage = 40f;
-            Debug.Log(this.Damage);
+            this.Damage = actor.GetActorProperties().getMagicAttack() + actor.GetActorProperties().getPhysicalAttack();
             this.attackerType = actor.Affiliation;
         }
 
@@ -82,7 +80,6 @@ namespace OneCanRun.AI
                 if (finalDamage < 0f)
                     finalDamage = 0f;
                 Debug.Log("Enemy Atttack!");
-                Debug.Log(finalDamage);
                 damageable.InflictDamage(finalDamage, false, Owner);
             }
         }
