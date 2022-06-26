@@ -25,7 +25,7 @@ namespace OneCanRun.UI
                 poolManager = new HurtNumberPoolManager(HurtNumberPrefab, plane);
             if (poolManager == null)
                 poolManager = HurtNumberPoolManager.instance;
-            poolManager.reset();
+            poolManager.reset(HurtNumberPrefab, plane);
             collect = GetComponentInParent<CollectDamageNumber>();
             collect.Dmg += AddHN;
             

@@ -29,7 +29,9 @@ namespace OneCanRun.Game.Share{
             }
         }
        
-        public void reset(){
+        public void reset(GameObject hurtNumberObject, Transform _plane){
+            sample = hurtNumberObject;
+            plane = _plane;
             pool = new List<GameObject>(poolSize);
             used = new List<bool>(poolSize);    
             for(int i = 0;i < poolSize; i++){
