@@ -26,6 +26,7 @@ namespace OneCanRun.UI
         private float BaseDis = 10;
         private Vector3 LastPosition;
         private float initTime;
+        private Health health;
         public void init(GameObject obj,float damage, DamageType _type)
         {
             hurt = damage.ToString();
@@ -41,6 +42,10 @@ namespace OneCanRun.UI
             float y = Mathf.Sqrt(radis * radis - x * x);
             RandomPos = new Vector2(x, y);
             initTime = Time.time;
+            health = obj.transform.parent.GetComponent<Health>();
+            LastPosition = obj.transform.position;
+            if (health == null)
+                health = obj.GetComponentInParent<Health>();
         }
 
 
@@ -48,13 +53,13 @@ namespace OneCanRun.UI
         {
             if (obj&&obj.activeSelf)
             {
-                Debug.Log(obj.transform.parent.GetComponent<Health>() == null);
-                if (obj.transform.parent.GetComponent<Health>().CurrentHealth != 0)
+               
+                if (health.CurrentHealth > 0)
                 {
                     transform.localPosition = GetUIPosition(obj.transform.position);
                     LastPosition = obj.transform.position;
                 }
-                else if (obj.transform.parent.GetComponent<Health>().CurrentHealth == 0)
+                else if (health.CurrentHealth <=0)
                 {
                     transform.localPosition = GetUIPosition(LastPosition);
                 }
@@ -85,7 +90,7 @@ namespace OneCanRun.UI
             float distance = Vector3.Distance(Camera.main.transform.position, point);
             float Base = BaseDis / distance;
             position += (RandomPos * Base);
-            mText.transform.localScale = (Base>1?1:Base)*Vector3.one;
+           // mText.transform.localScale = (Base>1?1:Base)*Vector3.one;
             if (position.x < -100 || position.y < -100 || position.x > Screen.width+100 || position.y > Screen.height+100)
                 HurtNumberHudManage.poolManager.release(this.gameObject);
             Vector2 uiPosition;
