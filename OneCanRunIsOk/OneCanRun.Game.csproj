@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\Game\Loading\SceneDataPasser.cs" />
     <Compile Include="Assets\Scripts\Game\Share\WeaponController.cs" />
     <Compile Include="Assets\Scripts\Game\Share\ActorAttribute.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\DroneController.cs" />
     <Compile Include="Assets\Scripts\Game\Share\MonsterFreshInfo.cs" />
     <Compile Include="Assets\Scripts\Game\Share\Objective.cs" />
     <Compile Include="Assets\Scripts\Game\Share\HurtNumberPoolManager.cs" />

@@ -33,6 +33,7 @@ namespace OneCanRun.Game.Share
         public static void initialization(GameObject _parent){
             parent = _parent;
             pool = new List<List<GameObject>>();
+            sampleList = monsterPoolManagerPtr.sampleList_exposed;
             used = new List<List<bool>>();
             for(int i = 0;i < sampleList.Count; i++){
                 pool.Add(new List<GameObject>(cacheSize));
@@ -88,6 +89,11 @@ namespace OneCanRun.Game.Share
 
         // remove the object from scene 
         public void release(int typeID, GameObject objcect){
+            Health health =  objcect.GetComponent<Health>();
+            health.m_IsDead = false;
+            ActorProperties properties = objcect.GetComponent<Actor>().GetActorProperties();
+            health.MaxHealth = properties.getMaxHealth();
+            health.CurrentHealth = properties.getMaxHealth();
             objcect.SetActive(false);
 
             // illegal
@@ -109,6 +115,11 @@ namespace OneCanRun.Game.Share
         }
 
         public void release(GameObject objcect){
+            Health health =  objcect.GetComponent<Health>();
+            health.m_IsDead = false;
+            ActorProperties properties = objcect.GetComponent<Actor>().GetActorProperties();
+            health.MaxHealth = properties.getMaxHealth();
+            health.CurrentHealth = properties.getMaxHealth();
             objcect.SetActive(false);
 
 

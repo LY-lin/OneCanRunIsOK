@@ -5,12 +5,16 @@ using UnityEngine;
 namespace OneCanRun.Game.Share{
 
     public class HurtNumberPoolManager{
-        private const int poolSize = 256;
+        private const int poolSize = 32;
         private List<GameObject> pool;
         private List<bool> used;
         private GameObject sample;
         private Transform plane;
+
+        // for hurt Number to release
+        public static HurtNumberPoolManager instance;
         public HurtNumberPoolManager(GameObject hurtNumberObject, Transform _plane){
+            instance = this;
             sample = hurtNumberObject;
             plane = _plane;
             pool = new List<GameObject>(poolSize);
@@ -41,15 +45,17 @@ namespace OneCanRun.Game.Share{
             }
 
             // in case too much require
-            if (index != -1){
+            if (index == -1){
 
                 GameObject temp = GameObject.Instantiate(sample, plane);
                 pool.Add(temp);
                 used.Add(true);
                 ret = temp;
-                ret.SetActive(true);
+                //ret.SetActive(true);
 
             }
+            // ?
+            //ret.GetComponent<>
 
             return ret;
 

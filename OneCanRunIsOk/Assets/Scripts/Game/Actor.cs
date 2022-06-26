@@ -27,6 +27,7 @@ namespace OneCanRun.Game
         private List<OneCanRun.Game.Share.Modifier> mModifier;
         public ActorAttribute actorAttribute{get;private set;}
         public ActorBuffManager buffManager;
+        public ActorConfig.CampType campType;
         private bool dirty = true;
         public bool isPlayer = false;
         private uint level = 0;
@@ -259,7 +260,7 @@ namespace OneCanRun.Game
             if(gameObject.name == "Player1"){
                 // read player actor config
                 Share.ActorConfig actorConfig = Share.ActorConfig.readFile("ActorConfig.cfg");
-
+                this.campType = actorConfig.getCampType();
                 this.actorAttribute = actorConfig.getActorAttribute();
                 this.baseProperty = actorConfig.GetActorProperties();
 

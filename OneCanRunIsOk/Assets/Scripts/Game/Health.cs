@@ -25,13 +25,20 @@ namespace OneCanRun.Game
 
         public bool m_IsDead;
 
-        Share.ActorProperties properties;
+        public Share.ActorProperties properties;
         float totalTime = 1f;
         void Start()
         {
             properties = GetComponent<Actor>().GetActorProperties();
-            MaxHealth = properties.getMaxHealth();
-            CurrentHealth = properties.getMaxHealth();
+
+            if (this.gameObject.name != "Dragon")
+            {
+                MaxHealth = properties.getMaxHealth();
+                CurrentHealth = properties.getMaxHealth();
+
+            }
+            CurrentHealth = MaxHealth;
+            
         }
         void Update()
         {

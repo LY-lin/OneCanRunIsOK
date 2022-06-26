@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using OneCanRun.Game.Share;
 using OneCanRun.GamePlay;
+using OneCanRun.Game;
 
 namespace OneCanRun.UI
 {
@@ -23,6 +24,8 @@ namespace OneCanRun.UI
         private Vector2 RandomPos;
         private float radis;
         private float BaseDis = 10;
+        private Vector3 LastPosition;
+        private float initTime;
         public void init(GameObject obj,float damage, DamageType _type)
         {
             hurt = damage.ToString();
@@ -32,43 +35,47 @@ namespace OneCanRun.UI
             else
                 mText.color = new Color(255, 255, 0);
             plane = this.transform.parent.GetComponent<RectTransform>();
-                this.obj = obj;
+            this.obj = obj;
             radis = Screen.width / 20;
             float x = Random.Range(0 - radis, radis);
             float y = Mathf.Sqrt(radis * radis - x * x);
             RandomPos = new Vector2(x, y);
+            initTime = Time.time;
         }
 
 
         private void Update()
         {
-            
-            if (obj)
+            if (obj&&obj.activeSelf)
             {
-
-                if (obj.activeSelf)
+                if (obj.GetComponentInParent<Health>().CurrentHealth != 0)
+                {
                     transform.localPosition = GetUIPosition(obj.transform.position);
-                else
-                    HurtNumberHudManage.poolManager.release(this.gameObject);
+                    LastPosition = obj.transform.position;
+                }
+                else if (obj.GetComponentInParent<Health>().CurrentHealth == 0)
+                {
+                    transform.localPosition = GetUIPosition(obj.transform.position);
+                }
             }
             else
+            {
+                HurtNumberHudManage.poolManager.release(this.gameObject);
+            }
+
+            if (Time.time - initTime >= lifeTime)
                 HurtNumberHudManage.poolManager.release(this.gameObject);
         }
 
         private void Start()
         {
-
-            /*transform.LookAt(Camera.main.transform);
-            transform.forward = -transform.forward;
-            */
             if (mText)
                 mText.text = hurt.ToString();
             else
             {
-                Destroy(this.gameObject);
+                HurtNumberHudManage.poolManager.release(this.gameObject);
                 return;
             }
-            Destroy(this.gameObject, lifeTime);
         }
 
         private Vector3 GetUIPosition(Vector3 point)
@@ -77,8 +84,9 @@ namespace OneCanRun.UI
             float distance = Vector3.Distance(Camera.main.transform.position, point);
             float Base = BaseDis / distance;
             position += (RandomPos * Base);
+            mText.transform.localScale = (Base>1?1:Base)*Vector3.one;
             if (position.x < -100 || position.y < -100 || position.x > Screen.width+100 || position.y > Screen.height+100)
-                Destroy(this);
+                HurtNumberHudManage.poolManager.release(this.gameObject);
             Vector2 uiPosition;
            
             RectTransformUtility.ScreenPointToLocalPointInRectangle(plane, position, null, out uiPosition);

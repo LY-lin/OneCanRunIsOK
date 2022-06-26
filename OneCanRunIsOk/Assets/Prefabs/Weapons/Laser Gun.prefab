@@ -103,8 +103,8 @@ MonoBehaviour:
   damageType: 0
   RemoteWeapons: 1
   WeaponName: Laser Gun
-  WeaponIcon: {fileID: 21300000, guid: d977df5edeb809f41b362e4bc5d35645, type: 3}
-  WeaponImg: {fileID: 0}
+  WeaponIcon: {fileID: 21300000, guid: 4f7b0400a270cd1498f5fbd7820356ac, type: 3}
+  WeaponImg: {fileID: 21300000, guid: 87f7d80c307cd3841b21a0615ad8927c, type: 3}
   description: A gun that emits a powerful laser
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 0}
@@ -153,7 +153,7 @@ AudioSource:
   m_GameObject: {fileID: 963746503092480717}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -911362531408344068, guid: 1d9998ab1cd80c947b8d20f0107159c3, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

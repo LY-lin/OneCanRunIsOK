@@ -14,6 +14,9 @@ namespace OneCanRun.AI.Enemies
         [SerializeField]
         private float duration;
 
+        [SerializeField]
+        private string colliderName; 
+
         private Boss boss;
 
         public override void Awake()
@@ -24,7 +27,7 @@ namespace OneCanRun.AI.Enemies
 
         protected override Status OnUpdate()
         {
-            if (boss.TryAttack(animation, duration))
+            if (boss.TryAttack(animation, duration, colliderName))
             {
                 return Status.Running;
             }

@@ -36,7 +36,7 @@ namespace OneCanRun.UI
             boss = FindObjectOfType<Boss>();
             DebugUtility.HandleErrorIfNullFindObject<Boss,BossHpBar>(boss, this);
             boss_health = boss.health;
-            Name.text = boss.name;
+            Name.text = boss.BossName;
             for(int i=0;i<Num;i++)
             {
                 GameObject hpInstance = Instantiate(HpBar.gameObject, HpPlane);
@@ -46,7 +46,7 @@ namespace OneCanRun.UI
                 lastHp = boss_health.MaxHealth;
                 listHp.Add(newHpBar);
                 int index = i % 4;
-                //ËÄÖÖÑÕÉ«ÂÖ»»
+                //å››ç§é¢œè‰²è½®æ¢
                 switch(index)
                 {
                     case 0:

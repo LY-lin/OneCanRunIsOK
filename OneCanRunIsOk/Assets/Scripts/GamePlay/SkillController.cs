@@ -97,7 +97,6 @@ namespace OneCanRun.GamePlay
         {
             if (m_LastTimeUse + CoolingTime > Time.time)
             {
-                Debug.Log("this skill is Cooling!");
                 return true;
             }
             return false;
@@ -163,7 +162,13 @@ namespace OneCanRun.GamePlay
         //summon
         void UseSummonSkill()
         {
-            Debug.Log("Summon!");
+            GameObject SummonInstance = Instantiate(UsingVfx, transform.position + transform.up, Quaternion.identity);
+            WeaponController wc = SummonInstance.GetComponentInChildren<WeaponController>();
+            //SummonInstance.Owner = this.Owner;
+            wc.Owner = this.Owner;
+            Destroy(wc.bulletPoolManager.getCollector(), ExistingTime + 3);
+            Destroy(SummonInstance, ExistingTime);
+            //Debug.Log("Summon!");
         }
 
         //Special - get the using point

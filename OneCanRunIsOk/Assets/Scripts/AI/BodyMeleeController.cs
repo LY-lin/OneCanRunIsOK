@@ -58,5 +58,31 @@ namespace OneCanRun.AI
             }
 
         }
+
+        void OnTriggerEnter(Collider col)
+        {
+            Actor target = col.gameObject.GetComponent<Actor>();
+            if (target)
+            {
+                if (target.Affiliation == this.attackerType)
+                    return;
+            }
+
+            Damageable damageable = col.gameObject.GetComponent<Damageable>();
+            if (damageable && !dic.ContainsKey(damageable.gameObject))
+            {
+
+                dic.Add(damageable.gameObject, 1);
+
+                Actor actor = col.gameObject.GetComponent<Actor>();
+                ActorProperties colliderProperty = actor.GetActorProperties();
+                float finalDamage = this.Damage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
+                if (finalDamage < 0f)
+                    finalDamage = 0f;
+                Debug.Log("Enemy Atttack!");
+                Debug.Log(finalDamage);
+                damageable.InflictDamage(finalDamage, false, Owner);
+            }
+        }
     }
 }

@@ -315,6 +315,7 @@ namespace OneCanRun.AI.Enemies
 
                 onDamaged?.Invoke();
             }
+
         }
 
         void OnDie()

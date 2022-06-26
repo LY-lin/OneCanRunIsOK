@@ -103,8 +103,8 @@ MonoBehaviour:
   damageType: 0
   RemoteWeapons: 0
   WeaponName: Shining Spear
-  WeaponIcon: {fileID: 0}
-  WeaponImg: {fileID: 0}
+  WeaponIcon: {fileID: 21300000, guid: c0461ed37899269449c7f03e25182f41, type: 3}
+  WeaponImg: {fileID: 21300000, guid: ed3f93eff8d973044bcbb55f345442a5, type: 3}
   description: A spear that glows, but has no special magic
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 0}
@@ -194,7 +194,7 @@ AudioSource:
   m_GameObject: {fileID: 1611169281684996860}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -911362531408344068, guid: 1d9998ab1cd80c947b8d20f0107159c3, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
