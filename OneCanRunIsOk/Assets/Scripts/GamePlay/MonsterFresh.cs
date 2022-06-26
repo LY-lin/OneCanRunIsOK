@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace OneCanRun.GamePlay
 {
@@ -17,6 +18,8 @@ namespace OneCanRun.GamePlay
         private Game.Share.MonsterPoolManager monsterPoolManager;
         private static int startTime;
         // Start is called before the first frame update
+
+        public UnityAction newWave;
 
         private int compareMonsterFreshInfo(Game.Share.MonsterFreshInfo a, Game.Share.MonsterFreshInfo b){
             if (a.time < b.time)
@@ -121,6 +124,7 @@ namespace OneCanRun.GamePlay
                         gameObject.SetActive(true);
                     }
                 }
+                newWave?.Invoke();
                 counter++;
             }
 

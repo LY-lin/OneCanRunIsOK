@@ -27,9 +27,11 @@ namespace OneCanRun.UI
         private Vector3 LastPosition;
         private float initTime;
         private Health health;
+
         public void init(GameObject obj,float damage, DamageType _type)
         {
             hurt = damage.ToString();
+            mText.text = hurt;
             type = _type;
             if (type == DamageType.magic)
                 mText.color = new Color(0,127, 255);

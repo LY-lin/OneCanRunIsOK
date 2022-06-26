@@ -52,7 +52,10 @@ MonoBehaviour:
   magicDefenceBuff: 0
   maxSpeedBuff: 0
   maxJumpBuff: 0
+  ImpactVfx: {fileID: 0}
   name: Heal
   description: Healing
+  buffImg: {fileID: 0}
+  buffID: 11
   hasExistTime: 0
   ExistTime: 0
