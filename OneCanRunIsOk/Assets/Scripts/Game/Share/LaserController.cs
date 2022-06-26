@@ -44,6 +44,8 @@ namespace OneCanRun.Game.Share
 
         private GameObject LaserInstance;
         public Transform PlayerSocket;
+
+        private bool isLasering=false;
         //private Vector3 hitPoint;
 
         void Start()
@@ -196,19 +198,31 @@ namespace OneCanRun.Game.Share
 
         public void StartLaser()
         {
-            LaserInstance = Instantiate(gameObject, LaserSocket);
+            if (!isLasering)
+            {
+                LaserInstance = Instantiate(gameObject, LaserSocket);
+                isLasering = true;
+            }
         }
 
         public void StartLaser(Transform socket)
         {
-            PlayerSocket = socket;
-            LaserInstance = Instantiate(gameObject, LaserSocket);
+            if (!isLasering)
+            {
+                PlayerSocket = socket;
+                LaserInstance = Instantiate(gameObject, LaserSocket);
+                isLasering = true;
+            }
         }
 
         public void StopLaser()
         {
-            DisablePrepare();
-            Destroy(LaserInstance, 0.1f);
+            if (isLasering)
+            {
+                DisablePrepare();
+                Destroy(LaserInstance, 0.1f);
+                isLasering = false;
+            }
         }
     }
 }

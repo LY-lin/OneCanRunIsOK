@@ -19,14 +19,23 @@ namespace OneCanRun.Game.Share
         public GameObject targetObject;
         public WeaponController weaponController;
 
+        public AudioClip audioClip;
+
+        private AudioSource audioSource;
+        
+
 
         //public GameObject Owner;
 
 
-        //void Start()
-        //{
-        
-        //}
+        void Start()
+        {
+            audioSource = GetComponent<AudioSource>();
+            DebugUtility.HandleErrorIfNullGetComponent<AudioSource, DroneController>(audioSource, this,gameObject);
+
+            audioSource.PlayOneShot(audioClip);
+            //audioSource.
+        }
 
         // Update is called once per frame
         void Update()
