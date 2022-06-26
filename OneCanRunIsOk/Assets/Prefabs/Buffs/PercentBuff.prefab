@@ -46,16 +46,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   healRateBuff: 0
-  physicalAttackBuff: 0
-  magicAttackBuff: 0
+  physicalAttackBuff: 0.2
+  magicAttackBuff: 0.2
   physicalDefenceBuff: 0
   magicDefenceBuff: 0
-  maxSpeedBuff: -0.5
+  maxSpeedBuff: 0
   maxJumpBuff: 0
   ImpactVfx: {fileID: 0}
-  name: Foreverbuff
-  description: HeiHeiHei
+  name: Percent Buff1
+  description: PA and MA percent up
   buffImg: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  buffID: 1
-  hasExistTime: 0
+  buffID: 14
+  hasExistTime: 1
   ExistTime: 10

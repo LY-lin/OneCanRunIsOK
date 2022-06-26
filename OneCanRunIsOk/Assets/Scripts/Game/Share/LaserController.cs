@@ -8,7 +8,7 @@ namespace OneCanRun.Game.Share
 {
     public class LaserController : MonoBehaviour
     {
-        //ÊÇ·ñµ±ÎäÆ÷Ê¹ÓÃ£¨½øĞĞ¼¤¹âµ¯µÀĞŞÕı£©
+        //æ˜¯å¦å½“æ­¦å™¨ä½¿ç”¨ï¼ˆè¿›è¡Œæ¿€å…‰å¼¹é“ä¿®æ­£ï¼‰
         public bool usedAsWeapon = false;
 
         public GameObject HitEffect;
@@ -44,6 +44,8 @@ namespace OneCanRun.Game.Share
 
         private GameObject LaserInstance;
         public Transform PlayerSocket;
+
+        private bool isLasering=false;
         //private Vector3 hitPoint;
 
         void Start()
@@ -177,7 +179,7 @@ namespace OneCanRun.Game.Share
             if (finalDamage < 0f)
                 finalDamage = 0f;
 
-            //ÏÂÈ¡Õû
+            //ä¸‹å–æ•´
             finalDamage = Mathf.Floor(finalDamage);
 
             //GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
@@ -196,19 +198,31 @@ namespace OneCanRun.Game.Share
 
         public void StartLaser()
         {
-            LaserInstance = Instantiate(gameObject, LaserSocket);
+            if (!isLasering)
+            {
+                LaserInstance = Instantiate(gameObject, LaserSocket);
+                isLasering = true;
+            }
         }
 
         public void StartLaser(Transform socket)
         {
-            PlayerSocket = socket;
-            LaserInstance = Instantiate(gameObject, LaserSocket);
+            if (!isLasering)
+            {
+                PlayerSocket = socket;
+                LaserInstance = Instantiate(gameObject, LaserSocket);
+                isLasering = true;
+            }
         }
 
         public void StopLaser()
         {
-            DisablePrepare();
-            Destroy(LaserInstance, 0.1f);
+            if (isLasering)
+            {
+                DisablePrepare();
+                Destroy(LaserInstance, 0.1f);
+                isLasering = false;
+            }
         }
     }
 }
