@@ -9,16 +9,18 @@ namespace OneCanRun.Game.Share
         private const int cacheSize = 20;
         private static List<GameObject> sampleList;
         public List<GameObject> sampleList_exposed;
-        //private static GameObject[] dataStream = new GameObject[cacheSize];
         private static GameObject parent;
-        private static bool init = false;
+
+        // for accelerating seach
+        private static Dictionary<string, int> lookupTable;
         private static List<List<GameObject>> pool;
         private static List<List<bool>> used;
         public int activeNumber = 0;
 
         private void OnEnable(){
-            if (monsterPoolManagerPtr == null)
+            if (monsterPoolManagerPtr == null){
                 monsterPoolManagerPtr = this;
+            }
 
         }
 
@@ -33,12 +35,14 @@ namespace OneCanRun.Game.Share
         public static void initialization(GameObject _parent){
             parent = _parent;
             pool = new List<List<GameObject>>();
+            lookupTable = new Dictionary<string, int>();
             sampleList = monsterPoolManagerPtr.sampleList_exposed;
             used = new List<List<bool>>();
             for(int i = 0;i < sampleList.Count; i++){
                 pool.Add(new List<GameObject>(cacheSize));
                 used.Add(new List<bool>(cacheSize));
                 GameObject current = sampleList[i];
+                lookupTable.Add(sampleList[i].name + "(Clone)", i);
                 for(int j = 0;j < cacheSize; j++){
                     GameObject temp = GameObject.Instantiate(current, _parent.transform);
                     temp.SetActive(false);
@@ -77,12 +81,12 @@ namespace OneCanRun.Game.Share
                 }
             }
 
-            
-            ret = UnityEngine.Object.Instantiate(sampleList[typeID], parent.transform);
-            pool[typeID].Add(ret);
-            used[typeID].Add(true);
+            if(index == -1){
+                ret = UnityEngine.Object.Instantiate(sampleList[typeID], parent.transform);
+                pool[typeID].Add(ret);
+                used[typeID].Add(true);
+            }
             ret.transform.position = position;
-            
             
             return ret;
         }
@@ -111,9 +115,10 @@ namespace OneCanRun.Game.Share
             }
             Destroy(objcect);
 
-
         }
 
+
+        // main way to release
         public void release(GameObject objcect){
             Health health =  objcect.GetComponent<Health>();
             health.m_IsDead = false;
@@ -122,16 +127,18 @@ namespace OneCanRun.Game.Share
             health.CurrentHealth = properties.getMaxHealth();
             objcect.SetActive(false);
 
+            objcect.gameObject.GetComponent<Actor>().reset();
+            int typeID;
+            if (!lookupTable.TryGetValue(objcect.name, out typeID))
+                throw new System.Exception(objcect.name + " is illegal ");
 
-
-            for(int i = 0;i < pool.Count; i++){
-                for(int j = 0;j < pool[i].Count; j++){
-                    if(pool[i][j] == objcect){
-                    used[i][j] = false;
+            for(int j = 0;j < pool[typeID].Count; j++){
+                if(pool[typeID][j] == objcect){
+                    used[typeID][j] = false;
                     return;
                 }
-                }
             }
+            
             Destroy(objcect);
 
         }

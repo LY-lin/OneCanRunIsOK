@@ -48,14 +48,15 @@ namespace OneCanRun.UI
         {
             if (obj&&obj.activeSelf)
             {
-                if (obj.GetComponentInParent<Health>().CurrentHealth != 0)
+                Debug.Log(obj.transform.parent.GetComponent<Health>() == null);
+                if (obj.transform.parent.GetComponent<Health>().CurrentHealth != 0)
                 {
                     transform.localPosition = GetUIPosition(obj.transform.position);
                     LastPosition = obj.transform.position;
                 }
-                else if (obj.GetComponentInParent<Health>().CurrentHealth == 0)
+                else if (obj.transform.parent.GetComponent<Health>().CurrentHealth == 0)
                 {
-                    transform.localPosition = GetUIPosition(obj.transform.position);
+                    transform.localPosition = GetUIPosition(LastPosition);
                 }
             }
             else

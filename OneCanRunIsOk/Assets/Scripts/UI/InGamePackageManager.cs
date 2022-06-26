@@ -53,7 +53,6 @@ namespace OneCanRun.UI
             if (Input.GetButtonDown(GameConstants.k_ButtonNamePauseMenu)
                 || (m_backpack.gameObject.activeSelf && Input.GetButtonDown(GameConstants.k_ButtonNameCancel)))
             {
-                Debug.Log("Pause");
                 SetPauseMenuActivation(!m_backpack.gameObject.activeSelf);
 
             }

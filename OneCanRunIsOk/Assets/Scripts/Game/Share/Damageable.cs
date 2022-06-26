@@ -81,7 +81,8 @@ namespace OneCanRun.Game.Share
                 // apply the damages
                 //Debug.Log(totalDamage);
                 Health.TakeDamage(totalDamage, damageSource);
-                collect.produce(Damaged, damageType, damage);
+                if (Damaged.GetComponentInParent<Actor>().Affiliation == affiliationType.enemy)
+                    collect.produce(Damaged, damageType, damage);
 
             }
         }
