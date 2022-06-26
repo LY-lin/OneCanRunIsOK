@@ -110,9 +110,11 @@ namespace OneCanRun.Game
         // in case up more than one level
         private void levelOneUp(){
             int strenthEnhanced = 1;
-            int techniqueEnhanced = 1;
+            int staminaEnhanced = 1;
             int intelligenceEnhanced = 1;
-            
+            this.actorAttribute.intelligence += intelligenceEnhanced;
+            this.actorAttribute.stamina += staminaEnhanced;
+            this.actorAttribute.strength += strenthEnhanced;
 
             //update base
 
@@ -124,8 +126,8 @@ namespace OneCanRun.Game
             // intelligence
             baseProperty.setMagicAttack(baseProperty.getMagicAttack() + intelligenceEnhanced);
             // technique
-            baseProperty.setPhysicalAttack(baseProperty.getPhysicalAttack() + techniqueEnhanced);
-            //baseProperty.setMaxSpeed(baseProperty.getMaxSpeed() * (1 + 0.1f * techniqueEnhanced));
+            baseProperty.setPhysicalAttack(baseProperty.getPhysicalAttack() + staminaEnhanced);
+
 
         }
 

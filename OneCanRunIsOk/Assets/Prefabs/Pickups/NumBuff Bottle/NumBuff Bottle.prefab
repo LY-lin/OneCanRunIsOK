@@ -4955,7 +4955,7 @@ GameObject:
   - component: {fileID: 92861144695111973}
   - component: {fileID: 959755694926721651}
   m_Layer: 0
-  m_Name: Bottle_Mana
+  m_Name: NumBuff Bottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5019,7 +5019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f6c043b7a2ad24e9b177cb82cc2f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffObject: {fileID: 0}
+  buffObject: {fileID: 230908398740711128, guid: 02d551b059a8bad44b9256508f2fee2e, type: 3}
 --- !u!114 &959755694926721651
 MonoBehaviour:
   m_ObjectHideFlags: 0

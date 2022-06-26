@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 927281462185983436}
   - component: {fileID: -2395946979236021228}
   m_Layer: 0
-  m_Name: IceBuff
+  m_Name: NumBuff1 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,18 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc3d8018dffa7f47a6439043c09539e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 0
   healRateBuff: 0
-  physicalAttackBuff: 0
-  magicAttackBuff: 0
-  physicalDefenceBuff: 0
-  magicDefenceBuff: 0
-  maxSpeedBuff: -0.5
+  physicalAttackBuff: 5
+  magicAttackBuff: 5
+  physicalDefenceBuff: 5
+  magicDefenceBuff: 5
+  maxSpeedBuff: 0
   maxJumpBuff: 0
   ImpactVfx: {fileID: 0}
-  name: 
-  description: 
-  buffImg: {fileID: 0}
-  buffID: 13
+  name: Buff9
+  description: Strengthening in all directions
+  buffImg: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  buffID: 9
   hasExistTime: 1
-  ExistTime: 2
+  ExistTime: 10

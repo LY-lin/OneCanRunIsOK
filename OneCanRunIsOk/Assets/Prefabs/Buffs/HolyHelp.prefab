@@ -50,10 +50,12 @@ MonoBehaviour:
   magicAttackBuff: 20
   physicalDefenceBuff: 20
   magicDefenceBuff: 20
-  maxSpeedBuff: 0
+  maxSpeedBuff: 2
   maxJumpBuff: 0
   ImpactVfx: {fileID: 0}
-  name: 
-  description: 
+  name: Holy Help
+  description: Strengthening in all directions
+  buffImg: {fileID: 0}
+  buffID: 12
   hasExistTime: 1
   ExistTime: 10

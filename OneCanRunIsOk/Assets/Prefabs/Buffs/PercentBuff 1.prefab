@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 927281462185983436}
   - component: {fileID: -2395946979236021228}
   m_Layer: 0
-  m_Name: IceBuff
+  m_Name: PercentBuff 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,14 +48,14 @@ MonoBehaviour:
   healRateBuff: 0
   physicalAttackBuff: 0
   magicAttackBuff: 0
-  physicalDefenceBuff: 0
-  magicDefenceBuff: 0
-  maxSpeedBuff: -0.5
+  physicalDefenceBuff: 0.2
+  magicDefenceBuff: 0.2
+  maxSpeedBuff: 0
   maxJumpBuff: 0
   ImpactVfx: {fileID: 0}
-  name: 
-  description: 
-  buffImg: {fileID: 0}
-  buffID: 13
+  name: Percent Buff2
+  description: PD and MD percent up
+  buffImg: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  buffID: 15
   hasExistTime: 1
-  ExistTime: 2
+  ExistTime: 10
