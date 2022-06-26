@@ -180,9 +180,9 @@ namespace OneCanRun.UI{
             QDescription.text = "Stop nearby enemies at time and teleport to the target location";
 
 
-            //FImage.sprite = gameObject.GetComponent<SkillController>().SkillIcon;
-            FName.text = "Unfinish";
-            FDescription.text = "Unfinish";
+            FImage.sprite = Resources.Load<Sprite>("Skills/Drone");
+            FName.text = "CallDrone";
+            FDescription.text = "Call a drone to fight together";
             config.setBaseAttribute(2, 6, 2, 6);
         }
 

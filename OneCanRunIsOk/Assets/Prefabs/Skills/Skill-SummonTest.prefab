@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillName: CallDrone
   SkillDescription: Call a drone to fight together
-  SkillIcon: {fileID: 21300000, guid: e801518f4fc11234e9887f62a845f839, type: 3}
+  SkillIcon: {fileID: 21300000, guid: 4e1e4c7316b2b2a41bbb79a066e44873, type: 3}
   m_SkillType: 2
   m_SpSkillType: 0
   CoolingTime: 5
