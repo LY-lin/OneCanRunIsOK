@@ -3493,6 +3493,7 @@ GameObject:
   - component: {fileID: 3920919027543811131}
   - component: {fileID: 3036777438095118379}
   - component: {fileID: 2019056498}
+  - component: {fileID: 5616355944566208699}
   m_Layer: 0
   m_Name: Dragon
   m_TagString: Untagged
@@ -3517,7 +3518,7 @@ Transform:
   - {fileID: 778311618}
   - {fileID: 413295466}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3920919027543811109
 MonoBehaviour:
@@ -3926,6 +3927,21 @@ CharacterController:
   m_SkinWidth: 0.3
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 2.5, z: 0}
+--- !u!114 &5616355944566208699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3920919027543811132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb2ff29e1e59e044a51d423a8ed35b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flameObject: {fileID: 1259762591101698, guid: 4650fcabf748dc848b719a08070fcaf3, type: 3}
+  Owner: {fileID: 3920919027543811132}
+  spitSocket: {fileID: 3920919026220962552}
 --- !u!1 &3920919027546932654
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using OneCanRun.Game;
 using UnityEngine.AI;
+using OneCanRun.Game.Share;
 
 namespace OneCanRun.AI.Enemies
 {
@@ -51,6 +52,8 @@ namespace OneCanRun.AI.Enemies
 
         Animator animator;
         CharacterController characterController;
+        SpitFlame spitFlame;
+
         int pathDestinationNodeIndex;
         float lastHitTime = Mathf.Infinity;
         float lastAttackTime = Mathf.Infinity;
@@ -94,6 +97,9 @@ namespace OneCanRun.AI.Enemies
 
             bodyMeleeControllers = GetComponentsInChildren<BodyMeleeController>();
             DebugUtility.HandleErrorIfNoComponentFound<Collider, Boss>(bodyMeleeControllers.Length, this, gameObject);
+
+            spitFlame = GetComponent<SpitFlame>();
+            DebugUtility.HandleErrorIfNullGetComponent<SpitFlame, Boss>(spitFlame, this, gameObject);
 
             map = new Dictionary<string, BodyMeleeController>();
 
