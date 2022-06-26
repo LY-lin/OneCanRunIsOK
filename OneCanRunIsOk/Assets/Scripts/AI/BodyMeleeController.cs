@@ -17,7 +17,9 @@ namespace OneCanRun.AI
         public void init(Actor actor)
         {
             this.Owner = actor.gameObject;
-            this.Damage = 10f;
+            // this.Damage = actor.GetActorProperties().getMagicAttack() + actor.GetActorProperties().getPhysicalAttack();
+            this.Damage = 40f;
+            Debug.Log(this.Damage);
             this.attackerType = actor.Affiliation;
         }
 
@@ -53,9 +55,36 @@ namespace OneCanRun.AI
                 if (finalDamage < 0f)
                     finalDamage = 0f;
                 Debug.Log("Enemy Atttack!");
+                Debug.Log(finalDamage);
                 damageable.InflictDamage(finalDamage, false, Owner);
             }
 
+        }
+
+        void OnTriggerEnter(Collider col)
+        {
+            Actor target = col.gameObject.GetComponent<Actor>();
+            if (target)
+            {
+                if (target.Affiliation == this.attackerType)
+                    return;
+            }
+
+            Damageable damageable = col.gameObject.GetComponent<Damageable>();
+            if (damageable && !dic.ContainsKey(damageable.gameObject))
+            {
+
+                dic.Add(damageable.gameObject, 1);
+
+                Actor actor = col.gameObject.GetComponent<Actor>();
+                ActorProperties colliderProperty = actor.GetActorProperties();
+                float finalDamage = this.Damage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
+                if (finalDamage < 0f)
+                    finalDamage = 0f;
+                Debug.Log("Enemy Atttack!");
+                Debug.Log(finalDamage);
+                damageable.InflictDamage(finalDamage, false, Owner);
+            }
         }
     }
 }

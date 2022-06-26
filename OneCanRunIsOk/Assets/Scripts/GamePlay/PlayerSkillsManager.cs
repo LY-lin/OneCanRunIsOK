@@ -43,6 +43,9 @@ namespace OneCanRun.GamePlay
         //public GameObject Laser;
         //LaserController lc;
 
+        //test Flame
+        //public SpitFlame spitFlame;
+
         void Start()
         {
             m_InputHandler = GetComponent<PlayerInputHandler>();
@@ -72,6 +75,8 @@ namespace OneCanRun.GamePlay
             //lc.Owner = gameObject;
             //lc.LaserSocket = SkillSocket;
 
+            //test Flame
+            //spitFlame = GetComponent<SpitFlame>();
         }
 
 
@@ -85,6 +90,21 @@ namespace OneCanRun.GamePlay
             //else if (m_InputHandler.GetUseSkillButtonDown())
             //{
             //    lc.StopLaser();
+            //}
+
+            //test Flame
+            //if(m_InputHandler.GetUseSPSkillButtonDown())
+            //{
+            //    if (!isAiming)
+            //    {
+            //        spitFlame.StartSpitting();
+            //        isAiming = true;
+            //    }
+            //    else
+            //    {
+            //        spitFlame.StopSpitting();
+            //        isAiming = false;
+            //    }
             //}
 
             //aiming
