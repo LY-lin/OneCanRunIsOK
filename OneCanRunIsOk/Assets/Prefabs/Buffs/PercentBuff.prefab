@@ -55,7 +55,7 @@ MonoBehaviour:
   ImpactVfx: {fileID: 0}
   name: Percent Buff1
   description: PA and MA percent up
-  buffImg: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  buffImg: {fileID: 21300000, guid: f2f5e4984466f7542a7cc394024291ff, type: 3}
   buffID: 14
   hasExistTime: 1
   ExistTime: 10

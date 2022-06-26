@@ -432,6 +432,7 @@ GameObject:
   - component: {fileID: 2263138276376709999}
   - component: {fileID: 6201211561966678761}
   - component: {fileID: 4386041538737709739}
+  - component: {fileID: -7996345042886867641}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -476,6 +477,7 @@ MonoBehaviour:
   Affiliation: 2
   AimPoint: {fileID: 4256155222580521307}
   buffManager: {fileID: 4256155222580521297}
+  campType: 0
   isPlayer: 0
 --- !u!195 &4256155222580521309
 NavMeshAgent:
@@ -750,6 +752,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-7996345042886867641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4256155222580521301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5006c84368fe0484ab5bbcb66241d091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DropList: {fileID: 4278575754204634294, guid: 4cecc645a9492d14dbcb8313049da382, type: 3}
 --- !u!1 &4829273511531430695
 GameObject:
   m_ObjectHideFlags: 0

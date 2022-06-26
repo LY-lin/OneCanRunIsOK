@@ -626,6 +626,7 @@ GameObject:
   - component: {fileID: 2333055648381596555}
   - component: {fileID: 2817332843408663665}
   - component: {fileID: 4642866303671975968}
+  - component: {fileID: -1233847239133097916}
   m_Layer: 0
   m_Name: Turtle
   m_TagString: Untagged
@@ -670,6 +671,7 @@ MonoBehaviour:
   Affiliation: 2
   AimPoint: {fileID: 2333055648381596556}
   buffManager: {fileID: 2333055648381596546}
+  campType: 0
   isPlayer: 0
 --- !u!195 &2333055648381596558
 NavMeshAgent:
@@ -835,6 +837,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamageMultiplier: 1
   SensibilityToSelfdamage: 0.6
+--- !u!114 &-1233847239133097916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2333055648381596548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5006c84368fe0484ab5bbcb66241d091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DropList: {fileID: 4278575754204634294, guid: 4cecc645a9492d14dbcb8313049da382, type: 3}
 --- !u!1 &2333055648484913325
 GameObject:
   m_ObjectHideFlags: 0
