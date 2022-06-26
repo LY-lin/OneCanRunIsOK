@@ -39,7 +39,7 @@ namespace OneCanRun.Game.Share
                 Damageable damageable = col.GetComponent<Damageable>();
                 if (damageable)
                 {
-                    Actor actor = col.gameObject.GetComponent<Actor>();
+                    Actor actor = col.gameObject.GetComponentInParent<Actor>();
                     ActorProperties colliderProperty = actor.GetActorProperties();
                     float finalDamage = calculateDamage(colliderProperty, damage, damageType);
                     damageable.InflictDamage(finalDamage, false, Owner, col.gameObject, damageType);
@@ -51,8 +51,8 @@ namespace OneCanRun.Game.Share
                         //col.gameObject.transform.Translate(displacementVector);
 
                         //DisplacementCalculating(aimingPoint, col);
-                        Vector3 displaceDestination = (col.transform.position - aimingPoint).normalized * displacementDistance + col.gameObject.transform.position;
-                        DisplaceAction da = new DisplaceAction(col.gameObject, displaceDestination, Time.time, displacementTime, displacementSpeed);
+                        Vector3 displaceDestination = (actor.transform.position - aimingPoint).normalized * displacementDistance + actor.gameObject.transform.position;
+                        DisplaceAction da = new DisplaceAction(actor.gameObject, displaceDestination, Time.time, displacementTime, displacementSpeed);
                         displaceActionsManager.addAction(da);
 
                     }
