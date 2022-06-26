@@ -114,6 +114,8 @@ namespace OneCanRun.GamePlay
         [Tooltip("Sound played when jumping")] public AudioClip JumpSfx;
         //着地声效
         [Tooltip("Sound played when landing")] public AudioClip LandSfx;
+        //低血量声效
+        [Tooltip("Sound played when dying")] public AudioClip DyingSfx;
 
         [Tooltip("Sound played when taking damage froma fall")]
         public AudioClip FallDamageSfx;
@@ -179,6 +181,8 @@ namespace OneCanRun.GamePlay
         const float k_JumpGroundingPreventionTime = 0.2f;
         const float k_GroundCheckDistanceInAir = 0.07f;
 
+        bool isDying = false;
+
         void Awake()
         {
             ActorsManager actorsManager = FindObjectOfType<ActorsManager>();
@@ -228,6 +232,8 @@ namespace OneCanRun.GamePlay
             }
 
             HasJumpedThisFrame = false;
+
+            CheckHealth();
 
             //着地判定
             bool wasGrounded = IsGrounded;
@@ -581,6 +587,31 @@ namespace OneCanRun.GamePlay
                         }
                     }
 
+                }
+            }
+        }
+
+        //低血量处理
+        void CheckHealth()
+        {
+            if (!isDying && (m_Health.CurrentHealth / m_Health.MaxHealth <= 0.3))
+            {
+                isDying = true;
+                if (DyingSfx)
+                {
+                    AudioSource.clip = DyingSfx;
+                    AudioSource.loop = true;
+                    AudioSource.Play();
+                }
+            }
+            else if(isDying&& (m_Health.CurrentHealth / m_Health.MaxHealth > 0.3))
+            {
+                isDying = false;
+                if (AudioSource.clip == DyingSfx)
+                {
+                    AudioSource.Stop();
+                    AudioSource.loop = false;
+                    AudioSource.clip = null;
                 }
             }
         }
