@@ -15,7 +15,7 @@ namespace OneCanRun.GamePlay
         private int timeCounter = 0;
         private int frameInterval = 0;
         private Game.Share.MonsterPoolManager monsterPoolManager;
-        private int startTime;
+        private static int startTime;
         // Start is called before the first frame update
 
         private int compareMonsterFreshInfo(Game.Share.MonsterFreshInfo a, Game.Share.MonsterFreshInfo b){
@@ -26,6 +26,13 @@ namespace OneCanRun.GamePlay
             return 0;
 
         }
+
+        public static void setTime(float _time)
+        {
+            counter = 0;
+            startTime = (int)_time;
+        }
+
 
         private void OnEnable(){
             startTime = (int)Time.time;
@@ -84,6 +91,7 @@ namespace OneCanRun.GamePlay
 
         void Start()
         {
+            setTime(Time.time);
             Game.Share.MonsterPoolManager.initialization(this.gameObject);
             monsterPoolManager = Game.Share.MonsterPoolManager.getInstance();
         }

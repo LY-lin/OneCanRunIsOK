@@ -244,7 +244,7 @@ namespace OneCanRun.GamePlay
                 if (RecievesFallDamage && fallSpeedRatio > 0f)
                 {
                     float dmgFromFall = Mathf.Lerp(FallDamageAtMinSpeed, FallDamageAtMaxSpeed, fallSpeedRatio);
-                    m_Health.TakeDamage(dmgFromFall, null);
+                    m_Health.TakeDamage(dmgFromFall, null); 
 
                     // fall damage SFX
                     AudioSource.PlayOneShot(FallDamageSfx);
@@ -275,7 +275,7 @@ namespace OneCanRun.GamePlay
         void OnDie()
         {
             IsDead = true;
-
+            MonsterFresh.setTime(Time.time);
             // Tell the weapons manager to switch to a non-existing weapon in order to lower the weapon
             m_WeaponsManager.SwitchToWeaponIndex(-1, true);
 
