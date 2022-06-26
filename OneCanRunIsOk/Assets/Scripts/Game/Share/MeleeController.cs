@@ -144,7 +144,7 @@ namespace OneCanRun.Game.Share
                 if (damageable)
                 {
                     m_ShootAudioSource.PlayOneShot(hitSfx);
-                    Actor actor = col.gameObject.GetComponent<Actor>();
+                    Actor actor = col.gameObject.GetComponentInParent<Actor>();
                     ActorProperties colliderProperty = actor.GetActorProperties();
                     float finalDamage = calculateDamage(colliderProperty, Damage, damageType);
                     damageable.InflictDamage(finalDamage, false, Owner, col.gameObject, damageType);

@@ -101,7 +101,7 @@ namespace OneCanRun.Game.Share
                             
                             if (curDeltaCount == deltaCount)
                             {
-                                Actor actor = col.gameObject.GetComponent<Actor>();
+                                Actor actor = col.gameObject.GetComponentInParent<Actor>();
                                 ActorProperties colliderProperty = actor.GetActorProperties();
                                 float finalDamage = calculateDamage(colliderProperty, damage * totalDeltaTime, damageType);
                                 damageable.InflictDamage(finalDamage, false, Owner, col.gameObject, damageType);
