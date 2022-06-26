@@ -48,6 +48,7 @@ namespace OneCanRun.GamePlay
                 float position_z = 0;
                 int typeID = 0;
                 int number = 0;
+                int level = 1;
                 foreach(XmlElement x12 in xl1.ChildNodes){
                     if(x12.Name == "Time"){
                         time = int.Parse(x12.InnerText);
@@ -67,9 +68,12 @@ namespace OneCanRun.GamePlay
                     if (x12.Name == "Number"){
                         number = int.Parse(x12.InnerText);
                     }
+                    if (x12.Name == "Level"){
+                        number = int.Parse(x12.InnerText);
+                    }
                 }
 
-                Game.Share.MonsterFreshInfo tmp = new Game.Share.MonsterFreshInfo(time, position_x, position_y, position_z, typeID, number);
+                Game.Share.MonsterFreshInfo tmp = new Game.Share.MonsterFreshInfo(time, position_x, position_y, position_z, typeID, number, level);
                 mMonsterList.Add(tmp);
             }
 
@@ -104,8 +108,10 @@ namespace OneCanRun.GamePlay
                 Game.Share.MonsterFreshInfo current = mMonsterList[counter];
                 for(int i = 0;i < current.number; i++){
                    GameObject gameObject = monsterPoolManager.getObject(current.typeID, new Vector3(current.position_x, current.position_y, current.position_z));
-                    if (gameObject)
+                    if (gameObject){
+                        gameObject.GetComponent<Game.Actor>().setLevel((uint)current.level);
                         gameObject.SetActive(true);
+                    }
                 }
                 counter++;
             }
