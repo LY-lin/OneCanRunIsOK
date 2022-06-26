@@ -23,7 +23,7 @@ namespace OneCanRun.Game.Share
         //    laser.Owner = this.Owner;
         //}
 
-        public void StartSpitting()
+        public void StartLasering()
         {
             if (!isLasering)
             {
@@ -33,11 +33,12 @@ namespace OneCanRun.Game.Share
             }
         }
 
-        public void StopSpitting()
+        public void StopLasering()
         {
             if (isLasering && laserInstance)
             {
-                Destroy(laserInstance);
+                laserInstance.GetComponent<LaserController>().DisablePrepare();
+                Destroy(laserInstance,0.1f);
                 isLasering = false;
             }
         }
