@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\Game\Share\DropList.cs" />
     <Compile Include="Assets\Scripts\Game\BuffController.cs" />
     <Compile Include="Assets\Scripts\Game\EventManager.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\SpitFlame.cs" />
     <Compile Include="Assets\Scripts\Game\Share\CollectDamageNumber.cs" />
     <Compile Include="Assets\Scripts\Game\EventFactory.cs" />
     <Compile Include="Assets\Scripts\Game\Share\MeleeController.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Assets\Scripts\Game\StaticEvents.cs" />
     <Compile Include="Assets\Scripts\Game\ActorsManager.cs" />
     <Compile Include="Assets\Scripts\Game\Share\AoeCalculator.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\DragonFlame.cs" />
     <Compile Include="Assets\Scripts\Game\DisplaceActionsManager.cs" />
     <Compile Include="Assets\Scripts\Game\Share\DisplaceAction.cs" />
     <Compile Include="Assets\Scripts\Game\ObjectiveManager.cs" />
