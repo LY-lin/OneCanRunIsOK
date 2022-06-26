@@ -163,24 +163,12 @@ namespace OneCanRun.AI.Enemies
             Vector3 weaponForward = (target - weapon.WeaponRoot.transform.position).normalized;
             weapon.transform.forward = weaponForward;
 
-            if (weapon.ShootType == WeaponShootType.Laser)
-            {
-                currentAttackIndex = currentWeaponIndex;
-                duration = intervals[currentAttackIndex];
-                preAttackState = AttackState.Weapon;
-                latestWeaponAttackTime = Time.time;
-                anim.SetBool(attacks[currentAttackIndex], true);
-                weapon.HandleShootInputs(true, true, false);
-            }
-            else
-            {
-                currentAttackIndex = currentWeaponIndex;
-                duration = intervals[currentAttackIndex];
-                preAttackState = AttackState.Weapon;
-                latestWeaponAttackTime = Time.time;
-                anim.SetTrigger(attacks[currentAttackIndex]);
-                weapon.HandleShootInputs(false, true, false);
-            }
+            currentAttackIndex = currentWeaponIndex;
+            duration = intervals[currentAttackIndex];
+            preAttackState = AttackState.Weapon;
+            latestWeaponAttackTime = Time.time;
+            anim.SetTrigger(attacks[currentAttackIndex]);
+            weapon.HandleShootInputs(false, true, false);
         }
 
         public void AttackBySkill()
@@ -198,6 +186,15 @@ namespace OneCanRun.AI.Enemies
             latestMeleeAttackTime = Time.time;
             currentAttackIndex = Random.Range(weapons.Length + skills.Length, attacks.Length);
             duration = intervals[currentAttackIndex];
+            if (attacks[currentAttackIndex] == "Laser")
+            {
+                anim.SetBool(attacks[currentAttackIndex], true);
+            }
+            else
+            {
+                anim.SetTrigger(attacks[currentAttackIndex]);
+            }
+            duration = intervals[currentAttackIndex];
             anim.SetTrigger(attacks[currentAttackIndex]);
         }
 
@@ -213,6 +210,15 @@ namespace OneCanRun.AI.Enemies
                 case AttackState.Melee:
                     if(latestMeleeAttackTime + duration <= Time.time)
                     {
+                        if (attacks[currentAttackIndex] == "Laser")
+                        {
+                            anim.SetBool(attacks[currentAttackIndex], false);
+                            LaserRealse laser = gameObject.GetComponent<LaserRealse>();
+                            if(laser != null)
+                            {
+                                laser.StopLasering();
+                            }
+                        }
                         flag = true;
                         Attacking = false;
                     }
@@ -220,12 +226,6 @@ namespace OneCanRun.AI.Enemies
                 case AttackState.Weapon:
                     if(latestWeaponAttackTime + duration <= Time.time)
                     {
-                        if (weapons[currentWeaponIndex].ShootType == WeaponShootType.Laser)
-                        {
-                            latestWeaponAttackTime = Time.time;
-                            weapons[currentWeaponIndex].HandleShootInputs(false, true, true);
-                            anim.SetBool(attacks[currentAttackIndex], false);
-                        }
                         Attacking = false;
                         flag = true;
                     }
