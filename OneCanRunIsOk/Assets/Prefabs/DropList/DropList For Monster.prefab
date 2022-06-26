@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4278575754204634289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4278575754204634295}
+  - component: {fileID: 4278575754204634294}
+  m_Layer: 0
+  m_Name: DropList For Monster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4278575754204634295
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4278575754204634289}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 91.9274, y: 0.5711577, z: 120.080345}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4278575754204634294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4278575754204634289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64055e58e5a7a8d49a939892a283b370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropList:
+  - {fileID: 276222062663076311, guid: fcc1e965b671f47428f3eaf678265517, type: 3}
+  - {fileID: 276222062663076311, guid: db01435691010ab4bbedd58e814f3b35, type: 3}
+  - {fileID: 276222062663076311, guid: a0ef7ab96e53e67478d9e82ca261cc69, type: 3}
+  - {fileID: 276222062663076311, guid: d0e6c5c307ab82f458bf414d4a8a04db, type: 3}
+  - {fileID: 276222062663076311, guid: 0338c8dfaa3e8a24fbc150e838b2175b, type: 3}
+  - {fileID: 276222062663076311, guid: 8dc96318e617aba46811755030c1d6d9, type: 3}
+  - {fileID: 276222062663076311, guid: a56b0b526c32bcb4ca736a15b7b5792a, type: 3}
+  - {fileID: 276222062663076311, guid: 342615f9098d82a4b9f8b5cbb2f3303d, type: 3}
+  - {fileID: 276222062663076311, guid: 70ddef8d55c533a4bacd88c45f329a8f, type: 3}
+  - {fileID: 276222062663076311, guid: e133b435fef84604eb63ec75c646ae2e, type: 3}
+  - {fileID: 230908398740711128, guid: 5092b1d2bdaacc9448b833bcf980cf6f, type: 3}
+  - {fileID: 230908398740711128, guid: 15fc0c26b90d7714fa4c32585ea2755e, type: 3}
+  weight: 020000000200000002000000020000000200000002000000020000000200000002000000020000000100000001000000

@@ -58,7 +58,7 @@ namespace OneCanRun.Game
 
             // call OnHeal action
             float trueHealAmount = CurrentHealth - healthBefore;
-            if (trueHealAmount > 0f)
+            if (trueHealAmount > 10f)
             {
                 OnHealed?.Invoke(trueHealAmount);
             }
