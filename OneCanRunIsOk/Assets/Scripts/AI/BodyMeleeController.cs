@@ -82,7 +82,6 @@ namespace OneCanRun.AI
                 if (finalDamage < 0f)
                     finalDamage = 0f;
                 Debug.Log("Enemy Atttack!");
-                Debug.Log(finalDamage);
                 damageable.InflictDamage(finalDamage, false, Owner);
             }
         }
