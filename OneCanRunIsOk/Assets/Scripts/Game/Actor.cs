@@ -28,9 +28,11 @@ namespace OneCanRun.Game
         public ActorAttribute actorAttribute{get;private set;}
         public ActorBuffManager buffManager;
         public ActorConfig.CampType campType;
-        private bool dirty = true;
+        private static XmlDocument alliesXml = null;
+        private static XmlDocument enemyXml = null;
+        private static XmlDocument neutralXml = null;
         public bool isPlayer = false;
-        private uint level = 0;
+        private uint level = 1;
 
         public uint getLevel(){
             return level;
@@ -157,11 +159,18 @@ namespace OneCanRun.Game
             string fileName = "defaultProperties";
             string configDirectory = System.IO.Directory.GetCurrentDirectory();
             configDirectory += "\\Config\\";
+            // property from file 
+            XmlDocument xml = null;
             Renderer[] renderers;
             switch (Affiliation)
             {
                 case affiliationType.allies:
                     fileName += ".allies.xml";
+                    if(alliesXml == null){
+                        alliesXml = new XmlDocument();
+                        alliesXml.Load(configDirectory + fileName);
+                    }
+                    xml = alliesXml;
                     renderers = this.gameObject.GetComponentsInChildren<Renderer>();
                     foreach (Renderer renderer in renderers)
                     {
@@ -174,6 +183,11 @@ namespace OneCanRun.Game
                     break;
                 case affiliationType.enemy:
                     fileName += ".enemy.xml";
+                    if(enemyXml == null){
+                        enemyXml = new XmlDocument();
+                        enemyXml.Load(configDirectory + fileName);
+                    }
+                    xml = enemyXml;
                     renderers = this.gameObject.GetComponentsInChildren<Renderer>();
                     foreach(Renderer renderer in renderers)
                     {
@@ -187,6 +201,11 @@ namespace OneCanRun.Game
                     break;
                 case affiliationType.neutral:
                     fileName += ".neutral.xml";
+                    if(neutralXml == null){
+                        neutralXml = new XmlDocument();
+                        neutralXml.Load(configDirectory + fileName);
+                    }
+                    xml = enemyXml;
                     renderers = this.gameObject.GetComponentsInChildren<Renderer>();
                     foreach (Renderer renderer in renderers)
                     {
@@ -200,17 +219,10 @@ namespace OneCanRun.Game
                 default:
                     break;
             }
-
             
 
-            //OneCanRun.Game.Share.Modifier modifier = new Share.Modifier(0, Share.Modifier.ModifierType.experience, this);
-            //mModifier.Add(modifier);
             
-
-            // property from file 
-            XmlDocument xml = new XmlDocument();
-            xml.Load(configDirectory + fileName);
-
+           
             XmlNodeList xmlNodeList = xml.SelectSingleNode("PropertyConfig").ChildNodes;
 
             foreach (XmlElement child in xmlNodeList)
@@ -308,6 +320,22 @@ namespace OneCanRun.Game
         public float getExperience()
         {
             return this.mModifier[0].baseValue;
+        }
+
+        public void reset(){
+            if (this.gameObject.name == "Player1")
+                return;
+
+            this.Awake();
+            this.OnEnable();
+            level = 1;
+        }
+
+        public void setLevel(uint targetlevel){
+            for(uint i = level;i < targetlevel; i++){
+                levelOneUp();
+            }
+
         }
 
     }
