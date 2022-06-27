@@ -55,13 +55,14 @@ namespace OneCanRun.AI.Enemies
         SpitFlame spitFlame;
 
         int pathDestinationNodeIndex;
-        float lastHitTime = Mathf.Infinity;
+        int hitNumber = 3;
         float lastAttackTime = Mathf.Infinity;
         float lastPlayTime = Mathf.Infinity;
         float Duration = 2.5f;
         bool CG = true;
         bool Attacking = false;
         Dictionary<string, BodyMeleeController> map;
+        Collider HitBox;
 
         // Start is called before the first frame update
         void Start()
@@ -103,12 +104,14 @@ namespace OneCanRun.AI.Enemies
 
             map = new Dictionary<string, BodyMeleeController>();
 
-            /*
-            foreach(Collider collider in colliders)
+            foreach(Collider c in colliders)
             {
-                map.Add(collider.gameObject.name, collider);
+                if ( c.gameObject.name == "HitBox")
+                {
+                    HitBox = c;
+                    HitBox.enabled = false;
+                }
             }
-            */
 
             foreach(BodyMeleeController bodyMeleeController in bodyMeleeControllers)
             {
@@ -147,6 +150,7 @@ namespace OneCanRun.AI.Enemies
         public void SetCG(bool cg)
         {
             characterController.detectCollisions = !cg;
+            HitBox.enabled = !cg;
             CG = cg;
         }
 
@@ -351,9 +355,9 @@ namespace OneCanRun.AI.Enemies
 
         void OnDamaged(float damage, GameObject damageSource)
         {
-            if (lastHitTime == Mathf.Infinity || lastHitTime + Duration < Time.time)
+            if (hitNumber > 0 && Mathf.FloorToInt((health.CurrentHealth * 4) / health.MaxHealth) == hitNumber)
             {
-                lastHitTime = Time.time;
+                hitNumber--;
                 animator.SetTrigger("isHit");
             }
             // test if the damage source is the player
