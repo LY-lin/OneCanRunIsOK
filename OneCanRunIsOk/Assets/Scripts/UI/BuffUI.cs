@@ -49,6 +49,7 @@ namespace OneCanRun.UI
             BuffIMG.sprite = buff.BuffIcon;
             BuffName = name;
             Description.text = buff.Description;
+            Debug.Log(Description.text);
             if(buff.GetIsForever())
             {
                 LastTime.gameObject.SetActive(false);
@@ -58,9 +59,7 @@ namespace OneCanRun.UI
             {
                 LastTime.gameObject.SetActive(true);
                 NumPlane.gameObject.SetActive(false);
-            }
-
-            Description.gameObject.SetActive(false);
+            }ug
             itsDes.alpha = 0;
         }
 
@@ -72,8 +71,11 @@ namespace OneCanRun.UI
         {
             itsDes.alpha = 0;
         }
-        
 
+        private void OnDisable()
+        {
+            itsDes.alpha = 0;
+        }
 
     }
 }
