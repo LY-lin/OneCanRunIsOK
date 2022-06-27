@@ -2645,10 +2645,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8065204585092371096}
-  - {fileID: 8067427735179441036}
   - {fileID: 3693281851271335344}
   - {fileID: 4380685719659719493}
   - {fileID: 1620047987699135195}
+  - {fileID: 8067427735179441036}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2708,7 +2708,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7244909077066024886}
   - component: {fileID: 1712027124812543801}
-  - component: {fileID: 5537692392055688426}
+  - component: {fileID: 1706117914883350848}
   m_Layer: 0
   m_Name: BuffInBackpack
   m_TagString: Untagged
@@ -2744,7 +2744,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5210655458245282571}
   m_CullTransparentMesh: 1
---- !u!114 &5537692392055688426
+--- !u!114 &1706117914883350848
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -146,7 +146,7 @@ namespace OneCanRun.Game.Share
             totalDeltaTime += Time.deltaTime;
         }
 
-        void DisablePrepare()
+        public void DisablePrepare()
         {
             if (Laser != null)
             {

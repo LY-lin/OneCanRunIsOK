@@ -14,6 +14,14 @@ namespace OneCanRun.AI
 
         private Dictionary<GameObject, int> dic = new Dictionary<GameObject, int>();
 
+        DisplaceActionsManager displaceActionsManager;
+
+        void Start()
+        {
+            displaceActionsManager = GameObject.FindObjectOfType<DisplaceActionsManager>();
+            DebugUtility.HandleErrorIfNullFindObject<DisplaceActionsManager, AoeCalculator>(displaceActionsManager, this);
+        }
+
         public void init(Actor actor)
         {
             this.Owner = actor.gameObject;
@@ -53,6 +61,14 @@ namespace OneCanRun.AI
                 if (finalDamage < 0f)
                     finalDamage = 0f;
                 Debug.Log("Enemy Atttack!");
+
+                Debug.Log(finalDamage);
+
+                Vector3 direction = new Vector3(1, 1, 1);
+                Vector3 displaceDestination = (direction).normalized * 5f + actor.gameObject.transform.position;
+                DisplaceAction da = new DisplaceAction(actor.gameObject, displaceDestination, Time.time, 1f, 5f);
+                displaceActionsManager.addAction(da);
+
                 damageable.InflictDamage(finalDamage, false, Owner,col.gameObject);
             }
 

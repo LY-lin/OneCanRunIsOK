@@ -7,6 +7,8 @@ namespace OneCanRun.GamePlay
     public class BuffPickup : Pickup
     {
         CollisionBuffGiver buffGiver;
+        //[Tooltip("拾取特效")]
+        //public GameObject PickUpVfx;
         void OnTriggerEnter(Collider other)
         {
             buffGiver = GetComponent<CollisionBuffGiver>();     
@@ -20,6 +22,11 @@ namespace OneCanRun.GamePlay
                     PickupEvent evt = Events.PickupEvent;
                     evt.Pickup = gameObject;
                     EventManager.broadcast(evt);
+                    GameObject VfxInstance = Instantiate(PickupVfxPrefab, pickingPlayer.transform);
+                    Destroy(VfxInstance.gameObject, 1.5f);
+                    AudioUtility.CreateSFX(PickupSfx, pickingPlayer.transform.position,  0f);
+                    //VfxInstance.transform.position -= GetComponentInParent<Camera>().transform.right;
+                    
                 }
                 Destroy(gameObject);
             }
