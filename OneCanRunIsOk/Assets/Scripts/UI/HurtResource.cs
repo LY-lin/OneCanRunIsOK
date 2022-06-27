@@ -39,11 +39,13 @@ namespace OneCanRun.UI
         {
             HurtRes.gameObject.SetActive(true);
             Vector2 position = RectTransformUtility.WorldToScreenPoint(Camera.main, point);
-            if (position.x < Screen.width / 2f +radis && position.x > Screen.width/2f - radis && position.y < Screen.height/2f + radis && position.y > Screen.height/2f - radis)
+            position = new Vector2(position.x - Screen.width / 2f, position.y - Screen.height / 2f);
+            Debug.Log(position);
+            Debug.Log(Mathf.Sqrt(Vector2.SqrMagnitude(position)));
+            if (Mathf.Sqrt(Vector2.SqrMagnitude(position)) < radis)
                 HurtRes.gameObject.SetActive(false);
             else
                 HurtRes.gameObject.SetActive(true);
-            position = new Vector2(position.x - Screen.width / 2f, position.y - Screen.height / 2f);
             position = position.normalized * radis;
             float tanValue = (0 - position.x) / position.y;
             float tanArc = Mathf.Atan(tanValue);
