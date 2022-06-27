@@ -301,9 +301,9 @@ RectTransform:
   - {fileID: 4632168799392808800}
   - {fileID: 5504914839791086631}
   - {fileID: 6008676011690947619}
+  - {fileID: 5517085476438393059}
   - {fileID: 3110557025811451353}
   - {fileID: 1867217411355127361}
-  - {fileID: 5517085476438393059}
   m_Father: {fileID: 4632168799279953516}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -426,6 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Feedback: {fileID: 6398951111150578352}
+  Crosshair: {fileID: 0}
   standTime: 0.2
 --- !u!1 &8758927186403827358
 GameObject:
