@@ -99,6 +99,7 @@
     <Compile Include="Assets\Scripts\Game\ActorsManager.cs" />
     <Compile Include="Assets\Scripts\Game\Share\AoeCalculator.cs" />
     <Compile Include="Assets\Scripts\Game\Share\DragonFlame.cs" />
+    <Compile Include="Assets\Scripts\Game\Share\LaserRealse.cs" />
     <Compile Include="Assets\Scripts\Game\DisplaceActionsManager.cs" />
     <Compile Include="Assets\Scripts\Game\Share\DisplaceAction.cs" />
     <Compile Include="Assets\Scripts\Game\ObjectiveManager.cs" />

@@ -229,9 +229,7 @@ namespace OneCanRun.Game
 
             foreach (XmlElement child in xmlNodeList)
             {
-                //XmlNodeList a = child.GetElementsByTagName("EXP");
-                //string a = child.GetAttribute("exp");
-                //string a = child.Name;
+                
                 if (child.Name == "EXP")
                 {
                     baseProperty.setEXP(ulong.Parse(child.InnerText));
