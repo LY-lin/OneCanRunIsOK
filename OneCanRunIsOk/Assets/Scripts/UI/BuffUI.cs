@@ -59,7 +59,7 @@ namespace OneCanRun.UI
             {
                 LastTime.gameObject.SetActive(true);
                 NumPlane.gameObject.SetActive(false);
-            }ug
+            }
             itsDes.alpha = 0;
         }
 
