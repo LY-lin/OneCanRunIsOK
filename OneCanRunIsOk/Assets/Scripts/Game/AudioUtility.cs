@@ -22,7 +22,7 @@ namespace OneCanRun.Game
             EnemyAttack
         }
 
-        public static void CreateSFX(AudioClip clip, Vector3 position, AudioGroups audioGroup, float spatialBlend,
+        public static void CreateSFX(AudioClip clip, Vector3 position,  float spatialBlend,
             float rolloffDistanceMin = 1f)
         {
             GameObject impactSfxInstance = new GameObject();
@@ -33,7 +33,7 @@ namespace OneCanRun.Game
             source.minDistance = rolloffDistanceMin;
             source.Play();
 
-            source.outputAudioMixerGroup = GetAudioGroup(audioGroup);
+            //source.outputAudioMixerGroup = GetAudioGroup(audioGroup);
 
             TimedSelfDestruct timedSelfDestruct = impactSfxInstance.AddComponent<TimedSelfDestruct>();
             timedSelfDestruct.LifeTime = clip.length;

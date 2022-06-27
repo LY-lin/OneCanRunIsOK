@@ -92,7 +92,7 @@ namespace OneCanRun.GamePlay
 
             if (PickupVfxPrefab)
             {
-                var pickupVfxInstance = Instantiate(PickupVfxPrefab, transform.position, Quaternion.identity);
+                //var pickupVfxInstance = Instantiate(PickupVfxPrefab, transform.position, Quaternion.identity);
             }
 
             m_HasPlayedFeedback = true;
