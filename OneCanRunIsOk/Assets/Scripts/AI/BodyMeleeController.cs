@@ -84,7 +84,7 @@ namespace OneCanRun.AI
                 DisplaceAction da = new DisplaceAction(actor.gameObject, displaceDestination, Time.time, 1f, 5f);
                 displaceActionsManager.addAction(da);
 
-                damageable.InflictDamage(finalDamage, false, Owner);
+                damageable.InflictDamage(finalDamage, false, Owner,col.gameObject);
             }
 
         }
@@ -110,7 +110,7 @@ namespace OneCanRun.AI
                 if (finalDamage < 0f)
                     finalDamage = 0f;
                 Debug.Log("Enemy Atttack!");
-                damageable.InflictDamage(finalDamage, false, Owner);
+                damageable.InflictDamage(finalDamage, false, Owner,col.gameObject);
             }
         }
     }

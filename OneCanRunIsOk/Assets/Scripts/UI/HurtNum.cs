@@ -44,8 +44,8 @@ namespace OneCanRun.UI
             float y = Mathf.Sqrt(radis * radis - x * x);
             RandomPos = new Vector2(x, y);
             initTime = Time.time;
-            health = obj.transform.parent.GetComponent<Health>();
             LastPosition = obj.transform.position;
+            health = obj.transform.parent.GetComponent<Health>();
             if (health == null)
                 health = obj.GetComponentInParent<Health>();
         }

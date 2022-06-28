@@ -5,6 +5,7 @@ namespace OneCanRun.Game.Share
 {
     public class MonsterPoolManager : MonoBehaviour
     {
+        // for Singleton
         private static MonsterPoolManager monsterPoolManagerPtr = null;
         private const int cacheSize = 20;
         private static List<GameObject> sampleList;
@@ -58,8 +59,8 @@ namespace OneCanRun.Game.Share
 
         }
 
-        // get a free object, if there is not a free one, a null will turn up.
-        // you have to consider the rate in case there is not free object to get
+        // get a free object, if there is not a free one, a new one will create
+        // you have to consider the rate in case performance loss
         public GameObject getObject(int typeID,Vector3 position)
         {
             // illegal
@@ -118,7 +119,7 @@ namespace OneCanRun.Game.Share
         }
 
 
-        // main way to release
+        // manual way to release
         public void release(GameObject objcect){
             Health health =  objcect.GetComponent<Health>();
             health.m_IsDead = false;
@@ -126,7 +127,6 @@ namespace OneCanRun.Game.Share
             health.MaxHealth = properties.getMaxHealth();
             health.CurrentHealth = properties.getMaxHealth();
             objcect.SetActive(false);
-
             objcect.gameObject.GetComponent<Actor>().reset();
             int typeID;
             if (!lookupTable.TryGetValue(objcect.name, out typeID))

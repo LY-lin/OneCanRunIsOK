@@ -26,7 +26,7 @@ namespace OneCanRun.Game.Share
             collect = FindObjectOfType<CollectDamageNumber>();
         }
 
-        public void InflictDamage(float damage, bool isExplosionDamage, GameObject damageSource)
+        public void InflictDamage(float damage, bool isExplosionDamage, GameObject damageSource, GameObject damaged)
         {
             if (damageSource == gameObject)
             {
@@ -52,6 +52,9 @@ namespace OneCanRun.Game.Share
                 // apply the damages
                 //Debug.Log(totalDamage);
                 Health.TakeDamage(totalDamage, damageSource);
+                Debug.Log(damageSource);
+                if (damaged.GetComponentInParent<Actor>().Affiliation == affiliationType.allies)
+                    collect.getHurt(damageSource);
             }
         }
 
@@ -85,6 +88,7 @@ namespace OneCanRun.Game.Share
                     (damageSource.GetComponentInParent<Actor>().Affiliation == affiliationType.allies || 
                     damageSource.GetComponentInParent<Actor>().Affiliation == affiliationType.neutral))
                     collect.produce(Damaged, damageType, damage);
+
 
             }
         }
