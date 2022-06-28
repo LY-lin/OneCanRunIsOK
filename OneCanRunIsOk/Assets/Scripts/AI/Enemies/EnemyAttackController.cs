@@ -220,6 +220,7 @@ namespace OneCanRun.AI.Enemies
                             }
                         }
                         flag = true;
+                        melees[currentMeleeIndex].SetAttacking(false);
                         Attacking = false;
                     }
                     break;

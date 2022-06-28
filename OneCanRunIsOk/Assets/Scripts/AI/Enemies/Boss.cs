@@ -59,7 +59,7 @@ namespace OneCanRun.AI.Enemies
         float lastAttackTime = Mathf.Infinity;
         float lastPlayTime = Mathf.Infinity;
         float Duration = 2.5f;
-        bool CG = true;
+        bool CG = false;
         bool Attacking = false;
         Dictionary<string, BodyMeleeController> map;
         Collider HitBox;
@@ -313,7 +313,7 @@ namespace OneCanRun.AI.Enemies
 
         public bool TryAttack(string Attack, float duration, string colliderName)
         {
-            if (Vector3.Distance(detectionModule.KnownDetectedTarget.transform.position,
+            if (detectionModule.KnownDetectedTarget && Vector3.Distance(detectionModule.KnownDetectedTarget.transform.position,
                 detectionModule.DetectionSourcePoint.position) > detectionModule.AttackRange)
             {
                 return false;
@@ -323,14 +323,12 @@ namespace OneCanRun.AI.Enemies
                 if (Attacking)
                 {
                     Attacking = false;
-                    /*
                     if (colliderName.Length != 0)
                     {
-                        Collider collider;
-                        map.TryGetValue(colliderName, out collider);
-                        collider.enabled = false;
+                        BodyMeleeController bodyMeleeController;
+                        map.TryGetValue(colliderName, out bodyMeleeController);
+                        bodyMeleeController.SetAttacking(false);
                     }
-                    */
                     return false;
                 }
                 else
