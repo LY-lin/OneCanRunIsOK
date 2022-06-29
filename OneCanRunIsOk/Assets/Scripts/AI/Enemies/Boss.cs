@@ -298,8 +298,14 @@ namespace OneCanRun.AI.Enemies
             animator.SetBool(Animation, flag);
         }
 
+        public void SetAnimationTrigger(string Animation)
+        {
+            animator.SetTrigger(Animation);
+        }
+
         public bool TryPlayAnimation(string Animation, float duration, bool flag)
         {
+            animator.SetBool("Sleep", false);
             if (flag)
             {
                 return lastPlayTime + duration > Time.time;
