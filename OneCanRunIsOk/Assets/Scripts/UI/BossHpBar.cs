@@ -69,7 +69,7 @@ namespace OneCanRun.UI
         // Update is called once per frame
         void Update()
         {
-            if(boss &&! boss.GetCG())
+            if(boss &&boss.GetAwake())
             {
                 if (boss_health.CurrentHealth > 0)
                 {

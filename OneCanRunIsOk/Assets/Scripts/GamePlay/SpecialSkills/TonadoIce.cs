@@ -78,7 +78,7 @@ namespace OneCanRun.GamePlay
             if (finalDamage < 0f)
                 finalDamage = 0f;
 
-            //ÏÂÈ¡Õû
+            //ä¸‹å–æ•´
             finalDamage = Mathf.Floor(finalDamage);
 
             //GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");

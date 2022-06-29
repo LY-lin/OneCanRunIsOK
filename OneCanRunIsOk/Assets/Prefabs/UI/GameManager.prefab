@@ -404,7 +404,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TitleTextContent: {fileID: 0}
   DescriptionTextContent: {fileID: 0}
-  CounterTextContent: {fileID: 0}
   CanvasGroup: {fileID: 0}
   CompletionDelay: 0
   FadeInDuration: 0.5
