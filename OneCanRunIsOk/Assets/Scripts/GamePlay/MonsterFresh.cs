@@ -120,7 +120,7 @@ namespace OneCanRun.GamePlay
                 for(int i = 0;i < current.number; i++){
                    GameObject gameObject = monsterPoolManager.getObject(current.typeID, new Vector3(current.position_x, current.position_y, current.position_z));
                     if (gameObject){
-                        gameObject.GetComponent<Game.Actor>().setLevel((uint)current.level);
+                        gameObject.GetComponent<Game.Actor>().setLevel((uint)(counter + 1));
                         gameObject.SetActive(true);
                     }
                 }
@@ -130,23 +130,5 @@ namespace OneCanRun.GamePlay
 
         }
 
-
-        //duplicate
-        void refreshAllFreeMonster(){
-            while (monsterPoolManager.activeNumber < monsterPoolManager.getCacheSize()){
-                //monsterPoolManager.getObject(new Vector3(64, 5, 60));
-                //GameObject temp = monsterPoolManager.getObject(new Vector3(42, 0.7f, 22));
-                
-            }
-
-        }
-
-        //duplicate
-        void refreshOneWave(){
-            for(int i = 0;i < waveNumber; i++){
-                //GameObject temp = monsterPoolManager.getObject(new Vector3(42, 0.7f, 22));
-            }
-
-        }
     }
 }
