@@ -261,7 +261,7 @@ namespace OneCanRun.AI.Enemies
         {
             NavMeshAgent.enabled = false;
             Vector3 direction = (destination - transform.position).normalized;
-            Vector3 fly = direction * 20f;
+            Vector3 fly = direction * 40f;
             OrientTowards(destination);
             characterController.Move(fly * Time.deltaTime);
         }
