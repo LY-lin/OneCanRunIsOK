@@ -79,7 +79,7 @@ MonoBehaviour:
   DetectionRange: 200
   AttackRange: 80
   KnownTargetTimeout: 12
-  DetectionAngle: 120
+  DetectionAngle: 180
 --- !u!1 &3920919025842050244
 GameObject:
   m_ObjectHideFlags: 0

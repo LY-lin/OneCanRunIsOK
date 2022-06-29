@@ -135,7 +135,7 @@ namespace OneCanRun.UI{
 
         // just fill the following 3 function if the camp changes
         private void useAzeymaCampInfo(){
-            config.setBaseAttribute(5, 7, 2, 6);
+            config.setBaseAttribute(5, 7, 2, 8);
             weaponDescription.text = "A staff carved out of rotten wood.";
             weaponName.text = "Stuffy Wand";
             //weaponImage.sprite = gameObject.GetComponentInChildren<WeaponController>().WeaponImg;
@@ -167,7 +167,7 @@ namespace OneCanRun.UI{
             FImage.sprite = Resources.Load<Sprite>("Skills/Buff");
             FName.text = "Holy Help";
             FDescription.text = "Pray for strength and healing";
-            config.setBaseAttribute(1, 10, 5, 8);
+            config.setBaseAttribute(1, 10, 5, 10);
         }
 
         private void useByregotCampInfo(){
@@ -183,7 +183,7 @@ namespace OneCanRun.UI{
             FImage.sprite = Resources.Load<Sprite>("Skills/Drone");
             FName.text = "CallDrone";
             FDescription.text = "Call a drone to fight together";
-            config.setBaseAttribute(2, 6, 2, 6);
+            config.setBaseAttribute(2, 6, 2, 8);
         }
 
 
