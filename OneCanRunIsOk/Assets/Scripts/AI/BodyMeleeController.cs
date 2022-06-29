@@ -91,6 +91,11 @@ namespace OneCanRun.AI
 
         void OnTriggerEnter(Collider col)
         {
+            if (!Attacking)
+            {
+                return;
+            }
+
             Actor target = col.gameObject.GetComponent<Actor>();
             if (target)
             {

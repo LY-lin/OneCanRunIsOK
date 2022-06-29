@@ -130,6 +130,8 @@ namespace OneCanRun.AI.Enemies
             }
 
             lastAttackTime = Time.time;
+
+            animator.SetBool("Sleep", true);
         }
 
         // Update is called once per frame
