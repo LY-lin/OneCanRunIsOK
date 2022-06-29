@@ -96,11 +96,12 @@ namespace OneCanRun.AI.Enemies
                     else
                     {
                         controller.SetNavDestination(transform.position);
-                        controller.OrientTowards(controller.KnownDetectedTarget.transform.position);
+                        if(controller.KnownDetectedTarget)
+                            controller.OrientTowards(controller.KnownDetectedTarget.transform.position);
                     }
                     break;
                 case AIState.Follow:
-                    if (controller.attackController.TryFinishAttack())
+                    if (controller.attackController.TryFinishAttack() && controller.KnownDetectedTarget)
                     {
                         controller.SetNavDestination(controller.KnownDetectedTarget.transform.position);
                         controller.OrientTowards(controller.KnownDetectedTarget.transform.position);
@@ -112,7 +113,7 @@ namespace OneCanRun.AI.Enemies
                     }
                     break;
                 case AIState.Attack:
-                    if (Vector3.Distance(controller.KnownDetectedTarget.transform.position,
+                    if (controller.KnownDetectedTarget && Vector3.Distance(controller.KnownDetectedTarget.transform.position,
                             controller.DetectionModule.DetectionSourcePoint.position)
                         >= (AttackStopDistanceRatio * controller.DetectionModule.AttackRange) && controller.attackController.TryFinishAttack())
                     {

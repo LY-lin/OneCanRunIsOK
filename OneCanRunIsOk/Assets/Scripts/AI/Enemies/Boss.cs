@@ -58,7 +58,7 @@ namespace OneCanRun.AI.Enemies
         SpitFlame spitFlame;
 
         int pathDestinationNodeIndex;
-        float lastHitTime = Mathf.Infinity;
+        int hitNumber = 3;
         float lastAttackTime = Mathf.Infinity;
         float lastPlayTime = Mathf.Infinity;
         float Duration = 2.5f;
@@ -66,6 +66,7 @@ namespace OneCanRun.AI.Enemies
         bool Awake = false;
         bool Attacking = false;
         Dictionary<string, BodyMeleeController> map;
+        Collider HitBox;
 
         BossAwake trap;
 
@@ -111,12 +112,14 @@ namespace OneCanRun.AI.Enemies
 
             map = new Dictionary<string, BodyMeleeController>();
 
-            /*
-            foreach(Collider collider in colliders)
+            foreach(Collider c in colliders)
             {
-                map.Add(collider.gameObject.name, collider);
+                if ( c.gameObject.name == "HitBox")
+                {
+                    HitBox = c;
+                    HitBox.enabled = false;
+                }
             }
-            */
 
             foreach(BodyMeleeController bodyMeleeController in bodyMeleeControllers)
             {
@@ -167,6 +170,7 @@ namespace OneCanRun.AI.Enemies
         public void SetCG(bool cg)
         {
             characterController.detectCollisions = !cg;
+            HitBox.enabled = !cg;
             CG = cg;
         }
 
@@ -334,7 +338,7 @@ namespace OneCanRun.AI.Enemies
 
         public bool TryAttack(string Attack, float duration, string colliderName)
         {
-            if (Vector3.Distance(detectionModule.KnownDetectedTarget.transform.position,
+            if (detectionModule.KnownDetectedTarget && Vector3.Distance(detectionModule.KnownDetectedTarget.transform.position,
                 detectionModule.DetectionSourcePoint.position) > detectionModule.AttackRange)
             {
                 return false;
@@ -344,14 +348,12 @@ namespace OneCanRun.AI.Enemies
                 if (Attacking)
                 {
                     Attacking = false;
-                    /*
                     if (colliderName.Length != 0)
                     {
-                        Collider collider;
-                        map.TryGetValue(colliderName, out collider);
-                        collider.enabled = false;
+                        BodyMeleeController bodyMeleeController;
+                        map.TryGetValue(colliderName, out bodyMeleeController);
+                        bodyMeleeController.SetAttacking(false);
                     }
-                    */
                     return false;
                 }
                 else
@@ -376,9 +378,9 @@ namespace OneCanRun.AI.Enemies
 
         void OnDamaged(float damage, GameObject damageSource)
         {
-            if (lastHitTime == Mathf.Infinity || lastHitTime + Duration < Time.time)
+            if (hitNumber > 0 && Mathf.FloorToInt((health.CurrentHealth * 4) / health.MaxHealth) == hitNumber)
             {
-                lastHitTime = Time.time;
+                hitNumber--;
                 animator.SetTrigger("isHit");
             }
             // test if the damage source is the player

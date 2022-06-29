@@ -12,6 +12,8 @@ namespace OneCanRun.AI
         private affiliationType attackerType;
         private float Damage;
 
+        private bool Attacking = false;
+
         private Dictionary<GameObject, int> dic = new Dictionary<GameObject, int>();
 
         DisplaceActionsManager displaceActionsManager;
@@ -29,14 +31,29 @@ namespace OneCanRun.AI
             this.attackerType = actor.Affiliation;
         }
 
+        public bool GetAttacking()
+        {
+            return Attacking;
+        }
+
+        public void SetAttacking(bool attacking)
+        {
+            Attacking = attacking;
+        }
+
         public void preOneAttack()
         {
             dic.Clear();
+            SetAttacking(true);
         }
 
         void OnCollisionEnter(Collision col)
         {
-            
+            if (!Attacking)
+            {
+                return;
+            }
+
             if (col.gameObject.layer == LayerMask.NameToLayer("physical dectect nut not collision"))
             {
                 return;
@@ -60,15 +77,14 @@ namespace OneCanRun.AI
                 float finalDamage = this.Damage - colliderProperty.getPhysicalDefence() - colliderProperty.getMagicDefence();
                 if (finalDamage < 0f)
                     finalDamage = 0f;
-                Debug.Log("Enemy Atttack!");
-                Debug.Log(finalDamage);
+                Debug.Log("Enemy Atttack!  finalDamage:" + finalDamage);
 
                 Vector3 direction = new Vector3(1, 1, 1);
                 Vector3 displaceDestination = (direction).normalized * 5f + actor.gameObject.transform.position;
                 DisplaceAction da = new DisplaceAction(actor.gameObject, displaceDestination, Time.time, 1f, 5f);
                 displaceActionsManager.addAction(da);
 
-                damageable.InflictDamage(finalDamage, false, Owner);
+                damageable.InflictDamage(finalDamage, false, Owner,col.gameObject);
             }
 
         }
@@ -94,7 +110,7 @@ namespace OneCanRun.AI
                 if (finalDamage < 0f)
                     finalDamage = 0f;
                 Debug.Log("Enemy Atttack!");
-                damageable.InflictDamage(finalDamage, false, Owner);
+                damageable.InflictDamage(finalDamage, false, Owner,col.gameObject);
             }
         }
     }
