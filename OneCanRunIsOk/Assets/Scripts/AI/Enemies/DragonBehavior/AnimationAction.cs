@@ -39,7 +39,11 @@ namespace OneCanRun.AI.Enemies
             else
             {
                 boss.SetAnimationBool(animation, false);
-                boss.SetCG(!endCG);
+                if (endCG)
+                {
+                    boss.SetCG(false);
+                    boss.SetAwake(true);
+                }
                 return Status.Success;
             }
         }

@@ -1,9 +1,10 @@
-using System.Collections;
+using UnityEngine.Events;
 using System.Collections.Generic;
 using UnityEngine;
 using OneCanRun.Game;
 using UnityEngine.AI;
 using OneCanRun.Game.Share;
+using OneCanRun.GamePlay;
 
 namespace OneCanRun.AI.Enemies
 {
@@ -22,6 +23,8 @@ namespace OneCanRun.AI.Enemies
         [Tooltip("Fraction of the enemy's attack range at which it will stop moving towards target while attacking")]
         [Range(0f, 1f)]
         public float AttackStopDistanceRatio = 0.5f;
+
+        
 
         public enum AIState
         {
@@ -59,9 +62,12 @@ namespace OneCanRun.AI.Enemies
         float lastAttackTime = Mathf.Infinity;
         float lastPlayTime = Mathf.Infinity;
         float Duration = 2.5f;
-        bool CG = true;
+        bool CG = false;
+        bool Awake = false;
         bool Attacking = false;
         Dictionary<string, BodyMeleeController> map;
+
+        BossAwake trap;
 
         // Start is called before the first frame update
         void Start()
@@ -82,6 +88,8 @@ namespace OneCanRun.AI.Enemies
             characterController = GetComponent<CharacterController>();
             DebugUtility.HandleErrorIfNullGetComponent<CharacterController, Boss>(characterController, this, gameObject);
 
+            trap = GameObject.Find("ChestForBossAwake").GetComponent<BossAwake>();
+            trap.bossAwake += BossAwake;
             // enemyAttackController = GetComponent<EnemyAttackController>();
             // DebugUtility.HandleErrorIfNullGetComponent<EnemyAttackController, Boss>(enemyAttackController, this, gameObject);
 
@@ -123,7 +131,8 @@ namespace OneCanRun.AI.Enemies
         // Update is called once per frame
         void Update()
         {
-            detectionModule.HandleDetection(actor, colliders);
+            if (Awake)
+                detectionModule.HandleDetection(actor, colliders);
         }
 
         void OnLostTarget()
@@ -144,10 +153,26 @@ namespace OneCanRun.AI.Enemies
             return CG;
         }
 
+        public bool GetAwake()
+        {
+            return Awake;
+        }
+
+        private void BossAwake()
+        {
+            Debug.Log("boss awake");
+            SetCG(true);
+        }
+
         public void SetCG(bool cg)
         {
             characterController.detectCollisions = !cg;
             CG = cg;
+        }
+
+        public void SetAwake(bool awake)
+        {
+            Awake = awake;
         }
 
         // 处理视角，追踪玩家
@@ -376,6 +401,8 @@ namespace OneCanRun.AI.Enemies
             {
                 collider.enabled = false;
             }
+
+            //BossDie?.Invoke();
         }
 
         public void EnterDeathQueue()
