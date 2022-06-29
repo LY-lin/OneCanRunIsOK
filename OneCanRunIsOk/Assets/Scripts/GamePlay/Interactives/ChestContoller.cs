@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
 
 namespace OneCanRun.GamePlay
@@ -8,6 +7,7 @@ namespace OneCanRun.GamePlay
     {
         Interactive m_Interactive;
         //Dropable dropable;
+        public UnityAction ChestOpen;
 
         // Start is called before the first frame update
         void Start()
@@ -21,6 +21,7 @@ namespace OneCanRun.GamePlay
         void beOpened()
         {
             GetComponent<Animator>().SetTrigger("Open");
+            ChestOpen?.Invoke();
             //dropable.drop();
         }
     }
