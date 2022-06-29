@@ -48,6 +48,9 @@ namespace OneCanRun.Game.Share
         private bool isLasering=false;
         //private Vector3 hitPoint;
 
+        public AudioSource audioSource;
+        public AudioClip LaserSfx;
+
         void Start()
         {
             //Get LineRender and ParticleSystem components from current prefab;  
@@ -58,6 +61,12 @@ namespace OneCanRun.Game.Share
             //Save [1] and [3] textures speed
             //{ DISABLED AFTER UPDATE}
             //LaserSpeed = LaserStartSpeed;
+
+            audioSource = GetComponent<AudioSource>();
+            DebugUtility.HandleErrorIfNullGetComponent<AudioSource, LaserController>(audioSource,
+                this, gameObject);
+
+            audioSource.PlayOneShot(LaserSfx);
         }
 
         void Update()
