@@ -884,6 +884,7 @@ MonoBehaviour:
   buffManager: {fileID: 2966504389081029322}
   campType: 0
   isPlayer: 0
+  enemyNanme: ChestMonster
 --- !u!195 &2966504389081029326
 NavMeshAgent:
   m_ObjectHideFlags: 0

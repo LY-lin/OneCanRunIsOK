@@ -479,6 +479,7 @@ MonoBehaviour:
   buffManager: {fileID: 4256155222580521297}
   campType: 0
   isPlayer: 0
+  enemyNanme: Slime
 --- !u!195 &4256155222580521309
 NavMeshAgent:
   m_ObjectHideFlags: 0
