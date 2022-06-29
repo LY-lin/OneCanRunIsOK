@@ -11,17 +11,17 @@ public class ObjectiveToast : MonoBehaviour
     [Tooltip("Text content that will display the description")]
     public TMPro.TextMeshProUGUI DescriptionTextContent;
 
-    [Tooltip("Text content that will display the counter")]
-    public TMPro.TextMeshProUGUI CounterTextContent;
+    //[Tooltip("Text content that will display the counter")]
+    //public TMPro.TextMeshProUGUI CounterTextContent;
 
-    [Tooltip("Rect that will display the description")]
-    public RectTransform SubTitleRect;
+    //[Tooltip("Rect that will display the description")]
+    //public RectTransform SubTitleRect;
 
     [Tooltip("Canvas used to fade in and out the content")]
     public CanvasGroup CanvasGroup;
 
-    [Tooltip("Layout group containing the objective")]
-    public HorizontalOrVerticalLayoutGroup LayoutGroup;
+ //   [Tooltip("Layout group containing the objective")]
+//    public HorizontalOrVerticalLayoutGroup LayoutGroup;
 
     [Header("Transitions")]
     [Tooltip("Delay before moving complete")]
@@ -65,7 +65,7 @@ public class ObjectiveToast : MonoBehaviour
 
         TitleTextContent.text = titleText;
         DescriptionTextContent.text = descText;
-        CounterTextContent.text = counterText;
+        //CounterTextContent.text = counterText;
 
         if (GetComponent<RectTransform>())
         {
@@ -96,7 +96,7 @@ public class ObjectiveToast : MonoBehaviour
     {
         float timeSinceFadeStarted = Time.time - m_StartFadeTime;
 
-        SubTitleRect.gameObject.SetActive(!string.IsNullOrEmpty(DescriptionTextContent.text));
+        //  SubTitleRect.gameObject.SetActive(!string.IsNullOrEmpty(DescriptionTextContent.text));
 
         if (m_IsFadingIn && !m_IsFadingOut)
         {
@@ -121,7 +121,7 @@ public class ObjectiveToast : MonoBehaviour
             // move in
             if (timeSinceFadeStarted < MoveInDuration)
             {
-                LayoutGroup.padding.left = (int)MoveInCurve.Evaluate(timeSinceFadeStarted / MoveInDuration);
+                //LayoutGroup.padding.left = (int)MoveInCurve.Evaluate(timeSinceFadeStarted / MoveInDuration);
 
                 if (GetComponent<RectTransform>())
                 {
@@ -131,7 +131,7 @@ public class ObjectiveToast : MonoBehaviour
             else
             {
                 // making sure the position is exact
-                LayoutGroup.padding.left = 0;
+                //LayoutGroup.padding.left = 0;
 
                 if (GetComponent<RectTransform>())
                 {
@@ -166,7 +166,7 @@ public class ObjectiveToast : MonoBehaviour
             // move out
             if (timeSinceFadeStarted < MoveOutDuration)
             {
-                LayoutGroup.padding.left = (int)MoveOutCurve.Evaluate(timeSinceFadeStarted / MoveOutDuration);
+                //LayoutGroup.padding.left = (int)MoveOutCurve.Evaluate(timeSinceFadeStarted / MoveOutDuration);
 
                 if (GetComponent<RectTransform>())
                 {
