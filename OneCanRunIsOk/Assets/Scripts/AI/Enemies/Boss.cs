@@ -63,6 +63,7 @@ namespace OneCanRun.AI.Enemies
         float lastPlayTime = Mathf.Infinity;
         float Duration = 2.5f;
         bool CG = false;
+
         bool Awake = false;
         bool Attacking = false;
         Dictionary<string, BodyMeleeController> map;
@@ -166,7 +167,9 @@ namespace OneCanRun.AI.Enemies
         private void BossAwake()
         {
             Debug.Log("boss awake");
+
             SetCG(true);
+            
         }
 
         public void SetCG(bool cg)
