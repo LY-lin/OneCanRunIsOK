@@ -63,6 +63,8 @@
     <Compile Include="Assets\Scripts\GamePlay\Pickups\HealthPickup.cs" />
     <Compile Include="Assets\Scripts\GamePlay\CollisionBuffGiver.cs" />
     <Compile Include="Assets\Scripts\GamePlay\SkillBuffGiver.cs" />
+    <Compile Include="Assets\Scripts\GamePlay\BossAwake.cs" />
+    <Compile Include="Assets\Scripts\GamePlay\Objectives\ObjectiveKillBoss.cs" />
     <Compile Include="Assets\Scripts\GamePlay\PlayerInputHandler.cs" />
     <Compile Include="Assets\Scripts\GamePlay\Dropable.cs" />
     <Compile Include="Assets\Scripts\GamePlay\SpecialSkills\FireRain.cs" />
