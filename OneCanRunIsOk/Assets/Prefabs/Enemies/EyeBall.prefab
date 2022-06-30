@@ -1946,6 +1946,7 @@ MonoBehaviour:
   buffManager: {fileID: 8429299602487222399}
   campType: 0
   isPlayer: 0
+  enemyName: .EyeBall
 --- !u!195 &8429299602487222395
 NavMeshAgent:
   m_ObjectHideFlags: 0

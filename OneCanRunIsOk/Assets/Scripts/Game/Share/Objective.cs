@@ -25,6 +25,7 @@ namespace OneCanRun.Game.Share
 
         protected virtual void Start()
         {
+            Debug.Log(OnObjectiveCreated);
             OnObjectiveCreated?.Invoke(this);
 
             DisplayMessageEvent displayMessage = Events.DisplayMessageEvent;

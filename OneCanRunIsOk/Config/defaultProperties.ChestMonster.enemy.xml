@@ -1,0 +1,11 @@
+<PropertyConfig>
+  <EXP exp="">0</EXP>
+  <MAXHEALTH maxHealth="">200</MAXHEALTH>
+  <HEALRATE healRate="">1</HEALRATE>
+  <PHYSICALATTACK physicalAttack="">40</PHYSICALATTACK>
+  <MAGICATTACK magicAttack="">0</MAGICATTACK>
+  <PHYSICALDEFENCE physicalDefence="">10</PHYSICALDEFENCE>
+  <MAGICDEFENCE magicDefence="">5</MAGICDEFENCE>
+  <MAXSPEED maxSpeed="">4</MAXSPEED>
+  <MAXJUMP maxJump="">5</MAXJUMP>
+</PropertyConfig>

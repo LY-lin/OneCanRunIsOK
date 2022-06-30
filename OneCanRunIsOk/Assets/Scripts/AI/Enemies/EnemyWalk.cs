@@ -69,7 +69,7 @@ namespace OneCanRun.AI.Enemies
                         state = AIState.Attack;
                         controller.SetNavDestination(transform.position);
                         int a = Random.Range(1, 100);
-                        if (a < 20)
+                        if (a < 35)
                             audioSource.PlayOneShot(moveClip);
                     }
                     break;
@@ -136,6 +136,7 @@ namespace OneCanRun.AI.Enemies
             if (state == AIState.Patrol)
             {
                 state = AIState.Follow;
+                audioSource.PlayOneShot(moveClip);
             }
         }
 

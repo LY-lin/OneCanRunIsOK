@@ -1,6 +1,7 @@
 using UnityEngine;
 using OneCanRun.Game.Share;
 using OneCanRun;
+using UnityEditor;
 
 namespace OneCanRun.GamePlay
 {
@@ -13,6 +14,7 @@ namespace OneCanRun.GamePlay
             base.Start();
             trap=GetComponent<BossAwake>();
             trap.bossAwake += BossAwake;
+            Debug.Log(this.gameObject);
         }
 
         void BossAwake()

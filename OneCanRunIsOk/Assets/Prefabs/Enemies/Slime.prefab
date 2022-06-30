@@ -108,8 +108,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1129649, y: 1.1186247, z: 1}
-  m_Center: {x: -0.4435176, y: 0.13601339, z: 0}
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
+  m_Center: {x: -0.5175384, y: 0.049049437, z: 0.005056381}
 --- !u!1 &885586711317105753
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,6 +479,7 @@ MonoBehaviour:
   buffManager: {fileID: 4256155222580521297}
   campType: 0
   isPlayer: 0
+  enemyName: .Slime
 --- !u!195 &4256155222580521309
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -665,7 +666,7 @@ AudioSource:
   m_GameObject: {fileID: 4256155222580521301}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8887467852957245608, guid: 1d9998ab1cd80c947b8d20f0107159c3, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.4
