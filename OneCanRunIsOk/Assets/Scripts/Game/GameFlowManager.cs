@@ -89,7 +89,7 @@ namespace OneCanRun.Game
             // Remember that we need to load the appropriate end scene after a delay
             GameIsEnding = true;
             Debug.Log("YOU Win");
-            EndGameFadeCanvasGroup.gameObject.SetActive(true);
+            //EndGameFadeCanvasGroup.gameObject.SetActive(true);
             if (win)
             {
                 //m_SceneToLoad = WinSceneName;

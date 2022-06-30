@@ -55,7 +55,7 @@ MonoBehaviour:
   ImpactVfx: {fileID: 0}
   name: Heal
   description: Healing
-  buffImg: {fileID: 0}
+  buffImg: {fileID: 21300000, guid: 8332678153b36824f8f5264acd37325d, type: 3}
   buffID: 11
   hasExistTime: 0
   ExistTime: 0

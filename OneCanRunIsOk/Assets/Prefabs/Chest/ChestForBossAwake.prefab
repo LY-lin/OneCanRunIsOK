@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7813633395758278837}
   - component: {fileID: 635926237727088625}
   - component: {fileID: 6682286754486196268}
+  - component: {fileID: 5719109824095450638}
   m_Layer: 0
   m_Name: ChestForBossAwake
   m_TagString: Untagged
@@ -168,6 +169,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DropList: {fileID: 4278575754204634294, guid: 1f6df1019f86a3c47b851e69a32ac7eb, type: 3}
+--- !u!114 &5719109824095450638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234810537949838666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65da821bee879d74b86d450f903424a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PortalVFX: {fileID: 1840157041260602, guid: 17d36ed57951c824fa6d4f4a785e96ce, type: 3}
 --- !u!1 &1134943117355519077
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +393,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7259480441841103655}
   m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.3653768, y: 0.927, z: 0.23109436}
+  m_LocalPosition: {x: -0.456, y: 0.927, z: 1.497}
   m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 0.6666667}
   m_ConstrainProportionsScale: 0
   m_Children: []

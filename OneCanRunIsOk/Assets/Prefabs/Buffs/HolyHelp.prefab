@@ -55,7 +55,7 @@ MonoBehaviour:
   ImpactVfx: {fileID: 0}
   name: Holy Help
   description: Strengthening in all directions
-  buffImg: {fileID: 0}
+  buffImg: {fileID: 21300000, guid: abb1e2a3a1dce31419f613a40c89bebb, type: 3}
   buffID: 12
   hasExistTime: 1
   ExistTime: 10
