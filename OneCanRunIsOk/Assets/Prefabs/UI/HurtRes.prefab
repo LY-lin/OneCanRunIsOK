@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HurtRes: {fileID: 159643169517869054}
-  lifeTime: 5
+  lifeTime: 7
 --- !u!1 &6480442690152501989
 GameObject:
   m_ObjectHideFlags: 0
