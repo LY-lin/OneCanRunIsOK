@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using OneCanRun.GamePlay;
 using UnityEngine;
 
 namespace OneCanRun.UI
@@ -9,14 +10,13 @@ namespace OneCanRun.UI
         [Tooltip("Canvas Group for all Hud UI")]
         public CanvasGroup Hud;
 
-        //CgManager cgManager;
-        // Start is called before the first frame update
+        CgManager cgManager;
         void Start()
         {
-            /* cgManage = FindObjectOfType<CgManager>();
+             cgManager = FindObjectOfType<CgManager>();
                 cgManager.showAction +=open;
                 cgManager.closeAction +=close;
-            */
+            
         }
 
         // Update is called once per frame

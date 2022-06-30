@@ -27,7 +27,7 @@ namespace OneCanRun.GamePlay
         {
             GetComponent<Animator>().SetTrigger("Open");
             ChestOpen?.Invoke();
-            cgManager.PlayDragonCG();
+            cgManager.PlayCG();
             //dropable.drop();
         }
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using OneCanRun.Game;
+using UnityEngine.Events;
 
 namespace OneCanRun.GamePlay
 {
@@ -48,6 +49,8 @@ namespace OneCanRun.GamePlay
         private GameObject tpBeginInstance;
         private GameObject tpEndInstance;
 
+        public UnityAction showAction;
+        public UnityAction closeAction;
         // Start is called before the first frame update
         void Start()
         {
@@ -140,19 +143,21 @@ namespace OneCanRun.GamePlay
             playCamera_audioListener.enabled = true;
         }
 
-        public void PlayDragonCG()
+        public void PlayCG()
         {
             playerInputHandler.lockInput = true;
             playingTime = Time.time;
             isPlaying = true;
             isDragonCg = true;
             ChangeToCgCamera();
+            closeAction?.Invoke();
         }
 
         void StopCG()
         {
             playerInputHandler.lockInput = false;
             isPlaying = false;
+            showAction?.Invoke();
         }
 
         void OrientTowards(Vector3 lookPosition)

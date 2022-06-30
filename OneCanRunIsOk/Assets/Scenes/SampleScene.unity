@@ -3391,11 +3391,12 @@ MonoBehaviour:
   TP_Vfx: {fileID: 1586826114847994, guid: 2c9f79d9d25f33d4d87abefadfa7af94, type: 3}
   dragonCgDuration: 15
   dragonCgRotationTime: 8
-  firstPersonCgDuration: 10
-  firstPersonCgDisplaceTime: 5
+  firstPersonCgDuration: 5
+  firstPersonCgDisplaceTime: 2.5
+  firstPersonCgRotationTime: 1
   cameraRotateSpeed: 1
   orientationSpeed: 5
-  displacementSpeed: 1
+  displacementSpeed: 2
   VfxExistingTime: 5
 --- !u!1 &1677773532
 GameObject:
@@ -4106,6 +4107,65 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &1887755389
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4274491274459358176, guid: 6796bd888710a29479687d30630648af, type: 3}
+      propertyPath: m_Name
+      value: path1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667939071958205319, guid: 6796bd888710a29479687d30630648af, type: 3}
+      propertyPath: m_RootOrder
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667939071958205319, guid: 6796bd888710a29479687d30630648af, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 100.69642
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667939071958205319, guid: 6796bd888710a29479687d30630648af, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667939071958205319, guid: 6796bd888710a29479687d30630648af, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 78.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667939071958205319, guid: 6796bd888710a29479687d30630648af, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667939071958205319, guid: 6796bd888710a29479687d30630648af, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667939071958205319, guid: 6796bd888710a29479687d30630648af, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667939071958205319, guid: 6796bd888710a29479687d30630648af, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667939071958205319, guid: 6796bd888710a29479687d30630648af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667939071958205319, guid: 6796bd888710a29479687d30630648af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667939071958205319, guid: 6796bd888710a29479687d30630648af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6796bd888710a29479687d30630648af, type: 3}
 --- !u!4 &1935376950 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 157643376636279086, guid: 8e8d31f895da67643a9b7c30e329b2b4, type: 3}
@@ -4889,6 +4949,7 @@ MonoBehaviour:
   TriggerAxisThreshold: 0.4
   InvertYAxis: 0
   InvertXAxis: 0
+  lockInput: 0
 --- !u!143 &2136025604
 CharacterController:
   m_ObjectHideFlags: 0
@@ -5063,7 +5124,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 162458478070658083, guid: f07e3fb4ec20def4aba468a2c2536a1f, type: 3}
       propertyPath: m_RootOrder
-      value: 24
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 162458478070658083, guid: f07e3fb4ec20def4aba468a2c2536a1f, type: 3}
       propertyPath: m_LocalPosition.x
