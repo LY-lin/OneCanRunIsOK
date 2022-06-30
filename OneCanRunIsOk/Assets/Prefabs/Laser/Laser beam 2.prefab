@@ -9894,7 +9894,7 @@ MonoBehaviour:
   NoiseTextureLength: 1
   LaserSocket: {fileID: 0}
   damageType: 1
-  damage: 20
+  damage: 100
   deltaCount: 25
   Owner: {fileID: 0}
   PlayerSocket: {fileID: 0}
@@ -9914,7 +9914,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
