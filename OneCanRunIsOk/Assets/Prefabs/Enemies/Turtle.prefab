@@ -674,7 +674,7 @@ MonoBehaviour:
   buffManager: {fileID: 2333055648381596546}
   campType: 0
   isPlayer: 0
-  enemyNanme: Turtle
+  enemyName: .Turtle
 --- !u!195 &2333055648381596558
 NavMeshAgent:
   m_ObjectHideFlags: 0
