@@ -31,6 +31,8 @@ namespace OneCanRun.GamePlay
         PlayerCharacterController m_PlayerCharacterController;
         bool m_FireInputWasHeld;
 
+        public bool lockInput=false;
+
         void Start()
         {
             m_PlayerCharacterController = GetComponent<PlayerCharacterController>();
@@ -54,6 +56,10 @@ namespace OneCanRun.GamePlay
         public bool CanProcessInput()
         {
             //return Cursor.lockState == CursorLockMode.Locked && !m_GameFlowManager.GameIsEnding;
+            if (lockInput)
+            {
+                return false;
+            }
             return Cursor.lockState == CursorLockMode.Locked;
         }
 
