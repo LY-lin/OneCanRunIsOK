@@ -24,7 +24,8 @@ namespace OneCanRun.AI.Enemies
         [Range(0f, 1f)]
         public float AttackStopDistanceRatio = 0.5f;
 
-        
+        public AudioClip ScreamLong;
+        public AudioClip ScreamShort;
 
         public enum AIState
         {
@@ -56,6 +57,7 @@ namespace OneCanRun.AI.Enemies
         Animator animator;
         CharacterController characterController;
         SpitFlame spitFlame;
+        AudioSource audioSource;
 
         int pathDestinationNodeIndex;
         int hitNumber = 3;
@@ -110,6 +112,9 @@ namespace OneCanRun.AI.Enemies
 
             spitFlame = GetComponent<SpitFlame>();
             DebugUtility.HandleErrorIfNullGetComponent<SpitFlame, Boss>(spitFlame, this, gameObject);
+
+            audioSource = GetComponent<AudioSource>();
+            DebugUtility.HandleErrorIfNullGetComponent<AudioSource, Boss>(audioSource, this, gameObject);
 
             map = new Dictionary<string, BodyMeleeController>();
 
@@ -315,6 +320,10 @@ namespace OneCanRun.AI.Enemies
             }
             else
             {
+                if (Animation == "TakeOff")
+                {
+                    audioSource.PlayOneShot(ScreamLong);
+                }
                 animator.SetBool(Animation, true);
                 lastPlayTime = Time.time;
                 return true;
@@ -389,9 +398,10 @@ namespace OneCanRun.AI.Enemies
 
         void OnDamaged(float damage, GameObject damageSource)
         {
-            if (hitNumber > 0 && Mathf.FloorToInt((health.CurrentHealth * 4) / health.MaxHealth) == hitNumber)
+            if (hitNumber > 0 && Mathf.CeilToInt((health.CurrentHealth * 4.0f) / health.MaxHealth) == hitNumber)
             {
                 hitNumber--;
+                audioSource.PlayOneShot(ScreamShort);
                 animator.SetTrigger("isHit");
             }
             // test if the damage source is the player
@@ -406,6 +416,7 @@ namespace OneCanRun.AI.Enemies
         {
             Debug.Log("Enemy Die");
 
+            audioSource.PlayOneShot(ScreamLong);
             animator.SetTrigger("isDie");
 
             NavMeshAgent.enabled = false;

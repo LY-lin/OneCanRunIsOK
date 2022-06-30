@@ -60,7 +60,6 @@ namespace OneCanRun.UI
         void Awake()
         {
             AmmoFillImage.fillAmount = 1;
-            //EventManager.AddListener<AmmoPickupEvent>(OnAmmoPickup);
         }
 
 
@@ -77,9 +76,10 @@ namespace OneCanRun.UI
                 BulletCounter.text = weapon.GetCarriedPhysicalBullets().ToString();
             }
 
+            if (!weapon.RemoteWeapons)
+                WeaponImage.color = Color.white;
             Reload.gameObject.SetActive(false);
             Reloading.gameObject.SetActive(false);
-            //Reloading.gameObject.SetActive(true);
             m_PlayerWeaponsManager = FindObjectOfType<PlayerWeaponsManager>();
             DebugUtility.HandleErrorIfNullFindObject<PlayerWeaponsManager, AmmoCounter>(m_PlayerWeaponsManager, this);
 
