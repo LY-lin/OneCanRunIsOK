@@ -40,9 +40,11 @@ namespace OneCanRun.UI
                 transform.localPosition = GetUIPosition(obj.transform.position);
                 Vector3 temp = HurtRes.transform.localScale * 10f;
                 //大小改变
-                float Base = (lifeTime-(Time.time-initTime)) / lifeTime;
+                //反比例函数（x+0.1)*(y-0.3) = 0.17, x是已过时间与存在时间比，y是比例系数
+                float Base =0.17f/((Time.time-initTime) / lifeTime + 0.1f)+0.3f;
+
                 Base = Base > 0.5f ? Base : 0.5f;
-                HurtRes.transform.localScale = Vector3.one * 2f *Base;
+                HurtRes.transform.localScale = Vector3.one *Base;
             }
             else
                 Destroy(this.gameObject);
@@ -56,9 +58,15 @@ namespace OneCanRun.UI
             HurtRes.gameObject.SetActive(true);
             Vector2 position = RectTransformUtility.WorldToScreenPoint(Camera.main, point);
             position = new Vector2(position.x - Screen.width / 2f, position.y - Screen.height / 2f);
-            //如果在radis大小的圆内，不会显示
-            if (Mathf.Sqrt(Vector2.SqrMagnitude(position)) < radis)
+            float forw = 0.1f;
+            if (Camera.main)
+                forw = Vector3.Dot(Camera.main.transform.forward, point - Camera.main.transform.position);
+            //如果目标在前方的radis大小的圆内，不会显示
+            if (Mathf.Sqrt(Vector2.SqrMagnitude(position)) < radis&& forw>0)
+            {
                 HurtRes.gameObject.SetActive(false);
+                
+            }
             else
                 HurtRes.gameObject.SetActive(true);
             position = position.normalized * radis;
