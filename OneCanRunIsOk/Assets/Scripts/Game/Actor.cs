@@ -189,7 +189,9 @@ namespace OneCanRun.Game
                     break;
                 case affiliationType.enemy:
                     fileName += enemyName+".enemy.xml";
-                    if(enemyXml == null ||){
+                    //string e = enemyXml.BaseURI.Substring();
+                    if(enemyXml == null|| !enemyXml.BaseURI.Contains(enemyName))
+                    {
                         enemyXml = new XmlDocument();
                         enemyXml.Load(configDirectory + fileName);
                     }
