@@ -16,6 +16,20 @@ namespace OneCanRun.Game.Share
         Laser,
     }
 
+    [System.Serializable]
+    public struct CrosshairData //准心的信息
+    {
+        [Tooltip("The image that will be used for this weapon's crosshair")]
+        public Sprite CrosshairSprite;
+
+
+
+        [Tooltip("The size of the crosshair image")]
+        public int CrosshairSize;
+
+        [Tooltip("The color of the crosshair image")]
+        public Color CrosshairColor;
+    }
 
     // [RequireComponent(typeof(AudioSource))]  //加入声源
     public class WeaponController : MonoBehaviour
@@ -41,10 +55,20 @@ namespace OneCanRun.Game.Share
         public string description;
 
 
+        [Tooltip("Default data for the crosshair")]
+        public CrosshairData CrosshairDataDefault;//默认的准心数据
+
+        /*
+        [Tooltip("Data for the crosshair when targeting an enemy")]
+        public CrosshairData CrosshairDataTargetInSight;//瞄准时的准信数据
+        */
+
         [Tooltip("The root object for the weapon, this is what will be deactivated when the weapon isn't active")]
         public GameObject WeaponRoot;   //武器使用的模型
 
         [Header("Melee Weapons' Internal Reference(Only active when RemoteWeapons is false)")]
+        //[Tooltip("Damagable Box")]
+        //public GameObject DamagableBox;
 
         [Tooltip("Delay between two attacks")]
         public float DelayBetweenAttacks;
@@ -53,7 +77,7 @@ namespace OneCanRun.Game.Share
         [Tooltip("damage")]
         public float damage;
 
-        
+        float OrginDamage;
 
         [Header("Remote Weapons' Internal References")]
         [Tooltip("Tip of the weapon, where the projectiles are shot")]
@@ -80,6 +104,12 @@ namespace OneCanRun.Game.Share
         [Range(0f, 2f)]
         public float RecoilForce = 1;//后坐力
 
+        /* [Tooltip("Ratio of the default FOV that this weapon applies while aiming")]
+         [Range(0f, 1f)]
+         public float AimZoomRatio = 1f; //瞄准时候的FOV比例
+         [Tooltip("Translation to apply to weapon arm when aiming with this weapon")]
+         public Vector3 AimOffset;*/
+        //当用这种武器瞄准时，平移过来适用于武器臂
 
         [Header("GunAmmo Parameters")]//枪支武器
         [Tooltip("Should the player manually reload")]//玩家手动装弹
@@ -88,13 +118,18 @@ namespace OneCanRun.Game.Share
         [Tooltip("Has physical clip on the weapon and ammo shells are ejected when firing")]
         public bool HasPhysicalBullets = false;//武器上有物理弹夹吗?发射时弹壳会弹出吗
 
-        
-        [Tooltip("the speed of shooting out")]
+        GameObject muzzleChargeInstance;
+
         public float speed = 100f;
 
         [Tooltip("Number of bullets in a clip")]
         public int ClipSize = 30;//单个弹匣的子弹数量
 
+        [Tooltip("Bullet Shell Casing")]
+        public GameObject ShellCasing;//枪管物件
+
+        [Tooltip("Weapon Ejection Port for physical ammo")]
+        public Transform EjectionPort;//武器弹射端口用于物理弹药
 
         [Tooltip("Force applied on the shell")]
         [Range(0.0f, 5.0f)] public float ShellCasingEjectionForce = 2.0f;
@@ -148,13 +183,24 @@ namespace OneCanRun.Game.Share
         [Tooltip("sound played when shooting")]
         public AudioClip ShootSfx;//射击时的音频片段
 
+        [Tooltip("Sound played when changing to this weapon")]
+        public AudioClip ChangeWeaponSfx;//充能武器时的音频片段
 
 
+        [Tooltip("Prefab of the charge flash")]
+        public GameObject MuzzleChargePrefab;//预制的枪口闪光，枪口的焰火
+
+        [Tooltip("Continuous Shooting Sound")]
+        public bool UseContinuousShootSound = false;//是否时许产生持续的音效
+
+        /*  //持续音频的设计
+        public AudioClip ContinuousShootStartSfx;
+        public AudioClip ContinuousShootLoopSfx;
+        public AudioClip ContinuousShootEndSfx;
+        AudioSource m_ContinuousShootAudioSource = null;*/
         bool m_WantsToShoot = false;
 
-        float OrginDamage;
 
-        GameObject muzzleChargeInstance;
         //射击时的Action
         public UnityAction OnShoot;
         public event Action OnShootProcessed;
@@ -165,6 +211,8 @@ namespace OneCanRun.Game.Share
         public float LastChargeTriggerTimestamp { get; private set; }   //上次触发充能的时间戳
         Vector3 m_LastMuzzlePosition;   //上次枪口的位置
 
+
+        public CachePool cachePool;
         public BulletPoolManager bulletPoolManager;
         // Update is called once per frame
 
@@ -207,9 +255,11 @@ namespace OneCanRun.Game.Share
             Owner = this.transform.gameObject;
             if (RemoteWeapons)
             {
-                if (ShootType!=WeaponShootType.Laser)
+                if (ShootType != WeaponShootType.Laser)
                 {
                     this.bulletPoolManager = new BulletPoolManager(this.bullet);
+                    //CacheItem cacheBullet = new CacheBullet(bullet);
+                    //this.cachePool = new CachePool(128, cacheBullet);
                 }
                 else
                 {
@@ -221,6 +271,7 @@ namespace OneCanRun.Game.Share
                 m_CurrentAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
                 MaxAmmo = HasPhysicalBullets ? ClipSize : MaxAmmo;
                 m_CarriedPhysicalBullets = Mathf.RoundToInt(m_CurrentAmmo);
+                //m_CarriedPhysicalBullets = HasPhysicalBullets ? ClipSize : 0;//?��????????????????????????0
                 m_LastMuzzlePosition = WeaponMuzzle.position;
 
 
@@ -233,14 +284,45 @@ namespace OneCanRun.Game.Share
             }
 
 
+            /*
+            if (UseContinuousShootSound)
+            {
+                m_ContinuousShootAudioSource = gameObject.AddComponent<AudioSource>();
+                m_ContinuousShootAudioSource.playOnAwake = false;
+                m_ContinuousShootAudioSource.clip = ContinuousShootLoopSfx;
+                m_ContinuousShootAudioSource.outputAudioMixerGroup =
+                    AudioUtility.GetAudioGroup(AudioUtility.AudioGroups.WeaponShoot);
+                m_ContinuousShootAudioSource.loop = true;
+            }*/
+
 
         }
         public void InitMelee()
         {
+            //DamagableBox.GetComponent<MeleeController>().Init(this);
+            //DamagableBox.gameObject.SetActive(false);
             GetComponent<MeleeController>().Init(this);
         }
+        //PickUp????????
+        //public void AddCarriablePhysicalBullets(int count) => m_CarriedPhysicalBullets = Mathf.Max(m_CarriedPhysicalBullets + count, MaxAmmo);
 
+        void ShootShell()//????????
+        {
+            /*
+            Rigidbody nextShell = m_PhysicalAmmoPool.Dequeue();
+            nextShell.transform.position = EjectionPort.transform.position;
+            nextShell.transform.rotation = EjectionPort.transform.rotation;
+            nextShell.gameObject.SetActive(true);
+            nextShell.transform.SetParent(null);
+            nextShell.collisionDetectionMode = CollisionDetectionMode.Continuous;
+            nextShell.AddForce(nextShell.transform.up * ShellCasingEjectionForce, ForceMode.Impulse);
+            m_PhysicalAmmoPool.Enqueue(nextShell);
+            */
 
+            //Bullet.trigger();
+        }
+
+        //void PlaySFX(AudioClip sfx) => AudioUtility.CreateSFX(sfx, transform.position, AudioUtility.AudioGroups.WeaponShoot, 0.0f);
 
 
         public void Reload()   //??????????
@@ -267,6 +349,7 @@ namespace OneCanRun.Game.Share
                 UpdateAmmo();
                 UpdateCharge();
                 UpdateLaser();
+                UpdateContinuousShootSound();
 
                 if (Time.deltaTime > 0)
                 {
@@ -351,15 +434,39 @@ namespace OneCanRun.Game.Share
                     isLasering = false;
                     lc.StopLaser();
                 }
-                UseAmmo(LaseringCost*Time.deltaTime);
+                UseAmmo(LaseringCost * Time.deltaTime);
             }
         }
 
+        void UpdateContinuousShootSound()
+        {/*
+            if (UseContinuousShootSound)
+            {
+                if (m_WantsToShoot && m_CurrentAmmo >= 1f)
+                {
+                    if (!m_ContinuousShootAudioSource.isPlaying)
+                    {
+                        m_ShootAudioSource.PlayOneShot(ShootSfx);
+                        m_ShootAudioSource.PlayOneShot(ContinuousShootStartSfx);
+                        m_ContinuousShootAudioSource.Play();
+                    }
+                }
+                else if (m_ContinuousShootAudioSource.isPlaying)
+                {
+                    m_ShootAudioSource.PlayOneShot(ContinuousShootEndSfx);
+                    m_ContinuousShootAudioSource.Stop();
+                }
+            }*/
+        }
 
         public void ShowWeapon(bool show)
         {
             WeaponRoot.SetActive(show);
 
+            if (show && ChangeWeaponSfx)
+            {
+                // m_ShootAudioSource.PlayOneShot(ChangeWeaponSfx);
+            }
 
             IsWeaponActive = show;
         }
@@ -374,7 +481,10 @@ namespace OneCanRun.Game.Share
 
         public bool HandleAttackInputs(bool inputDown, bool inputHeld)
         {
-            
+            //if ((inputDown || inputHeld)&&!DamagableBox.gameObject.activeSelf)
+            //{
+            //    return TryAttack();
+            //}
             if ((inputDown || inputHeld) && !IsAttacking)
             {
                 return TryAttack();
@@ -413,6 +523,8 @@ namespace OneCanRun.Game.Share
                     if (inputUp || (AutomaticReleaseOnCharged && CurrentCharge >= 1f))
                     {
                         damage = (int)(damage * CurrentCharge);
+                        //Debug.Log("CurrentCharge:" + CurrentCharge);
+                        //Debug.Log("weapon damage:" + damage);
                         return TryReleaseCharge();
                     }
 
@@ -433,7 +545,7 @@ namespace OneCanRun.Game.Share
                         isLasering = true;
                         return true;
                     }
-                    else if(inputUp && isLasering)
+                    else if (inputUp && isLasering)
                     {
                         lc.StopLaser();
                         isLasering = false;
@@ -484,6 +596,8 @@ namespace OneCanRun.Game.Share
                 LastChargeTriggerTimestamp = Time.time;
                 IsCharging = true;
                 GetComponent<Animator>().SetTrigger("Attack");
+                muzzleChargeInstance = Instantiate(MuzzleChargePrefab, WeaponMuzzle.position,
+                    WeaponMuzzle.rotation, WeaponMuzzle.transform);
                 // Unparent the muzzleFlashInstance
                 if (UnparentMuzzleFlash)
                 {
@@ -512,14 +626,20 @@ namespace OneCanRun.Game.Share
         }
         void EndAttack()
         {
+
+            //DamagableBox.GetComponent<MeleeController>().ReleaseDic();
+            //DamagableBox.gameObject.SetActive(false);
             m_LastTimeAttack = Time.time;
             IsAttacking = false;
 
         }
         void HandleAttack()
         {
+            //DamagableBox.gameObject.SetActive(true);
+            //DamagableBox.GetComponent<MeleeController>().Init(this);
             GetComponent<Animator>().SetTrigger("Attack");
             IsAttacking = true;
+            //m_ShootAudioSource.PlayOneShot(WeaponAttackSfx);
 
         }
         void HandleShoot()
@@ -539,6 +659,7 @@ namespace OneCanRun.Game.Share
             // muzzle flash
             if (MuzzleFlashPrefab != null)
             {
+                //?????��?????
                 GameObject muzzleFlashInstance = Instantiate(MuzzleFlashPrefab, WeaponMuzzle.position,
                     WeaponMuzzle.rotation, WeaponMuzzle.transform);
                 // Unparent the muzzleFlashInstance
@@ -552,10 +673,18 @@ namespace OneCanRun.Game.Share
 
             if (HasPhysicalBullets)
             {
+                //ShootShell();
+                //m_CarriedPhysicalBullets--;
                 m_CarriedPhysicalBullets = Mathf.RoundToInt(m_CurrentAmmo);
             }
 
             m_LastTimeShot = Time.time;
+
+            // play shoot SFX
+            if (ShootSfx && !UseContinuousShootSound)
+            {
+                m_ShootAudioSource.PlayOneShot(ShootSfx);
+            }
 
             // Trigger attack animation if there is any
             if (WeaponAnimator)
@@ -586,6 +715,7 @@ namespace OneCanRun.Game.Share
 
             // initialization
             GameObject tempBullet = bulletPoolManager.getObject(WeaponMuzzle.position, Quaternion.LookRotation(shootDirection));
+            //GameObject tempBullet = cachePool.getObject().cacheObject;
             tempBullet.transform.position = WeaponMuzzle.position;
             tempBullet.transform.rotation = Quaternion.LookRotation(shootDirection);
             tempBullet.transform.position = WeaponMuzzle.position;
@@ -595,7 +725,9 @@ namespace OneCanRun.Game.Share
 
 
             tempBullet.transform.forward = shootDirection;
+            // Debug.Log(shootDirection);
             tempBullet.GetComponent<BulletController>().Shoot(this);
+            //tempBullet.GetComponent<BulletController>().OnShoot?.Invoke();
 
 
 
@@ -606,7 +738,7 @@ namespace OneCanRun.Game.Share
             this.Owner = owner;
             if (ShootType == WeaponShootType.Laser)
             {
-                lc.Owner=owner;
+                lc.Owner = owner;
             }
         }
     }

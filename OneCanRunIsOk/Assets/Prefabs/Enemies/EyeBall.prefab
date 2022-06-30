@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5001057056645303897}
   - component: {fileID: 6628442063252791349}
   - component: {fileID: 6630314843898522610}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,12 +46,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 1
-  damageType: 0
+  damageType: 1
   RemoteWeapons: 1
   WeaponName: 
   WeaponIcon: {fileID: 0}
   WeaponImg: {fileID: 0}
   description: 
+  CrosshairDataDefault:
+    CrosshairSprite: {fileID: 0}
+    CrosshairSize: 0
+    CrosshairColor: {r: 0, g: 0, b: 0, a: 0}
   WeaponRoot: {fileID: 7307447526246765740}
   DelayBetweenAttacks: 0
   damage: 0
@@ -64,8 +68,10 @@ MonoBehaviour:
   RecoilForce: 1
   AutomaticReload: 1
   HasPhysicalBullets: 1
-  speed: 100
-  ClipSize: 30
+  speed: 20
+  ClipSize: 3
+  ShellCasing: {fileID: 0}
+  EjectionPort: {fileID: 0}
   ShellCasingEjectionForce: 2
   ShellPoolSize: 1
   AmmoReloadRate: 1
@@ -80,7 +86,10 @@ MonoBehaviour:
   WeaponAnimator: {fileID: 0}
   MuzzleFlashPrefab: {fileID: 0}
   UnparentMuzzleFlash: 0
-  ShootSfx: {fileID: 0}
+  ShootSfx: {fileID: 8300000, guid: 0a8242c4863262647ac363b535ecb563, type: 3}
+  ChangeWeaponSfx: {fileID: 0}
+  MuzzleChargePrefab: {fileID: 0}
+  UseContinuousShootSound: 0
 --- !u!82 &6630314843898522610
 AudioSource:
   m_ObjectHideFlags: 0
@@ -246,7 +255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2939579545926585284}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +288,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1359647885182561924}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: GunRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -310,7 +319,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8678941780978579311}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: GunMuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +334,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8168296100058546491}
   m_LocalRotation: {x: 0.6532815, y: 0.27059805, z: -0.6532815, w: 0.27059805}
-  m_LocalPosition: {x: -0.8, y: -0.55, z: 0.05}
+  m_LocalPosition: {x: -1.05, y: -0.83, z: 0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1975,7 +1984,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8429299602387209710}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WeaponRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

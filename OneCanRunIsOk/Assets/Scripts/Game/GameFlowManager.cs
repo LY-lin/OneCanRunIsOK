@@ -52,7 +52,7 @@ namespace OneCanRun.Game
             //游戏音量管理
 
             //
-            
+            EndGameFadeCanvasGroup.gameObject.SetActive(false);
             //EndGameFadeCanvasGroup.gameObject.SetActive(false);
         }
 
@@ -63,7 +63,7 @@ namespace OneCanRun.Game
             {
                 //计算结束场景的画布透明度，实现渐变效果
                 float timeRatio = 1 - (m_TimeLoadEndGameScene - Time.time) / EndSceneLoadDelay;
-                //EndGameFadeCanvasGroup.alpha = timeRatio;
+                EndGameFadeCanvasGroup.alpha = timeRatio;
 
                 //音响控制系统
                 //AudioUtility.SetMasterVolume(1 - timeRatio);
@@ -72,10 +72,10 @@ namespace OneCanRun.Game
                 if (Time.time >= m_TimeLoadEndGameScene)
                 {
                     //LoadingHelper.Instance.LoadScene("SampleScene");
-                    SceneManager.LoadScene(3);
+                    SceneManager.LoadScene(m_SceneToLoad);
                     GameIsEnding = false;
                 }
-                UnityEngine.SceneManagement.SceneManager.LoadScene("LoseScene");
+                //UnityEngine.SceneManagement.SceneManager.LoadScene("LoseScene");
             }
         }
         void OnAllObjectivesCompleted(AllObjectivesCompletedEvent evt) => EndGame(true);
@@ -89,7 +89,7 @@ namespace OneCanRun.Game
             // Remember that we need to load the appropriate end scene after a delay
             GameIsEnding = true;
             Debug.Log("YOU Win");
-            //EndGameFadeCanvasGroup.gameObject.SetActive(true);
+            EndGameFadeCanvasGroup.gameObject.SetActive(true);
             if (win)
             {
                 //m_SceneToLoad = WinSceneName;
@@ -117,13 +117,13 @@ namespace OneCanRun.Game
                 displayMessage.Message = WinGameMessage;
                 displayMessage.DelayBeforeDisplay = DelayBeforeWinMessage;
                 EventManager.Broadcast(displayMessage);*/
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene("WinScene");
             }
             else
             {
                 m_SceneToLoad = LoseSceneName;
                 m_TimeLoadEndGameScene = Time.time + EndSceneLoadDelay;
-                SceneManager.LoadScene(3);
+                
             }
         }
 
