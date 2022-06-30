@@ -52,16 +52,12 @@ MonoBehaviour:
   WeaponIcon: {fileID: 0}
   WeaponImg: {fileID: 0}
   description: 
-  CrosshairDataDefault:
-    CrosshairSprite: {fileID: 0}
-    CrosshairSize: 0
-    CrosshairColor: {r: 0, g: 0, b: 0, a: 0}
   WeaponRoot: {fileID: 7307447526246765740}
   DelayBetweenAttacks: 0
   damage: 0
   WeaponMuzzle: {fileID: 8678941780978579311}
   ShootType: 1
-  bullet: {fileID: 1254343392523665438, guid: 28ca67a84a75e9642a8da4bee674efbc, type: 3}
+  bullet: {fileID: 1747586400421602, guid: b7c0029aa0c34834fa90529bbec05b3b, type: 3}
   DelayBetweenShots: 0.5
   BulletSpreadAngle: 0
   BulletsPerShot: 1
@@ -70,8 +66,6 @@ MonoBehaviour:
   HasPhysicalBullets: 1
   speed: 100
   ClipSize: 30
-  ShellCasing: {fileID: 0}
-  EjectionPort: {fileID: 0}
   ShellCasingEjectionForce: 2
   ShellPoolSize: 1
   AmmoReloadRate: 1
@@ -87,9 +81,6 @@ MonoBehaviour:
   MuzzleFlashPrefab: {fileID: 0}
   UnparentMuzzleFlash: 0
   ShootSfx: {fileID: 0}
-  ChangeWeaponSfx: {fileID: 0}
-  MuzzleChargePrefab: {fileID: 0}
-  UseContinuousShootSound: 0
 --- !u!82 &6630314843898522610
 AudioSource:
   m_ObjectHideFlags: 0

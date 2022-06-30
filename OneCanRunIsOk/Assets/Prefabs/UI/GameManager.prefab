@@ -1579,6 +1579,7 @@ GameObject:
   - component: {fileID: 3906232378234279346}
   - component: {fileID: 3906232378234279338}
   - component: {fileID: 4198285646850856775}
+  - component: {fileID: 965936523586323662}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1824,6 +1825,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hud: {fileID: 8045817138241843511}
+--- !u!114 &965936523586323662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8538118310472526423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3ed65a07a3babb48833f869ed626af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  playCamera: {fileID: 0}
+  cgCamera: {fileID: 0}
+  TP_begin: {fileID: 0}
+  TP_end: {fileID: 0}
+  TP_Vfx: {fileID: 0}
+  dragonCgDuration: 15
+  dragonCgRotationTime: 8
+  firstPersonCgDuration: 5
+  firstPersonCgDisplaceTime: 2.5
+  firstPersonCgRotationTime: 1
+  cameraRotateSpeed: 1
+  orientationSpeed: 5
+  displacementSpeed: 2
+  VfxExistingTime: 5
 --- !u!1 &8538118310909987396
 GameObject:
   m_ObjectHideFlags: 0
