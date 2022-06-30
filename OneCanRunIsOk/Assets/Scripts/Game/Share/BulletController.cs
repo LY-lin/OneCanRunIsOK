@@ -62,7 +62,7 @@ namespace OneCanRun.Game.Share
 
             ActorProperties tmp = controller.Owner.GetComponent<Actor>().GetActorProperties();
             this.shooterType = controller.Owner.GetComponent<Actor>().Affiliation;
-            float tmpDamage = tmp.getMagicAttack() + tmp.getPhysicalAttack();
+            float tmpDamage = calculateShootingDamage(tmp);
 
             // calculate damage
             this.mDamage = tmpDamage + controller.damage;
@@ -167,6 +167,24 @@ namespace OneCanRun.Game.Share
             }
             if (finalDamage < 0f)
                 finalDamage = 0f;
+
+            return finalDamage;
+        }
+
+        private float calculateShootingDamage(ActorProperties shooter)
+        {
+            if (shooter == null)
+                return 0;
+            float finalDamage = 0;
+            if (this.damageType == DamageType.magic)
+            {
+                finalDamage = shooter.getMagicAttack();
+            }
+            else
+            {
+                finalDamage = shooter.getPhysicalAttack();
+            }
+
 
             return finalDamage;
         }

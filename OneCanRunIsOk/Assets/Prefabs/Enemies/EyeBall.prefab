@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798837759497049345}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -58,7 +58,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.9725897
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2870703242894651685
 GameObject:
@@ -396,8 +396,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4142755, y: 1.3387963, z: 1.4919205}
-  m_Center: {x: -0.20713796, y: 0.042213622, z: -0.004436493}
+  m_Size: {x: 1.2670003, y: 1.2796446, z: 1.4919205}
+  m_Center: {x: -0.28077567, y: 0.07178951, z: -0.004436493}
 --- !u!114 &8429299600452157547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1946,6 +1946,7 @@ MonoBehaviour:
   buffManager: {fileID: 8429299602487222399}
   campType: 0
   isPlayer: 0
+  enemyName: .EyeBall
 --- !u!195 &8429299602487222395
 NavMeshAgent:
   m_ObjectHideFlags: 0

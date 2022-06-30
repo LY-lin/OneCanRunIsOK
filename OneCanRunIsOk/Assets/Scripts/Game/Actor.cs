@@ -11,6 +11,8 @@ namespace OneCanRun.Game
         neutral,
         enemy
     }
+
+
     // This class contains general information describing an actor (player or enemies).
     // It is mostly used for AI detection logic and determining if an actor is friend or foe
     public class Actor : MonoBehaviour
@@ -33,6 +35,8 @@ namespace OneCanRun.Game
         private static XmlDocument neutralXml = null;
         public bool isPlayer = false;
         private uint level = 1;
+
+        public string enemyName;
 
         public uint getLevel(){
             return level;
@@ -184,8 +188,10 @@ namespace OneCanRun.Game
                     }
                     break;
                 case affiliationType.enemy:
-                    fileName += ".enemy.xml";
-                    if(enemyXml == null){
+                    fileName += enemyName+".enemy.xml";
+                    //string e = enemyXml.BaseURI.Substring();
+                    if(enemyXml == null|| !enemyXml.BaseURI.Contains(enemyName))
+                    {
                         enemyXml = new XmlDocument();
                         enemyXml.Load(configDirectory + fileName);
                     }

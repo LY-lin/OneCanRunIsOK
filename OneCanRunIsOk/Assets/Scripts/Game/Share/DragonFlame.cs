@@ -41,6 +41,7 @@ namespace OneCanRun.Game.Share
                         Actor actor = col.gameObject.GetComponentInParent<Actor>();
                         ActorProperties colliderProperty = actor.GetActorProperties();
                         float finalDamage = calculateDamage(colliderProperty, damage * totalDeltaTime, damageType);
+                        Debug.Log("龙炎伤害：" + finalDamage);
                         if (Owner != actor.gameObject)
                             damageable.InflictDamage(finalDamage, false, Owner, col.gameObject, damageType);
                     }

@@ -600,5 +600,14 @@ namespace OneCanRun.Game.Share
 
 
         }
+
+        public void UpdateOwner(GameObject owner)
+        {
+            this.Owner = owner;
+            if (ShootType == WeaponShootType.Laser)
+            {
+                lc.Owner=owner;
+            }
+        }
     }
 }
