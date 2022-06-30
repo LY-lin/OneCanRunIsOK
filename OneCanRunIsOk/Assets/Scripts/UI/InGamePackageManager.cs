@@ -18,6 +18,7 @@ namespace OneCanRun.UI
         Health m_PlayerHealth;
         Backpack m_backpack;
 
+        PauseMenu pause;
         public Backpack getBackpack(){
             return m_backpack;
 
@@ -36,36 +37,29 @@ namespace OneCanRun.UI
             m_backpack = newBackpack;
 
             m_backpack.gameObject.SetActive(false);
+            pause = this.transform.parent.GetComponentInChildren<PauseMenu>();
         }
 
         void Update()
         {
-            
 
-            //输入esc，退出背包
-            if (m_backpack.gameObject.activeSelf&&Input.GetKeyDown(KeyCode.Escape))
+            if (!pause.getPausel().gameObject.activeSelf)
             {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-
-            //按下tab键开关背包
-            if (Input.GetButtonDown(GameConstants.k_ButtonNamePauseMenu)
-                || (m_backpack.gameObject.activeSelf && Input.GetButtonDown(GameConstants.k_ButtonNameCancel)))
-            {
-                SetPauseMenuActivation(!m_backpack.gameObject.activeSelf);
-
-            }
-
-            /* //滚轴
-            if (Input.GetAxisRaw(GameConstants.k_AxisNameVertical) != 0)
-            {
-                if (EventSystem.current.currentSelectedGameObject == null)
+                //输入esc，退出背包
+                if (m_backpack.gameObject.activeSelf && Input.GetKeyDown(KeyCode.Escape))
                 {
-                    EventSystem.current.SetSelectedGameObject(null);
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
+
+                //按下tab键开关背包
+                if (Input.GetButtonDown(GameConstants.k_ButtonNamePauseMenu)
+                    || (m_backpack.gameObject.activeSelf && Input.GetButtonDown(GameConstants.k_ButtonNameCancel)))
+                {
+                    SetPauseMenuActivation(!m_backpack.gameObject.activeSelf);
+
                 }
             }
-            */
         }
 
         public void ClosePauseMenu()
