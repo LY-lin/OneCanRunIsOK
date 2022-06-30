@@ -66,6 +66,20 @@ namespace OneCanRun.Game.Share
             DebugUtility.HandleErrorIfNullGetComponent<AudioSource, LaserController>(audioSource,
                 this, gameObject);
 
+            Actor actor = Owner.GetComponent<Actor>();
+            if (actor)
+            {
+                ActorProperties tmp = actor.GetActorProperties();
+                if (damageType == DamageType.physical)
+                {
+                    damage += tmp.getPhysicalAttack();
+                }
+                else if (damageType == DamageType.magic)
+                {
+                    damage += tmp.getMagicAttack();
+                }
+            }
+
             audioSource.PlayOneShot(LaserSfx);
         }
 
@@ -109,14 +123,11 @@ namespace OneCanRun.Game.Share
                         Damageable damageable = col.GetComponent<Damageable>();
                         if (damageable)
                         {
-                            
-                            if (curDeltaCount == deltaCount)
-                            {
-                                Actor actor = col.gameObject.GetComponentInParent<Actor>();
-                                ActorProperties colliderProperty = actor.GetActorProperties();
-                                float finalDamage = calculateDamage(colliderProperty, damage * totalDeltaTime, damageType);
-                                damageable.InflictDamage(finalDamage, false, Owner, col.gameObject, damageType);
-                            }
+
+                            Actor actor = col.gameObject.GetComponentInParent<Actor>();
+                            ActorProperties colliderProperty = actor.GetActorProperties();
+                            float finalDamage = calculateDamage(colliderProperty, damage * totalDeltaTime, damageType);
+                            damageable.InflictDamage(finalDamage, false, Owner, col.gameObject, damageType);
                         }
                     }
                 }
