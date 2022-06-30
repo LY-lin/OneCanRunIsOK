@@ -133,10 +133,10 @@ namespace OneCanRun.Game
                 for (int i = 0; i < listToPercentDelete.Count; i++)
                 {
                     PercentBuffList.Remove(listToPercentDelete[i]);
-                    buffLost?.Invoke(listToDelete[i]);
+                    buffLost?.Invoke(listToPercentDelete[i]);
                 }
             }
-            if (WeaponBuffList.Count > 0)
+            /*if (WeaponBuffList.Count > 0)
                 foreach (BuffController m in WeaponBuffList)
                 {
                     if (!checkActive(m, time))
@@ -145,14 +145,14 @@ namespace OneCanRun.Game
                         WeaponBuffList.Remove(m);
                     }
                 }
-            if (listToPercentDelete.Count > 0)
+            if (listToWeaponBuffDelete.Count > 0)
             {
                 for (int i = 0; i < listToPercentDelete.Count; i++)
                 {
                     WeaponBuffList.Remove(listToPercentDelete[i]);
                     buffLost?.Invoke(listToDelete[i]);
                 }
-            }
+            }*/
             if (changed)
                 buffChanged?.Invoke();
         }

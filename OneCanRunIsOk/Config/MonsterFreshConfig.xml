@@ -50,7 +50,7 @@
   <Wave id="6">
     <Time time="">50</Time>
     <Position_x position_x="">112</Position_x>
-    <Position_y position_y="">2</Position_y>
+    <Position_y position_y="">5</Position_y>
     <Position_z position_z="">-102</Position_z>
     <TypeID typeID="">2</TypeID>
     <Number number="">5</Number>
@@ -58,7 +58,7 @@
   <Wave id="7">
     <Time time="">50</Time>
     <Position_x position_x="">110</Position_x>
-    <Position_y position_y="">2</Position_y>
+    <Position_y position_y="">5</Position_y>
     <Position_z position_z="">-104</Position_z>
     <TypeID typeID="">3</TypeID>
     <Number number="">3</Number>

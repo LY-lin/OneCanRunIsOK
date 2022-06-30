@@ -66,7 +66,7 @@ namespace OneCanRun.GamePlay
                     if (x12.Name == "Position_x"){
                         position_x = float.Parse(x12.InnerText);
                     }
-                    if (x12.Name == "Position_y"){
+                    if (x12.Name == "Position_y") {
                         position_y = float.Parse(x12.InnerText);
                     }
                     if (x12.Name == "Position_z"){

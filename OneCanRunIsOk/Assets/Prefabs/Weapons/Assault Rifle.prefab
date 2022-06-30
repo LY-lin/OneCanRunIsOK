@@ -335,7 +335,7 @@ MonoBehaviour:
     CrosshairColor: {r: 0, g: 0, b: 0, a: 0}
   WeaponRoot: {fileID: 100006}
   DelayBetweenAttacks: 0
-  damage: 20
+  damage: 10
   WeaponMuzzle: {fileID: 4978071067295733055}
   ShootType: 1
   bullet: {fileID: 1734307153417951284, guid: a98546528b163484ba67c160f647d0d0, type: 3}
