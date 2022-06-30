@@ -9894,7 +9894,7 @@ MonoBehaviour:
   NoiseTextureLength: 1
   LaserSocket: {fileID: 0}
   damageType: 1
-  damage: 100
+  damage: 20
   deltaCount: 25
   Owner: {fileID: 0}
   PlayerSocket: {fileID: 0}

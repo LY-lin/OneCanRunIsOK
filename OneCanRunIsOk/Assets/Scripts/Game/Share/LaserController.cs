@@ -66,14 +66,18 @@ namespace OneCanRun.Game.Share
             DebugUtility.HandleErrorIfNullGetComponent<AudioSource, LaserController>(audioSource,
                 this, gameObject);
 
-            ActorProperties tmp = Owner.GetComponent<Actor>().GetActorProperties();
-            if (damageType == DamageType.physical)
+            Actor actor = Owner.GetComponent<Actor>();
+            if (actor)
             {
-                damage += tmp.getPhysicalAttack();
-            }
-            else if (damageType == DamageType.magic)
-            {
-                damage += tmp.getMagicAttack();
+                ActorProperties tmp = actor.GetActorProperties();
+                if (damageType == DamageType.physical)
+                {
+                    damage += tmp.getPhysicalAttack();
+                }
+                else if (damageType == DamageType.magic)
+                {
+                    damage += tmp.getMagicAttack();
+                }
             }
 
             audioSource.PlayOneShot(LaserSfx);
