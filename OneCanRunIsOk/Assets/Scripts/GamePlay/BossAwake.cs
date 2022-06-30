@@ -16,6 +16,10 @@ namespace OneCanRun.GamePlay
         void ChestWasOpen()
         {
             bossAwake?.Invoke();
+            AudioSource BGM = GameObject.Find("GameManager").GetComponent<AudioSource>();
+            BGM.Stop();
+            BGM.clip = Resources.Load<AudioClip>("Glenn Stafford - Heaven's Devils");
+            BGM.Play();
         }
     }
 }
