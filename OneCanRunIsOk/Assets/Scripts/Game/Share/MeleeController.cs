@@ -11,9 +11,7 @@ namespace OneCanRun.Game.Share
         private float Damage;
         private affiliationType attackerType;
         public GameObject Owner { get; private set; }
-        //private Dictionary<GameObject, int> dic = new Dictionary<GameObject, int>();
 
-        //public GameObject hurtNumber;
         public DamageType damageType;
         public GameObject attackVfx;
         public float attackVfxDelay;
@@ -28,7 +26,6 @@ namespace OneCanRun.Game.Share
         AudioSource m_ShootAudioSource;
         public AudioClip WeaponAttackSfx;
         public AudioClip hitSfx;
-        //UnityAction<Vector3> Dmg;
 
         public void Init(WeaponController wc)
         {
@@ -41,49 +38,6 @@ namespace OneCanRun.Game.Share
             attackSocket = GameObject.Find("SkillSocket").transform;
 
         }
-        //public void ReleaseDic()
-        //{
-        //    dic.Clear();
-        //}
-        // Update is called once per frame
-        //void Update()
-        //{
-            
-        //    /*
-        //    ActorProperties tmp = wc.Owner.GetComponent<Actor>().GetActorProperties();
-        //    float tmpDamage = tmp.getMagicAttack() + tmp.getPhysicalAttack();
-        //    Damage *= tmpDamage;
-        //    */
-        //}
-
-        //void OnCollisionEnter(Collision col)
-        //{
-        //    /*
-        //    if (col.gameObject.layer == LayerMask.NameToLayer("weapon"))
-        //    {
-        //        return;
-        //    }*/
-
-        //    Actor target = col.gameObject.GetComponent<Actor>();
-        //    if (target)
-        //    {
-        //        if (target.Affiliation == this.attackerType)
-        //            return;
-        //    }
-
-        //    Damageable damageable = col.collider.GetComponent<Damageable>();
-        //    if (damageable&&!dic.ContainsKey(damageable.gameObject))
-        //    {
-                
-        //        dic.Add(damageable.gameObject, 1);
-                
-        //        Actor actor = col.gameObject.GetComponent<Actor>();
-        //        ActorProperties colliderProperty = actor.GetActorProperties();
-        //        float finalDamage = calculateDamage(colliderProperty, Damage, damageType, col.gameObject.transform.position + transform.up);
-        //        damageable.InflictDamage(finalDamage, false, Owner);
-
-        //    }
-        //}
 
         private float calculateDamage(ActorProperties colliderProperty, float damage, DamageType damageType)
         {
@@ -104,17 +58,6 @@ namespace OneCanRun.Game.Share
             //下取整
             finalDamage = Mathf.Floor(finalDamage);
 
-            //GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
-            //if (hurtNumber && hurtNumberParent)
-            //{
-            //    Debug.Log("count!");
-            //    GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
-            //    hurt.transform.position = damagePoint;
-            //    hurt.GetComponent<HurtNumber>().init(finalDamage, damageType);
-
-
-            //}
-            //Dmg.Invoke(damagePoint, damageType, finalDamage);
 
             return finalDamage;
         }

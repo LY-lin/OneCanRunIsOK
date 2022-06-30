@@ -6,16 +6,18 @@ namespace OneCanRun.UI
     public class PauseMenu : MonoBehaviour
     {
         // in case collision for game menu
-        public GameObject GameMenu;
         private Backpack backpack;
         public GameObject pauseMenuObject;
-        public GameObject optionsMenuObject;
         public Transform plane;
 
         PauseMenuController pause1;
+        public PauseMenuController getPausel()
+        {
+            return pause1;
+        }
 
         void Start(){
-            backpack = GameMenu.GetComponent<InGamePackageManager>().getBackpack();
+            backpack = this.transform.parent.GetComponentInChildren<InGamePackageManager>().getBackpack();
             GameObject pause = GameObject.Instantiate(pauseMenuObject, plane);
             pause1 = pause.GetComponent<PauseMenuController>();
             pause1.gameObject.SetActive(false);

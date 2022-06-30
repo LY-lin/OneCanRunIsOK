@@ -36,6 +36,7 @@ namespace OneCanRun.UI
         {
            //Debug.Log(m_health.CurrentHealth);
             HealthImage.fillAmount = m_health.CurrentHealth / m_health.MaxHealth;
+            if(Camera.main)
             HealthBarPivot.LookAt(Camera.main.transform.position);
             Vector3 position = player.transform.position;
             //bool ifnear = Vector3.Distance(position, this.gameObject.transform.position) < distance;

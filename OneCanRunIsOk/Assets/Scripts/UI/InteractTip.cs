@@ -41,7 +41,8 @@ namespace OneCanRun.UI
             if (interactive.showInteractiveUI)
             {
                 plane.gameObject.SetActive(true);
-                Pivot.LookAt(Camera.main.transform.position);
+                if(Camera.main)
+                    Pivot.LookAt(Camera.main.transform.position);
             }
             else
             {
