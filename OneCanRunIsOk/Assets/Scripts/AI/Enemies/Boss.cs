@@ -27,6 +27,8 @@ namespace OneCanRun.AI.Enemies
         public AudioClip ScreamLong;
         public AudioClip ScreamShort;
 
+        //public UnityAction BossDied;
+
         public enum AIState
         {
             Idle,
@@ -73,6 +75,8 @@ namespace OneCanRun.AI.Enemies
 
         BossAwake trap;
 
+        ObjectiveKillBoss objectiveKillBoss;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -96,6 +100,8 @@ namespace OneCanRun.AI.Enemies
             trap.bossAwake += BossAwake;
             // enemyAttackController = GetComponent<EnemyAttackController>();
             // DebugUtility.HandleErrorIfNullGetComponent<EnemyAttackController, Boss>(enemyAttackController, this, gameObject);
+
+            objectiveKillBoss = GameObject.Find("ChestForBossAwake").GetComponent<ObjectiveKillBoss>();
 
             NavMeshAgent = GetComponent<NavMeshAgent>();
             DebugUtility.HandleErrorIfNullGetComponent<NavMeshAgent, Boss>(NavMeshAgent, this, gameObject);
@@ -425,8 +431,7 @@ namespace OneCanRun.AI.Enemies
             {
                 collider.enabled = false;
             }
-
-            //BossDie?.Invoke();
+            objectiveKillBoss.BossKilled();
         }
 
         public void EnterDeathQueue()

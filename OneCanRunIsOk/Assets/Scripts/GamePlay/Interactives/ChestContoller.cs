@@ -9,7 +9,7 @@ namespace OneCanRun.GamePlay
         Interactive m_Interactive;
         //Dropable dropable;
         public UnityAction ChestOpen;
-        CgManager cgManager;
+
 
         // Start is called before the first frame update
         void Start()
@@ -17,8 +17,6 @@ namespace OneCanRun.GamePlay
             m_Interactive = GetComponent<Interactive>();
             m_Interactive.beInteracted += beOpened;
 
-            cgManager = GameObject.FindObjectOfType<CgManager>();
-            DebugUtility.HandleErrorIfNullFindObject<CgManager, ChestContoller>(cgManager, this);
             //dropable = GetComponent<Dropable>();
         }
 
@@ -27,7 +25,7 @@ namespace OneCanRun.GamePlay
         {
             GetComponent<Animator>().SetTrigger("Open");
             ChestOpen?.Invoke();
-            cgManager.PlayCG();
+            //cgManager.PlayCG();
             //dropable.drop();
         }
     }

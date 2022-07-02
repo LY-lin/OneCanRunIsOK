@@ -9403,7 +9403,7 @@ MonoBehaviour:
   length: 80
   width: 40
   height: 40
-  damage: 22
+  damage: 55
   deltaCount: 25
   Owner: {fileID: 0}
   damageType: 1

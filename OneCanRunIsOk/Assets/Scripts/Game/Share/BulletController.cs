@@ -88,7 +88,7 @@ namespace OneCanRun.Game.Share
             }
 
 
-            Actor target = col.gameObject.GetComponent<Actor>();
+            Actor target = col.gameObject.GetComponentInParent<Actor>();
             //if (target == null)
             //return;
             if (target)

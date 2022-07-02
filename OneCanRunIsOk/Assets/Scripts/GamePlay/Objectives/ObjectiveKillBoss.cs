@@ -1,7 +1,5 @@
 using UnityEngine;
 using OneCanRun.Game.Share;
-using OneCanRun;
-using UnityEditor;
 
 namespace OneCanRun.GamePlay
 {
@@ -9,6 +7,7 @@ namespace OneCanRun.GamePlay
     {
         //Boss m_boss;
         BossAwake trap;
+        //Boss boss;
         protected override void Start()
         {
             base.Start();
@@ -22,7 +21,7 @@ namespace OneCanRun.GamePlay
             UpdateObjective("KILL THE DRAGON !!!",string.Empty, "Kill the dragon!!!");
         }
 
-        void BossKilled()
+        public void BossKilled()
         {
             CompleteObjective("Mission Completed.",string.Empty, "Win");
         }

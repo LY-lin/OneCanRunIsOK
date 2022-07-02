@@ -164,10 +164,8 @@ namespace OneCanRun.AI.Enemies
             weapon.transform.forward = weaponForward;
 
             currentAttackIndex = currentWeaponIndex;
-            duration = intervals[currentAttackIndex];
             preAttackState = AttackState.Weapon;
             latestWeaponAttackTime = Time.time;
-            anim.SetTrigger(attacks[currentAttackIndex]);
             weapon.HandleShootInputs(false, true, false);
         }
 

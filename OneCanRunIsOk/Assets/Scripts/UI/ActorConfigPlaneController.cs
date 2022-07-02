@@ -138,7 +138,7 @@ namespace OneCanRun.UI{
             config.setBaseAttribute(5, 7, 2, 8);
             weaponDescription.text = "A staff carved out of rotten wood.";
             weaponName.text = "Stuffy Wand";
-            //weaponImage.sprite = gameObject.GetComponentInChildren<WeaponController>().WeaponImg;
+            weaponImage.sprite = Resources.Load<Sprite>("Weapons/StuffyWand");
 
             QImage.sprite = Resources.Load<Sprite>("Skills/FireRain");
             QName.text = "FireRain";
@@ -157,7 +157,7 @@ namespace OneCanRun.UI{
         private void useHaloneCampInfo(){
             weaponDescription.text = "A spear that glows, but has no special magic";
             weaponName.text = "Shining Spear";
-            //weaponImage.sprite = gameObject.GetComponentInChildren<WeaponController>().WeaponImg;
+            weaponImage.sprite = Resources.Load<Sprite>("Weapons/Spear");
 
             QImage.sprite = Resources.Load<Sprite>("Skills/tornado");
             QName.text = "Tonado";
@@ -173,7 +173,7 @@ namespace OneCanRun.UI{
         private void useByregotCampInfo(){
             weaponDescription.text = "Cheap, leathery, old and capable of firing";
             weaponName.text = "AR1";
-            //weaponImage.sprite = gameObject.GetComponentInChildren<WeaponController>().WeaponImg;
+            weaponImage.sprite = Resources.Load<Sprite>("Weapons/Assault Rifle");
 
             QImage.sprite = Resources.Load<Sprite>("Skills/Flash");
             QName.text = "Flash";
