@@ -17,9 +17,11 @@ namespace OneCanRun.Game.Share
         private static List<List<GameObject>> pool;
         private static List<List<bool>> used;
         public int activeNumber = 0;
+        public int totalMonsterNumber = 0;
 
         private void OnEnable(){
             if (monsterPoolManagerPtr == null){
+                this.totalMonsterNumber = sampleList_exposed.Count;
                 monsterPoolManagerPtr = this;
             }
 
@@ -34,6 +36,7 @@ namespace OneCanRun.Game.Share
 
         // initialization
         public static void initialization(GameObject _parent){
+            
             parent = _parent;
             pool = new List<List<GameObject>>();
             lookupTable = new Dictionary<string, int>();
@@ -78,6 +81,7 @@ namespace OneCanRun.Game.Share
                     used[typeID][i] = true;
                     index = i;
                     ret = pool[typeID][i];
+                    ret.transform.position = position;
                     return ret;
                 }
             }
@@ -88,7 +92,7 @@ namespace OneCanRun.Game.Share
                 used[typeID].Add(true);
             }
             ret.transform.position = position;
-            
+            activeNumber++;
             return ret;
         }
 
@@ -110,6 +114,7 @@ namespace OneCanRun.Game.Share
             for(int i = 0;i < pool[typeID].Count; i++){
                 if(pool[typeID][i] == objcect){
                     used[typeID][i] = false;
+                    activeNumber--;
                     return;
                 }
 
@@ -135,6 +140,7 @@ namespace OneCanRun.Game.Share
             for(int j = 0;j < pool[typeID].Count; j++){
                 if(pool[typeID][j] == objcect){
                     used[typeID][j] = false;
+                    activeNumber--;
                     return;
                 }
             }

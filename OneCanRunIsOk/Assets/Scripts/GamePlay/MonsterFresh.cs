@@ -15,8 +15,10 @@ namespace OneCanRun.GamePlay
         public int timeInterval = 30;
         private int timeCounter = 0;
         private int frameInterval = 0;
+        private int levelCounter = 1;
         private Game.Share.MonsterPoolManager monsterPoolManager;
         private static int startTime;
+        public static bool freshable = true;
         // Start is called before the first frame update
 
         public UnityAction newWave;
@@ -100,12 +102,14 @@ namespace OneCanRun.GamePlay
         }
 
         // Update is called once per frame
-        void Update()
-        {
+        void Update(){
+
+            if (!freshable)
+                return;
 
             // fresh as stable time
-            if (Time.frameCount% frameInterval == 0){
-                //refreshOneWave();
+            if (Time.frameCount% frameInterval == 0 && monsterPoolManager.activeNumber <= 30){
+                freshOnceButInfinite();
 
             }
 
@@ -120,15 +124,33 @@ namespace OneCanRun.GamePlay
                 for(int i = 0;i < current.number; i++){
                    GameObject gameObject = monsterPoolManager.getObject(current.typeID, new Vector3(current.position_x, current.position_y, current.position_z));
                     if (gameObject){
-                        gameObject.GetComponent<Game.Actor>().setLevel((uint)(counter + 1));
+                        gameObject.GetComponent<Game.Actor>().setLevel((uint)(levelCounter + 1));
+                        levelCounter++;
                         gameObject.SetActive(true);
+                        Debug.Log(gameObject.transform.position);
                     }
                 }
+
                 newWave?.Invoke();
                 counter++;
             }
 
         }
 
+
+
+        void freshOnceButInfinite(){
+            for(int i = 0;i < 5; i++){
+                Game.Share.MonsterFreshInfo current = mMonsterList[Random.Range(0, mMonsterList.Count)];
+                GameObject gameObject = monsterPoolManager.getObject(Random.Range(0, monsterPoolManager.totalMonsterNumber), new Vector3(current.position_x, current.position_y, current.position_z));
+                if (gameObject){
+                    gameObject.GetComponent<Game.Actor>().setLevel((uint)(levelCounter + 1));
+                    levelCounter++;
+                    gameObject.SetActive(true);
+                }
+
+            }
+
+        }
     }
 }
