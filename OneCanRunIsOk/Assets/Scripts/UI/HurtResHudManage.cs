@@ -16,10 +16,10 @@ namespace OneCanRun.UI
         // Start is called before the first frame update
 
         private int n = 0;
-        CollectDamageNumber collect;
+        CollectDamage collect;
         void Start()
         {
-            collect = GetComponentInParent<CollectDamageNumber>();
+            collect = GetComponentInParent<CollectDamage>();
             collect.hurted += AddHR;
         }
 

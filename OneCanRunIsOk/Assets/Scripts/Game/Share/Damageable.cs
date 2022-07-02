@@ -14,7 +14,7 @@ namespace OneCanRun.Game.Share
         public float SensibilityToSelfdamage = 0.5f;
 
         public Health Health { get; private set; }
-        CollectDamageNumber collect;
+        CollectDamage collect;
         void Awake()
         {
             // find the health component either at the same level, or higher in the hierarchy
@@ -23,7 +23,7 @@ namespace OneCanRun.Game.Share
             {
                 Health = GetComponentInParent<Health>();
             }
-            collect = FindObjectOfType<CollectDamageNumber>();
+            collect = FindObjectOfType<CollectDamage>();
         }
 
         public void InflictDamage(float damage, bool isExplosionDamage, GameObject damageSource, GameObject damaged)
@@ -88,6 +88,8 @@ namespace OneCanRun.Game.Share
                     (damageSource.GetComponentInParent<Actor>().Affiliation == affiliationType.allies || 
                     damageSource.GetComponentInParent<Actor>().Affiliation == affiliationType.neutral))
                     collect.produce(Damaged, damageType, damage);
+                if (Damaged.GetComponentInParent<Actor>().Affiliation == affiliationType.allies)
+                    collect.getHurt(damageSource);
 
 
             }

@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace OneCanRun.Game.Share
 {
-    public class CollectDamageNumber : MonoBehaviour
+    public class CollectDamage : MonoBehaviour
     {
         public UnityAction<GameObject, DamageType, float> Dmg;
         public UnityAction Feedback;

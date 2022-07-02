@@ -16,7 +16,7 @@ namespace OneCanRun.UI
         // Start is called before the first frame update
 
         public static Game.Share.HurtNumberPoolManager poolManager;
-        CollectDamageNumber collect;
+        CollectDamage collect;
         static private int num = 0;
         void Start()
         {
@@ -26,7 +26,7 @@ namespace OneCanRun.UI
             if (poolManager == null)
                 poolManager = HurtNumberPoolManager.instance;
             poolManager.reset(HurtNumberPrefab, plane);
-            collect = GetComponentInParent<CollectDamageNumber>();
+            collect = GetComponentInParent<CollectDamage>();
             collect.Dmg += AddHN;
             
         }

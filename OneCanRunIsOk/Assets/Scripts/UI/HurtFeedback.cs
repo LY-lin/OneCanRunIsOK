@@ -8,40 +8,40 @@ namespace OneCanRun.UI
 {
     public class HurtFeedback : MonoBehaviour
     {
-        [Tooltip("Feedback Image")]
-        public Image Feedback;
+        [Tooltip("Cross Image")]
+        public Image Cross;
+        [Tooltip("Feedback Sprite")]
+        public Sprite Feedback;
 
-        [Tooltip("Crosshair image")]
-        public Image Crosshair;
+        [Tooltip("Crosshair sprite")]
+        public Sprite Crosshair;
 
         [Tooltip("Time to stand showing feedback")]
         public float standTime = 0.5f;
 
-        private CollectDamageNumber collect;
+        private CollectDamage collect;
         private float lastTime = 0;
+        private bool usingFB = false;
         // Start is called before the first frame update
         void Start()
         {
-            collect = GetComponentInParent<CollectDamageNumber>();
+            collect = GetComponentInParent<CollectDamage>();
             collect.Feedback += ShowFeedback;
-            Feedback.gameObject.SetActive(false);
-            Crosshair.gameObject.SetActive(true);
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (Feedback.gameObject.activeSelf && Time.time - lastTime >= standTime)
+            if (usingFB&&Time.time - lastTime >= standTime)
             {
-                Feedback.gameObject.SetActive(false);
-                Crosshair.gameObject.SetActive(true);
+                Cross.sprite = Crosshair;
             }
         }
 
         void ShowFeedback()
         {
-            Feedback.gameObject.SetActive(true);
-            Crosshair.gameObject.SetActive(false);
+            Cross.sprite = Feedback;
+            usingFB = true;
             lastTime = Time.time;
         }
     }
