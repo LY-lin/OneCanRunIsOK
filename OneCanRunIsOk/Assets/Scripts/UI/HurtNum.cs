@@ -96,7 +96,6 @@ namespace OneCanRun.UI
             if (position.x < -100 || position.y < -100 || position.x > Screen.width+100 || position.y > Screen.height+100)
                 HurtNumberHudManage.poolManager.release(this.gameObject);
             Vector2 uiPosition;
-           
             RectTransformUtility.ScreenPointToLocalPointInRectangle(plane, position, null, out uiPosition);
             return uiPosition;
         }

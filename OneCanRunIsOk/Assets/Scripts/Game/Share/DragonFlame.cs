@@ -72,13 +72,13 @@ namespace OneCanRun.Game.Share
             //下取整
             finalDamage = Mathf.Floor(finalDamage);
 
-            //GameObject hurtNumberParent = GameObject.Find("HurtNumberCollector");
-            //if (hurtNumber && hurtNumberParent)
+            //GameObject hurtResourceParent = GameObject.Find("hurtResourceCollector");
+            //if (hurtResource && hurtResourceParent)
             //{
             //    //Debug.Log("count!");
-            //    GameObject hurt = GameObject.Instantiate(hurtNumber, hurtNumberParent.transform);
+            //    GameObject hurt = GameObject.Instantiate(hurtResource, hurtResourceParent.transform);
             //    hurt.transform.position = damagePoint;
-            //    hurt.GetComponent<HurtNumber>().init(finalDamage, damageType);
+            //    hurt.GetComponent<hurtResource>().init(finalDamage, damageType);
 
 
             //}

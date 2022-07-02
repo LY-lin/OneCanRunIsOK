@@ -15,17 +15,26 @@ namespace OneCanRun.UI
         public RectTransform plane;
         // Start is called before the first frame update
 
-        private int n = 0;
         CollectDamage collect;
+        public static HurtResourcePoolManager poolManager;
         void Start()
         {
+            if (HurtResourcePoolManager.instance == null)
+                poolManager = new HurtResourcePoolManager(HurtResPrefab, plane);
+            if (poolManager == null)
+            {
+                poolManager = HurtResourcePoolManager.instance;
+                poolManager.reset(HurtResPrefab, plane);
+            }
             collect = GetComponentInParent<CollectDamage>();
             collect.hurted += AddHR;
         }
 
         void AddHR(GameObject position)
-        { 
-            GameObject HRInstance = Instantiate(HurtResPrefab, plane);
+        {
+
+            GameObject HRInstance = poolManager.getObject();
+            Debug.LogError("create");
             HurtResource newHurtRes = HRInstance.GetComponent<HurtResource>();
             DebugUtility.HandleErrorIfNullGetComponent<HurtResource, HurtResHudManage>(newHurtRes, this,
                 HRInstance.gameObject);

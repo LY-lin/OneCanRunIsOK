@@ -3,9 +3,14 @@ using UnityEngine;
 
 namespace OneCanRun.Game.Share
 {
-    
+    public enum DamageType
+    {
+        magic =1,
+        physical = 0,
+    }
     public class Damageable : MonoBehaviour
     {
+
         [Tooltip("Multiplier to apply to the received damage")]
         public float DamageMultiplier = 1f;
 

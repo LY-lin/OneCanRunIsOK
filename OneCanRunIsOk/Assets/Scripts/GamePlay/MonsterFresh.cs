@@ -127,7 +127,6 @@ namespace OneCanRun.GamePlay
                         gameObject.GetComponent<Game.Actor>().setLevel((uint)(levelCounter + 1));
                         levelCounter++;
                         gameObject.SetActive(true);
-                        Debug.Log(gameObject.transform.position);
                     }
                 }
 
