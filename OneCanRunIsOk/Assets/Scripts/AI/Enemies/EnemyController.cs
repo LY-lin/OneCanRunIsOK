@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
 using OneCanRun.Game;
-using OneCanRun.Game.Share;
+using OneCanRun.GamePlay;
 
 namespace OneCanRun.AI.Enemies
 {
@@ -73,9 +73,11 @@ namespace OneCanRun.AI.Enemies
         // 导航数据模块
         NavigationModule navigationModule;
 
+        private Dropable dropable;
+
         Animator animator;
 
-        public int dropRate = 10;
+        public int dropRate = 80;
         
         int pathDestinationNodeIndex;
 
@@ -130,6 +132,8 @@ namespace OneCanRun.AI.Enemies
             NavigationModule[] navigationModules = GetComponentsInChildren<NavigationModule>();
             DebugUtility.HandleWarningIfDuplicateObjects<DetectionModule, EnemyController>(enemyDetectionModules.Length,
                 this, gameObject);
+
+            dropable = GetComponent<Dropable>();
             // Override navmesh agent data
             if (navigationModules.Length > 0)
             {
@@ -336,7 +340,8 @@ namespace OneCanRun.AI.Enemies
             // loot an object
             if (TryDropItem())
             {
-                Instantiate(LootPrefab, transform.position, Quaternion.identity);
+                //Instantiate(LootPrefab, transform.position, Quaternion.identity);
+                dropable.drop();
             }
 
             // this will call the OnDestroy function
@@ -355,7 +360,7 @@ namespace OneCanRun.AI.Enemies
         public bool TryDropItem()
         {
             int result = Random.Range(0, 100);
-            if (DropRate == 0 || LootPrefab == null || result >= this.dropRate)
+            if (DropRate == 0 || result >= this.dropRate)
                 return false;
             else if (DropRate == 1)
                 return true;

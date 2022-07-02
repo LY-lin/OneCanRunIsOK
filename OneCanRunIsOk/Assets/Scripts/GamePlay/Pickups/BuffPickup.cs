@@ -13,6 +13,7 @@ namespace OneCanRun.GamePlay
         {
             buffGiver = GetComponent<CollisionBuffGiver>();     
             PlayerCharacterController pickingPlayer = other.GetComponent<PlayerCharacterController>();
+            if(pickingPlayer)
             if(pickingPlayer.name == "Player1")
             {
                 if (pickingPlayer != null)

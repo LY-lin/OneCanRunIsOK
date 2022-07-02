@@ -35,6 +35,7 @@ namespace OneCanRun.UI
             if (usingFB&&Time.time - lastTime >= standTime)
             {
                 Cross.sprite = Crosshair;
+                usingFB = false;
             }
         }
 

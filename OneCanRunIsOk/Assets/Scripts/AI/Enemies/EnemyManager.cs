@@ -28,13 +28,18 @@ namespace OneCanRun.AI.Enemies
                 NumberOfEnemiesTotal++;
 
                 GameObject myPath;
-                if (Random.Range(0f,2f) > 1.0f)
+                float rate = Random.Range(0f, 3f);
+                if ( rate < 1.0f)
                 {
                     myPath = GameObject.Find("path");
                 }
-                else
+                else if( rate < 2.0f )
                 {
                     myPath = GameObject.Find("path1");
+                }
+                else
+                {
+                    myPath = GameObject.Find("path2");
                 }
                 
                 PatrolPath patrol = myPath.GetComponent<PatrolPath>();

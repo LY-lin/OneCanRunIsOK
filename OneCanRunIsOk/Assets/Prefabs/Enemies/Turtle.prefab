@@ -733,7 +733,7 @@ MonoBehaviour:
   attackController: {fileID: 2333055648381596547}
   health: {fileID: 2333055648381596559}
   actor: {fileID: 2333055648381596557}
-  dropRate: 10
+  dropRate: 50
 --- !u!114 &2333055648381596545
 MonoBehaviour:
   m_ObjectHideFlags: 0

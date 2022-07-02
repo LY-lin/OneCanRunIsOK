@@ -43,7 +43,8 @@ namespace OneCanRun.GamePlay
             //Debug.Log(this.gameObject.transform.GetChild(3).GetComponent<Transform>().position);
             //popForce.set
             if (targetDrop != null){
-                GameObject loot = GameObject.Instantiate(targetDrop, burnPosition);
+                GameObject loot = GameObject.Instantiate(targetDrop,burnPosition.position,burnPosition.rotation);
+                
                 Debug.Log(loot.GetComponent<Transform>().position);
                 m_Rigidbody = loot.GetComponent<Rigidbody>();
                 float m_ForceX= Random.Range(1f,2f), m_ForceY = 3f, m_ForceZ = Random.Range(1f, 2f);

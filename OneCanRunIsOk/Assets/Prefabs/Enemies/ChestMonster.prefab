@@ -839,6 +839,7 @@ GameObject:
   - component: {fileID: 3368980292634908414}
   - component: {fileID: 6673695119927750216}
   - component: {fileID: -1386304130803538124}
+  - component: {fileID: 7864943182158586813}
   m_Layer: 0
   m_Name: ChestMonster
   m_TagString: Untagged
@@ -864,6 +865,7 @@ Transform:
   - {fileID: 2966504389218270971}
   - {fileID: 5474939588140039465}
   - {fileID: 1842233482008197453}
+  - {fileID: 7869422092288750875}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -943,7 +945,7 @@ MonoBehaviour:
   attackController: {fileID: 2966504389081029323}
   health: {fileID: 2966504389081029327}
   actor: {fileID: 2966504389081029325}
-  dropRate: 10
+  dropRate: 50
 --- !u!114 &2966504389081029321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1145,6 +1147,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7864943182158586813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2966504389081029317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5006c84368fe0484ab5bbcb66241d091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DropList: {fileID: 4278575754204634294, guid: 4cecc645a9492d14dbcb8313049da382, type: 3}
 --- !u!1 &2966504389104984675
 GameObject:
   m_ObjectHideFlags: 0
@@ -1648,6 +1663,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &8625719601262910242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7869422092288750875}
+  m_Layer: 0
+  m_Name: LootBurn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7869422092288750875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8625719601262910242}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.35, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2966504389081029324}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8754296547984052940
 GameObject:
   m_ObjectHideFlags: 0
