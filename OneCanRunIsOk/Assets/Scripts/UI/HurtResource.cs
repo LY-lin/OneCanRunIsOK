@@ -29,27 +29,28 @@ namespace OneCanRun.UI
             health = obj.transform.parent.GetComponent<Health>();
             if (health == null)
                 health = obj.GetComponentInParent<Health>();
+            HurtRes.gameObject.SetActive(true);
         }
 
         // Update is called once per frame
         void Update()
         {
-            
+
             if (obj && obj.activeSelf && health.CurrentHealth > 0)
             {
                 transform.localPosition = GetUIPosition(obj.transform.position);
                 Vector3 temp = HurtRes.transform.localScale * 10f;
                 //大小改变
                 //反比例函数（x+0.1)*(y-0.3) = 0.17, x是已过时间与存在时间比，y是比例系数
-                float Base =0.17f/((Time.time-initTime) / lifeTime + 0.1f)+0.3f;
+                float Base = 0.17f / ((Time.time - initTime) / lifeTime + 0.1f) + 0.3f;
 
                 Base = Base > 0.5f ? Base : 0.5f;
-                HurtRes.transform.localScale = Vector3.one *Base;
+                HurtRes.transform.localScale = Vector3.one * Base;
             }
             else
-                Destroy(this.gameObject);
+                HurtResHudManage.poolManager.release(this.gameObject);
            if (Time.time - initTime >= lifeTime)
-                Destroy(this.gameObject);
+                HurtResHudManage.poolManager.release(this.gameObject);
         }
 
         //获得伤害来源的UI坐标
